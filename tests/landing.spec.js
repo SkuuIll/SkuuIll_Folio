@@ -1,31 +1,19 @@
 const { test, expect } = require("@playwright/test");
 const AxeBuilder = require("@axe-core/playwright").default;
 
-test("full motion starts automatically without any activation or preference UI", async ({
-  page,
-}) => {
+test("system reduced-motion preference pauses nonessential animation", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => {
-    localStorage.setItem("skull-motion-mode", "reduced");
-    localStorage.setItem("spulp-motion-mode", "reduced");
-    sessionStorage.setItem("skull-motion", "paused");
-  });
   await page.goto("./");
+  await expect(page.locator("html")).toHaveAttribute("data-effects", "off");
+  await expect(page.locator("#signal-canvas")).toHaveAttribute("data-running", "false");
+  await expect(page.locator(".signal-fallback")).toBeVisible();
+
+  await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(page.locator("html")).toHaveAttribute("data-effects", "full");
-  await expect(page.locator("#signal-canvas")).toHaveAttribute(
-    "data-running",
-    "true",
-  );
-  await expect(
-    page.locator(
-      "#motion-mode,#motion-status,#enable-effects,.motion-notice,.motion-toolbar,#scene-pause,#motion-toggle",
-    ),
-  ).toHaveCount(0);
-  await page.reload();
-  await expect(page.locator("#signal-canvas")).toHaveAttribute(
-    "data-running",
-    "true",
-  );
+  await expect(page.locator("#signal-canvas")).toHaveAttribute("data-running", "true");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("#signal-canvas")).toHaveAttribute("data-running", "false");
 });
 
 test("scene responds to pointer and scroll, and stops offscreen and behind menu", async ({
