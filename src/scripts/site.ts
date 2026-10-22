@@ -174,11 +174,17 @@ paletteButton?.addEventListener("click", () => {
 });
 showPalette();
 
-// Always enabled; renderers independently suspend when hidden or offscreen.
-root.dataset.motionMode = "full";
-root.dataset.motion = "active";
-root.dataset.effects = "full";
-document.dispatchEvent(new CustomEvent("skull:motion"));
+// Respect OS accessibility preferences and adjust active renderers when they change.
+const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+function applyMotionPreference() {
+  const reduced = motionPreference.matches;
+  root.dataset.motionMode = reduced ? "reduced" : "full";
+  root.dataset.motion = reduced ? "paused" : "active";
+  root.dataset.effects = reduced ? "off" : "full";
+  document.dispatchEvent(new CustomEvent("skull:motion"));
+}
+motionPreference.addEventListener("change", applyMotionPreference);
+applyMotionPreference();
 
 const inquiry = document.querySelector<HTMLFormElement>("#inquiry-form");
 if (inquiry) {
