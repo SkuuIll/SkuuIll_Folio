@@ -348,7 +348,7 @@ body {
 :root[data-effects="reduced"]::view-transition-new(root) {
   animation: none !important;
 }
-@media (min-width: 768px) {
+@media (min-width: 768px) and (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
   }
