@@ -8,6 +8,7 @@ import "../styles/experience.css";
 
 import "../styles/shell.css";
 import "../styles/landing.css";
+import "../styles/showcase.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
 interface Props {
@@ -80,9 +81,10 @@ const canonical = new URL(Astro.url.pathname, "https://skuuill.github.io");
         localStorage.removeItem("skull-motion-mode");
         localStorage.removeItem("spulp-motion-mode");
       } catch {}
-      document.documentElement.dataset.motionMode = "full";
-      document.documentElement.dataset.effects = "full";
-      document.documentElement.dataset.motion = "active";
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.documentElement.dataset.motionMode = reducedMotion ? "reduced" : "full";
+      document.documentElement.dataset.effects = reducedMotion ? "off" : "full";
+      document.documentElement.dataset.motion = reducedMotion ? "paused" : "active";
       const palettes = ["forest", "blue", "clay", "violet", "amber", "ice"];
       const scenes = ["orb", "ribbon", "helix", "torus", "lattice"];
       let lastPalette, lastScene;
@@ -135,9 +137,10 @@ const canonical = new URL(Astro.url.pathname, "https://skuuill.github.io");
         </span>
       </a>
       <nav class="desktop-nav" aria-label="Navegación principal">
+        <a href={asset("#trabajo")}>Proyectos</a>
+        <a href={asset("#capacidades")}>Qué hago</a>
         <a href={asset("#laboratorio")}>Laboratorio</a>
-        <a href={asset("#secuencia")}>Experiencia</a>
-        <a href={asset("#proceso")}>Proceso</a>
+        <a href={asset("proyectos/")}>Archivo</a>
       </nav>
       <button
         id="chapters-toggle"
@@ -207,6 +210,12 @@ const canonical = new URL(Astro.url.pathname, "https://skuuill.github.io");
             </a>
             <a href={asset("#secuencia")}>
               <span>01</span>Experiencia
+            </a>
+            <a href={asset("#trabajo")}>
+              <span>02</span>Proyectos destacados
+            </a>
+            <a href={asset("#capacidades")}>
+              <span>03</span>Qué hago
             </a>
             <a href={asset("#profundidad")}>
               <span>02</span>Observatorio
