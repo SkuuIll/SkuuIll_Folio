@@ -1,0 +1,105 @@
+---
+import { projects, projectUrl, asset } from "../data/projects";
+
+const featuredIds = ["vigia", "cpaul", "pubg-map", "mi-taller", "repo-setup", "fluxnet"];
+const featured = featuredIds.map((id) => projects.find((item) => item.id === id)).filter((item) => item !== undefined);
+const capabilities = [
+  {
+    index: "01",
+    label: "Producto & frontend",
+    title: "Interfaces que se pueden usar.",
+    description: "Webs, paneles, PWA y flujos comerciales diseñados para personas reales.",
+    tools: "React · Next.js · Vue · TypeScript · CSS",
+  },
+  {
+    index: "02",
+    label: "Backend & arquitectura",
+    title: "La lógica detrás de la pantalla.",
+    description: "APIs, procesos de negocio, autenticación e integración de datos.",
+    tools: "Python · Node.js · NestJS · SQL · Redis",
+  },
+  {
+    index: "03",
+    label: "Mobile & sistemas",
+    title: "Software donde se necesita.",
+    description: "Aplicaciones Android, herramientas de escritorio e integración con dispositivos.",
+    tools: "Kotlin · Flutter · Java · Linux",
+  },
+  {
+    index: "04",
+    label: "Infraestructura & automatización",
+    title: "Del código al entorno real.",
+    description: "Despliegues, mantenimiento de VPS, flujos CI/CD y automatización de tareas.",
+    tools: "Docker · GitHub Actions · Shell · Python",
+  },
+];
+---
+<section class="portfolio-work shell" id="trabajo" aria-labelledby="portfolio-work-title">
+  <div class="portfolio-work-heading">
+    <div>
+      <p class="eyebrow">04 / PROYECTOS SELECCIONADOS</p>
+      <h2 id="portfolio-work-title">No es un concepto.<br/><span>Es software.</span></h2>
+    </div>
+    <p>Una selección de productos y herramientas que desarrollé: desde operaciones hoteleras hasta experiencias 3D, mapas, aplicaciones y automatización.</p>
+  </div>
+
+  <div class="portfolio-work-grid">
+    {featured.map((project, index) => (
+      <article class:list={["portfolio-work-card", index < 2 && "portfolio-work-card--feature"]}>
+        <a class="portfolio-work-link" href={projectUrl(project.id)} aria-label={`Ver el caso de ${project.title}`}>
+          <div class:list={["portfolio-work-media", `portfolio-work-media--${project.tone}`]}>
+            {project.image ? (
+              <img
+                src={asset(`media/${project.image}`)}
+                alt={project.alt || `Visualización de ${project.title}`}
+                loading="lazy"
+                decoding="async"
+                width="900"
+                height="550"
+              />
+            ) : (
+              <div class="portfolio-work-art" aria-hidden="true">
+                <span class="portfolio-work-rings"></span>
+                <span class="portfolio-work-art-label">SK / {String(index + 1).padStart(2, "0")}</span>
+                <span class="portfolio-work-art-mark">↗</span>
+              </div>
+            )}
+            <span class="portfolio-work-media-id">PROYECTO / {String(index + 1).padStart(2, "0")}</span>
+            <span class="portfolio-work-arrow" aria-hidden="true">↗</span>
+          </div>
+          <div class="portfolio-work-body">
+            <div class="portfolio-work-meta"><span>{project.label}</span><span>{project.status}</span></div>
+            <h3>{project.title}</h3>
+            <p>{project.summary}</p>
+            <div class="portfolio-work-tech" aria-label="Tecnologías">
+              {project.stack.slice(0, 4).map((tech) => <span>{tech}</span>)}
+            </div>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+  <a class="portfolio-archive-link" href={asset("proyectos/")}>
+    <span>Explorá el archivo de proyectos completo</span>
+    <span aria-hidden="true">↗</span>
+  </a>
+</section>
+
+<section class="portfolio-capabilities shell" id="capacidades" aria-labelledby="capabilities-title">
+  <div class="portfolio-capabilities-heading">
+    <p class="eyebrow">05 / QUÉ HAGO</p>
+    <h2 id="capabilities-title">Una mirada integral.<br/><span>Del diseño al despliegue.</span></h2>
+    <p>Trabajo como desarrollador independiente: diseño la experiencia, implemento la solución y preparo el entorno para que funcione.</p>
+  </div>
+  <div class="portfolio-capabilities-grid">
+    {capabilities.map((item) => (
+      <article class="portfolio-capability">
+        <div class="portfolio-capability-top"><span class="mono">{item.index}</span><span class="portfolio-capability-glyph" aria-hidden="true">↗</span></div>
+        <p class="portfolio-capability-label">{item.label}</p>
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+        <span class="portfolio-capability-tools">{item.tools}</span>
+      </article>
+    ))}
+  </div>
+</section>
