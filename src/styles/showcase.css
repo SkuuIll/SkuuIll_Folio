@@ -52,5 +52,3 @@
 @media(max-width:1100px){.portfolio-capabilities-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.portfolio-capability{min-height:260px}}
 @media(max-width:720px){.portfolio-work-heading{grid-template-columns:1fr}.portfolio-work-grid{grid-template-columns:1fr}.portfolio-work-card--feature .portfolio-work-media,.portfolio-work-media{aspect-ratio:1.48}.portfolio-work-heading h2,.portfolio-capabilities-heading h2{letter-spacing:-.055em}.portfolio-work-body{padding:1.4rem}.portfolio-capabilities-grid{grid-template-columns:1fr}.portfolio-capability{min-height:230px}.portfolio-work-card:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.portfolio-work-card,.portfolio-work-media img,.portfolio-work-arrow,.portfolio-capability{transition:none!important}.portfolio-work-card:hover .portfolio-work-media img{transform:none}}
-/* Cross-document transitions enhance capable browsers without requiring JavaScript routing. */
-@view-transition{navigation:auto}
