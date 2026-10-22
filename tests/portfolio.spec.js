@@ -142,11 +142,11 @@ test("old project links resolve under the repository hosting path", async ({
   page,
 }) => {
   await page.goto("site/?caso=cpaul");
-  await expect(page).toHaveURL(/\/SkuuIll\/proyectos\/cpaul\/$/);
+  await expect(page).toHaveURL(/\/SkuuIll_Folio\/proyectos\/cpaul\/$/);
   await page.goto("./?caso=vigia");
-  await expect(page).toHaveURL(/\/SkuuIll\/proyectos\/vigia\/$/);
+  await expect(page).toHaveURL(/\/SkuuIll_Folio\/proyectos\/vigia\/$/);
   await page.goto("site/?caso=unknown-case");
-  await expect(page).toHaveURL(/\/SkuuIll\/proyectos\/#unknown-case$/);
+  await expect(page).toHaveURL(/\/SkuuIll_Folio\/proyectos\/#unknown-case$/);
 });
 
 test("form rejects whitespace and invalidates a prepared message after edits", async ({
