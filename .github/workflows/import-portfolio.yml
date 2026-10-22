@@ -1,0 +1,98 @@
+name: Import existing portfolio
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-portfolio.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out dedicated portfolio repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Read public source portfolio
+        uses: actions/checkout@v4
+        with:
+          repository: SkuuIll/SkuuIll
+          ref: main
+          path: .original-profile
+          persist-credentials: false
+
+      - name: Transfer app, media, project cases and tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          source=.original-profile
+          for item in src public scripts tests docs astro.config.mjs index.html package.json package-lock.json playwright.config.js tsconfig.json .gitignore .markdownlint-cli2.jsonc .gitattributes; do
+            if [ -e "$source/$item" ]; then
+              cp -a "$source/$item" "./$item"
+            fi
+          done
+          rm -rf .original-profile
+          # Keep repository responsibility clear. GitHub-only documentation stays in the profile.
+          rm -f docs/profile.md docs/landing.md docs/appearance.md
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          patterns = [
+              ("/SkuuIll/", "/SkuuIll_Folio/"),
+              ('"/SkuuIll"', '"/SkuuIll_Folio"'),
+              ("'/SkuuIll'", "'/SkuuIll_Folio'"),
+              ("http://127.0.0.1:4179/SkuuIll/", "http://127.0.0.1:4179/SkuuIll_Folio/"),
+          ]
+          paths = list(Path("src").rglob("*")) + list(Path("docs").rglob("*")) + [
+              Path("astro.config.mjs"), Path("playwright.config.js")
+          ] + list(Path("tests").rglob("*"))
+          for path in paths:
+              if not path.is_file() or path.suffix not in {".astro",".ts",".js",".json",".mjs",".md",".css"}:
+                  continue
+              text = path.read_text("utf-8")
+              for old,new in patterns:
+                  text = text.replace(old,new)
+              path.write_text(text, "utf-8")
+          config = Path("astro.config.mjs")
+          text = config.read_text("utf-8").replace('"/SkuuIll"', '"/SkuuIll_Folio"')
+          config.write_text(text, "utf-8")
+          package = Path("package.json")
+          pkg = json.loads(package.read_text("utf-8"))
+          pkg["name"] = "skull-portfolio"
+          pkg["description"] = "Portfolio independiente de Skull: casos de software, interacción y motion"
+          package.write_text(json.dumps(pkg, ensure_ascii=False, indent=2) + "\n", "utf-8")
+          PY
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install and validate
+        run: |
+          npm ci
+          npm run check
+          npm run check:privacy
+          npm run build
+
+      - name: Commit imported portfolio
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "The portfolio is already up to date."
+            exit 0
+          fi
+          git commit -m "feat: migrate independent Astro portfolio and media"
+          git push origin HEAD:main
