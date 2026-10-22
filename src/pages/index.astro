@@ -2,12 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import SpatialExperience from "../components/SpatialExperience.astro";
 import Contact from "../components/Contact.astro";
+import SelectedWork from "../components/SelectedWork.astro";
 import { asset, projects } from "../data/projects";
 ---
 
 <Layout
-  title="Skull — Diseño, código e interacción"
-  description="Interfaces que responden. Un laboratorio de diseño, movimiento y desarrollo de software por Skull."
+  title="Skull — Desarrollo de software, diseño y experiencias digitales"
+  description="Desarrollo software web, Android, APIs y automatización desde Chaco, Argentina. Conocé los proyectos, experiencias interactivas y casos de Skull."
 >
   <div
     class="signal-world"
@@ -100,20 +101,20 @@ import { asset, projects } from "../data/projects";
         <span>DISEÑO + DESARROLLO</span>
       </div>
       <div class="sp-hero-copy">
-        <p class="eyebrow">IDEAS QUE TOMAN FORMA</p>
+        <p class="eyebrow">DESARROLLO WEB · ANDROID · SISTEMAS</p>
         <h1 id="hero-title">
-          Diseño interfaces
+          Transformo ideas
           <br />
-          que <em>responden.</em>
+          en <em>software real.</em>
         </h1>
         <p class="sp-lead">
-          Código, movimiento y un poco de curiosidad.
+          Diseño interfaces y desarrollo aplicaciones, APIs y sistemas.
           <br />
-          Explorá lo que pasa cuando trabajan juntos.
+          Del primer prototipo al despliegue.
         </p>
         <div class="sp-actions">
-          <a class="sp-primary" href="#laboratorio" data-magnetic>
-            Explorar la experiencia <span aria-hidden="true">↘</span>
+          <a class="sp-primary" href="#trabajo" data-magnetic>
+            Ver proyectos <span aria-hidden="true">↘</span>
           </a>
           <a class="sp-secondary" href="#contacto">
             Hablemos <span aria-hidden="true">↗</span>
@@ -127,7 +128,7 @@ import { asset, projects } from "../data/projects";
         <div class="mono">
           INDEPENDIENTE
           <br />
-          ARGENTINA · DESDE 2022
+          CHARATA · CHACO · ARGENTINA
         </div>
       </div>
       <a class="sp-scroll mono" href="#secuencia">
@@ -176,10 +177,11 @@ import { asset, projects } from "../data/projects";
     </section>
   </div>
   <SpatialExperience />
+  <SelectedWork />
   <section class="sp-lab shell" id="laboratorio" aria-labelledby="lab-title">
     <div class="lab-heading">
       <div>
-        <p class="eyebrow">02 / TOCÁ, CAMBIÁ, EXPLORÁ</p>
+        <p class="eyebrow">04 / TOCÁ, CAMBIÁ, EXPLORÁ</p>
         <h2 id="lab-title">
           Menos promesas.
           <br />
@@ -360,7 +362,7 @@ import { asset, projects } from "../data/projects";
     aria-labelledby="process-title"
   >
     <div class="process-heading">
-      <p class="eyebrow">03 / DEL CONCEPTO A LA PANTALLA</p>
+      <p class="eyebrow">05 / DEL CONCEPTO A LA PANTALLA</p>
       <h2 id="process-title">
         La idea es el inicio.
         <br />
