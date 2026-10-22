@@ -41,7 +41,7 @@ for (const width of [360, 390, 768, 1440, 1920]) {
     });
     await page.goto("./");
     await readyImages(page);
-    await expect(page.locator("h1")).toContainText("responden.");
+    await expect(page.locator("h1")).toContainText("software real.");
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -272,22 +272,15 @@ test("palette and scene change on reload while blocked storage remains usable", 
   expect(errors).toEqual([]);
 });
 
-test("keyboard skip link works with the complete experience enabled", async ({
-  page,
-}) => {
+test("keyboard skip link remains accessible with reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("./");
   await page.keyboard.press("Tab");
-  await expect(
-    page.getByRole("link", { name: "Saltar al contenido" }),
-  ).toBeFocused();
+  await expect(page.getByRole("link", { name: "Saltar al contenido" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#contenido$/);
-  await expect(page.locator("html")).toHaveAttribute("data-effects", "full");
-  await expect(page.locator("#signal-canvas")).toHaveAttribute(
-    "data-running",
-    "true",
-  );
+  await expect(page.locator("html")).toHaveAttribute("data-effects", "off");
+  await expect(page.locator("#signal-canvas")).toHaveAttribute("data-running", "false");
 });
 
 for (const palette of ["clay", "forest", "blue", "violet", "amber", "ice"]) {
