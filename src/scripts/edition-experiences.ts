@@ -10,7 +10,7 @@ if(shell){
  const set=(root:ParentNode,selector:string,value:string)=>{const node=root.querySelector<HTMLElement>(selector);if(node)node.textContent=value};
  const projectBy=(id:string)=>projectList.find(item=>item.id===id)??projectList[0];
  // SKULL OS: one window, four authentic project entries. No iframe or remote service.
- const os=shell.querySelector<HTMLElement>("[data-os]");
+ const os=shell.querySelector<HTMLElement>("[data-os]")!;
  if(os){
   const buttons=[...os.querySelectorAll<HTMLButtonElement>("[data-os-open]")];
   function open(id:string){
@@ -43,7 +43,7 @@ if(shell){
   xray.dataset.step="0";
  }
  // Museum: curated exhibit, proper alt text and no fabricated mockups.
- const museum=shell.querySelector<HTMLElement>("[data-museum]");
+ const museum=shell.querySelector<HTMLElement>("[data-museum]")!;
  if(museum&&projectList.length){
   let current=0;
   const image=museum.querySelector<HTMLImageElement>("[data-museum-image]");
