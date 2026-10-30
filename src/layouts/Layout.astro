@@ -23,6 +23,7 @@ import "../styles/sitewide-polish.css";
 import "../styles/portfolio-2.css";
 import "../styles/portfolio-2-tech.css";
 import "../styles/portfolio-2-cases.css";
+import "../styles/portfolio-2-visual.css";
 import CommandPalette from "../components/CommandPalette.astro";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
@@ -125,7 +126,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         if (["light", "dark"].includes(savedTheme)) theme = savedTheme;
       } catch {}
       document.documentElement.dataset.theme = theme;
-      // Cycle through seven art directions on every full page load.
+      // A stable editorial homepage by default; fourteen art directions remain available by explicit URL.
       // A shared key works across Spanish, English and project pages.
       const designs = ["editorial", "casebook", "systems", "atelier", "chromatic", "pocket", "studio", "skull-os", "xray", "museum", "terminal", "canvas", "brutalist", "story"];
       let priorDesign;
@@ -136,7 +137,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       const requestedDesign = new URLSearchParams(location.search).get("design");
       const design = requestedDesign && designs.includes(requestedDesign)
         ? requestedDesign
-        : designs[(previousIndex + 1) % designs.length];
+        : "editorial";
       document.documentElement.dataset.design = design;
       try { sessionStorage.setItem("skull-design-last", design); } catch {}
       try { localStorage.setItem("skull-design-last", design); } catch {}
