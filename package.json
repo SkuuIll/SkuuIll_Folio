@@ -7,7 +7,7 @@
     "lint": "markdownlint-cli2 && astro check",
     "test": "playwright test",
     "dev": "astro dev --host 127.0.0.1",
-    "build": "astro build",
+    "build": "npm run branding && astro build",
     "preview": "astro preview --host 127.0.0.1 --port 4179",
     "serve:test": "npm run build && npm run preview",
     "check": "astro check",

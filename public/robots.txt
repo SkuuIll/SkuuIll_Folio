@@ -1,3 +1,3 @@
 User-agent: *
-Allow: /SkuuIll/
-Sitemap: https://skuuill.github.io/SkuuIll/sitemap.xml
+Allow: /
+Sitemap: https://skuull.pages.dev/sitemap.xml

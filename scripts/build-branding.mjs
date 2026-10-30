@@ -14,4 +14,8 @@ writeFileSync("assets/profile-cover-2026.svg", cover(1280, 420));
 await sharp(Buffer.from(cover(1200, 630)))
   .png()
   .toFile("public/media/social-cover.png");
-console.log("Skull profile and social covers generated.");
+const icon = (size) => '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#080d13"/><path d="M35 11H18L10 22l28 6-8 10H13" fill="none" stroke="#64efd4" stroke-width="5"/></svg>';
+for (const [filename, size] of [["favicon-32.png",32],["apple-touch-icon.png",180],["icon-192.png",192],["icon-512.png",512]]) {
+  await sharp(Buffer.from(icon(size))).png().toFile("public/" + filename);
+}
+console.log("Skull social card and favicons generated.");

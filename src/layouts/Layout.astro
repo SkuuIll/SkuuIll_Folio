@@ -19,8 +19,22 @@ const {
   title = "Skull — Diseño, código e interacción",
   description = profile.summary,
 } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://skuuill.pages.dev");
-const socialImage = new URL(asset("media/social-cover.png"), Astro.site ?? "https://skuuill.pages.dev");
+const siteOrigin = Astro.site ?? new URL("https://skuull.pages.dev");
+const canonical = new URL(Astro.url.pathname, siteOrigin);
+const socialImage = new URL(asset("media/social-cover.png"), siteOrigin);
+const person = {
+  "@type": "Person", "@id": siteOrigin.href + "#person", name: "Skull", alternateName: "SkuuIll",
+  jobTitle: "Desarrollador de software independiente", url: siteOrigin.href,
+  description: profile.summary, sameAs: [profile.github],
+  knowsAbout: ["Desarrollo web", "Android", "Backend", "Automatización"],
+  homeLocation: { "@type": "Place", name: "Chaco, Argentina" },
+};
+const structuredData = { "@context": "https://schema.org", "@graph": [
+  person,
+  { "@type": "WebSite", "@id": siteOrigin.href + "#website", name: "Skull — Digital Lab", url: siteOrigin.href, inLanguage: "es-AR", creator: { "@id": person["@id"] } },
+  { "@type": "WebPage", "@id": canonical.href + "#webpage", url: canonical.href, name: title, description, inLanguage: "es-AR",
+    isPartOf: { "@id": siteOrigin.href + "#website" }, about: { "@id": person["@id"] }, primaryImageOfPage: socialImage.href },
+] };
 ---
 
 <!doctype html>
@@ -44,19 +58,32 @@ const socialImage = new URL(asset("media/social-cover.png"), Astro.site ?? "http
     />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Skull (SkuuIll)" />
     <meta name="theme-color" content="#080d13" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
+    <link rel="icon" type="image/png" sizes="32x32" href={asset("favicon-32.png")} />
+    <link rel="apple-touch-icon" sizes="180x180" href={asset("apple-touch-icon.png")} />
+    <link rel="manifest" href={asset("site.webmanifest")} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Skull — Digital Lab" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="es_AR" />
     <meta property="og:url" content={canonical} />
-    <meta
-      property="og:image"
-      content={socialImage.toString()}
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={socialImage.href} />
+    <meta property="og:image:secure_url" content={socialImage.href} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Skull. — Diseño, código e interacción." />
+        <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage.href} />
+    <meta name="twitter:image:alt" content="Skull — portafolio de desarrollo de software" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
       let theme = "dark";

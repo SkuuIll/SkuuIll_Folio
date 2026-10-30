@@ -5,7 +5,7 @@ import { defineConfig } from "astro/config";
 const deploymentBase = process.env.PORTFOLIO_BASE || "/SkuuIll_Folio";
 
 export default defineConfig({
-  site: process.env.PORTFOLIO_SITE || "https://skuuill.pages.dev",
+  site: process.env.PORTFOLIO_SITE || "https://skuull.pages.dev",
   base: deploymentBase,
   output: "static",
   trailingSlash: "always",
