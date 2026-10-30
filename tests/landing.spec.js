@@ -195,9 +195,7 @@ for (const theme of ["dark", "light"])
     ).toEqual([]);
   });
 
-test("data saving caps quality without disabling the experience", async ({
-  page,
-}) => {
+test("data saver preserves content while preventing expensive rendering", async ({ page }) => {
   await page.addInitScript(() =>
     Object.defineProperty(navigator, "connection", {
       configurable: true,
@@ -205,11 +203,11 @@ test("data saving caps quality without disabling the experience", async ({
     }),
   );
   await page.goto("./");
-  await expect(page.locator("html")).toHaveAttribute("data-effects", "full");
-  await expect(page.locator("#signal-canvas")).toHaveAttribute(
-    "data-running",
-    "true",
-  );
+  await expect(page.locator("html")).toHaveAttribute("data-performance", "lite");
+  await expect(page.locator("html")).toHaveAttribute("data-effects", "off");
+  await expect(page.locator("#signal-canvas")).toHaveAttribute("data-running", "false");
+  await expect(page.locator(".signal-fallback")).toBeVisible();
+  await expect(page.locator("h1")).toBeVisible();
 });
 
 test("visibility changes stop and resume rendering without changing the preference", async ({
