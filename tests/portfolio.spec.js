@@ -41,7 +41,14 @@ for (const width of [360, 390, 768, 1440, 1920]) {
     });
     await page.goto("./");
     await readyImages(page);
-    await expect(page.locator("h1")).toContainText("software real.");
+    const currentEdition=await page.locator("html").getAttribute("data-design");
+    const experimental=["skull-os","xray","museum","terminal","canvas","brutalist","story"].includes(currentEdition);
+    if (experimental) {
+      await expect(page.locator("h1")).toBeVisible();
+      await expect(page.locator(".sp-hero")).toBeHidden();
+    } else {
+      await expect(page.locator("h1")).toContainText("software real.");
+    }
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -55,7 +62,8 @@ for (const width of [360, 390, 768, 1440, 1920]) {
           .filter((id) => !document.getElementById(id)),
       );
     expect(missingTargets).toEqual([]);
-    await expect(page.locator(".signal-stage")).toBeVisible();
+    if(experimental) await expect(page.locator(".signal-stage")).toBeHidden();
+    else await expect(page.locator(".signal-stage")).toBeVisible();
     await expect(page.getByRole("tab")).toHaveCount(3);
     expect(errors).toEqual([]);
   });

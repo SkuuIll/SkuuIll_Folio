@@ -46,9 +46,29 @@ if (selector) {
     try { sessionStorage.setItem("skull-design-last", key); } catch {}
     try { localStorage.setItem("skull-design-last", key); } catch {}
   };
+  // One semantic h1 in the active landing, even though all editions are
+  // statically rendered for SEO and switch instantly without reloading.
+  // Inactive scenes remain h2 so they cannot produce duplicate h1 elements.
+  const swapHeading = (node: HTMLElement, tag: "h1" | "h2") => {
+    if (node.tagName.toLowerCase() === tag) return;
+    const next = document.createElement(tag);
+    for (const attr of Array.from(node.attributes)) next.setAttribute(attr.name, attr.value);
+    while (node.firstChild) next.appendChild(node.firstChild);
+    node.replaceWith(next);
+  };
+  const syncHeadings = (key: string) => {
+    const sceneActive = document.querySelector('[data-edition-scene="' + key + '"]') !== null;
+    const original = document.getElementById("hero-title");
+    if (original) swapHeading(original, sceneActive ? "h2" : "h1");
+    for (const heading of Array.from(document.querySelectorAll<HTMLElement>("[data-primary-heading]"))) {
+      const parent = heading.closest("[data-edition-scene]");
+      swapHeading(heading, parent?.getAttribute("data-edition-scene") === key ? "h1" : "h2");
+    }
+  };
   const paint = (key: string, save: boolean) => {
     const mode = paletteOf(key) ?? modes[0];
     root.dataset.design = mode.key;
+    syncHeadings(mode.key);
     root.dataset.palette = mode.palette;
     if (direct) direct.value = mode.key;
     if (title) title.textContent = english ? mode.en : mode.es;

@@ -90,7 +90,8 @@ test("new directions replace the generic hero rather than stacking it below",asy
   await expect(page.locator('.edition-scene[data-edition-scene="'+key+'"] h1')).toBeVisible();
   await expect(page.locator(".signal-backdrop")).toBeHidden();
  }
- await select(page,"editorial");
+ await page.locator("[data-design-select]").selectOption("editorial");
+ await expect(page.locator("html")).toHaveAttribute("data-design","editorial");
  await expect(page.locator(".sp-hero")).toBeVisible();
  await expect(page.locator(".edition-experiences")).toBeHidden();
 });

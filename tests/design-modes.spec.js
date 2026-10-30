@@ -31,7 +31,7 @@ test("visitor can switch editions manually and the next reload selects another",
 });
 test("Spanish and English expose the same fourteen design controls",async ({page})=>{
   await page.goto("en/");
-  await expect(page.locator("[data-design-next]")).toHaveText(/Next design/);
+  await expect(page.locator("[data-design-next]")).toHaveAttribute("aria-label","Next design");
   await expect(page.locator("[data-design-name]")).not.toBeEmpty();
   await page.locator("[data-design-next]").click();
   await expect(page.locator("html")).toHaveAttribute("data-design",/editorial|casebook|systems|atelier|chromatic|pocket|studio|skull-os|xray|museum|terminal|canvas|brutalist|story/);

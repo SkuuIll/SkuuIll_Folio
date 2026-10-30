@@ -70,7 +70,9 @@ test("a browser without canvas renders readable content and vector artwork", asy
   );
   await page.goto("./");
   await expect(page.locator("h1")).toBeVisible();
-  await expect(page.locator(".signal-fallback")).toBeVisible();
+  const isNew=await page.locator("html").evaluate(el=>["skull-os","xray","museum","terminal","canvas","brutalist","story"].includes(el.dataset.design));
+  if (isNew) await expect(page.locator(".signal-fallback")).toBeHidden();
+  else await expect(page.locator(".signal-fallback")).toBeVisible();
   await expect(page.locator(".signal-stage")).not.toHaveClass(/is-ready/);
   await page.getByRole("tab", { name: /Interfaces/ }).click();
   await expect(page.locator("#panel-interface")).toBeVisible();
@@ -206,7 +208,9 @@ test("data saver preserves content while preventing expensive rendering", async 
   await expect(page.locator("html")).toHaveAttribute("data-performance", "lite");
   await expect(page.locator("html")).toHaveAttribute("data-effects", "off");
   await expect(page.locator("#signal-canvas")).toHaveAttribute("data-running", "false");
-  await expect(page.locator(".signal-fallback")).toBeVisible();
+  const isNew=await page.locator("html").evaluate(el=>["skull-os","xray","museum","terminal","canvas","brutalist","story"].includes(el.dataset.design));
+  if (isNew) await expect(page.locator(".signal-fallback")).toBeHidden();
+  else await expect(page.locator(".signal-fallback")).toBeVisible();
   await expect(page.locator("h1")).toBeVisible();
 });
 
