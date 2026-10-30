@@ -14,11 +14,23 @@ import { profile } from "../data/profile";
 interface Props {
   title?: string;
   description?: string;
+  lang?: "es" | "en";
 }
 const {
   title = "Skull — Diseño, código e interacción",
   description = profile.summary,
+  lang = "es",
 } = Astro.props;
+const en = lang === "en";
+const tr = (es: string, english: string) => en ? english : es;
+const home = en ? "en/" : "";
+const archive = en ? "en/projects/" : "proyectos/";
+const basePath = import.meta.env.BASE_URL;
+const relative = Astro.url.pathname.startsWith(basePath) ? Astro.url.pathname.slice(basePath.length) : "";
+const spanish = relative.startsWith("en/projects/") ? relative.replace(/^en\/projects\//, "proyectos/") : relative.replace(/^en\//, "");
+const english = relative.startsWith("proyectos/") ? relative.replace(/^proyectos\//, "en/projects/") : "en/" + relative;
+const spanishUrl = new URL(basePath + spanish, Astro.site ?? "https://skuull.pages.dev");
+const englishUrl = new URL(basePath + english, Astro.site ?? "https://skuull.pages.dev");
 const siteOrigin = Astro.site ?? new URL("https://skuull.pages.dev");
 const canonical = new URL(Astro.url.pathname, siteOrigin);
 const socialImage = new URL(asset("media/social-cover.png"), siteOrigin);
@@ -31,14 +43,14 @@ const person = {
 };
 const structuredData = { "@context": "https://schema.org", "@graph": [
   person,
-  { "@type": "WebSite", "@id": siteOrigin.href + "#website", name: "Skull — Digital Lab", url: siteOrigin.href, inLanguage: "es-AR", creator: { "@id": person["@id"] } },
-  { "@type": "WebPage", "@id": canonical.href + "#webpage", url: canonical.href, name: title, description, inLanguage: "es-AR",
+  { "@type": "WebSite", "@id": siteOrigin.href + "#website", name: "Skull — Digital Lab", url: siteOrigin.href, inLanguage: en ? "en" : "es-AR", creator: { "@id": person["@id"] } },
+  { "@type": "WebPage", "@id": canonical.href + "#webpage", url: canonical.href, name: title, description, inLanguage: en ? "en" : "es-AR",
     isPartOf: { "@id": siteOrigin.href + "#website" }, about: { "@id": person["@id"] }, primaryImageOfPage: socialImage.href },
 ] };
 ---
 
 <!doctype html>
-<html lang="es-AR" data-material="glass">
+<html lang={en ? "en" : "es-AR"} data-material="glass">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,6 +74,9 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
     <meta name="author" content="Skull (SkuuIll)" />
     <meta name="theme-color" content="#080d13" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es-AR" href={spanishUrl.href} />
+    <link rel="alternate" hreflang="en" href={englishUrl.href} />
+    <link rel="alternate" hreflang="x-default" href={spanishUrl.href} />
     <link rel="icon" type="image/svg+xml" href={asset("favicon.svg")} />
     <link rel="icon" type="image/png" sizes="32x32" href={asset("favicon-32.png")} />
     <link rel="apple-touch-icon" sizes="180x180" href={asset("apple-touch-icon.png")} />
@@ -70,7 +85,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
     <meta property="og:site_name" content="Skull — Digital Lab" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:locale" content="es_AR" />
+    <meta property="og:locale" content={en ? "en_US" : "es_AR"} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage.href} />
     <meta property="og:image:secure_url" content={socialImage.href} />
@@ -147,10 +162,10 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
   <body>
     <div class="reading-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#contenido">
-      Saltar al contenido
+      {tr("Saltar al contenido", "Skip to content")}
     </a>
     <header class="site-header shell">
-      <a class="brand" href={asset("")} aria-label="Skull, inicio">
+      <a class="brand" href={asset(home)} aria-label={tr("Skull, inicio", "Skull, home")}>
         <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <path
             d="M24 6H11L5 13l21 6-6 7H7"
@@ -165,10 +180,15 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         </span>
       </a>
       <nav class="desktop-nav" aria-label="Navegación principal">
-        <a href={asset("#trabajo")}>Proyectos</a>
-        <a href={asset("#capacidades")}>Qué hago</a>
-        <a href={asset("#laboratorio")}>Laboratorio</a>
-        <a href={asset("proyectos/")}>Archivo</a>
+        <a href={asset(home + "#trabajo")}>{tr("Proyectos", "Projects")}</a>
+        <a href={asset(home + "#capacidades")}>{tr("Qué hago", "What I do")}</a>
+        <a href={asset(home + "#laboratorio")}>{tr("Laboratorio", "Lab")}</a>
+        <a href={asset(archive)}>{tr("Archivo", "Archive")}</a>
+      </nav>
+      <nav class="language-switch" aria-label={tr("Idioma", "Language")}>
+        <a href={spanishUrl.pathname} hreflang="es-AR" lang="es" aria-current={!en ? "page" : undefined}>ES</a>
+        <span aria-hidden="true">/</span>
+        <a href={englishUrl.pathname} hreflang="en" lang="en" aria-current={en ? "page" : undefined}>EN</a>
       </nav>
       <button
         id="chapters-toggle"
@@ -222,50 +242,50 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       <dialog
         id="mobile-nav"
         class="mobile-nav chapter-menu"
-        aria-label="Explorar capítulos"
+        aria-label={tr("Explorar capítulos", "Browse sections")}
         hidden
       >
         <div class="chapter-menu-content shell">
           <div class="chapter-menu-top mono">
-            <span>SKULL / EXPLORAR</span>
+            <span>{tr("SKULL / EXPLORAR", "SKULL / EXPLORE")}</span>
             <button type="button" id="chapters-close">
-              Cerrar menú <span aria-hidden="true">×</span>
+              {tr("Cerrar menú", "Close menu")} <span aria-hidden="true">×</span>
             </button>
           </div>
           <nav aria-label="Navegación por capítulos">
-            <a href={asset("")}>
-              <span>00</span>Inicio
+            <a href={asset(home)}>
+              <span>00</span>{tr("Inicio","Home")}
             </a>
-            <a href={asset("#secuencia")}>
-              <span>01</span>Experiencia
+            <a href={asset(home + "#secuencia")}>
+              <span>01</span>{tr("Experiencia","Experience")}
             </a>
-            <a href={asset("#trabajo")}>
-              <span>02</span>Proyectos destacados
+            <a href={asset(home + "#trabajo")}>
+              <span>02</span>{tr("Proyectos destacados","Featured projects")}
             </a>
-            <a href={asset("#capacidades")}>
-              <span>03</span>Qué hago
+            <a href={asset(home + "#capacidades")}>
+              <span>03</span>{tr("Qué hago","What I do")}
             </a>
-            <a href={asset("#profundidad")}>
-              <span>02</span>Observatorio
+            <a href={asset(home + "#profundidad")}>
+              <span>02</span>{tr("Observatorio","Observatory")}
             </a>
-            <a href={asset("#recorrido")}>
-              <span>03</span>Umbral 3D
+            <a href={asset(home + "#recorrido")}>
+              <span>03</span>{tr("Umbral 3D","3D portal")}
             </a>
-            <a href={asset("#laboratorio")}>
-              <span>04</span>Laboratorio
+            <a href={asset(home + "#laboratorio")}>
+              <span>04</span>{tr("Laboratorio","Lab")}
             </a>
-            <a href={asset("#proceso")}>
-              <span>05</span>Proceso
+            <a href={asset(home + "#proceso")}>
+              <span>05</span>{tr("Proceso","Process")}
             </a>
-            <a href={asset("proyectos/")} aria-label="Archivo de proyectos">
-              <span>06</span>Archivo
+            <a href={asset(archive)} aria-label="Archivo de proyectos">
+              <span>06</span>{tr("Archivo","Archive")}
             </a>
-            <a href={asset("#contacto")}>
-              <span>07</span>Contacto
+            <a href={asset(home + "#contacto")}>
+              <span>07</span>{tr("Contacto","Contact")}
             </a>
           </nav>
           <p class="mono chapter-menu-bottom">
-            CÓDIGO CON IDENTIDAD. / ARGENTINA
+            {tr("CÓDIGO CON IDENTIDAD. / ARGENTINA", "CODE WITH IDENTITY. / ARGENTINA")}
           </p>
         </div>
       </dialog>
@@ -274,33 +294,19 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       <slot />
     </main>
     <footer class="site-footer shell">
-      <a class="footer-name" href={asset("")}>
+      <a class="footer-name" href={asset(home)}>
         Skull<span>↗</span>
       </a>
       <div>
-        <p>Software desde Chaco, Argentina.</p>
+        <p>{tr("Software desde Chaco, Argentina.", "Software from Chaco, Argentina.")}</p>
         <p class="mono">© {new Date().getUTCFullYear()} / SkuuIll</p>
       </div>
       <div class="footer-links">
         <a href={profile.github}>GitHub ↗</a>
-        <button type="button" class="footer-share" id="share-portfolio" hidden>Compartir ↗</button>
+        <button type="button" class="footer-share" id="share-portfolio" hidden>{tr("Compartir ↗", "Share ↗")}</button>
         <a href={`mailto:${profile.email}`}>Email ↗</a>
       </div>
       <p id="share-status" class="share-status mono" role="status" aria-live="polite"></p>
-      <div class="preferences" hidden>
-        <label class="material-control">
-          Acabado
-          <select id="material-mode">
-            <option value="glass">Vidrio</option>
-            <option value="solid">Sólido</option>
-            <option value="auto">Del sistema</option>
-          </select>
-        </label>
-
-        <button id="palette-toggle" type="button">
-          Color: <span>Menta</span>
-        </button>
-      </div>
     </footer>
     <script>
       import "../scripts/site";
