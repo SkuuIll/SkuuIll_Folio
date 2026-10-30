@@ -18,13 +18,17 @@ async function setupScroll() {
   const gsap = gsapModule.gsap;
   gsap.registerPlugin(triggerModule.ScrollTrigger);
   scrollContext = gsap.context(() => {
-    gsap.from(".sp-hero-copy > *", {
-      y: 24,
-      stagger: 0.09,
-      duration: 0.85,
-      ease: "power3.out",
-      clearProps: "all",
-    });
+    // Avoid filtered/rotated glyph antialiasing and jitter in Chromatic mode.
+    // Other editions keep the subtle entrance sequence.
+    if (root.dataset.design !== "chromatic") {
+      gsap.from(".sp-hero-copy > *", {
+        y: 24,
+        stagger: 0.09,
+        duration: 0.85,
+        ease: "power3.out",
+        clearProps: "all",
+      });
+    }
     gsap.fromTo(
       ".hero-signature",
       { y: 0 },
