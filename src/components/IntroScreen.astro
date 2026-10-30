@@ -1,0 +1,32 @@
+---
+import "../styles/intro.css";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const en = lang === "en";
+const t=(es:string, english:string)=>en?english:es;
+---
+<div class="sk-intro" data-sk-intro role="dialog" aria-modal="true" aria-label={t("Presentación inicial de SKULL","SKULL opening introduction")}>
+  <div class="sk-intro-grid" aria-hidden="true"></div>
+  <div class="sk-intro-top mono">
+    <span>SKULL / DIGITAL LAB</span>
+    <span>EST. 2026 &nbsp;•&nbsp; CHACO, AR</span>
+  </div>
+  <div class="sk-intro-core">
+    <svg class="sk-intro-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M20 8H44L55 19V41L44 54H20L9 41V19L20 8Z" fill="none" stroke="currentColor" stroke-width="2.5" />
+      <path d="M18 25 27 28 25 36 17 35 18 25ZM46 25 37 28 39 36 47 35 46 25Z" fill="currentColor"/>
+      <path d="M32 34 27 42H37Z" fill="currentColor"/>
+      <path d="M22 46H42M26 46V52M32 46V53M38 46V52" stroke="currentColor" stroke-width="3"/>
+    </svg>
+    <span class="sk-intro-name" aria-label="SKULL" role="img">
+      <span>S</span><span>K</span><span>U</span><span>L</span><span>L</span><span class="sk-intro-dot">.</span>
+    </span>
+    <span class="sk-intro-sub mono">{t("Diseño. Código. Experiencia.","Design. Code. Experience.")}</span>
+  </div>
+  <div class="sk-intro-bottom">
+    <div class="sk-intro-meter" aria-hidden="true"><span></span></div>
+    <span class="mono sk-intro-status">{t("INICIANDO EXPERIENCIA","STARTING EXPERIENCE")}</span>
+    <button type="button" class="sk-intro-skip" data-intro-skip>{t("Omitir intro","Skip intro")} <span aria-hidden="true">↗</span></button>
+  </div>
+</div>
+<script>import "../scripts/intro";</script>

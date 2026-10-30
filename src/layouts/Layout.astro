@@ -18,6 +18,7 @@ import "../styles/edition-refinement.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
 import { legalNav } from "../data/legal";
+import IntroScreen from "../components/IntroScreen.astro";
 interface Props {
   title?: string;
   description?: string;
@@ -31,6 +32,7 @@ const {
 const en = lang === "en";
 const tr = (es: string, english: string) => en ? english : es;
 const home = en ? "en/" : "";
+const hasLandingIntro = relative === "" || relative === "en/" || relative === "en";
 const archive = en ? "en/projects/" : "proyectos/";
 const basePath = import.meta.env.BASE_URL;
 const relative = Astro.url.pathname.startsWith(basePath) ? Astro.url.pathname.slice(basePath.length) : "";
@@ -179,8 +181,24 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         localStorage.setItem("skull-last-scene", scene);
       } catch {}
     </script>
+    {hasLandingIntro && (
+      <script is:inline>
+        // Only a tab's first home visit gets the intro. Never delay visitors
+        // with reduced motion, data saving or a constrained device.
+        try {
+          const root = document.documentElement;
+          const alreadySeen = sessionStorage.getItem("skull-intro-seen");
+          if (!alreadySeen && root.dataset.effects !== "off" &&
+            root.dataset.performance !== "lite" &&
+            !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            root.dataset.intro = "pending";
+          }
+        } catch { /* Session storage unavailable: display the site directly. */ }
+      </script>
+    )}
   </head>
   <body>
+    {hasLandingIntro && <IntroScreen lang={lang} />}
     <div class="reading-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#contenido">
       {tr("Saltar al contenido", "Skip to content")}
