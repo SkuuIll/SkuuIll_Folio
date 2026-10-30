@@ -40,3 +40,48 @@
 @media(max-width:930px){.proof-gallery-intro{grid-template-columns:1fr}.proof-gallery-intro>p{max-width:63ch}.proof-gallery-track{grid-template-columns:repeat(2,minmax(0,1fr))}.proof-frame:last-child{grid-column:1/-1}}
 @media(max-width:640px){.proof-gallery{padding-block:45px}.proof-gallery-track{grid-template-columns:1fr;gap:14px}.proof-frame:last-child{grid-column:auto}.proof-frame-art{aspect-ratio:1.55}.proof-gallery-intro h2{font-size:clamp(40px,10vw,62px)}.proof-frame-caption{padding:18px}.proof-gallery-foot{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.proof-frame,.proof-frame-art img,.proof-frame-caption a span:last-child{transition:none!important;transform:none!important}}
+
+/* Taste + Canvas: an asymmetric product editorial on wide screens.
+   Lead with one real interface, then put the two supporting cases side by side
+   with their evidence; the mobile and tablet versions remain calm and scannable. */
+@media(min-width:1101px){
+  .proof-gallery-track{
+    grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:clamp(14px,1.8vw,26px);
+  }
+  .proof-frame:first-child{grid-row:1/3}
+  .proof-frame:first-child .proof-frame-art{aspect-ratio:1.16;flex:1;min-height:0}
+  .proof-frame:first-child .proof-frame-caption{flex:0 0 auto}
+  .proof-frame:not(:first-child){
+    display:grid;
+    grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);
+    grid-template-rows:auto minmax(0,1fr);
+    align-items:stretch;
+  }
+  .proof-frame:not(:first-child) .proof-frame-header{grid-column:1/-1}
+  .proof-frame:not(:first-child) .proof-frame-art{aspect-ratio:auto;min-height:220px;height:100%}
+  .proof-frame:not(:first-child) .proof-frame-caption{min-width:0;padding:clamp(16px,1.6vw,26px);gap:9px}
+  .proof-frame:not(:first-child) .proof-frame-caption h3{font-size:clamp(23px,2vw,35px)}
+  .proof-frame:not(:first-child) .proof-frame-caption>p:not(.mono){font-size:13px;line-height:1.55}
+}
+/* Preserving the art direction of each selectable edition instead of applying
+   the same brandless glass-card treatment everywhere. */
+:root[data-design="casebook"] .proof-gallery-intro h2,
+:root[data-design="atelier"] .proof-gallery-intro h2,
+:root[data-design="museum"] .proof-gallery-intro h2{font-family:Georgia,serif;font-weight:400}
+:root[data-design="systems"] .proof-frame{box-shadow:inset 4px 0 0 var(--accent)}
+:root[data-design="studio"] .proof-frame{background:var(--paper);box-shadow:0 18px 50px #0000001b}
+:root[data-design="xray"] .proof-frame-art{background:color-mix(in srgb,var(--signal-blue) 19%,var(--surface))}
+:root[data-design="canvas"] .proof-gallery-track{border:1px dashed var(--line);padding:clamp(12px,2vw,24px)}
+:root[data-design="brutalist"] .proof-frame:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--accent)}
+:root[data-design="story"] .proof-frame-header{background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+:root[data-design="terminal"] .proof-frame-header{font-family:var(--mono);letter-spacing:.09em}
+:root[data-design="pocket"] .proof-frame-caption{gap:8px}
+:root[data-design="chromatic"] .proof-frame-art img{filter:saturate(1.18)}
+:root[data-design="skull-os"] .proof-frame-header{border-bottom:2px solid var(--accent)}
+@media(hover:none){.proof-frame:hover,.proof-frame:hover .proof-frame-art img{transform:none}}
+@media(prefers-reduced-motion:reduce){
+  :root[data-design="brutalist"] .proof-frame:hover,
+  .proof-frame:hover,.proof-frame:hover .proof-frame-art img{transform:none!important}
+}
