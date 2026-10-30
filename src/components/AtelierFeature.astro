@@ -1,20 +1,22 @@
 ---
 import { asset, projectUrl } from "../data/projects";
-const { compact = false } = Astro.props;
+interface Props { compact?: boolean; lang?: "es" | "en" }
+const { compact = false, lang = "es" } = Astro.props;
+const tr = (es: string, english: string) => lang === "en" ? english : es;
 const shots = [
   {
     file: "atelier-colors.webp",
-    label: "Color y material",
+    label: tr("Color y material", "Color and material"),
     alt: "Atelier de CPAUL: prenda tridimensional y controles de color por zona.",
   },
   {
     file: "atelier-design.webp",
-    label: "Diseño y bordado",
+    label: tr("Diseño y bordado", "Design and embroidery"),
     alt: "Atelier de CPAUL: incorporación de un texto de demostración sobre la prenda 3D.",
   },
   {
     file: "atelier-placement.webp",
-    label: "Ubicación y detalle",
+    label: tr("Ubicación y detalle", "Placement and detail"),
     alt: "Atelier de CPAUL: vista lateral y ubicaciones de personalización.",
   },
 ];
@@ -28,18 +30,18 @@ const shots = [
   <div class="exhibition-heading" data-reveal>
     <p class="eyebrow">01 / ATELIER 3D · CPAUL</p>
     <h2 id="atelier-title">
-      De una idea
-      <br />a una <span class="accent">prenda.</span>
+      {tr("De una idea","From an idea")}
+      <br />a una <span class="accent">{tr("prenda.","garment.")}</span>
     </h2>
     <p>
-      Un configurador que convierte color, material y diseño en una experiencia
-      tridimensional. Una de las piezas más profundas de mi trabajo.
+      {tr("Un configurador que convierte color, material y diseño en una experiencia","A configurator that turns color, material and design into an")}
+      {tr("tridimensional. Una de las piezas más profundas de mi trabajo.","immersive 3D experience. One of my most detailed projects.")}
     </p>
   </div>
   <div class="atelier-stage" data-reveal>
     <div class="atelier-toolbar">
       <span>CPAUL / PRODUCT DESIGN EXPERIENCE</span>
-      <span>WEB · 3D · PERSONALIZACIÓN</span>
+      <span>{tr("WEB · 3D · PERSONALIZACIÓN","WEB · 3D · CUSTOMIZATION")}</span>
     </div>
     <img
       id="atelier-shot"
@@ -53,7 +55,7 @@ const shots = [
   <div
     class="atelier-tabs"
     role="group"
-    aria-label="Pantallas del Atelier"
+    aria-label={tr("Pantallas del Atelier", "Atelier screens")}
     hidden
   >
     {shots.map((shot, i) => (
@@ -70,40 +72,40 @@ const shots = [
   </div>
   <div class="atelier-description">
     <p>
-      Capturas reales del Atelier ejecutado localmente con un catálogo de
-      demostración. El editor combina prendas, colores por zona, materiales,
-      texto e imágenes, ubicaciones y una vista previa del diseño.
+      {tr("Capturas reales del Atelier ejecutado localmente con un catálogo de","Real screenshots of the Atelier running locally with a demo catalog.")}
+      {tr("demostración. El editor combina prendas, colores por zona, materiales,","The editor combines clothing, per-zone colors, materials,")}
+      {tr("texto e imágenes, ubicaciones y una vista previa del diseño.","text, images, placement controls and design previews.")}
     </p>
     <div>
       <a
         class="inline-link"
-        href={compact ? "#explorar-3d" : projectUrl("cpaul")}
+        href={compact ? "#explorar-3d" : projectUrl("cpaul", lang)}
       >
-        Explorá el trabajo detrás del Atelier <span aria-hidden="true">↗</span>
+        {tr("Explorá el trabajo detrás del Atelier","Explore the work behind the Atelier")} <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>
   <div class="atelier-detail-row">
     <article data-reveal>
-      <span class="eyebrow">01 / CONFIGURAR</span>
-      <h3>La prenda como punto de partida.</h3>
+      <span class="eyebrow">{tr("01 / CONFIGURAR","01 / CONFIGURE")}</span>
+      <h3>{tr("La prenda como punto de partida.","Start with the garment.")}</h3>
       <p>
-        Catálogo de bases, selección de materiales y color por zonas del modelo.
+        {tr("Catálogo de bases, selección de materiales y color por zonas del modelo.","Base garment catalog, material selection and per-zone colors.")}
       </p>
     </article>
     <article data-reveal>
-      <span class="eyebrow">02 / PERSONALIZAR</span>
-      <h3>Un diseño con intención.</h3>
+      <span class="eyebrow">{tr("02 / PERSONALIZAR","02 / CUSTOMIZE")}</span>
+      <h3>{tr("Un diseño con intención.","Purposeful customization.")}</h3>
       <p>
-        Texto, imágenes y acabados de hilo, con controles de tamaño y ubicación.
+        {tr("Texto, imágenes y acabados de hilo, con controles de tamaño y ubicación.","Text, graphics and thread finishes with size and placement controls.")}
       </p>
     </article>
     <article data-reveal>
-      <span class="eyebrow">03 / CONECTAR</span>
-      <h3>Del editor al pedido.</h3>
+      <span class="eyebrow">{tr("03 / CONECTAR","03 / CONNECT")}</span>
+      <h3>{tr("Del editor al pedido.","From editor to order.")}</h3>
       <p>
-        Borrador local, revisión del diseño y preparación de la solicitud de
-        cotización.
+        {tr("Borrador local, revisión del diseño y preparación de la solicitud de","Local drafts, design review and preparation for a")}
+        {tr("cotización.","quotation request.")}
       </p>
     </article>
   </div>
@@ -113,8 +115,8 @@ const shots = [
     data-model-viewer
     data-model={asset("models/atelier-tshirt/model.gltf")}
   >
-    <p class="eyebrow">UNA MUESTRA INTERACTIVA / MODELO DEL PROYECTO</p>
-    <h3 style="margin: 16px 0 24px">Probá el volumen. Cambiá el color.</h3>
+    <p class="eyebrow">{tr("UNA MUESTRA INTERACTIVA / MODELO DEL PROYECTO","INTERACTIVE PREVIEW / PROJECT MODEL")}</p>
+    <h3 style="margin: 16px 0 24px">{tr("Probá el volumen. Cambiá el color.","Explore the volume. Change the color.")}</h3>
     <div class="viewer-shell">
       <img
         class="viewer-poster"
@@ -127,29 +129,29 @@ const shots = [
       <div class="viewer-stage" hidden></div>
       <div class="viewer-start" hidden>
         <button class="solid-button" type="button" data-load-model>
-          Activar muestra 3D
+          {tr("Activar muestra 3D","Activate 3D preview")}
         </button>
         <p>
-          Se carga solo al activarla. Podés girar la prenda y explorar sus
-          colores; el editor completo se muestra en las capturas.
+          {tr("Se carga solo al activarla. Podés girar la prenda y explorar sus","Loads only when requested. Rotate the garment and explore its")}
+          {tr("colores; el editor completo se muestra en las capturas.","colors; the full editor is shown in the screenshots.")}
         </p>
       </div>
     </div>
     <p class="viewer-status" role="status" aria-live="polite">
-      La imagen estática está disponible sin activar la muestra 3D.
+      {tr("La imagen estática está disponible sin activar la muestra 3D.","The static image is available without loading the 3D preview.")}
     </p>
     <div class="viewer-controls" hidden>
       <button type="button" data-model-color="#a74c36" aria-pressed="false">
-        Arcilla
+        {tr("Arcilla","Clay")}
       </button>
       <button type="button" data-model-color="#d8d0b8" aria-pressed="false">
-        Lino
+        {tr("Lino","Linen")}
       </button>
       <button type="button" data-model-color="#51664a" aria-pressed="false">
-        Oliva
+        {tr("Oliva","Olive")}
       </button>
       <button type="button" data-model-color="#29363c" aria-pressed="false">
-        Carbón
+        {tr("Carbón","Charcoal")}
       </button>
       <button
         type="button"
@@ -172,7 +174,7 @@ const shots = [
         −
       </button>
       <button type="button" data-close-model>
-        Cerrar 3D
+        {tr("Cerrar 3D","Close 3D")}
       </button>
     </div>
   </div>
