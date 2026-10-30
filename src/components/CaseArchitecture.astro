@@ -1,0 +1,12 @@
+---
+interface Props {lang?:"es"|"en";id:string;stack:string[]}
+const {lang="es",id,stack}=Astro.props;const en=lang==="en";
+const layers=stack.slice(0,5);
+---
+<section class="case-architecture case-section" aria-labelledby="architecture-title">
+ <p class="eyebrow">{en?"TECHNICAL ANATOMY":"ANATOMÍA TÉCNICA"}</p>
+ <h2 id="architecture-title">{en?"Documented technology stack":"Stack tecnológico documentado"}</h2>
+ <p>{en?"A readable overview of the technologies associated with this project. The order is illustrative, not a claim about production topology.":"Una vista legible de las tecnologías asociadas al proyecto. El orden es ilustrativo y no representa necesariamente la arquitectura desplegada."}</p>
+ <ol class="case-architecture-flow" aria-label={en?"Project technologies":"Tecnologías del proyecto"}>{layers.map((tech,i)=><li><span class="mono">{String(i+1).padStart(2,"0")}</span><strong>{tech}</strong></li>)}</ol>
+ <a class="case-architecture-link" href={en?"/en/#tecnologias":"/#tecnologias"}>{en?"Explore the technology map":"Explorar el mapa de tecnologías"} <span aria-hidden="true">↗</span></a>
+</section>
