@@ -6,6 +6,11 @@ const cleanups: Array<() => void> = [];
 let disposed = false;
 
 async function mount(host: HTMLElement) {
+  // Keep the authored poster and CSS portal on low-memory or data-saver devices.
+  if (root.dataset.performance === "lite") {
+    host.dataset.renderer = "fallback";
+    return;
+  }
   const canvas = host.querySelector<HTMLCanvasElement>("canvas")!;
   const context = canvas.getContext("webgl2", {
     alpha: false,
