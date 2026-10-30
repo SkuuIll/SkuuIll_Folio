@@ -1,0 +1,80 @@
+/* SKULL / UI cleanup 2026-10-30
+   A compact edition switcher, consistent focus targets and overflow-safe scenes. */
+
+/* One-line switcher on desktop, one-line icon controls on mobile. */
+:root[data-design] .design-ribbon{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:56px;
+  padding:6px 11px 6px 15px;
+  margin-top:9px;
+  border-radius:14px;
+  width:min(1040px,calc(100% - 40px));
+  max-width:100%;
+  box-shadow:none;
+}
+.design-ribbon-main{min-width:0;flex:1 1 auto;gap:9px}
+.design-ribbon-figure,.design-ribbon-note,.design-ribbon-caption{display:none}
+.design-ribbon-title{display:block;min-width:0}
+.design-ribbon-title strong{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:12px}
+.design-ribbon-controls{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex:0 0 auto;flex-wrap:nowrap;min-width:0}
+.design-ribbon-controls button{padding:6px 10px;border-radius:9px;min-width:44px;min-height:44px}
+.design-ribbon-controls .design-index{min-width:51px;color:var(--muted);font-size:11px}
+.design-select-label{display:block;flex:0 1 176px;min-width:0;max-width:176px}
+.design-select-label select{width:100%;max-width:100%;min-width:0;min-height:44px;padding:7px 9px;font-size:12px;border-radius:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.design-ribbon-controls .design-next{min-width:44px}
+.design-ribbon-controls .design-next .design-next-text{display:inline}
+.design-ribbon :is(button,select):focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Text must remain readable even in modes that otherwise dim decorative marks. */
+:root[data-design] .hero-signature{opacity:1!important}
+:root[data-design] .hero-signature>.mono{color:var(--muted);opacity:1!important}
+
+/* Prevent visual bleed caused by large experimental typography and transforms. */
+.edition-experiences,.edition-scene{min-width:0;max-width:100%}
+.edition-scene :is(h2,h3,strong,p){overflow-wrap:anywhere}
+.os-surface,.os-window-content,.museum-gallery,.xray-shell,.story-shell,.canvas-shell,.brutal-panel{min-width:0;max-width:100%}
+.edition-scene :is(.os-window,.os-window-content>div,.museum-placard,.xray-heading,.xray-controls,.story-sidebar,.story-content){min-width:0}
+.edition-scene img{max-width:100%}
+.brutal-panel{overflow:hidden}
+.brutal-panel h2{overflow-wrap:anywhere;word-break:normal}
+.canvas-viewport{overflow:clip}
+.xray-model{overflow:clip}
+
+/* Don't mask interaction in a reduced-motion experience; remove only non-essential movement. */
+@media(prefers-reduced-motion:reduce){
+ .edition-scene :is(.xray-plate,.story-orbit,.story-square,.terminal-cursor){animation:none!important;transition:none!important}
+}
+
+@media(max-width:767px){
+ :root[data-design] .design-ribbon{
+   width:calc(100% - 28px);
+   min-height:52px;
+   padding:4px 7px;
+   margin-top:7px;
+   gap:0;
+   border-radius:12px;
+ }
+ .design-ribbon-main{display:none}
+ .design-ribbon-controls{width:100%;flex:1 1 auto;justify-content:space-between;gap:4px}
+ .design-ribbon-controls button{min-width:44px;height:44px;padding:7px}
+ .design-ribbon-controls .design-index{min-width:45px;font-size:10px}
+ .design-select-label{flex:1 1 auto;width:auto;min-width:0;max-width:none}
+ .design-select-label select{width:100%;min-width:0;font-size:11px;padding:7px 6px;height:44px}
+ .design-ribbon-controls .design-next{min-width:44px;width:44px}
+ .design-ribbon-controls .design-next .design-next-text{display:none}
+ .edition-scene.shell{min-width:0}
+ .os-dock,.os-topbar,.terminal-toolbar{max-width:100%;overflow:hidden}
+ .os-topbar>span,.terminal-toolbar>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+ .brutal-panel{box-shadow:5px 5px 0 #111}
+ .xray-model{overflow:clip}
+}
+@media(max-width:365px){
+ .design-ribbon-controls .design-index{min-width:41px}
+ .design-select-label select{font-size:10px}
+ .os-dock{font-size:9px;gap:8px}
+ .terminal-inner{padding:15px}
+ .terminal-form label{font-size:10px}
+}

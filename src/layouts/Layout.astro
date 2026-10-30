@@ -13,6 +13,7 @@ import "../styles/design-modes.css";
 import "../styles/design-contrast.css";
 import "../styles/theme-corrections.css";
 import "../styles/editions-two.css";
+import "../styles/visual-polish.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
 import { legalNav } from "../data/legal";
@@ -330,8 +331,8 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
             ].map(([value,label]) => <option value={value}>{label}</option>)}
           </select>
         </label>
-        <button type="button" data-design-next class="design-next">
-          {tr("Otro diseño", "Next design")} <span aria-hidden="true">→</span>
+        <button type="button" data-design-next class="design-next" aria-label={tr("Siguiente diseño", "Next design")} title={tr("Siguiente diseño", "Next design")}>
+          <span class="design-next-text">{tr("Otro diseño", "Next design")}</span> <span aria-hidden="true">→</span>
         </button>
       </div>
     </aside>
