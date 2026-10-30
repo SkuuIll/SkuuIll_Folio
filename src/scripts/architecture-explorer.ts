@@ -1,7 +1,7 @@
 export {};
 // A meaningful CSS-only data-flow illustration using documented project stacks.
 // Does not request private APIs, claim live telemetry, or load WebGL.
-const root = document.querySelector<HTMLElement>("[data-architecture]");
+const root = document.querySelector<HTMLElement>("[data-architecture]")!;
 if (root) {
   const stage = root.querySelector<HTMLElement>(".architecture-stage");
   const english = document.documentElement.lang.startsWith("en");
