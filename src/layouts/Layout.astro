@@ -14,6 +14,7 @@ import "../styles/design-contrast.css";
 import "../styles/theme-corrections.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
+import { legalNav } from "../data/legal";
 interface Props {
   title?: string;
   description?: string;
@@ -338,6 +339,14 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         <button type="button" class="footer-share" id="share-portfolio" hidden>{tr("Compartir ↗", "Share ↗")}</button>
         <a href={`mailto:${profile.email}`}>Email ↗</a>
       </div>
+      <nav class="footer-legal" aria-label={tr("Información legal y privacidad", "Legal and privacy information")}>
+        <span class="footer-legal-heading mono">{tr("LEGAL Y TRANSPARENCIA", "LEGAL & TRANSPARENCY")}</span>
+        <div class="footer-legal-links">
+          {legalNav.map((item) => (
+            <a href={asset((en ? "en/" : "") + item.kind + "/")}>{en ? item.en : item.es}</a>
+          ))}
+        </div>
+      </nav>
       <p id="share-status" class="share-status mono" role="status" aria-live="polite"></p>
     </footer>
     <script>

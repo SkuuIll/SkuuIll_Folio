@@ -539,3 +539,19 @@ body {
  .portfolio-work-card, .portfolio-capability { transition-duration:.15s; }
  .sp-hero-copy { contain:layout style; }
 }
+
+/* Trust and legal footer: compact enough for phones, readable in all themes. */
+.site-footer{align-items:start;row-gap:22px}
+.site-footer .footer-links{display:flex;justify-self:end;align-self:center;align-items:center;gap:clamp(8px,1.4vw,22px);flex-wrap:wrap}
+.site-footer .footer-links>a,.site-footer .footer-links>button{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;font-size:12px;padding:6px 4px;color:var(--ink)}
+.site-footer .footer-links>a:hover,.site-footer .footer-links>button:hover{color:var(--accent)}
+.footer-legal{grid-column:1/-1;display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:18px;min-width:0}
+.footer-legal-heading{font:10px var(--mono);letter-spacing:.09em;color:var(--muted)}
+.footer-legal-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 24px}
+.footer-legal-links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-size:12px;line-height:1.35;color:var(--muted)}
+.footer-legal-links a:hover,.footer-legal-links a:focus-visible{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.site-footer #share-status:empty{display:none}
+.site-footer #share-status:not(:empty){grid-column:1/-1;margin:0}
+@media(max-width:1100px){.site-footer .footer-links{justify-self:start;gap:8px 20px}}
+@media(max-width:767px){.site-footer{grid-template-columns:1fr 1fr}.footer-legal-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px}.footer-legal-links a{font-size:11px;white-space:normal}.site-footer .footer-links{grid-column:1/-1;flex-wrap:wrap;gap:10px 18px}}
+@media(max-width:380px){.footer-legal-links{grid-template-columns:1fr}}

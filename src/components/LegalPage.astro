@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/legal.css";
+import { asset } from "../data/projects";
+import { legalContent, legalNav, sources, updated, type LegalKind, type Locale } from "../data/legal";
+interface Props { lang: Locale; kind: LegalKind }
+const { lang, kind } = Astro.props;
+const en = lang === "en";
+const doc = legalContent[lang][kind];
+const path = (key: LegalKind) => asset((en ? "en/" : "") + key + "/");
+const t = (es: string, english: string) => en ? english : es;
+---
+<Layout lang={lang} title={doc.title + " — SKULL"} description={doc.lead}>
+  <article class="legal-page shell" aria-labelledby="legal-page-title">
+    <a class="legal-back" href={asset(en ? "en/" : "")}>← {t("Volver al portafolio","Back to portfolio")}</a>
+    <header class="legal-hero">
+      <p class="eyebrow">SKULL / {t("INFORMACIÓN Y TRANSPARENCIA","INFORMATION & TRANSPARENCY")}</p>
+      <h1 id="legal-page-title">{doc.title}</h1>
+      <p>{doc.lead}</p>
+      <div class="legal-stamp mono">{t("Última revisión: 30 de octubre de 2026","Last reviewed: October 30, 2026")} · AR / {lang.toUpperCase()}</div>
+    </header>
+    <div class="legal-columns">
+      <nav class="legal-menu" aria-label={t("Documentos legales","Legal documents")}>
+        <span class="legal-menu-heading mono">{t("DOCUMENTOS","DOCUMENTS")}</span>
+        {legalNav.map(item => (
+          <a href={path(item.kind)} aria-current={kind === item.kind ? "page" : undefined}>
+            {en ? item.en : item.es}<span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
+      <div class="legal-body">
+        {doc.sections.map((section,i) => (
+          <section class="legal-section" aria-labelledby={"legal-section-" + i}>
+            <span class="mono legal-section-number">{String(i + 1).padStart(2,"0")} / {String(doc.sections.length).padStart(2,"0")}</span>
+            <h2 id={"legal-section-" + i}>{section.heading}</h2>
+            {section.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+          </section>
+        ))}
+        {kind === "creditos" && (
+          <section class="legal-section" aria-labelledby="legal-licenses-heading">
+            <span class="mono legal-section-number">{t("LICENCIAS INCLUIDAS","BUNDLED LICENSES")}</span>
+            <h2 id="legal-licenses-heading">{t("Archivos de licencia","License files")}</h2>
+            <ul class="legal-source-links">
+              <li><a href={asset("licenses/Manrope-OFL.txt")}>Manrope — SIL OFL ↗</a></li>
+              <li><a href={asset("licenses/Geist-Mono-OFL.txt")}>Geist Mono — SIL OFL ↗</a></li>
+              <li><a href={asset("licenses/Three-MIT.txt")}>Three.js — MIT ↗</a></li>
+              <li><a href="https://github.com/SkuuIll/SkuuIll_Folio" target="_blank" rel="noopener noreferrer">{t("Repositorio del portafolio","Portfolio repository")} ↗</a></li>
+            </ul>
+          </section>
+        )}
+        <section class="legal-section legal-references" aria-labelledby="legal-references-title">
+          <span class="mono legal-section-number">{t("REFERENCIAS OFICIALES","OFFICIAL REFERENCES")}</span>
+          <h2 id="legal-references-title">{t("Normativa argentina","Argentine legislation")}</h2>
+          <p>{t("Fuentes públicas para consultar la normativa. Se aplican según la naturaleza de cada actividad y no todas implican obligaciones adicionales para un portafolio sin ventas online.","Public legal references. Applicability depends on the activity; not every provision creates additional requirements for a portfolio without online sales.")}</p>
+          <ul class="legal-source-links">{sources.map(source=>(
+            <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title} ↗</a></li>
+          ))}</ul>
+        </section>
+        <p class="legal-notice">{t("Este contenido describe el funcionamiento actual del portafolio y no reemplaza el asesoramiento jurídico sobre una actividad comercial concreta.","These pages describe the current portfolio and do not replace legal advice for a specific commercial activity.")}</p>
+        <a class="legal-contact" href="mailto:moreappmix@gmail.com">{t("¿Tenés una consulta sobre esta información?","Questions about this information?")} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </article>
+</Layout>
