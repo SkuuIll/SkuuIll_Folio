@@ -1,0 +1,87 @@
+---
+import { asset } from "../data/projects";
+import "../styles/architecture-explorer.css";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const en = lang === "en";
+const t = (es: string, english: string) => en ? english : es;
+---
+<section class="architecture-demo shell" id="profundidad" aria-labelledby="architecture-title">
+  <div class="architecture-heading">
+    <div>
+      <p class="eyebrow">{t("03 / POR DENTRO DE UN PROYECTO", "03 / INSIDE THE SOFTWARE")}</p>
+      <h2 id="architecture-title">{t("No es magia.", "Not magic.")}<br /><span>{t("Es arquitectura.", "It's architecture.")}</span></h2>
+    </div>
+    <p>{t("Elegí uno de mis proyectos y explorá cómo se conectan sus piezas. Tocá cada módulo y reproducí el flujo de información.", "Choose a real project and explore how its parts connect. Select each module and replay the information flow.")}</p>
+  </div>
+  <div class="architecture-console" data-architecture data-project="vigia" data-step="0" data-flow="idle" data-matrix="off" data-matrix-visible="false">
+    <div class="architecture-toolbar">
+      <span class="mono"><i class="architecture-led" aria-hidden="true"></i> SKULL / SYSTEM.EXPLORER</span>
+      <span class="mono architecture-label">{t("DIAGRAMA CONCEPTUAL · NO CONECTADO EN VIVO", "CONCEPTUAL DIAGRAM · NOT LIVE")}</span>
+    </div>
+    <div class="architecture-projects" role="group" aria-label={t("Proyecto de ejemplo", "Example project")}>
+      <button type="button" data-arch-project="vigia" aria-pressed="true">01 / Vigía</button>
+      <button type="button" data-arch-project="cpaul" aria-pressed="false">02 / CPAUL</button>
+      <button type="button" data-arch-project="repo-setup" aria-pressed="false">03 / Repo Setup Kit</button>
+    </div>
+    <div class="architecture-stage" data-matrix="off" data-matrix-visible="false" data-flow="idle">
+      <div class="matrix-rain" aria-hidden="true"></div>
+      <div class="architecture-stage-top">
+        <div>
+          <span class="mono architecture-overline">{t("SISTEMA SELECCIONADO", "SELECTED SYSTEM")}</span>
+          <h3 data-arch-title>Vigía · Gestión Hotelera</h3>
+        </div>
+        <span class="architecture-status mono" data-arch-status>{t("ARQUITECTURA EXPLICATIVA", "EXPLANATORY ARCHITECTURE")}</span>
+      </div>
+      <div class="architecture-nodes" role="group" aria-label={t("Etapas del sistema", "System stages")}>
+        {[
+          { n:"01", kind:t("Interfaz", "Interface"), name:"React / Android", text:t("Panel y aplicación móvil", "Dashboard and mobile app") },
+          { n:"02", kind:"API", name:"NestJS", text:t("Reglas y permisos", "Rules and permissions") },
+          { n:"03", kind:t("Datos", "Data"), name:"PostgreSQL", text:t("Persistencia", "Persistence") },
+          { n:"04", kind:t("Operación", "Operations"), name:t("Roles / sedes", "Roles / sites"), text:t("Acceso y supervisión", "Access and supervision") },
+        ].map((node, i) => (
+          <button class="architecture-node" type="button" data-arch-node={i} aria-pressed={i === 0 ? "true" : "false"}>
+            <span class="mono architecture-node-number">{node.n} / {node.kind}</span>
+            <strong data-arch-node-title>{node.name}</strong>
+            <span class="architecture-node-desc" data-arch-node-sub>{node.text}</span>
+            <span class="architecture-node-led" aria-hidden="true"></span>
+          </button>
+        ))}
+      </div>
+      <div class="architecture-links" aria-hidden="true">
+        <span class="architecture-wire"></span>
+        <span class="architecture-wire"></span>
+        <span class="architecture-wire"></span>
+      </div>
+      <div class="architecture-stage-bottom">
+        <div class="architecture-detail" aria-live="polite">
+          <span class="mono" data-arch-detail-label>01 / {t("Interfaz", "Interface")}</span>
+          <p data-arch-detail>{t("El panel web y la app Android permiten trabajar con habitaciones, rondas y personal.", "Web dashboard and Android app provide interfaces for hotel rooms, rounds and staff.")}</p>
+        </div>
+        <div class="architecture-actions">
+          <button type="button" class="architecture-replay" data-arch-replay>
+            <span class="architecture-replay-icon" aria-hidden="true">▶</span>
+            <span data-arch-replay-label>{t("Reproducir flujo", "Replay flow")}</span>
+          </button>
+          <button type="button" id="matrix-toggle" class="architecture-matrix" aria-pressed="false">
+            <span aria-hidden="true">⌘</span>
+            <span class="matrix-toggle-label">{t("Activar Matrix", "Enable Matrix")}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="architecture-footer">
+      <p class="mono">{t("INTERACCIÓN REAL · FLUJO VISUAL SIMULADO", "REAL INTERACTION · SIMULATED VISUAL FLOW")}</p>
+      <a data-arch-case href={asset(lang === "en" ? "en/projects/vigia/" : "proyectos/vigia/")}>
+        <span data-arch-case-label>{t("Explorar el caso Vigía", "Explore Vigía case study")}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <p class="architecture-feedback mono" data-arch-feedback role="status" aria-live="polite"></p>
+    <span class="visually-hidden" id="matrix-status" role="status" aria-live="polite"></span>
+  </div>
+</section>
+<script>
+  import "../scripts/architecture-explorer";
+  import "../scripts/matrix";
+</script>

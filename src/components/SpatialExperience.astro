@@ -1,61 +1,12 @@
 ---
-import { asset } from "../data/projects";
+import ArchitectureExplorer from "./ArchitectureExplorer.astro";
 interface Props { lang?: "es" | "en" }
 const lang = Astro.props.lang ?? "es";
 const tr = (es: string, english: string) => lang === "en" ? english : es;
 import "../styles/spatial.css";
 ---
 
-<section
-  class="spatial-photo shell"
-  id="profundidad"
-  aria-labelledby="spatial-title"
->
-  <div class="spatial-heading">
-    <p class="eyebrow">{tr("03 / OBSERVATORIO DIGITAL","03 / DIGITAL OBSERVATORY")}</p>
-    <h2 id="spatial-title">
-      {tr("Más allá","Beyond")}
-      <br />
-      {tr("de la pantalla.","the screen.")}
-    </h2>
-    <p>
-      {tr("Una escena que responde a tu mirada. Explorá la profundidad, la perspectiva","A scene that responds to your point of view. Explore depth, perspective")}
-      {tr("y la luz. También podés activar una capa cyberpunk de código en movimiento.","and light. You can also enable a cyberpunk layer of moving code.")}
-    </p>
-  </div>
-  <div class="spatial-frame" data-spatial="photo">
-    <img
-      src={asset("media/spatial-observatory.webp")}
-      width="1536"
-      height="1024"
-      loading="lazy"
-      decoding="async"
-      alt={tr("Observatorio futurista entre estructuras oscuras, anillos de cristal y una esfera luminosa sobre montañas lejanas.", "Futuristic observatory with dark structures, glass rings and a glowing sphere over distant mountains.")}
-    />
-    <canvas aria-hidden="true" data-running="false"></canvas>
-    <div class="matrix-rain" aria-hidden="true"></div>
-    <div class="spatial-image-caption">
-      <span class="mono">SKULL / OBSERVATORIO</span>
-      <span>{tr("Perspectiva · Luz · Profundidad","Perspective · Light · Depth")}</span>
-    </div>
-    <div class="spatial-reticle" aria-hidden="true"></div>
-  </div>
-  <div class="spatial-tools" hidden>
-    <label for="spatial-depth">
-      {tr("Profundidad","Depth")} <output id="spatial-depth-value">50</output>
-    </label>
-    <input id="spatial-depth" type="range" min="0" max="100" value="50" />
-    <span>{tr("Mové el cursor. En tu teléfono, desplazate.","Move your cursor. On a phone, scroll.")}</span>
-  </div>
-  <div class="spatial-art-actions">
-    <p class="mono">{tr("EXPERIENCIA INTERACTIVA / CONTROLADA POR VOS","INTERACTIVE EXPERIENCE / YOU'RE IN CONTROL")}</p>
-    <button type="button" id="matrix-toggle" aria-pressed="false" hidden>
-      <span class="matrix-toggle-icon" aria-hidden="true">⌘</span>
-      <span class="matrix-toggle-label">{tr("Activar lluvia Matrix","Enable Matrix rain")}</span>
-    </button>
-    <span id="matrix-status" class="mono" role="status" aria-live="polite"></span>
-  </div>
-</section>
+<ArchitectureExplorer lang={lang} />
 
 <section class="portal-journey" id="recorrido" aria-labelledby="journey-title">
   <div class="journey-stage" data-spatial="journey">
@@ -102,5 +53,4 @@ import "../styles/spatial.css";
 </section>
 <script>
   import "../scripts/spatial";
-  import "../scripts/matrix";
 </script>
