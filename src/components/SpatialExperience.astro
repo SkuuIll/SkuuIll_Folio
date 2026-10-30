@@ -36,13 +36,13 @@ import "../styles/spatial.css";
     <div class="matrix-rain" aria-hidden="true"></div>
     <div class="spatial-image-caption">
       <span class="mono">SKULL / OBSERVATORIO</span>
-      <span>{tr("Perspectiva · Luz · {tr("Profundidad","Depth")}","Perspective · Light · Depth")}</span>
+      <span>{tr("Perspectiva · Luz · Profundidad","Perspective · Light · Depth")}</span>
     </div>
     <div class="spatial-reticle" aria-hidden="true"></div>
   </div>
   <div class="spatial-tools" hidden>
     <label for="spatial-depth">
-      Profundidad <output id="spatial-depth-value">50</output>
+      {tr("Profundidad","Depth")} <output id="spatial-depth-value">50</output>
     </label>
     <input id="spatial-depth" type="range" min="0" max="100" value="50" />
     <span>{tr("Mové el cursor. En tu teléfono, desplazate.","Move your cursor. On a phone, scroll.")}</span>
