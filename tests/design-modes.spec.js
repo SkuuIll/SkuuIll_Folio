@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
-const modes = ["editorial","casebook","systems","atelier","chromatic","pocket","studio"];
+const modes = ["editorial","casebook","systems","atelier","chromatic","pocket","studio","skull-os","xray","museum","terminal","canvas","brutalist","story"];
 
-test("every reload rotates through all seven complete art directions", async ({ page }) => {
+test("every reload rotates through all fourteen complete art directions", async ({ page }) => {
   await page.goto("./");
   const seen = [];
   for (let i=0;i<modes.length;i++) {
@@ -10,10 +10,10 @@ test("every reload rotates through all seven complete art directions", async ({ 
     expect(seen).not.toContain(key);
     seen.push(key);
     await expect(page.locator("[data-design-name]")).not.toBeEmpty();
-    await expect(page.locator("[data-design-index]")).toHaveText(/0[1-7] \/ 07/);
+    await expect(page.locator("[data-design-index]")).toHaveText(/(0[1-9]|1[0-4]) \/ 14/);
     if (i < modes.length-1) await page.reload();
   }
-  expect(new Set(seen).size).toBe(7);
+  expect(new Set(seen).size).toBe(14);
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-design",seen[0]);
 });
@@ -29,17 +29,17 @@ test("visitor can switch editions manually and the next reload selects another",
   await page.locator("[data-design-prev]").click();
   await expect(page.locator("[data-design-name]")).not.toBeEmpty();
 });
-test("Spanish and English expose the same seven design controls",async ({page})=>{
+test("Spanish and English expose the same fourteen design controls",async ({page})=>{
   await page.goto("en/");
   await expect(page.locator("[data-design-next]")).toHaveText(/Next design/);
   await expect(page.locator("[data-design-name]")).not.toBeEmpty();
   await page.locator("[data-design-next]").click();
-  await expect(page.locator("html")).toHaveAttribute("data-design",/editorial|casebook|systems|atelier|chromatic|pocket|studio/);
+  await expect(page.locator("html")).toHaveAttribute("data-design",/editorial|casebook|systems|atelier|chromatic|pocket|studio|skull-os|xray|museum|terminal|canvas|brutalist|story/);
   await expect(page.locator(".design-about")).toContainText("Code matters.");
   await page.goto("./");
   await expect(page.locator(".design-about")).toContainText("El código importa.");
 });
-test("seven styles remain accessible on constrained mobile viewport",async({page})=>{
+test("fourteen styles remain accessible on constrained mobile viewport",async({page})=>{
   await page.addInitScript(()=>{
     Object.defineProperty(navigator,"deviceMemory",{value:2,configurable:true});
     Object.defineProperty(navigator,"connection",{value:{saveData:true},configurable:true});

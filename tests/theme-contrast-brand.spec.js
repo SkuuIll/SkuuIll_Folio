@@ -1,5 +1,5 @@
 const {test,expect}=require("@playwright/test");
-const editions=["editorial","casebook","systems","atelier","chromatic","pocket","studio"];
+const editions=["editorial","casebook","systems","atelier","chromatic","pocket","studio","skull-os","xray","museum","terminal","canvas","brutalist","story"];
 const cssState=async(page)=>page.evaluate(()=>{
  const root=document.documentElement, hero=document.querySelector(".sp-hero");
  const vars=getComputedStyle(root), heading=hero&&hero.querySelector("h1");
@@ -11,12 +11,12 @@ const cssState=async(page)=>page.evaluate(()=>{
   headingTransform:h?.transform,headingShadow:h?.textShadow
  };
 });
-test("each of seven visual editions has distinct light and dark palettes",async({page})=>{
+test("each of fourteen visual editions has distinct light and dark palettes",async({page})=>{
  await page.goto("./");
  const button=page.locator("#theme-toggle");
  await expect(button).toBeVisible();
  const observations=[];
- for(let i=0;i<7;i++){
+ for(let i=0;i<14;i++){
   const current=await page.locator("html").getAttribute("data-design");
   expect(editions).toContain(current);
   if((await page.locator("html").getAttribute("data-theme"))!=="dark")await button.click();
@@ -44,13 +44,13 @@ test("each of seven visual editions has distinct light and dark palettes",async(
   observations.push(current);
   await page.locator("[data-design-next]").click();
  }
- expect(new Set(observations).size).toBe(7);
+ expect(new Set(observations).size).toBe(14);
 });
 test("editorial and studio do not lock to one theme; systems changes backgrounds",async({page})=>{
  await page.goto("./");
  const button=page.locator("#theme-toggle");
  for(const target of ["editorial","systems","studio"]){
-  for(let i=0;i<7&&(await page.locator("html").getAttribute("data-design"))!==target;i++)
+  for(let i=0;i<14&&(await page.locator("html").getAttribute("data-design"))!==target;i++)
    await page.locator("[data-design-next]").click();
   await expect(page.locator("html")).toHaveAttribute("data-design",target);
   if((await page.locator("html").getAttribute("data-theme"))!=="dark")await button.click();
@@ -61,7 +61,7 @@ test("editorial and studio do not lock to one theme; systems changes backgrounds
 });
 test("chromatic text is no longer rotated, shadowed or visually doubled",async({page})=>{
  await page.goto("./");
- for(let i=0;i<7&&(await page.locator("html").getAttribute("data-design"))!=="chromatic";i++)
+ for(let i=0;i<14&&(await page.locator("html").getAttribute("data-design"))!=="chromatic";i++)
   await page.locator("[data-design-next]").click();
  await expect(page.locator("html")).toHaveAttribute("data-design","chromatic");
  for(let mode=0;mode<2;mode++){

@@ -12,6 +12,7 @@ import "../styles/showcase.css";
 import "../styles/design-modes.css";
 import "../styles/design-contrast.css";
 import "../styles/theme-corrections.css";
+import "../styles/editions-two.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
 import { legalNav } from "../data/legal";
@@ -113,7 +114,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       document.documentElement.dataset.theme = theme;
       // Cycle through seven art directions on every full page load.
       // A shared key works across Spanish, English and project pages.
-      const designs = ["editorial", "casebook", "systems", "atelier", "chromatic", "pocket", "studio"];
+      const designs = ["editorial", "casebook", "systems", "atelier", "chromatic", "pocket", "studio", "skull-os", "xray", "museum", "terminal", "canvas", "brutalist", "story"];
       let priorDesign;
       try { priorDesign = sessionStorage.getItem("skull-design-last") || localStorage.getItem("skull-design-last"); } catch {}
       const previousIndex = designs.indexOf(priorDesign);
@@ -160,7 +161,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         const choices = values.filter((value) => value !== last);
         return choices[Math.floor(Math.random() * choices.length)];
       };
-      const designPalettes = { editorial: "matrix", casebook: "copper", systems: "ice", atelier: "violet", chromatic: "neon", pocket: "forest", studio: "amber" };
+      const designPalettes = { editorial: "matrix", casebook: "copper", systems: "ice", atelier: "violet", chromatic: "neon", pocket: "forest", studio: "amber", "skull-os": "blue", xray: "ice", museum: "copper", terminal: "matrix", canvas: "cobalt", brutalist: "amber", story: "violet" };
       const palette = designPalettes[design] || choose(palettes, lastPalette);
       const scene = choose(scenes, lastScene);
       const seed = Math.floor(Math.random() * 1000000);
@@ -317,7 +318,18 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         <button type="button" data-design-prev aria-label={tr("Diseño anterior", "Previous design")} title={tr("Diseño anterior", "Previous design")}>
           <span aria-hidden="true">←</span>
         </button>
-        <span data-design-index class="design-index" aria-label={tr("Diseño de siete", "Design of seven")}>01 / 07</span>
+        <span data-design-index class="design-index" aria-label={tr("Diseño de catorce", "Design of fourteen")}>01 / 14</span>
+        <label class="design-select-label">
+          <span class="visually-hidden">{tr("Elegir diseño", "Choose design")}</span>
+          <select data-design-select aria-label={tr("Elegir entre 14 diseños", "Choose from 14 designs")}>
+            {[
+              ["editorial","01 · Editorial"],["casebook","02 · Casebook"],["systems","03 · Systems"],["atelier","04 · Atelier"],
+              ["chromatic","05 · Chromatic"],["pocket","06 · Pocket"],["studio","07 · Studio"],["skull-os","08 · SKULL OS"],
+              ["xray","09 · X-Ray 3D"],["museum","10 · Digital Museum"],["terminal","11 · Terminal Pro"],
+              ["canvas","12 · Infinite Canvas"],["brutalist","13 · Neo-Brutalist"],["story","14 · Story Mode"]
+            ].map(([value,label]) => <option value={value}>{label}</option>)}
+          </select>
+        </label>
         <button type="button" data-design-next class="design-next">
           {tr("Otro diseño", "Next design")} <span aria-hidden="true">→</span>
         </button>

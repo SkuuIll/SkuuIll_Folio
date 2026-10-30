@@ -1,0 +1,190 @@
+/* SKULL / Editions 08–14. Original interfaces; shared semantic content, no extra 3D runtime. */
+.edition-experiences{display:none}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .edition-experiences{display:block}
+.edition-scene{display:none;min-width:0;padding-block:18px 55px}
+:root[data-design="skull-os"] .edition-scene[data-edition-scene="skull-os"],
+:root[data-design="xray"] .edition-scene[data-edition-scene="xray"],
+:root[data-design="museum"] .edition-scene[data-edition-scene="museum"],
+:root[data-design="terminal"] .edition-scene[data-edition-scene="terminal"],
+:root[data-design="canvas"] .edition-scene[data-edition-scene="canvas"],
+:root[data-design="brutalist"] .edition-scene[data-edition-scene="brutalist"],
+:root[data-design="story"] .edition-scene[data-edition-scene="story"]{display:block}
+.edition-scene a,.edition-scene button{touch-action:manipulation}
+.edition-scene :is(button,input,a):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.edition-overline{font:11px/1.5 var(--mono);letter-spacing:.16em;color:var(--accent);margin-bottom:16px}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .sp-hero{min-height:64svh}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .sp-hero-copy{padding-block:30px}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .sp-hero h1{font-size:clamp(45px,5.7vw,85px)}
+
+/* Theme palette per edition. Main text contrast always passes on the --paper foundation. */
+:root[data-theme="dark"][data-design="skull-os"]{--paper:#101827;--surface:#1b2638;--ink:#edf3ff;--muted:#b7c6dc;--line:#455874;--soft:#293c54;--accent:#9ebdff;--signal-blue:#88d9ea}
+:root[data-theme="light"][data-design="skull-os"]{--paper:#eef2fb;--surface:#fff;--ink:#162640;--muted:#4b607b;--line:#abbdd4;--soft:#d7e4fa;--accent:#274f9a;--signal-blue:#3474af}
+:root[data-theme="dark"][data-design="xray"]{--paper:#07151b;--surface:#12303b;--ink:#e8fbf7;--muted:#abcfd0;--line:#3a6871;--soft:#1b424a;--accent:#72efd2;--signal-blue:#7dc0f8}
+:root[data-theme="light"][data-design="xray"]{--paper:#ebf7f4;--surface:#dff1ee;--ink:#123f45;--muted:#40686b;--line:#9cc8bd;--soft:#cfebe3;--accent:#126d64;--signal-blue:#245a92}
+:root[data-theme="dark"][data-design="museum"]{--paper:#1b1718;--surface:#2b2324;--ink:#f9efe2;--muted:#d3bfae;--line:#605049;--soft:#40302c;--accent:#f3c98d;--signal-blue:#c5afb9}
+:root[data-theme="light"][data-design="museum"]{--paper:#f8f3ea;--surface:#eee5d9;--ink:#2e2322;--muted:#695951;--line:#c6b6a4;--soft:#e6d5c4;--accent:#8a4c25;--signal-blue:#7a6b88}
+:root[data-theme="dark"][data-design="terminal"]{--paper:#030d0a;--surface:#0a1b13;--ink:#d5fce4;--muted:#a4d0b7;--line:#305943;--soft:#153322;--accent:#80ffac;--signal-blue:#78dbaa}
+:root[data-theme="light"][data-design="terminal"]{--paper:#effaf1;--surface:#fafffa;--ink:#133b2c;--muted:#426a51;--line:#a1cbb0;--soft:#d7efdf;--accent:#16623d;--signal-blue:#356c51}
+:root[data-theme="dark"][data-design="canvas"]{--paper:#111c27;--surface:#1c2e40;--ink:#e6f4fc;--muted:#b1c8d6;--line:#49637b;--soft:#2b4254;--accent:#8bd7ff;--signal-blue:#b0c8ff}
+:root[data-theme="light"][data-design="canvas"]{--paper:#f0f6fc;--surface:#fff;--ink:#1d3148;--muted:#526a83;--line:#b2c8df;--soft:#dfebf7;--accent:#286994;--signal-blue:#4b77af}
+:root[data-theme="dark"][data-design="brutalist"]{--paper:#141111;--surface:#312a21;--ink:#fff4e7;--muted:#edcbb1;--line:#a68f6a;--soft:#473525;--accent:#ffe56b;--signal-blue:#ff9364}
+:root[data-theme="light"][data-design="brutalist"]{--paper:#f2eddb;--surface:#fffcdf;--ink:#26201c;--muted:#594a39;--line:#897662;--soft:#f9dc8b;--accent:#704500;--signal-blue:#b64728}
+:root[data-theme="dark"][data-design="story"]{--paper:#18172a;--surface:#26263f;--ink:#f5f1fc;--muted:#c8bfdc;--line:#645c80;--soft:#39314e;--accent:#d7baff;--signal-blue:#c4b9fa}
+:root[data-theme="light"][data-design="story"]{--paper:#fcf7fd;--surface:#f1e9f9;--ink:#30253e;--muted:#6a5779;--line:#c5b4d2;--soft:#e6d8f0;--accent:#754e9b;--signal-blue:#6470b1}
+
+/* 08 / SKULL OS */
+.os-desktop{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 90px #0003;background:radial-gradient(circle at 60% 15%,#4a689580,transparent 50%),linear-gradient(130deg,#10243e,#0a182c);color:#eff7ff}
+.os-topbar,.os-dock{display:flex;gap:15px;align-items:center;justify-content:space-between;padding:13px 20px;background:#090f1dcc;font:11px var(--mono);letter-spacing:.05em}
+.os-clock{color:#86efbe}.os-surface{min-height:560px;display:grid;grid-template-columns:minmax(140px,190px) minmax(0,1fr);gap:24px;padding:clamp(16px,3.5vw,50px);align-items:start}
+.os-intro{grid-column:1/-1}.os-intro h2{font-size:clamp(50px,6.2vw,99px);line-height:.96;letter-spacing:-.08em;margin:9px 0}.os-intro h2 span{color:#b1d2fc}
+.os-intro p{max-width:55ch;font-size:14px;line-height:1.7;color:#d0dff0}.os-intro .mono{color:#98ccf4}
+.os-icons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.os-icons button{background:#132d47b0;border:1px solid #7794b466;color:#fff;min-height:95px;border-radius:12px;padding:12px;display:grid;justify-items:center;gap:8px;font-size:11px;text-align:center}
+.os-icons button[aria-pressed="true"]{background:#40678d9c;box-shadow:inset 0 0 0 2px #9ee7f9}
+.os-icons .os-icon{font-size:27px;font-weight:700;line-height:1}
+.os-window{background:#eef3fb;color:#1b3247;border:1px solid #cfdaec;border-radius:13px;box-shadow:0 15px 55px #0009;overflow:hidden;min-width:0}
+.os-window-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:12px;background:#e2eaf5;border-bottom:1px solid #c5d5e4;font:11px var(--mono)}
+.os-dots{display:flex;gap:5px}.os-dots span{width:8px;height:8px;border-radius:50%;background:#6b8aac}.os-dots span:first-child{background:#e58f86}.os-dots span:nth-child(2){background:#e9c66c}
+.os-window-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);min-height:235px}
+.os-window-content img{width:100%;height:100%;min-height:235px;object-fit:cover;object-position:top}
+.os-window-content>div{padding:clamp(16px,2vw,28px);align-self:center}.os-window-content .mono{font-size:10px;color:#466783}
+.os-window-content h3{font-size:clamp(22px,2.8vw,36px);margin:12px 0;color:#162e48}.os-window-content p{font-size:13px;line-height:1.6;color:#4c6276}
+.os-window-content a{display:inline-flex;color:#1e5688;font-weight:700;font-size:12px;margin-top:20px;text-decoration:underline;text-underline-offset:4px}
+.os-dock{justify-content:flex-start;gap:17px;background:#0c1c2fcf;color:#cce0f6}
+:root[data-theme="light"][data-design="skull-os"] .os-desktop{background:linear-gradient(120deg,#95b4e0,#567eb6);border-color:#698cbf}
+
+/* 09 / X-RAY. Physically separated CSS 3D slabs. */
+.xray-shell{display:grid;grid-template-columns:minmax(0,.7fr) minmax(300px,1fr) minmax(220px,.65fr);gap:25px;min-height:530px;padding:clamp(25px,4vw,65px);border:1px solid var(--line);border-radius:6px;background:linear-gradient(135deg,var(--surface),var(--paper));align-items:center}
+.xray-heading h2{font-size:clamp(40px,4.8vw,76px);line-height:1;letter-spacing:-.06em;margin:15px 0}.xray-heading p{color:var(--muted);font-size:14px;line-height:1.7}.xray-heading .mono{color:var(--accent)}
+.xray-model{--xray-focus:0;position:relative;min-height:420px;perspective:900px;transform-style:preserve-3d}
+.xray-plate{position:absolute;top:50%;left:50%;width:min(78%,330px);height:150px;border:2px solid var(--accent);border-radius:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px;background:color-mix(in srgb,var(--accent) 9%,var(--surface));box-shadow:0 14px 30px #0003;transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-28deg) translateY(var(--lift));transition:transform .3s,background-color .3s,box-shadow .3s;pointer-events:none}
+.xray-plate span{font:13px var(--mono);color:var(--accent)}.xray-glyph{font:34px var(--mono);color:var(--ink)}
+.xray-plate-1{--lift:-150px;z-index:4}.xray-plate-2{--lift:-50px;z-index:3}.xray-plate-3{--lift:50px;z-index:2}.xray-plate-4{--lift:150px;z-index:1}
+.xray-shell[data-step="0"] .xray-plate-1,.xray-shell[data-step="1"] .xray-plate-2,.xray-shell[data-step="2"] .xray-plate-3,.xray-shell[data-step="3"] .xray-plate-4{background:color-mix(in srgb,var(--accent) 30%,var(--surface));box-shadow:0 12px 45px color-mix(in srgb,var(--accent) 25%,transparent);border-width:3px}
+.xray-layers{display:grid;gap:7px}.xray-layers button{display:flex;gap:12px;align-items:center;justify-content:space-between;text-align:left;border:1px solid var(--line);padding:12px;background:var(--surface);color:var(--ink);border-radius:8px;min-height:46px}
+.xray-layers button[aria-pressed="true"]{border-color:var(--accent);background:var(--soft)}.xray-layers .mono{font-size:11px;color:var(--accent)}
+.xray-readout{padding:18px 0;border-top:1px solid var(--line);margin-top:18px}.xray-readout .mono{color:var(--accent);font-size:11px}
+.xray-readout h3{font-size:23px;margin:9px 0}.xray-readout p{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* 10 / DIGITAL MUSEUM. Focus on the actual image. */
+.museum-hall{padding:clamp(24px,4vw,65px);border:12px solid color-mix(in srgb,var(--accent) 29%,var(--line));background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--surface) 90%,var(--paper)) 0 130px,var(--paper) 130px 132px);box-shadow:inset 0 25px 55px #0002}
+.museum-masthead{display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid var(--line);padding-bottom:25px;margin-bottom:35px}
+.museum-masthead h2{font:400 clamp(42px,5.4vw,82px)/1.05 Georgia,serif;letter-spacing:-.06em;margin:10px 0}
+.museum-masthead p{color:var(--muted);max-width:26ch;line-height:1.6;font-size:14px}.museum-masthead .mono{font-size:11px;color:var(--accent)}
+.museum-gallery{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,.53fr);gap:clamp(25px,4vw,60px);align-items:center}
+.museum-frame{padding:clamp(12px,1.6vw,22px);border:clamp(10px,1.6vw,22px) ridge #b19569;position:relative;background:#161616;box-shadow:0 35px 55px #0005}
+.museum-frame img{width:100%;aspect-ratio:900/550;height:auto;max-height:430px;object-fit:cover;display:block}.museum-frame-corner{position:absolute;bottom:20px;right:20px;background:#000b;padding:8px;color:#fff;font:10px var(--mono)}
+.museum-placard{padding:15px 0}.museum-placard .mono{font:11px var(--mono);color:var(--accent)}.museum-placard h3{font:400 clamp(32px,4vw,54px) Georgia,serif;margin:19px 0}
+.museum-placard>p{font-size:14px;line-height:1.75;color:var(--muted)}.museum-placard>a{color:var(--accent);display:inline-flex;margin-top:20px;font-weight:700}
+.museum-navigation{display:flex;gap:12px;margin-top:40px}.museum-navigation button{width:54px;height:48px;background:var(--surface);border:1px solid var(--line);font-size:23px;border-radius:0;color:var(--ink)}.museum-navigation button:hover{border-color:var(--accent)}
+
+/* 11 / TERMINAL — monospace and functioning command shell */
+.terminal-shell{border:1px solid var(--accent);border-radius:4px;background:var(--surface);box-shadow:0 0 65px color-mix(in srgb,var(--accent) 10%,transparent);overflow:hidden;font-family:var(--mono)}
+.terminal-toolbar{display:flex;justify-content:space-between;gap:12px;padding:16px 22px;background:var(--soft);font:11px var(--mono);color:var(--ink)}
+.terminal-toolbar>span:first-child{color:var(--accent);letter-spacing:6px}.terminal-inner{padding:clamp(22px,5vw,65px)}
+.terminal-inner h2{font:700 clamp(53px,8vw,133px)/1 var(--mono);letter-spacing:-.095em;overflow-wrap:anywhere;color:var(--accent)}
+.terminal-cursor{animation:term-blink 1.2s step-end infinite}@keyframes term-blink{50%{opacity:0}}
+.terminal-inner>p{max-width:64ch;color:var(--muted);font:14px/1.7 var(--mono);margin:24px 0}
+.terminal-history{min-height:170px;max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:20px;border:1px solid var(--line);background:var(--paper);font:13px/1.5 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.terminal-history p{margin:0}.terminal-prompt{color:var(--accent)}.terminal-history a{color:var(--accent);text-decoration:underline}
+.terminal-form{display:flex;align-items:center;gap:10px;margin-top:12px;border:1px solid var(--line);background:var(--paper);padding:8px 12px}
+.terminal-form label{color:var(--accent);white-space:nowrap;font-size:13px}.terminal-form input{flex:1;min-width:0;color:var(--ink);background:transparent;border:0;font:14px var(--mono);padding:8px;outline-offset:3px}.terminal-form button{border:1px solid var(--accent);background:var(--soft);color:var(--ink);min-height:44px;padding:8px 14px}
+.terminal-shortcuts{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}.terminal-shortcuts button{background:var(--soft);color:var(--ink);border:1px solid var(--line);padding:9px 13px;min-height:44px;font:12px var(--mono)}
+.terminal-shortcuts button:hover{border-color:var(--accent)}
+
+/* 12 / CANVAS — panning and zooming a finite, accessible conceptual map */
+.canvas-shell{border:1px solid var(--line);border-radius:22px;background:var(--surface);overflow:hidden}
+.canvas-heading{display:flex;align-items:end;justify-content:space-between;gap:25px;padding:clamp(20px,3vw,45px);border-bottom:1px solid var(--line)}
+.canvas-heading h2{font-size:clamp(46px,6vw,98px);letter-spacing:-.075em;line-height:1;margin:10px 0}.canvas-heading>.mono,.canvas-heading span{color:var(--accent)}
+.canvas-heading>p{max-width:39ch;line-height:1.65;color:var(--muted);font-size:14px}
+.canvas-viewport{position:relative;height:clamp(390px,49vw,670px);overflow:hidden;touch-action:pan-y;isolation:isolate;background:repeating-linear-gradient(0deg,transparent 0 38px,color-mix(in srgb,var(--accent) 12%,transparent) 39px 40px),repeating-linear-gradient(90deg,var(--paper) 0 38px,color-mix(in srgb,var(--accent) 12%,var(--paper)) 39px 40px)}
+.canvas-space{position:absolute;top:50%;left:50%;width:900px;height:600px;transform:translate(-50%,-50%) translate(var(--pan-x,0px),var(--pan-y,0px)) scale(var(--zoom,1));transform-origin:center;will-change:transform}
+.canvas-space svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:8 8;opacity:.4;pointer-events:none}
+.canvas-node{position:absolute;width:190px;min-height:120px;padding:17px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--accent);border-radius:12px;background:var(--surface);box-shadow:0 20px 38px #0003;color:var(--ink)}
+.canvas-node:hover,.canvas-node:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.canvas-node .mono{font-size:9px;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.canvas-node strong{font-size:22px;letter-spacing:-.03em}.canvas-node>span:last-child{margin-top:auto;font-size:11px;color:var(--muted)}
+.canvas-node-0{left:70px;top:75px}.canvas-node-1{left:425px;top:35px}.canvas-node-2{left:610px;top:310px}.canvas-node-3{left:285px;top:435px}
+.canvas-zoom{position:absolute;bottom:17px;left:20px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}
+.canvas-tools{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:16px 22px;border-top:1px solid var(--line)}
+.canvas-tools>div{display:flex;gap:7px}.canvas-tools button{min-width:45px;min-height:45px;background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:9px;font-size:19px}
+.canvas-tools button:hover{border-color:var(--accent)}
+
+/* 13 / BRUTALIST — full bleed poster and intentionally sharp, bold grid */
+.brutal-panel{background:#ffe46c;color:#121516;border:5px solid #121516;box-shadow:15px 15px 0 #111;overflow:hidden;padding:clamp(20px,4vw,57px)}
+:root[data-theme="dark"][data-design="brutalist"] .brutal-panel{background:#282827;color:#fff7eb;border-color:#ffe46c;box-shadow:15px 15px 0 #a88f2f}
+.brutal-head{display:flex;justify-content:space-between;gap:15px;font:800 12px var(--mono);border-bottom:5px solid currentColor;padding-bottom:15px}
+.brutal-panel h2{font:900 clamp(64px,10vw,175px)/.82 var(--sans);letter-spacing:-.125em;margin:35px 0;overflow-wrap:anywhere}
+.brutal-panel h2 span,.brutal-panel h2 em{display:block;font-style:normal}.brutal-panel h2 em{color:#ad302b;text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:6px}
+:root[data-theme="dark"][data-design="brutalist"] .brutal-panel h2 em{color:#ffbe66}
+.brutal-panel>p{font-size:clamp(16px,2vw,25px);max-width:50ch;font-weight:750;line-height:1.4}
+.brutal-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px 0}
+.brutal-steps button{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:25px;background:#fff;border:3px solid #121516;padding:20px;min-height:145px;color:#131313;text-align:left;font-size:14px;font-weight:700;box-shadow:6px 6px 0 #121516}
+.brutal-steps button[aria-pressed="true"]{background:#121516;color:#fff;box-shadow:8px 8px 0 #a4392b}
+.brutal-steps button strong{font-size:clamp(14px,1.4vw,20px)}
+.brutal-result{display:grid;grid-template-columns:110px minmax(120px,.7fr) minmax(0,1fr);gap:22px;border-top:5px solid currentColor;padding:26px 0 5px;align-items:start}
+.brutal-result strong{font-size:clamp(22px,2.5vw,35px);line-height:1.2}.brutal-result p{line-height:1.6;font-size:15px}
+
+/* 14 / STORY — immersive two-column editorial chapters */
+.story-shell{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);min-height:650px;border:1px solid var(--line);background:var(--surface);border-radius:22px;overflow:hidden}
+.story-sidebar{padding:clamp(24px,4vw,65px);background:var(--paper)}
+.story-sidebar>.mono{font-size:11px;color:var(--accent)}.story-sidebar h2{font:400 clamp(44px,5vw,78px)/1.05 Georgia,serif;margin:18px 0;letter-spacing:-.06em}
+.story-sidebar>p{color:var(--muted);font-size:14px;line-height:1.7}
+.story-chapters{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:8px}
+.story-chapters button{display:flex;align-items:center;gap:17px;text-align:left;color:var(--muted);border-left:2px solid var(--line);background:transparent;padding:13px;min-height:48px;width:100%;font-size:13px}
+.story-chapters button span{font:12px var(--mono)}.story-chapters button[aria-current="step"]{border-color:var(--accent);background:var(--surface);color:var(--ink);font-weight:700}
+.story-content{padding:clamp(24px,4vw,65px);display:flex;flex-direction:column;gap:20px;background:radial-gradient(ellipse at 50% 45%,color-mix(in srgb,var(--signal-blue) 21%,transparent),transparent 60%),var(--surface)}
+.story-topline,.story-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.story-topline .mono,.story-bottom .mono{font-size:10px;color:var(--muted)}
+.story-illustration{height:230px;position:relative;display:grid;place-items:center;perspective:500px;overflow:hidden}
+.story-orbit{width:190px;height:190px;position:absolute;border:2px solid var(--accent);border-radius:50%;transform:rotateX(61deg);box-shadow:0 0 0 19px color-mix(in srgb,var(--accent) 7%,transparent),0 0 0 39px color-mix(in srgb,var(--accent) 5%,transparent)}
+.story-square{position:absolute;width:110px;height:110px;border:2px solid var(--signal-blue);transform:rotate(40deg)}
+.story-center{font:900 57px var(--sans);color:var(--ink);position:relative}
+.story-content h3{font:400 clamp(30px,4vw,60px) Georgia,serif;letter-spacing:-.05em}
+.story-content>p{font-size:16px;color:var(--muted);line-height:1.8;max-width:56ch;min-height:80px}
+.story-bottom{border-top:1px solid var(--line);margin-top:auto;padding-top:22px}
+.story-bottom button{background:var(--accent);color:var(--paper);padding:13px 20px;min-height:47px;border:0;border-radius:8px;font-weight:700}
+:root[data-theme="dark"][data-design="story"] .story-bottom button{color:#211a2e}
+
+/* For new modes, original hero becomes a compact secondary introduction. */
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .signal-backdrop{opacity:.35}
+:root[data-design="terminal"] .sp-hero h1{font-family:var(--mono)}
+:root[data-design="brutalist"] .sp-hero h1{font-weight:900}
+:root[data-design="museum"] .sp-hero h1,:root[data-design="story"] .sp-hero h1{font-family:Georgia,serif;font-weight:400}
+
+/* Tablet and phone layouts; no viewport-wide transforms or hijacked scroll. */
+@media(max-width:1100px){
+ .xray-shell{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+ .xray-controls{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:25px}
+ .os-surface{grid-template-columns:145px 1fr}
+ .museum-gallery{grid-template-columns:minmax(0,1fr) minmax(180px,.6fr)}
+ .brutal-steps{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:767px){
+ .edition-scene{padding-bottom:35px}
+ .os-surface{grid-template-columns:1fr;min-height:0;gap:18px}
+ .os-intro{grid-column:1}.os-intro h2{font-size:clamp(44px,10vw,70px)}
+ .os-icons{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ .os-icons button{min-height:77px;padding:7px 3px;font-size:9px;overflow-wrap:anywhere}
+ .os-window-content{grid-template-columns:1fr}.os-window-content img{height:190px;min-height:0}
+ .xray-shell{grid-template-columns:1fr;gap:10px;padding:23px}
+ .xray-model{min-height:350px}.xray-controls{grid-column:1;grid-template-columns:1fr}
+ .museum-masthead,.canvas-heading{display:block}.museum-masthead p,.canvas-heading>p{max-width:none;margin-top:16px}
+ .museum-gallery{grid-template-columns:1fr;gap:22px}
+ .museum-hall{padding:19px;border-width:5px}.museum-placard h3{margin:10px 0}
+ .museum-navigation{margin-top:18px}
+ .terminal-inner{padding:20px}.terminal-inner h2{font-size:clamp(40px,10vw,75px)}
+ .terminal-toolbar{font-size:9px;padding:12px}.terminal-form label{font-size:10px}
+ .terminal-form button{font-size:11px;padding:6px}.terminal-history{font-size:11px}
+ .canvas-viewport{height:450px}
+ .brutal-panel{padding:20px;border-width:3px;box-shadow:7px 7px 0 #111}
+ .brutal-panel h2{font-size:clamp(49px,11vw,85px)}
+ .brutal-steps{gap:8px}.brutal-steps button{box-shadow:3px 3px 0 #121516;padding:12px;min-height:110px}
+ .brutal-result{grid-template-columns:1fr;gap:10px}
+ .story-shell{grid-template-columns:1fr;min-height:0}
+ .story-sidebar,.story-content{padding:23px}.story-sidebar h2{font-size:clamp(43px,9vw,65px)}
+ .story-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .story-illustration{height:170px}
+ :root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .sp-hero{min-height:0}
+}
+@media(max-width:410px){.os-icons{grid-template-columns:repeat(2,minmax(0,1fr))}.story-chapters{grid-template-columns:1fr}.terminal-form{flex-wrap:wrap}.terminal-form input{flex-basis:55%}.xray-plate{width:90%}.canvas-tools{justify-content:center}}
+@media(prefers-reduced-motion:reduce){.xray-plate,.terminal-cursor{transition:none!important;animation:none!important}}
+:root[data-performance="lite"] .xray-plate,:root[data-performance="lite"] .canvas-space{transition:none!important;will-change:auto}

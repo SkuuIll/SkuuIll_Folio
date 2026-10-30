@@ -1,4 +1,4 @@
-// Seven art directions share one content tree. Names and descriptions are editorial, not SEO copy.
+// Fourteen distinct art directions share one content tree. Names and descriptions are editorial, not SEO copy.
 export {};
 const root = document.documentElement;
 const modes = [
@@ -23,6 +23,13 @@ const modes = [
   { key:"studio", palette:"amber", es:"Studio / Servicios", en:"Studio / Services",
     esNote:"Presentación de estudio independiente, servicios y contacto al frente.",
     enNote:"An independent-studio presentation, with services and contact up front." },
+  { key:"skull-os", palette:"blue", es:"SKULL OS / Escritorio", en:"SKULL OS / Desktop",esNote:"Un sistema de escritorio con aplicaciones de proyectos.",enNote:"An interactive desktop with project apps." },
+  { key:"xray", palette:"ice", es:"X-Ray 3D / Capas", en:"X-Ray 3D / Layers",esNote:"Placas de arquitectura explotadas en perspectiva.",enNote:"Exploded architecture plates in perspective." },
+  { key:"museum", palette:"copper", es:"Digital Museum / Galería", en:"Digital Museum / Gallery",esNote:"Proyectos expuestos como obras de una galería.",enNote:"Projects displayed as gallery exhibits." },
+  { key:"terminal", palette:"matrix", es:"Terminal Hacker Pro", en:"Terminal Hacker Pro",esNote:"Comandos reales para explorar habilidades y trabajos.",enNote:"Real commands for exploring projects and skills." },
+  { key:"canvas", palette:"cobalt", es:"Infinite Canvas / Mapa", en:"Infinite Canvas / Map",esNote:"Un mapa interactivo de proyectos con controles de zoom.",enNote:"An interactive project map with zoom controls." },
+  { key:"brutalist", palette:"amber", es:"Neo-Brutalist Lab", en:"Neo-Brutalist Lab",esNote:"Tipografía industrial, bordes duros y proceso interactivo.",enNote:"Industrial typography, hard edges and interactive process." },
+  { key:"story", palette:"violet", es:"Story Mode / Capítulos", en:"Story Mode / Chapters",esNote:"El proceso de crear software contado en cuatro capítulos.",enNote:"The software process told through four chapters." },
 ] as const;
 const english = root.lang.startsWith("en");
 const selector = document.querySelector<HTMLElement>("[data-design-ribbon]");
@@ -31,6 +38,7 @@ if (selector) {
   const note = selector.querySelector<HTMLElement>("[data-design-note]");
   const index = selector.querySelector<HTMLElement>("[data-design-index]");
   const icon = selector.querySelector<HTMLElement>("[data-design-icon]");
+  const direct = selector.querySelector<HTMLSelectElement>("[data-design-select]");
   const prev = selector.querySelector<HTMLButtonElement>("[data-design-prev]");
   const next = selector.querySelector<HTMLButtonElement>("[data-design-next]");
   const paletteOf = (key: string) => modes.find((mode) => mode.key === key);
@@ -42,10 +50,11 @@ if (selector) {
     const mode = paletteOf(key) ?? modes[0];
     root.dataset.design = mode.key;
     root.dataset.palette = mode.palette;
+    if (direct) direct.value = mode.key;
     if (title) title.textContent = english ? mode.en : mode.es;
     if (note) note.textContent = english ? mode.enNote : mode.esNote;
     const at = modes.findIndex((item) => item.key === mode.key);
-    if (index) index.textContent = String(at + 1).padStart(2, "0") + " / 07";
+    if (index) index.textContent = String(at + 1).padStart(2, "0") + " / 14";
     if (icon) icon.textContent = String(at + 1).padStart(2, "0");
     if (save) remember(mode.key);
     const color = getComputedStyle(root).getPropertyValue("--paper").trim();
@@ -55,6 +64,7 @@ if (selector) {
     const current = modes.findIndex((item) => item.key === root.dataset.design);
     paint(modes[((current < 0 ? 0 : current) + direction + modes.length) % modes.length].key, true);
   };
+  direct?.addEventListener("change", () => paint(direct.value,true));
   prev?.addEventListener("click", () => move(-1));
   next?.addEventListener("click", () => move(1));
   paint(root.dataset.design || modes[0].key, false);
