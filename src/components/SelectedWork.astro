@@ -48,6 +48,11 @@ const capabilities = [
     <p>{tr("Una selección de productos y herramientas que desarrollé: desde operaciones hoteleras hasta experiencias 3D, mapas, aplicaciones y automatización.","A selection of software and tools I have built, from hotel systems to 3D experiences, maps, applications and automation.")}</p>
   </div>
 
+  <div class="portfolio-edition-context" aria-label={tr("Presentación visual actual","Current presentation style")}>
+    <span class="mono">{tr("EDICIÓN / PRESENTACIÓN","EDITION / PRESENTATION")}</span>
+    <strong data-work-edition-name>{tr("Editorial / Identidad","Editorial / Identity")}</strong>
+    <span data-work-edition-note>{tr("Tipografía protagonista, composición asimétrica y un lenguaje visual sobrio.","Oversized type, asymmetrical composition and a restrained visual language.")}</span>
+  </div>
   <div class="portfolio-work-grid">
     {featured.map((project, index) => (
       <article class:list={["portfolio-work-card", index < 2 && "portfolio-work-card--feature"]}>

@@ -84,6 +84,11 @@ if (selector) {
     if (direct) direct.value = mode.key;
     if (title) title.textContent = english ? mode.en : mode.es;
     if (note) note.textContent = english ? mode.enNote : mode.esNote;
+    // Project presentation carries each edition's identity beyond the hero.
+    const workName=document.querySelector<HTMLElement>("[data-work-edition-name]");
+    const workNote=document.querySelector<HTMLElement>("[data-work-edition-note]");
+    if(workName)workName.textContent=english?mode.en:mode.es;
+    if(workNote)workNote.textContent=english?mode.enNote:mode.esNote;
     const at = modes.findIndex((item) => item.key === mode.key);
     if (index) index.textContent = String(at + 1).padStart(2, "0") + " / 14";
     if (icon) icon.textContent = String(at + 1).padStart(2, "0");
