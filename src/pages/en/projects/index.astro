@@ -1,0 +1,98 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { projectUrl } from "../../../data/projects";
+import { projectsForLocale } from "../../../data/projects-en";
+const projects = projectsForLocale("en");
+---
+
+<Layout lang="en"
+  title="Project archive — Skull"
+  description="Skull's work across business systems, Android, desktop, cartography, automation and open-source software."
+>
+  <section class="page-heading shell">
+    <a class="breadcrumb" href={`${import.meta.env.BASE_URL}en/#trabajo`}>
+      ← Back to selected work
+    </a>
+    <p class="eyebrow">ARCHIVE / PRODUCTS, TOOLS & EXPLORATIONS</p>
+    <h1>
+      More ways
+      <br />
+      de <span class="muted">to build.</span>
+    </h1>
+    <div class="case-intro-row">
+      <p class="case-lead">
+        A broader look at my work. Each case covers the problem, the
+        solution and the project's current status.
+      </p>
+      <p class="case-meta">
+        Includes original software and open-source adaptations with
+        attribution. Private work is presented through documented
+        scope rather than private source.
+      </p>
+    </div>
+  </section>
+  <section class="catalog-section shell" aria-label="Project catalog">
+    <div class="catalog-tools" hidden>
+      <div class="filter-group" role="group" aria-label="Filter projects">
+        {[
+          { id: "all", label: "All" },
+          { id: "gestion", label: "Business & commerce" },
+          { id: "web", label: "Web" },
+          { id: "mobile", label: "Android" },
+          { id: "infra", label: "Systems" },
+          { id: "automation", label: "Automation & AI" },
+        ].map((filter) => (
+          <button
+            type="button"
+            data-filter={filter.id}
+            aria-pressed={filter.id === "all"}
+          >
+            {filter.label}
+          </button>
+        ))}
+      </div>
+      <label class="catalog-search">
+        Search by project or technology
+        <input
+          id="project-search"
+          type="search"
+          placeholder="e.g. Django, Android, GPS"
+          autocomplete="off"
+        />
+      </label>
+    </div>
+    <p id="project-count" class="catalog-count" role="status">
+      {projects.length} projects
+    </p>
+    <div class="catalog-list">
+      {projects.map((project, index) => (
+        <a
+          id={project.id}
+          class="catalog-row"
+          data-category={project.categories.join(" ")}
+          href={projectUrl(project.id, "en")}
+        >
+          <span class="mono">{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <h2>{project.title}</h2>
+            <p>{project.label}</p>
+          </div>
+          <p class="catalog-stack">{project.stack.join(" · ")}</p>
+          <span class="project-state">{project.status}</span>
+          <span class="row-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
+      ))}
+    </div>
+    <div id="empty-projects" class="empty-state" hidden>
+      <h2>No matches found.</h2>
+      <p>
+        Try another technology or clear the filters to browse all projects.
+      </p>
+      <button id="reset-projects" class="outline-button" type="button">
+        Show all projects
+      </button>
+    </div>
+  </section>
+</Layout>
