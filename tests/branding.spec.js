@@ -18,7 +18,7 @@ test('opt-in Matrix overlay and expanded color palette remain controllable', asy
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('./');
   const toggle = page.locator('#matrix-toggle');
-  const frame = page.locator('.spatial-frame');
+  const frame = page.locator('.architecture-stage');
   await expect(toggle).toBeVisible();
   await expect(toggle).toHaveAttribute('aria-pressed', 'false');
   await toggle.click();
@@ -33,5 +33,5 @@ test('reduced motion disables optional Matrix effect', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('./');
   await expect(page.locator('#matrix-toggle')).toBeDisabled();
-  await expect(page.locator('.spatial-frame')).toHaveAttribute('data-matrix', 'off');
+  await expect(page.locator('.architecture-stage')).toHaveAttribute('data-matrix', 'off');
 });

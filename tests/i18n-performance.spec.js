@@ -3,6 +3,8 @@ const { test, expect } = require("@playwright/test");
 test("English routes have translated content, hreflang, and working case studies", async ({ page }) => {
   await page.goto("en/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await page.locator('[data-arch-project="cpaul"]').click();
+  await expect(page.locator("[data-arch-case]")).toHaveAttribute("href",/\/en\/projects\/cpaul\/$/);
   await expect(page.locator("#hero-title")).toContainText("real software.");
   await expect(page.locator('link[rel="alternate"][hreflang="es-AR"]')).toHaveAttribute("href", /skuull\.pages\.dev/);
   await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute("href", /\/en\/$/);
@@ -37,9 +39,11 @@ test("Low-memory data saver devices keep readable fallbacks without heavy render
   await page.goto("./");
   await expect(page.locator("html")).toHaveAttribute("data-performance", "lite");
   await expect(page.locator("html")).toHaveAttribute("data-effects", "off");
-  await page.locator(".spatial-frame").scrollIntoViewIfNeeded();
-  await expect(page.locator(".spatial-frame")).toHaveAttribute("data-renderer", "fallback");
-  await expect(page.locator(".spatial-frame img")).toBeVisible();
+  const demo = page.locator(".architecture-console");
+  await demo.scrollIntoViewIfNeeded();
+  await expect(demo.locator(".architecture-node")).toHaveCount(4);
+  await demo.locator('[data-arch-project="repo-setup"]').click();
+  await expect(demo.locator("[data-arch-title]")).toContainText("Repo Setup Kit");
   await expect(page.locator("#matrix-toggle")).toBeDisabled();
   await page.locator(".journey-stage").scrollIntoViewIfNeeded();
   await expect(page.locator('.journey-stage[data-spatial="journey"]')).toHaveAttribute("data-renderer", "fallback");
