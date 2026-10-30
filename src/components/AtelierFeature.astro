@@ -31,7 +31,7 @@ const shots = [
     <p class="eyebrow">01 / ATELIER 3D · CPAUL</p>
     <h2 id="atelier-title">
       {tr("De una idea","From an idea")}
-      <br />a una <span class="accent">{tr("prenda.","garment.")}</span>
+      <br />{tr("a una ", "to a ")}<span class="accent">{tr("prenda.","garment.")}</span>
     </h2>
     <p>
       {tr("Un configurador que convierte color, material y diseño en una experiencia","A configurator that turns color, material and design into an")}
@@ -121,7 +121,7 @@ const shots = [
       <img
         class="viewer-poster"
         src={asset("media/atelier-colors.webp")}
-        alt="Vista estática del configurador de indumentaria."
+        alt={tr("Vista estática del configurador de indumentaria.", "Static preview of the clothing configurator.")}
         width="1600"
         height="1000"
         loading="lazy"
@@ -156,21 +156,21 @@ const shots = [
       <button
         type="button"
         data-model-turn="-1"
-        aria-label="Girar prenda a la izquierda"
+        aria-label={tr("Girar prenda a la izquierda","Rotate garment left")}
       >
         ←
       </button>
       <button
         type="button"
         data-model-turn="1"
-        aria-label="Girar prenda a la derecha"
+        aria-label={tr("Girar prenda a la derecha","Rotate garment right")}
       >
         →
       </button>
-      <button type="button" data-model-zoom="0.85" aria-label="Acercar prenda">
+      <button type="button" data-model-zoom="0.85" aria-label={tr("Acercar prenda","Zoom in on garment")}>
         +
       </button>
-      <button type="button" data-model-zoom="1.15" aria-label="Alejar prenda">
+      <button type="button" data-model-zoom="1.15" aria-label={tr("Alejar prenda","Zoom out from garment")}>
         −
       </button>
       <button type="button" data-close-model>
