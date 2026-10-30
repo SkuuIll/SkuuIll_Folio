@@ -76,3 +76,14 @@ test("edition switch animations are controlled and respect reduced motion",async
  await select(page,"editorial");
  await expect(page.locator(".sp-hero")).toBeVisible();
 });
+
+test("direct edition URLs are shareable and normal pages still cycle",async({page})=>{
+ await page.goto("./?design=casebook");
+ await expect(page.locator("html")).toHaveAttribute("data-design","casebook");
+ await page.reload();
+ await expect(page.locator("html")).toHaveAttribute("data-design","casebook");
+ await page.goto("en/?design=terminal");
+ await expect(page.locator("html")).toHaveAttribute("data-design","terminal");
+ await page.goto("./");
+ await expect(page.locator("html")).toHaveAttribute("data-design","canvas");
+});
