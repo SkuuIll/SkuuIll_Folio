@@ -1,8 +1,10 @@
-# Skull / Folio
+# SkuuIll · Skull Portfolio
 
 Portafolio web independiente de **Skull (SkuuIll)**, desarrollador freelance de software en Charata, Chaco, Argentina.
 
-**Sitio previsto:** https://skuuill.github.io/SkuuIll_Folio/
+**Sitio principal:** https://skuuill.pages.dev/ (Cloudflare Pages, despliegue automático desde `main`).
+
+**Repositorio:** https://github.com/SkuuIll/SkuuIll_Folio
 
 > El perfil de GitHub se mantiene por separado en [SkuuIll/SkuuIll](https://github.com/SkuuIll/SkuuIll). Este repositorio contiene únicamente la aplicación web, su documentación y sus pruebas.
 
@@ -40,9 +42,15 @@ npx playwright install chromium
 npx playwright test --workers=2
 ```
 
+## Guías de calidad y herramientas de desarrollo asistido
+
+Seguimos un flujo documentado de diseño, evaluación visual, accesibilidad, pruebas y revisión antes de publicar. Las referencias externas son [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [Impeccable](https://github.com/pbakaus/impeccable) y [Superpowers](https://github.com/obra/superpowers). Véase [AGENTS.md](AGENTS.md), [guía de herramientas](docs/agent-toolkit.md) y [criterios de diseño y calidad](docs/design-quality.md).
+
+Las herramientas de terceros son opcionales: enlazarlas no implica haberlas instalado en los editores o entornos personales.
+
 ## GitHub Pages
 
-La compilación está configurada para **`/SkuuIll_Folio/`**, no para la ruta del antiguo repositorio de perfil.
+GitHub Pages es una alternativa secundaria y actualmente requiere que Pages se habilite en el repositorio. El workflow construye para **`/SkuuIll_Folio/`**; Cloudflare utiliza la raíz **`/`** mediante `PORTFOLIO_BASE=/`.
 
 1. Abrí [Settings → Pages](https://github.com/SkuuIll/SkuuIll_Folio/settings/pages).
 2. En **Build and deployment**, elegí **GitHub Actions** como origen.

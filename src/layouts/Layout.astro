@@ -19,7 +19,8 @@ const {
   title = "Skull — Diseño, código e interacción",
   description = profile.summary,
 } = Astro.props;
-const canonical = new URL(Astro.url.pathname, "https://skuuill.github.io");
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://skuuill.pages.dev");
+const socialImage = new URL(asset("media/social-cover.png"), Astro.site ?? "https://skuuill.pages.dev");
 ---
 
 <!doctype html>
@@ -53,7 +54,7 @@ const canonical = new URL(Astro.url.pathname, "https://skuuill.github.io");
     <meta property="og:url" content={canonical} />
     <meta
       property="og:image"
-      content="https://skuuill.github.io/SkuuIll_Folio/media/social-cover.png"
+      content={socialImage.toString()}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="color-scheme" content="light dark" />
