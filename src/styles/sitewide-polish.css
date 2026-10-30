@@ -120,6 +120,7 @@
 }
 .project-journey-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .project-journey-link .mono { color: var(--accent); font-size: 11px; letter-spacing: .05em; }
+.project-journey-link .mono span[aria-hidden] { font-size: 1em; color: inherit; }
 .project-journey-link strong {
   display: block;
   max-width: 18ch;
