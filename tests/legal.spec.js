@@ -6,7 +6,7 @@ test("Spanish and English legal pages exist with correct language, canonical and
     await page.goto(path);
     await expect(page.locator("html")).toHaveAttribute("lang",lang==="en"?"en":"es-AR");
     await expect(page.locator("main h1")).toBeVisible();
-    await expect(page.locator(".legal-section")).toHaveCount(kind==="creditos"?4:kind==="legal"?4:kind==="privacidad"?6:4);
+    await expect(page.locator(".legal-section")).toHaveCount(kind==="creditos"?5:kind==="legal"?4:kind==="privacidad"?6:kind==="terminos"?5:4);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",new RegExp("/"+path.replace(/\//g,"\\/")+"$"));
     await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute("href",new RegExp("/en/"+kind+"/$"));
     await expect(page.locator('link[rel="alternate"][hreflang="es-AR"]')).toHaveAttribute("href",new RegExp("/"+kind+"/$"));
