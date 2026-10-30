@@ -333,14 +333,14 @@ if (shareButton) {
     try {
       if (navigator.share) {
         await navigator.share({ title: document.title, text: "Portafolio de Skull — desarrollo de software", url });
-        if (shareStatus) shareStatus.textContent = "Enlace listo para compartir.";
+        if (shareStatus) shareStatus.textContent = tr("Enlace listo para compartir.","Ready to share.");
       } else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(url);
-        if (shareStatus) shareStatus.textContent = "Enlace copiado al portapapeles.";
-      } else if (shareStatus) shareStatus.textContent = "Copiá este enlace: " + url;
+        if (shareStatus) shareStatus.textContent = tr("Enlace copiado al portapapeles.","Link copied to clipboard.");
+      } else if (shareStatus) shareStatus.textContent = tr("Copiá este enlace: ","Copy this link: ") + url;
     } catch (error) {
       if ((error as Error)?.name !== "AbortError" && shareStatus)
-        shareStatus.textContent = "Copiá este enlace: " + url;
+        shareStatus.textContent = tr("Copiá este enlace: ","Copy this link: ") + url;
     }
   });
 }
