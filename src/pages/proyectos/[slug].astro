@@ -2,14 +2,15 @@
 import Layout from "../../layouts/Layout.astro";
 import ProjectVisual from "../../components/ProjectVisual.astro";
 import AtelierFeature from "../../components/AtelierFeature.astro";
-import { projects, projectUrl, asset } from "../../data/projects";
+import ProjectJourney from "../../components/ProjectJourney.astro";
+import { projects, asset } from "../../data/projects";
 export function getStaticPaths() {
-  return projects.map((project, index) => ({
+  return projects.map((project) => ({
     params: { slug: project.id },
-    props: { project, next: projects[(index + 1) % projects.length] },
+    props: { project },
   }));
 }
-const { project, next } = Astro.props;
+const { project } = Astro.props;
 ---
 
 <Layout
@@ -158,11 +159,5 @@ const { project, next } = Astro.props;
       ))}
     </div>
   )}
-  <a class="case-next shell" href={projectUrl(next.id)}>
-    <div>
-      <p class="eyebrow">SIGUIENTE PROYECTO</p>
-      <p>{next.title}</p>
-    </div>
-    <span aria-hidden="true">↗</span>
-  </a>
+  <ProjectJourney currentId={project.id} lang="es" />
 </Layout>

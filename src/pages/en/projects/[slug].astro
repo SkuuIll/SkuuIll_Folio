@@ -2,16 +2,17 @@
 import Layout from "../../../layouts/Layout.astro";
 import ProjectVisual from "../../../components/ProjectVisual.astro";
 import AtelierFeature from "../../../components/AtelierFeature.astro";
-import { projectUrl, asset } from "../../../data/projects";
+import ProjectJourney from "../../../components/ProjectJourney.astro";
+import { asset } from "../../../data/projects";
 import { projectsForLocale } from "../../../data/projects-en";
 export function getStaticPaths() {
   const projects = projectsForLocale("en");
-  return projects.map((project, index) => ({
+  return projects.map((project) => ({
     params: { slug: project.id },
-    props: { project, next: projects[(index + 1) % projects.length] },
+    props: { project },
   }));
 }
-const { project, next } = Astro.props;
+const { project } = Astro.props;
 ---
 
 <Layout lang="en"
@@ -144,11 +145,5 @@ const { project, next } = Astro.props;
       ))}
     </div>
   )}
-  <a class="case-next shell" href={projectUrl(next.id, "en")}>
-    <div>
-      <p class="eyebrow">NEXT PROJECT</p>
-      <p>{next.title}</p>
-    </div>
-    <span aria-hidden="true">↗</span>
-  </a>
+  <ProjectJourney currentId={project.id} lang="en" />
 </Layout>

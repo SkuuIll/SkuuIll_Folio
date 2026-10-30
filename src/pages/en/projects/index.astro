@@ -1,6 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import { projectUrl } from "../../../data/projects";
+import { projectUrl, asset } from "../../../data/projects";
 import { projectsForLocale } from "../../../data/projects-en";
 const projects = projectsForLocale("en");
 ---
@@ -17,7 +17,7 @@ const projects = projectsForLocale("en");
     <h1>
       More ways
       <br />
-      de <span class="muted">to build.</span>
+      <span class="muted">to build.</span>
     </h1>
     <div class="case-intro-row">
       <p class="case-lead">
@@ -73,9 +73,17 @@ const projects = projectsForLocale("en");
           href={projectUrl(project.id, "en")}
         >
           <span class="mono">{String(index + 1).padStart(2, "0")}</span>
+          <span class="catalog-thumb" aria-hidden="true">
+            {project.image ? (
+              <img src={asset(`media/${project.image}`)} width="220" height="160" loading="lazy" decoding="async" alt="" />
+            ) : (
+              <span class="catalog-thumb-fallback">SK / {String(index + 1).padStart(2, "0")}</span>
+            )}
+          </span>
           <div>
             <h2>{project.title}</h2>
             <p>{project.label}</p>
+            <span class="catalog-row-status">{project.status}</span>
           </div>
           <p class="catalog-stack">{project.stack.join(" · ")}</p>
           <span class="project-state">{project.status}</span>
