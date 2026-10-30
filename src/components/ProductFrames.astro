@@ -1,0 +1,43 @@
+---
+import { asset, projectUrl } from "../data/projects";
+interface Props { lang?: "es" | "en" }
+const lang=Astro.props.lang ?? "es";
+const en=lang==="en";
+const t=(es:string,english:string)=>en?english:es;
+const cases=[
+  {id:"vigia",image:"vigia-modules.webp",title:"Vigía",code:"01 / WORKFLOW",headline:t("Operaciones que se entienden.","Operations you can understand."),detail:t("Seguridad, personal y hotel en una interfaz conectada.","Security, staff and hotel operations in one connected interface."),alt:t("Captura real de los módulos de Vigía.","Real screenshot of Vigía's modules.")},
+  {id:"cpaul",image:"atelier-colors.webp",title:"CPAUL / Atelier",code:"02 / INTERACTION",headline:t("Personalización que se ve.","Customization you can see."),detail:t("Una experiencia de indumentaria con controles de diseño en 3D.","A clothing experience with interactive 3D design controls."),alt:t("Captura real del atelier de ropa tridimensional.","Real screenshot of the interactive clothing atelier.")},
+  {id:"pubg-map",image:"tactical-map.webp",title:"Tactical Map",code:"03 / UTILITY",headline:t("Información para decidir.","Information for decisions."),detail:t("Cartografía y herramientas de medición en un mapa interactivo.","Cartography and measurement tools on an interactive map."),alt:t("Captura real del mapa táctico con herramientas cartográficas.","Real screenshot of the tactical map with cartographic tools.")}
+];
+---
+<section class="proof-gallery shell" id="vistas" aria-labelledby="proof-gallery-title">
+  <div class="proof-gallery-intro">
+    <div>
+      <p class="eyebrow">{t("PRUEBAS VISUALES / PRODUCTOS REALES","VISUAL PROOF / REAL PRODUCTS")}</p>
+      <h2 id="proof-gallery-title">{t("El producto habla.","Let the product speak.")}</h2>
+    </div>
+    <p>{t("Tres capturas auténticas, una idea clara por pantalla. Sin maquetas de tiendas ni funciones inventadas.","Three authentic captures, one clear idea per screen. No fabricated store mockups or invented features.")}</p>
+  </div>
+  <div class="proof-gallery-track">
+    {cases.map((item,i)=>(
+      <article class:list={["proof-frame",i===1 && "proof-frame--focus"]}>
+        <div class="proof-frame-header">
+          <span class="mono">{item.code}</span>
+          <span aria-hidden="true">SK / 0{i+1}</span>
+        </div>
+        <div class="proof-frame-art">
+          <img src={asset(`media/${item.image}`)} width="900" height="550" loading="lazy" decoding="async" alt={item.alt} />
+        </div>
+        <div class="proof-frame-caption">
+          <p class="mono">{item.title}</p>
+          <h3>{item.headline}</h3>
+          <p>{item.detail}</p>
+          <a href={projectUrl(item.id,lang)} aria-label={t("Ver caso de ","View case study for ")+item.title}>
+            <span>{t("Explorar caso real","Explore real case")}</span><span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+  <p class="proof-gallery-foot mono">{t("CAPTURAS DE DEMOSTRACIÓN · NO SON PUBLICACIONES DE APP STORE","DEMONSTRATION SCREENSHOTS · NOT APP STORE LISTINGS")}</p>
+</section>

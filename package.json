@@ -14,7 +14,8 @@
     "format": "prettier --plugin prettier-plugin-astro --write src scripts tests astro.config.mjs",
     "branding": "node scripts/build-branding.mjs",
     "review:visual": "node scripts/review-portfolio.mjs",
-    "check:privacy": "node scripts/check-privacy.mjs"
+    "check:privacy": "node scripts/check-privacy.mjs",
+    "skills:sync": "bash scripts/sync-design-skills.sh"
   },
   "engines": {
     "node": ">=22.22.0"

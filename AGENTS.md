@@ -25,3 +25,9 @@ When tools are installed in a developer's coding agent, use their current upstre
 - Each change should have a clear user-facing purpose, a reviewable diff and a validation record.
 - Prefer a pull request for major visual changes. Preserve production URLs, canonical/OG metadata, and accessibility fallbacks.
 - This repository is the website; the GitHub profile README is maintained separately.
+
+## Installed design-skills entrypoints (October 2026)
+
+The repo now includes reviewed `SKILL.md` entrypoints for five new tools under [`.agents/skills/`](.agents/skills/README.md): UX Designer, Canvas Design, App Store Screenshots, Taste, and Transitions.dev. Some upstream helpers (Taste scripts, screenshot editor template, additional recipes) are **not vendored**; install the full optional tool packages in the local agent workspace via `npm run skills:sync` after reviewing the sources. Never run that command in Astro build, production or CI.
+
+The live implementation uses no new runtime packages: see [`ProductFrames.astro`](src/components/ProductFrames.astro), [`skill-polish.css`](src/styles/skill-polish.css), and [visual philosophy](docs/skull-visual-philosophy.md). Maintain accurate project imagery and never claim app-store acceptance without evidence.

@@ -44,3 +44,15 @@ En un agente compatible, iniciar el contexto de producto con `/impeccable init` 
 6. **Publicar**: verificar el sitio real en https://skuull.pages.dev/ y revisar `canonical`, Open Graph y enlaces de contacto.
 
 Las tres herramientas son proyectos de terceros. Las referencias no certifican que estén instaladas ni constituyen una afirmación de autoría.
+
+## 4. Cinco skills de diseño incorporadas
+
+Se incluyeron los `SKILL.md` principales en [`.agents/skills/`](../.agents/skills/README.md). Son **herramientas del agente de desarrollo, no dependencias de la web**. El contenido de trabajo está incorporado y aplicado; las herramientas opcionales de edición/inspección se completan localmente con `npm run skills:sync`, que descarga las versiones completas y requiere revisión antes de aprobar cambios.
+
+- **UX Designer:** `szilu/ux-designer-skill` (corregido desde el enlace inexistente `szilut`). Accesibilidad WCAG, móvil, i18n.
+- **Canvas Design:** `anthropics/skills --skill canvas-design`. Dirección visual original para la galería.
+- **App Store Screenshots:** `ParthJadhav/app-store-screenshots`. Redacción centrada en beneficios y capturas reales. Su editor Next.js **no se integra** en el sitio Astro.
+- **Taste:** `Leonxlnx/taste-skill --skill design-taste-frontend`. Dirección editorial y revisión de antipatrones.
+- **Transitions.dev:** `JakubAntalik/transitions.dev --skill transitions-dev`. Tokens de movimiento y microinteracciones accesibles.
+
+La implementación visible está en `src/components/ProductFrames.astro` y `src/styles/skill-polish.css`. No se descargaron paquetes de JavaScript de estas skills al bundle público.
