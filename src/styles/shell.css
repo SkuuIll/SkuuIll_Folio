@@ -519,3 +519,23 @@ body {
   overflow-wrap: anywhere;
   color: var(--muted);
 }
+
+
+/* Locale selection belongs in the header; avoid control clutter in the footer. */
+.language-switch { display:inline-flex;align-items:center;gap:8px;flex-shrink:0;border:1px solid var(--line);border-radius:50px;padding:5px 10px;font:11px var(--mono);color:var(--muted); }
+.language-switch a { display:inline-flex;align-items:center;justify-content:center;min-width:25px;min-height:32px;border-radius:20px;text-decoration:none; }
+.language-switch a[aria-current="page"] { color:var(--accent);font-weight:800; }
+.language-switch a:hover { color:var(--ink); }
+.language-switch a:focus-visible { outline-offset:0; }
+@media(max-width:767px) { .language-switch {padding:2px 5px;gap:2px}.language-switch a{min-width:24px;min-height:36px;font-size:10px} }
+/* Constrained hardware: ship visual fallbacks instead of running every rendering loop. */
+:root[data-performance="lite"] .signal-stage canvas { opacity:0!important; }
+:root[data-performance="lite"] .portal-journey {height:100svh!important}
+:root[data-performance="lite"] .journey-stage {position:relative;}
+:root[data-performance="lite"] .matrix-rain{display:none!important}
+:root[data-performance="lite"] .site-header { backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:var(--paper)!important }
+:root[data-performance="lite"] .glass-lens { filter:none!important }
+@media(max-width:767px) {
+ .portfolio-work-card, .portfolio-capability { transition-duration:.15s; }
+ .sp-hero-copy { contain:layout style; }
+}
