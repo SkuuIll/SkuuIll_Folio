@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { asset } from "../../data/projects";
+---
+<Layout lang="en" title="Page not found — Skull" description="This page is unavailable. Explore Skull's projects and digital experiences.">
+  <section class="page-heading shell">
+    <p class="eyebrow">404 / PAGE NOT FOUND</p>
+    <h1>Back to<br/><span class="muted">what matters.</span></h1>
+    <p class="case-lead" style="margin-block:35px">The page you requested isn't available. Browse the projects or get in touch.</p>
+    <a class="solid-button" href={asset("en/")}>Return home ↗</a>
+    <a class="inline-link" style="margin:25px" href={asset("en/projects/")}>Browse projects ↗</a>
+  </section>
+</Layout>
