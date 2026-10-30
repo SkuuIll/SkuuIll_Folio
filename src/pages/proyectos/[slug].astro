@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import ProjectVisual from "../../components/ProjectVisual.astro";
 import AtelierFeature from "../../components/AtelierFeature.astro";
+import CaseArchitecture from "../../components/CaseArchitecture.astro";
 import ProjectJourney from "../../components/ProjectJourney.astro";
 import { projects, asset } from "../../data/projects";
 export function getStaticPaths() {
@@ -159,5 +160,6 @@ const { project } = Astro.props;
       ))}
     </div>
   )}
+  <div class="shell"><CaseArchitecture id={project.id} stack={project.stack} lang="es" /></div>
   <ProjectJourney currentId={project.id} lang="es" />
 </Layout>
