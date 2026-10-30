@@ -65,6 +65,17 @@ if (selector) {
       swapHeading(heading, parent?.getAttribute("data-edition-scene") === key ? "h1" : "h2");
     }
   };
+  let transitionTimer:ReturnType<typeof setTimeout>|undefined;
+  const revealEdition = () => {
+    const target=document.querySelector<HTMLElement>("main");
+    if(!target)return;
+    target.classList.remove("edition-revealing");
+    // Restart short transition after each explicit edition change.
+    void target.offsetWidth;
+    target.classList.add("edition-revealing");
+    if(transitionTimer!==undefined)clearTimeout(transitionTimer);
+    transitionTimer=setTimeout(()=>target.classList.remove("edition-revealing"),450);
+  };
   const paint = (key: string, save: boolean) => {
     const mode = paletteOf(key) ?? modes[0];
     root.dataset.design = mode.key;
@@ -76,7 +87,7 @@ if (selector) {
     const at = modes.findIndex((item) => item.key === mode.key);
     if (index) index.textContent = String(at + 1).padStart(2, "0") + " / 14";
     if (icon) icon.textContent = String(at + 1).padStart(2, "0");
-    if (save) remember(mode.key);
+    if (save){remember(mode.key);revealEdition()}
     const color = getComputedStyle(root).getPropertyValue("--paper").trim();
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content",color);
   };
