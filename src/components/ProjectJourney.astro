@@ -1,0 +1,56 @@
+---
+import { projectUrl, asset } from "../data/projects";
+import { projectsForLocale } from "../data/projects-en";
+
+interface Props {
+  currentId: string;
+  lang?: "es" | "en";
+}
+const { currentId, lang = "es" } = Astro.props;
+const projects = projectsForLocale(lang);
+const currentIndex = projects.findIndex((project) => project.id === currentId);
+const previous = currentIndex > 0 ? projects[currentIndex - 1] : undefined;
+const next = currentIndex >= 0 && currentIndex < projects.length - 1 ? projects[currentIndex + 1] : undefined;
+const tr = (es: string, en: string) => lang === "en" ? en : es;
+---
+{currentIndex >= 0 && (
+  <nav class="project-journey shell" aria-label={tr("Navegar por los proyectos", "Browse projects")}>
+    <div class="project-journey-head">
+      <span class="mono">{tr("SEGUÍ EXPLORANDO", "KEEP EXPLORING")}</span>
+      <span class="mono project-journey-index" aria-label={tr(`Proyecto ${currentIndex + 1} de ${projects.length}`, `Project ${currentIndex + 1} of ${projects.length}`)}>
+        {String(currentIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+      </span>
+    </div>
+    <div class="project-journey-grid">
+      {previous ? (
+        <a class="project-journey-link project-journey-previous" href={projectUrl(previous.id, lang)}>
+          <span class="mono"><span aria-hidden="true">←</span> {tr("ANTERIOR", "PREVIOUS")}</span>
+          <strong>{previous.title}</strong>
+          <small>{previous.label}</small>
+        </a>
+      ) : (
+        <a class="project-journey-link project-journey-previous" href={asset(lang === "en" ? "en/projects/" : "proyectos/")}>
+          <span class="mono"><span aria-hidden="true">←</span> {tr("VOLVER", "BACK")}</span>
+          <strong>{tr("Todo el archivo", "Full archive")}</strong>
+          <small>{tr("Ver los proyectos", "Browse projects")}</small>
+        </a>
+      )}
+      {next ? (
+        <a class="project-journey-link project-journey-next case-next" href={projectUrl(next.id, lang)}>
+          <span class="mono">{tr("SIGUIENTE", "NEXT")} <span aria-hidden="true">↗</span></span>
+          <strong>{next.title}</strong>
+          <small>{next.label}</small>
+        </a>
+      ) : (
+        <a class="project-journey-link project-journey-next case-next" href={asset(lang === "en" ? "en/projects/" : "proyectos/")}>
+          <span class="mono">{tr("VOLVER AL ARCHIVO", "BACK TO ARCHIVE")} <span aria-hidden="true">↗</span></span>
+          <strong>{tr("Más proyectos", "More projects")}</strong>
+          <small>{tr("Explorá el catálogo completo", "Explore the full catalog")}</small>
+        </a>
+      )}
+    </div>
+    <a class="project-journey-all" href={asset(lang === "en" ? "en/projects/" : "proyectos/")}>
+      {tr("Ver los", "View all")} {projects.length} {tr("proyectos", "projects")} <span aria-hidden="true">↗</span>
+    </a>
+  </nav>
+)}
