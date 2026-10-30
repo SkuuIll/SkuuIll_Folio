@@ -94,7 +94,10 @@ test("all project cases exist with visible content and correct canonical URLs", 
     await expect(page.locator(".case-section").first()).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      `https://skuuill.github.io/SkuuIll_Folio/proyectos/${project.id}/`,
+      new URL(
+        `${(process.env.PORTFOLIO_BASE || "/SkuuIll_Folio").replace(/\/$/, "")}/proyectos/${project.id}/`,
+        process.env.PORTFOLIO_SITE || "https://skuuill.pages.dev",
+      ).href,
     );
     expect(
       await page.evaluate(
