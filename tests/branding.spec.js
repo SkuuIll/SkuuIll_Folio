@@ -26,9 +26,7 @@ test('opt-in Matrix overlay and expanded color palette remain controllable', asy
   expect(await frame.locator(".matrix-column").count()).toBeGreaterThanOrEqual(12);
   await toggle.click();
   await expect(frame).toHaveAttribute('data-matrix', 'off');
-  const button = page.locator('#palette-toggle');
-  await expect(button).toBeVisible();
-  for (let i = 0; i < 12; i++) await button.click();
+  await expect(page.locator('#palette-toggle')).toHaveCount(0);
   await expect(page.locator('html')).toHaveAttribute('data-palette', /forest|blue|clay|violet|amber|ice|matrix|neon|sunset|cobalt|rose|copper/);
 });
 test('reduced motion disables optional Matrix effect', async ({ page }) => {

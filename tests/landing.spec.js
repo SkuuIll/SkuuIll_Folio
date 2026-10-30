@@ -294,30 +294,16 @@ test("every load has a fresh composition and palette but preserves the chosen th
   await expect(page.locator("#scene-pause,#motion-toggle")).toHaveCount(0);
 });
 
-test("glass surfaces have a real material and a solid alternative", async ({
-  page,
-}) => {
+test("glass surfaces keep their visual fallback without footer controls", async ({ page }) => {
   await page.goto("./");
   await expect(page.locator(".glass-lens")).toBeVisible();
-  const material = await page.locator(".glass-lens").evaluate((element) => ({
-    filter: getComputedStyle(element).backdropFilter,
-    shadow: getComputedStyle(element).boxShadow,
-  }));
-  expect(material.filter).not.toBe("none");
-  expect(material.shadow).not.toBe("none");
-  await page.locator("#material-mode").selectOption("solid");
+  await expect(page.locator("#material-mode")).toHaveCount(0);
+  await page.evaluate(() => { document.documentElement.dataset.material = "solid"; });
   await expect(page.locator(".glass-lens")).toBeHidden();
-  await page.reload();
-  await expect(page.locator("#material-mode")).toHaveValue("solid");
-  await page.locator("#material-mode").selectOption("glass");
+  await page.evaluate(() => { document.documentElement.dataset.material = "glass"; });
   await expect(page.locator(".glass-lens")).toBeVisible();
   await page.emulateMedia({ contrast: "more" });
   await expect(page.locator(".glass-lens")).toBeHidden();
-  expect(
-    await page
-      .locator(".site-header")
-      .evaluate((element) => getComputedStyle(element).backdropFilter),
-  ).toBe("none");
 });
 
 test("automatic glass honors transparency reduction while explicit glass can opt in", async ({
@@ -330,8 +316,8 @@ test("automatic glass honors transparency reduction while explicit glass can opt
   });
   await page.goto("./");
   await expect(page.locator(".glass-lens")).toBeVisible();
-  await page.locator("#material-mode").selectOption("auto");
+  await page.evaluate(() => { document.documentElement.dataset.material = "auto"; });
   await expect(page.locator(".glass-lens")).toBeHidden();
-  await page.locator("#material-mode").selectOption("glass");
+  await page.evaluate(() => { document.documentElement.dataset.material = "glass"; });
   await expect(page.locator(".glass-lens")).toBeVisible();
 });

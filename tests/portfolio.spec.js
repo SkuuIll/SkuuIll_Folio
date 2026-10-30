@@ -271,7 +271,7 @@ test("palette and scene change on reload while blocked storage remains usable", 
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.reload();
-  await page.locator("#palette-toggle").click();
+  await expect(page.locator("#palette-toggle")).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
