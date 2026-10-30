@@ -32,10 +32,10 @@ const {
 const en = lang === "en";
 const tr = (es: string, english: string) => en ? english : es;
 const home = en ? "en/" : "";
-const hasLandingIntro = relative === "" || relative === "en/" || relative === "en";
 const archive = en ? "en/projects/" : "proyectos/";
 const basePath = import.meta.env.BASE_URL;
 const relative = Astro.url.pathname.startsWith(basePath) ? Astro.url.pathname.slice(basePath.length) : "";
+const hasLandingIntro = relative === "" || relative === "en/" || relative === "en";
 const spanish = relative.startsWith("en/projects/") ? relative.replace(/^en\/projects\//, "proyectos/") : relative.replace(/^en\//, "");
 const english = relative.startsWith("en/") ? relative : relative.startsWith("proyectos/") ? relative.replace(/^proyectos\//, "en/projects/") : "en/" + relative;
 const spanishUrl = new URL(basePath + spanish, Astro.site ?? "https://skuull.pages.dev");
