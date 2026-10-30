@@ -1,0 +1,420 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SpatialExperience from "../../components/SpatialExperience.astro";
+import Contact from "../../components/Contact.astro";
+import SelectedWork from "../../components/SelectedWork.astro";
+import { asset, projects } from "../../data/projects";
+---
+
+<Layout lang="en"
+  title="Skull — Software development, design & digital experiences"
+  description="Independent software developer from Argentina. Web apps, Android, APIs, automation, and interactive digital experiences."
+>
+  <div
+    class="signal-world"
+    id="inicio"
+    data-case-ids={projects.map((project) => project.id).join(" ")}
+  >
+    <svg class="glass-filter" width="0" height="0" aria-hidden="true">
+      <defs>
+        <filter
+          id="glass-refraction"
+          x="-20%"
+          y="-20%"
+          width="140%"
+          height="140%"
+          color-interpolation-filters="sRGB"
+        >
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency=".012 .018"
+            numOctaves="2"
+            seed="7"
+            result="noise"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="16"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </defs>
+    </svg>
+    <div class="signal-backdrop" aria-hidden="true">
+      <div class="signal-stage">
+        <svg class="signal-fallback" viewBox="0 0 800 800" fill="none">
+          <defs>
+            <pattern
+              id="signal-grid"
+              width="50"
+              height="50"
+              patternUnits="userSpaceOnUse"
+            >
+              <path d="M50 0H0V50" stroke="currentColor" stroke-opacity=".14" />
+            </pattern>
+          </defs>
+          <rect width="800" height="800" fill="url(#signal-grid)" />
+          {Array.from({ length: 14 }, (_, i) => (
+            <ellipse
+              cx="400"
+              cy="400"
+              rx={100 + i * 15}
+              ry={250 - i * 11}
+              transform={`rotate(${i * 13} 400 400)`}
+              stroke="currentColor"
+              stroke-opacity=".4"
+            />
+          ))}
+          <circle
+            cx="400"
+            cy="400"
+            r="300"
+            stroke="currentColor"
+            stroke-dasharray="2 16"
+          />
+        </svg>
+        <canvas id="signal-canvas"></canvas>
+        <div class="glass-lens">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path
+              d="M24 6H11L5 13l21 6-6 7H7"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <span class="signal-coordinate mono">
+          SP / FIELD_001
+          <br />
+          PROCEDURAL SIGNAL
+        </span>
+      </div>
+    </div>
+    <section class="sp-hero shell" aria-labelledby="hero-title">
+      <div class="hero-topline mono">
+        <span>
+          <i class="status-dot"></i> SKULL / DIGITAL LAB
+        </span>
+        <span>DESIGN + DEVELOPMENT</span>
+      </div>
+      <div class="sp-hero-copy">
+        <p class="eyebrow">WEB · ANDROID · SYSTEMS</p>
+        <h1 id="hero-title">
+          I turn ideas
+          <br />
+          en <em>real software.</em>
+        </h1>
+        <p class="sp-lead">
+          I design interfaces and develop applications, APIs, and systems.
+          <br />
+          From first prototype to production.
+        </p>
+        <div class="sp-actions">
+          <a class="sp-primary" href="#trabajo" data-magnetic>
+            Explore projects <span aria-hidden="true">↘</span>
+          </a>
+          <a class="sp-secondary" href="#contacto">
+            Let's talk <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-signature">
+        <span>
+          Skull<span class="signature-dot">.</span>
+        </span>
+        <div class="mono">
+          INDEPENDENT
+          <br />
+          CHARATA · CHACO · ARGENTINA
+        </div>
+      </div>
+      <a class="sp-scroll mono" href="#secuencia">
+        <span aria-hidden="true">↓</span> SCROLL TO EXPLORE
+      </a>
+    </section>
+    <section
+      class="sp-sequence shell"
+      id="secuencia"
+      aria-labelledby="sequence-title"
+    >
+      <div class="sequence-heading">
+        <p class="eyebrow">01 / ONE SYSTEM, MANY FORMS</p>
+        <h2 id="sequence-title">
+          Every gesture.
+          <br />
+          <span>One response.</span>
+        </h2>
+      </div>
+      <div class="sequence-steps">
+        <article data-phase="0">
+          <span class="mono">01 — STRUCTURE</span>
+          <h3>Start with structure.</h3>
+          <p>
+            Grids, proportion, and space. The foundations of an interface that
+            makes sense.
+          </p>
+        </article>
+        <article data-phase="1">
+          <span class="mono">02 — MOTION</span>
+          <h3>Then, rhythm.</h3>
+          <p>
+            Forms respond to scrolling. Motion supports the story
+            you want to tell.
+          </p>
+        </article>
+        <article data-phase="2">
+          <span class="mono">03 — CONNECTION</span>
+          <h3>Everything responds.</h3>
+          <p>
+            Considered interactions connect design, code, and the person
+            on the other side.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
+  <SpatialExperience lang="en" />
+  <SelectedWork lang="en" />
+  <section class="sp-lab shell" id="laboratorio" aria-labelledby="lab-title">
+    <div class="lab-heading">
+      <div>
+        <p class="eyebrow">04 / TOUCH, CHANGE, EXPLORE</p>
+        <h2 id="lab-title">
+          Less talking.
+          <br />
+          <span>More interaction.</span>
+        </h2>
+      </div>
+      <p>
+        This is a small interactive laboratory. Three original experiments
+        to experience design in action.
+      </p>
+    </div>
+    <div class="lab-console">
+      <div class="lab-tabs" hidden role="tablist" aria-label="Experiments">
+        <button
+          role="tab"
+          id="tab-composition"
+          aria-controls="panel-composition"
+          aria-selected="true"
+          tabindex="0"
+        >
+          01 Composition
+        </button>
+        <button
+          role="tab"
+          id="tab-motion"
+          aria-controls="panel-motion"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          02 Motion
+        </button>
+        <button
+          role="tab"
+          id="tab-interface"
+          aria-controls="panel-interface"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          03 Interfaces
+        </button>
+      </div>
+      <div
+        class="lab-panel"
+        role="tabpanel"
+        id="panel-composition"
+        aria-labelledby="tab-composition"
+        tabindex="0"
+      >
+        <div class="experiment-copy">
+          <span class="mono">EXPERIMENT_01 / GEOMETRY</span>
+          <h3>
+            Structure can
+            <br />
+            be playful.
+          </h3>
+          <p>
+            Change density and distribution. One rule, hundreds of
+            compositions.
+          </p>
+          <div class="lab-controls" hidden>
+            <label for="density">
+              Density <output id="density-value">8</output>
+            </label>
+            <input id="density" type="range" min="4" max="12" value="8" />
+            <button type="button" id="layout-shuffle" class="sp-secondary">
+              Shuffle layout ↗
+            </button>
+          </div>
+        </div>
+        <div class="composition-art" aria-hidden="true">
+          {Array.from({ length: 64 }, (_, i) => (
+            <span style={`--i:${i};--r:${Math.floor(i / 8)};--c:${i % 8}`} />
+          ))}
+        </div>
+      </div>
+      <div
+        class="lab-panel"
+        role="tabpanel"
+        id="panel-motion"
+        aria-labelledby="tab-motion"
+        tabindex="0"
+      >
+        <div class="experiment-copy">
+          <span class="mono">EXPERIMENT_02 / FREQUENCY</span>
+          <h3>
+            Find
+            <br />
+            your frequency.
+          </h3>
+          <p>
+            Adjust a wave's amplitude. The pulse reacts in real time to
+            every change.
+          </p>
+          <div class="lab-controls" hidden>
+            <label for="amplitude">
+              Amplitude <output id="amplitude-value">50</output>
+            </label>
+            <input id="amplitude" type="range" min="10" max="90" value="50" />
+          </div>
+        </div>
+        <div class="wave-art" aria-hidden="true">
+          {Array.from({ length: 35 }, (_, i) => (
+            <span
+              style={`--i:${i};--height:${20 + Math.sin(i * 0.28) ** 2 * 70}%`}
+            />
+          ))}
+          <span class="wave-axis mono">SIGNAL / SINE</span>
+        </div>
+      </div>
+      <div
+        class="lab-panel"
+        role="tabpanel"
+        id="panel-interface"
+        aria-labelledby="tab-interface"
+        tabindex="0"
+      >
+        <div class="experiment-copy">
+          <span class="mono">EXPERIMENT_03 / STATES</span>
+          <h3>
+            Small details.
+            <br />
+            Better feedback.
+          </h3>
+          <p>
+            Change an interface state and see how it communicates. An
+            interactive demo that doesn't send data.
+          </p>
+          <div class="lab-controls state-controls" hidden>
+            <button type="button" data-demo-state="ready" aria-pressed="true">
+              Ready
+            </button>
+            <button
+              type="button"
+              data-demo-state="working"
+              aria-pressed="false"
+            >
+              Working
+            </button>
+            <button type="button" data-demo-state="done" aria-pressed="false">
+              Complete
+            </button>
+          </div>
+        </div>
+        <div class="interface-art" data-state="ready">
+          <div class="interface-top mono">
+            <span>SP / INTERFACE</span>
+            <span>DEMO</span>
+          </div>
+          <div class="interface-symbol" aria-hidden="true">
+            ↗
+          </div>
+          <p id="interface-status" role="status">
+            Ready to begin.
+          </p>
+          <div class="interface-track" aria-hidden="true">
+            <span></span>
+          </div>
+          <span class="mono interface-caption">
+            ONE STATE. CLEAR FEEDBACK.
+          </span>
+        </div>
+      </div>
+      <div class="lab-footer mono">
+        <span>BUILT WITH CODE / REAL INTERACTION</span>
+        <span>SKULL — LAB_2026</span>
+      </div>
+    </div>
+    <noscript>
+      <p class="lab-note">
+        Browse all three compositions. Enable JavaScript to change
+        their controls.
+      </p>
+    </noscript>
+  </section>
+  <section
+    class="sp-process shell"
+    id="proceso"
+    aria-labelledby="process-title"
+  >
+    <div class="process-heading">
+      <p class="eyebrow">05 / FROM CONCEPT TO SCREEN</p>
+      <h2 id="process-title">
+        An idea is the beginning.
+        <br />
+        <span>The details make the difference.</span>
+      </h2>
+      <p>
+        Independent software design and development from Argentina. I work
+        across interfaces, APIs, data, and automation.
+      </p>
+    </div>
+    <div class="process-line" aria-hidden="true">
+      <span></span>
+    </div>
+    <div class="process-steps">
+      {[
+        {
+          n: "01",
+          title: "Understand",
+          text: "Understand the problem, the people, and the goal.",
+        },
+        {
+          n: "02",
+          title: "Shape",
+          text: "Explore composition and test interactions.",
+        },
+        {
+          n: "03",
+          title: "Build",
+          text: "Connect interfaces, logic, and data.",
+        },
+        {
+          n: "04",
+          title: "Refine",
+          text: "Review accessibility, performance, and details.",
+        },
+      ].map((step) => (
+        <article data-reveal>
+          <span class="mono">{step.n}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </article>
+      ))}
+    </div>
+    <div class="archive-link">
+      <p>Want to discover more work?</p>
+      <a href={asset("proyectos/")}>
+        Explore the full archive <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+  <Contact lang="en" />
+  <script>
+    import "../scripts/landing";
+  </script>
+</Layout>
