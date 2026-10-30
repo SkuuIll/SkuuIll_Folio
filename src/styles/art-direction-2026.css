@@ -1,0 +1,348 @@
+/* SKULL / Edition clarity and visual consistency.
+   This layer comes last, replacing contradictory legacy theme skins. */
+
+/* A selection must feel like a fresh composition, without blocking navigation. */
+@keyframes skull-edition-reveal{
+  from{opacity:.4;transform:translate3d(0,13px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media(prefers-reduced-motion:no-preference){
+  main.edition-revealing .signal-world>.sp-hero,
+  main.edition-revealing .edition-scene[data-edition-scene]{
+    animation:skull-edition-reveal .42s cubic-bezier(.2,.8,.2,1) both;
+  }
+}
+:root[data-design] .signal-world{min-width:0;max-width:100%;overflow-x:clip}
+:root[data-design] .sp-hero{box-sizing:border-box;min-width:0}
+:root[data-design] .sp-hero .hero-topline,
+:root[data-design] .sp-hero .sp-hero-copy,
+:root[data-design] .sp-hero .hero-signature,
+:root[data-design] .sp-hero .sp-scroll{min-width:0;max-width:100%}
+:root[data-design] .hero-topline{position:relative;z-index:4;flex-wrap:wrap;align-items:center;gap:10px 20px}
+:root[data-design] .hero-topline>span{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+:root[data-design] .sp-hero-copy{box-sizing:border-box}
+:root[data-design] .sp-hero h1{overflow-wrap:normal;hyphens:none}
+:root[data-design] .hero-signature{position:relative;z-index:2}
+:root[data-design] .hero-signature>span{min-width:0}
+
+/* 01 — EDITORIAL: oversized printed headline, asymmetry and ruled columns. */
+:root[data-design="editorial"] .sp-hero{
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-top:2px solid var(--ink);border-bottom:5px double var(--ink);
+  background:var(--paper);
+}
+:root[data-design="editorial"] .sp-hero-copy{
+  margin:0;max-width:min(94%,1190px);padding:clamp(48px,7vw,110px) 0;
+}
+:root[data-design="editorial"] .sp-hero h1{
+  font-weight:850;line-height:.9;font-size:clamp(60px,9vw,148px);
+  letter-spacing:-.105em;text-transform:uppercase;
+}
+:root[data-design="editorial"] .hero-signature>span{
+  font-size:clamp(75px,14vw,220px);font-weight:850;
+}
+:root[data-design="editorial"] .signal-backdrop{opacity:.08}
+
+/* 02 — CASEBOOK: a two-page case-study spread; no procedural field or
+   stacked technical labels over the typography. */
+:root[data-design="casebook"] .signal-backdrop{display:none!important}
+:root[data-design="casebook"] .sp-hero.shell{
+  display:grid!important;
+  grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  grid-template-rows:auto minmax(370px,1fr) auto auto;
+  column-gap:clamp(25px,3.5vw,58px);
+  row-gap:10px;
+  width:min(1440px,calc(100% - 96px));
+  max-width:100%;
+  margin:18px auto 35px;
+  padding:clamp(20px,2.8vw,43px);
+  min-height:min(88svh,850px);
+  background:var(--surface)!important;
+  border:1px solid var(--line);border-radius:7px;overflow:clip;
+  color:var(--ink);
+}
+:root[data-design="casebook"] .sp-hero::before{
+  content:"";display:block;
+  grid-column:2;grid-row:2/4;
+  position:relative!important;inset:auto!important;
+  z-index:1;width:100%;height:100%;min-height:440px;
+  background:
+    linear-gradient(180deg,#040a1080,transparent 38%,#08151b59),
+    url("/media/atelier-colors.webp") center / cover!important;
+  border:1px solid color-mix(in srgb,var(--line) 70%,transparent);
+  border-radius:3px;filter:none!important;box-shadow:16px 16px 0 color-mix(in srgb,var(--accent) 13%,transparent);
+}
+:root[data-design="casebook"] .sp-hero::after{
+  content:"CASE  /  002";display:block;
+  grid-column:2;grid-row:2;
+  position:relative;z-index:2;
+  align-self:start;justify-self:start;pointer-events:none;
+  margin:17px;padding:8px 12px;
+  color:#f4fff8;background:#15242ad9;border:1px solid #a4c4c266;
+  font:11px var(--mono);letter-spacing:.14em;
+}
+:root[data-design="casebook"] .hero-topline{
+  grid-row:1;grid-column:1/-1;
+  display:flex;align-items:center;justify-content:space-between;
+  margin:0 0 17px;padding-bottom:13px;
+  border-bottom:1px solid var(--line);color:var(--muted);
+  font-size:10px!important;line-height:1.4;
+}
+:root[data-design="casebook"] .hero-topline>span:last-child{
+  margin-left:auto;max-width:47%;text-align:right;
+}
+:root[data-design="casebook"] .sp-hero-copy{
+  grid-row:2;grid-column:1;align-self:center;z-index:2;
+  width:100%;max-width:none!important;
+  padding:20px 0 15px!important;
+  border:0!important;margin:0!important;
+}
+:root[data-design="casebook"] .sp-hero .eyebrow{
+  color:var(--accent)!important;margin-bottom:20px;
+}
+:root[data-design="casebook"] .sp-hero h1{
+  color:var(--ink)!important;text-shadow:none!important;
+  font:400 clamp(47px,5vw,83px)/1.03 Georgia,serif!important;
+  letter-spacing:-.065em!important;max-width:12ch;
+  text-transform:none!important;
+}
+:root[data-design="casebook"] .sp-hero h1 em{
+  color:var(--accent);font-style:italic;
+}
+:root[data-design="casebook"] .sp-lead{
+  color:var(--muted)!important;max-width:45ch;
+  font-size:clamp(14px,1.15vw,16px);line-height:1.75;
+}
+:root[data-design="casebook"] .hero-signature{
+  grid-column:1;grid-row:3;align-self:end;
+  display:flex;gap:20px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:20px;
+}
+:root[data-design="casebook"] .hero-signature>span{
+  font-size:clamp(54px,7vw,95px)!important;line-height:.94;
+  letter-spacing:-.075em;
+}
+:root[data-design="casebook"] .hero-signature>.mono{max-width:18ch;align-self:center}
+:root[data-design="casebook"] .sp-scroll{
+  grid-column:1/-1;grid-row:4;margin:15px 0 0;
+  max-width:none;justify-content:flex-end;
+  border-top:1px solid var(--line);padding-top:12px;
+}
+:root[data-design="casebook"] .sp-actions{gap:12px;margin-top:25px}
+:root[data-design="casebook"] .sp-primary,
+:root[data-design="casebook"] .sp-secondary{
+  border-radius:5px;min-height:44px;padding:12px 16px;
+}
+
+/* 03 — SYSTEMS: contained engineering interface instead of a poster. */
+:root[data-design="systems"] .signal-backdrop{
+  opacity:.15;filter:none;
+}
+:root[data-design="systems"] .sp-hero{
+  width:min(1370px,calc(100% - 92px));max-width:100%;
+  margin:24px auto;padding:clamp(22px,4vw,55px);
+  display:flex;flex-direction:column;align-items:stretch;gap:15px;
+  border:2px solid var(--accent);border-radius:0;
+}
+:root[data-design="systems"] .sp-hero::before{
+  content:"[ SYS / EDITION 03 ]";right:22px;top:18px;z-index:2;
+  background:var(--paper);padding:5px 10px;
+}
+:root[data-design="systems"] .hero-topline{border-bottom:1px dashed var(--line);padding-bottom:18px;padding-right:145px}
+:root[data-design="systems"] .sp-hero-copy{
+  width:min(65%,790px);max-width:790px!important;align-self:flex-start;
+  border-left:4px solid var(--accent);padding:clamp(25px,4vw,64px)!important;
+  background:color-mix(in srgb,var(--surface) 78%,transparent);
+}
+:root[data-design="systems"] .sp-hero h1{
+  font:650 clamp(42px,5.1vw,86px)/1.09 var(--mono)!important;
+  letter-spacing:-.07em;
+}
+:root[data-design="systems"] .hero-signature>span{font-size:clamp(65px,10vw,145px)}
+:root[data-design="systems"] .sp-scroll{margin-top:5px}
+:root[data-design="systems"] .signal-stage{width:41%;margin-left:59%;opacity:.33}
+
+/* 04 — ATELIER: gallery-like typography centered with quiet whitespace. */
+:root[data-design="atelier"] .sp-hero{
+  text-align:center;justify-content:center;gap:35px;
+  background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 60%);
+}
+:root[data-design="atelier"] .hero-topline{width:100%;justify-content:space-between;text-align:left}
+:root[data-design="atelier"] .sp-hero-copy{
+  margin:auto!important;width:min(950px,100%);max-width:100%!important;
+  text-align:center!important;border:0!important;
+  padding:clamp(65px,10vw,145px) 0!important;
+}
+:root[data-design="atelier"] .sp-hero h1{
+  font:400 clamp(58px,8vw,138px)/1.02 Georgia,serif!important;
+  letter-spacing:-.075em;
+}
+:root[data-design="atelier"] .sp-lead{margin-inline:auto}
+:root[data-design="atelier"] .sp-actions{justify-content:center}
+:root[data-design="atelier"] .hero-signature{justify-content:center;opacity:.35}
+:root[data-design="atelier"] .signal-backdrop{opacity:.1;filter:blur(22px)}
+
+/* 05 — CHROMATIC: one bold diagonal poster and modular cards. */
+:root[data-design="chromatic"] .sp-hero{
+  display:flex;flex-direction:column;
+  width:min(1480px,calc(100% - 72px));max-width:100%;
+  margin:22px auto 30px;padding:clamp(22px,3vw,45px);
+  border-radius:clamp(16px,3vw,45px);
+  min-height:min(86svh,850px);
+  overflow:clip;isolation:isolate;
+}
+:root[data-design="chromatic"] .sp-hero::before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:min(45vw,600px);height:min(45vw,600px);right:-9%;top:5%;
+  border:clamp(35px,5vw,82px) solid #ffdf7850;border-radius:50%;
+  transform:rotate(12deg);
+}
+:root[data-design="chromatic"] .sp-hero-copy{
+  width:min(950px,90%);max-width:950px!important;
+  align-self:flex-start;z-index:2;
+}
+:root[data-design="chromatic"] .sp-hero h1{
+  font-size:clamp(50px,7.6vw,114px)!important;
+  font-weight:850!important;line-height:1.04;
+  letter-spacing:-.08em!important;text-shadow:none!important;
+}
+:root[data-design="chromatic"] .hero-signature>span{font-size:clamp(65px,11vw,155px)}
+:root[data-design="chromatic"] .signal-backdrop{opacity:.08}
+
+/* 06 — POCKET: no decorative visuals; compact, utilitarian, very legible. */
+:root[data-design="pocket"] .sp-hero{
+  width:min(930px,calc(100% - 80px));max-width:100%;
+  min-height:0!important;margin:5vh auto 10vh;
+  padding:clamp(24px,5vw,65px);
+  border:1px solid var(--line);border-radius:10px;
+  display:flex;gap:35px;background:var(--surface);
+}
+:root[data-design="pocket"] .sp-hero-copy{padding:10px 0!important;max-width:640px!important}
+:root[data-design="pocket"] .sp-hero h1{
+  font-size:clamp(42px,5.3vw,72px)!important;line-height:1.12;
+  letter-spacing:-.055em!important;
+}
+:root[data-design="pocket"] .sp-lead{font-size:15px}
+:root[data-design="pocket"] .hero-signature{display:none!important}
+:root[data-design="pocket"] .sp-scroll{margin:0}
+:root[data-design="pocket"] .signal-backdrop{display:none!important}
+
+/* 07 — STUDIO: commercial studio split composition and real project image. */
+:root[data-design="studio"] .sp-hero{
+  width:min(1410px,calc(100% - 75px));
+  max-width:100%;
+  grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+  gap:clamp(18px,2.5vw,38px);
+  min-height:min(85svh,870px);
+  padding:clamp(20px,3vw,48px);
+  border-bottom:5px solid var(--accent);overflow:clip;
+}
+:root[data-design="studio"] .sp-hero::before{
+  grid-column:2;grid-row:2/span 3;align-self:stretch;min-height:390px;
+  background:linear-gradient(145deg,#11283566,#020a11a3),url("/media/vigia-modules.webp") center / cover;
+}
+:root[data-design="studio"] .sp-hero-copy{
+  grid-column:1;grid-row:2;max-width:none!important;margin:0!important;
+  border:0!important;padding:clamp(10px,3vw,42px) 0!important;
+}
+:root[data-design="studio"] .sp-hero h1{
+  font-size:clamp(50px,5.9vw,99px)!important;
+}
+:root[data-design="studio"] .hero-signature{
+  grid-column:1;grid-row:3;
+}
+:root[data-design="studio"] .hero-signature>span{
+  font-size:clamp(60px,9vw,132px);
+}
+:root[data-design="studio"] .signal-backdrop{display:none!important}
+
+/* Keep all fourteen variants within phone viewport, including Casebook's
+   image, long translations, and stamped chapter surfaces. */
+@media(max-width:1000px){
+  :root[data-design="casebook"] .sp-hero.shell{
+    grid-template-columns:minmax(0,1fr) minmax(0,.83fr);
+    width:calc(100% - 42px);
+  }
+  :root[data-design="casebook"] .sp-hero h1{
+    font-size:clamp(44px,5.5vw,65px)!important;
+  }
+  :root[data-design="casebook"] .sp-hero::before{min-height:350px}
+  :root[data-design="systems"] .sp-hero-copy{width:min(70%,700px)}
+  :root[data-design="studio"] .sp-hero{width:calc(100% - 42px)}
+}
+@media(max-width:767px){
+  :root[data-design] .hero-topline{
+    font-size:10px;line-height:1.5;
+    gap:10px!important;
+  }
+  :root[data-design="casebook"] .sp-hero.shell{
+    display:flex!important;flex-direction:column;
+    width:calc(100% - 24px);max-width:100%;
+    margin:8px auto 20px;
+    padding:17px!important;gap:19px;
+    min-height:0;
+  }
+  :root[data-design="casebook"] .hero-topline{order:0;width:100%;padding:0 0 12px;margin:0}
+  :root[data-design="casebook"] .hero-topline>span:last-child{max-width:50%}
+  :root[data-design="casebook"] .sp-hero-copy{
+    order:1;max-width:100%!important;padding:4px 0 0!important;
+    width:100%;align-self:stretch;
+  }
+  :root[data-design="casebook"] .sp-hero h1{
+    font-size:clamp(43px,9vw,68px)!important;
+    max-width:100%;line-height:1.04;
+  }
+  :root[data-design="casebook"] .sp-hero::before{
+    order:2;width:100%;height:clamp(240px,55vw,390px);
+    min-height:0;flex:0 0 auto;box-shadow:7px 7px 0 color-mix(in srgb,var(--accent) 17%,transparent);
+  }
+  :root[data-design="casebook"] .sp-hero::after{
+    order:3;position:relative;align-self:flex-start;
+    margin:-57px 10px 0;pointer-events:none;
+  }
+  :root[data-design="casebook"] .hero-signature{
+    order:4;width:100%;padding-top:15px;margin:0;
+  }
+  :root[data-design="casebook"] .hero-signature>span{font-size:clamp(50px,13vw,80px)!important}
+  :root[data-design="casebook"] .sp-scroll{order:5;align-self:stretch;margin:0;padding-top:12px}
+  :root[data-design="casebook"] .sp-actions{gap:10px;flex-wrap:wrap}
+  :root[data-design="systems"] .sp-hero{
+    width:calc(100% - 24px);margin:12px auto;padding:17px!important;
+    min-height:0;gap:16px;
+  }
+  :root[data-design="systems"] .sp-hero::before{position:relative;top:auto;right:auto;display:block;align-self:flex-end;margin:0 0 -20px}
+  :root[data-design="systems"] .hero-topline{padding-right:0}
+  :root[data-design="systems"] .sp-hero-copy{width:100%;max-width:100%!important;padding:20px!important}
+  :root[data-design="systems"] .sp-hero h1{font-size:clamp(38px,9vw,65px)!important}
+  :root[data-design="systems"] .signal-backdrop{display:none}
+  :root[data-design="atelier"] .sp-hero-copy{text-align:center!important;padding:48px 0!important}
+  :root[data-design="atelier"] .sp-hero h1{font-size:clamp(48px,10vw,80px)!important}
+  :root[data-design="chromatic"] .sp-hero{
+    width:calc(100% - 24px);margin:9px auto 20px;padding:19px!important;
+    min-height:0;max-width:100%;
+  }
+  :root[data-design="chromatic"] .sp-hero h1{font-size:clamp(46px,10.5vw,76px)!important}
+  :root[data-design="chromatic"] .sp-hero-copy{width:100%;max-width:100%!important}
+  :root[data-design="pocket"] .sp-hero{
+    width:calc(100% - 24px);margin:12px auto 35px;
+    padding:22px!important;gap:20px;
+  }
+  :root[data-design="studio"] .sp-hero{
+    width:calc(100% - 24px);display:flex!important;flex-direction:column;
+    padding:19px!important;gap:18px;margin:10px auto;
+  }
+  :root[data-design="studio"] .sp-hero::before{
+    display:block;position:relative;order:2;min-height:240px;height:240px;width:100%;
+    flex:0 0 240px;align-self:auto;
+  }
+  :root[data-design="studio"] .hero-topline{order:0}
+  :root[data-design="studio"] .sp-hero-copy{order:1;width:100%;padding:15px 0!important}
+  :root[data-design="studio"] .sp-hero h1{font-size:clamp(44px,10vw,76px)!important}
+  :root[data-design="studio"] .hero-signature{order:3}
+  :root[data-design="studio"] .sp-scroll{order:4}
+  :root[data-design="studio"] .hero-signature>span{font-size:clamp(58px,12vw,94px)}
+}
+@media(prefers-reduced-motion:reduce){
+  main.edition-revealing .signal-world>.sp-hero,
+  main.edition-revealing .edition-scene[data-edition-scene]{animation:none!important}
+}
