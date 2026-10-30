@@ -78,3 +78,46 @@
  .terminal-inner{padding:15px}
  .terminal-form label{font-size:10px}
 }
+
+/* Final specificity guard: 14 modes must not stretch the mobile switcher.
+   All actionable controls retain a 44px hit area. */
+@media(max-width:767px){
+ :root[data-design] .design-ribbon{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  height:52px!important;min-height:52px!important;max-height:52px!important;
+  padding:3px 6px!important;gap:0!important;
+  width:min(540px,calc(100% - 28px))!important;
+  margin:7px auto 0!important;box-sizing:border-box!important;
+ }
+ :root[data-design] .design-ribbon-main,
+ :root[data-design] .design-ribbon-figure,
+ :root[data-design] .design-ribbon-note{display:none!important}
+ :root[data-design] .design-ribbon-controls{
+  display:flex!important;flex:1 1 100%!important;flex-wrap:nowrap!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  height:44px!important;align-items:center!important;justify-content:space-between!important;gap:3px!important;
+ }
+ :root[data-design] .design-ribbon-controls button{flex:0 0 44px!important;min-width:44px!important;max-width:44px!important;width:44px!important;height:44px!important;min-height:44px!important;padding:4px!important}
+ :root[data-design] .design-ribbon-controls .design-index{flex:0 0 43px!important;min-width:43px!important;max-width:43px!important}
+ :root[data-design] .design-select-label{display:block!important;flex:1 1 0!important;width:auto!important;min-width:0!important;max-width:none!important}
+ :root[data-design] .design-select-label select{display:block!important;min-height:44px!important;height:44px!important;width:100%!important;max-width:100%!important;padding:5px!important}
+ :root[data-design] .design-next-text{display:none!important}
+ /* Casebook's even cards had a more specific desktop grid rule and widened
+    screenshots to 600+px inside 390px phones. */
+ :root[data-design="casebook"] .portfolio-work-card:nth-child(even) .portfolio-work-link,
+ :root[data-design="casebook"] .portfolio-work-card .portfolio-work-link{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+ }
+ :root[data-design="casebook"] .portfolio-work-card:nth-child(even) .portfolio-work-body{order:initial!important}
+ :root[data-design="casebook"] .portfolio-work-card .portfolio-work-media{
+  min-height:0!important;width:100%!important;max-width:100%!important;max-height:none!important;
+  aspect-ratio:1.65;
+ }
+ :root[data-design="casebook"] .portfolio-work-card .portfolio-work-media img{
+  width:100%!important;max-width:100%!important;height:100%!important;object-fit:cover;
+ }
+ /* Decorative SVGs belong inside the hero backdrop, not across the content. */
+ .signal-backdrop{overflow:hidden}
+ .signal-stage{max-width:100%}
+}
