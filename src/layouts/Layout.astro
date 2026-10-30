@@ -124,7 +124,12 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       let priorDesign;
       try { priorDesign = sessionStorage.getItem("skull-design-last") || localStorage.getItem("skull-design-last"); } catch {}
       const previousIndex = designs.indexOf(priorDesign);
-      const design = designs[(previousIndex + 1) % designs.length];
+      // An explicit design link is shareable and predictable. Ordinary visits
+      // still rotate through all fourteen editions.
+      const requestedDesign = new URLSearchParams(location.search).get("design");
+      const design = requestedDesign && designs.includes(requestedDesign)
+        ? requestedDesign
+        : designs[(previousIndex + 1) % designs.length];
       document.documentElement.dataset.design = design;
       try { sessionStorage.setItem("skull-design-last", design); } catch {}
       try { localStorage.setItem("skull-design-last", design); } catch {}
