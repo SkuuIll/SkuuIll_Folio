@@ -1,5 +1,6 @@
 ---
 import ArchitectureExplorer from "./ArchitectureExplorer.astro";
+import DepthShowcase from "./DepthShowcase.astro";
 interface Props { lang?: "es" | "en" }
 const lang = Astro.props.lang ?? "es";
 const tr = (es: string, english: string) => lang === "en" ? english : es;
@@ -7,6 +8,7 @@ import "../styles/spatial.css";
 ---
 
 <ArchitectureExplorer lang={lang} />
+<DepthShowcase lang={lang} />
 
 <section class="portal-journey" id="recorrido" aria-labelledby="journey-title">
   <div class="journey-stage" data-spatial="journey">
