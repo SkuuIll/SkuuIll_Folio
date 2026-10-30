@@ -150,6 +150,21 @@ if(shell){
    else zoom=Math.max(.65,Math.min(1.5,Math.round((zoom+(direction==="in"?.15:-.15))*100)/100));
    paint();
   };
+  // Zine-style reversible covers: native buttons, no nested interactive links,
+  // and the hidden side is absent from keyboard and assistive navigation.
+  canvas.querySelectorAll<HTMLButtonElement>("[data-canvas-flip]").forEach(button=>{
+   button.addEventListener("click",()=>{
+    const card=button.closest<HTMLElement>("[data-canvas-card]");
+    const front=card?.querySelector<HTMLElement>("[data-canvas-front]");
+    const back=card?.querySelector<HTMLElement>("[data-canvas-back]");
+    if(!card||!front||!back)return;
+    const showBack=back.hidden;
+    back.hidden=!showBack;front.hidden=showBack;
+    card.classList.toggle("is-flipped",showBack);
+    const next=card.querySelector<HTMLButtonElement>(showBack?".canvas-card-back [data-canvas-flip]":".canvas-card-front [data-canvas-flip]");
+    next?.focus({preventScroll:true});
+   });
+  });
   canvas.querySelectorAll<HTMLButtonElement>("[data-pan]").forEach(b=>b.addEventListener("click",()=>pan(b.dataset.pan||"")));
   canvas.querySelectorAll<HTMLButtonElement>("[data-zoom]").forEach(b=>b.addEventListener("click",()=>change(b.dataset.zoom||"")));
   viewport?.addEventListener("keydown",e=>{
@@ -160,7 +175,7 @@ if(shell){
    else if(e.key==="Home"){e.preventDefault();change("reset")}
   });
   let dragging=false,lastX=0,lastY=0;
-  viewport?.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse"||e.button!==0|| (e.target as Element).closest("a"))return;dragging=true;lastX=e.clientX;lastY=e.clientY});
+  viewport?.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse"||e.button!==0|| (e.target as Element).closest("a,button"))return;dragging=true;lastX=e.clientX;lastY=e.clientY});
   viewport?.addEventListener("pointermove",e=>{if(!dragging)return;x=Math.max(-360,Math.min(360,x+e.clientX-lastX));y=Math.max(-250,Math.min(250,y+e.clientY-lastY));lastX=e.clientX;lastY=e.clientY;paint()});
   window.addEventListener("pointerup",()=>{dragging=false});
   paint();
@@ -180,15 +195,27 @@ if(shell){
  if(story){
   let chapter=0;
   const buttons=[...story.querySelectorAll<HTMLButtonElement>("[data-story-pick]")];
+  const storyImage=story.querySelector<HTMLImageElement>("[data-story-photo]");
+  const storyVisualIds=["vigia","cpaul","pubg-map","vigia"];
   const choose=(i:number)=>{
    chapter=(i+steps.length)%steps.length;
    const step=steps[chapter];
    set(story,"[data-story-index]",step.number);
    set(story,"[data-story-title]",step.title);
    set(story,"[data-story-description]",step.body);
+   set(story,"[data-story-seal-number]",step.number);
+   story.querySelector<HTMLElement>("[data-story-route-fill]")?.style.setProperty("--chapter-progress",String((chapter+1)/steps.length));
+   const picture=projectBy(storyVisualIds[chapter]);
+   if(storyImage&&picture?.image)storyImage.src=picture.image;
    buttons.forEach((button,n)=>{if(n===chapter)button.setAttribute("aria-current","step");else button.removeAttribute("aria-current")});
   };
   buttons.forEach((b,i)=>b.addEventListener("click",()=>choose(i)));
   story.querySelector("[data-story-next]")?.addEventListener("click",()=>choose(chapter+1));
+  story.addEventListener("keydown",event=>{
+   if((event.target as Element).closest("button,a,input,select"))return;
+   if(event.key==="ArrowRight"){event.preventDefault();choose(chapter+1)}
+   if(event.key==="ArrowLeft"){event.preventDefault();choose(chapter-1)}
+  });
+  choose(0);
  }
 }
