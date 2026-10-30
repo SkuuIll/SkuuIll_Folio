@@ -1,5 +1,8 @@
 ---
 import { asset } from "../data/projects";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const tr = (es: string, english: string) => lang === "en" ? english : es;
 import "../styles/spatial.css";
 ---
 
@@ -9,15 +12,15 @@ import "../styles/spatial.css";
   aria-labelledby="spatial-title"
 >
   <div class="spatial-heading">
-    <p class="eyebrow">03 / OBSERVATORIO DIGITAL</p>
+    <p class="eyebrow">{tr("03 / OBSERVATORIO DIGITAL","03 / DIGITAL OBSERVATORY")}</p>
     <h2 id="spatial-title">
-      Más allá
+      {tr("Más allá","Beyond")}
       <br />
-      de la pantalla.
+      {tr("de la pantalla.","the screen.")}
     </h2>
     <p>
-      Una escena que responde a tu mirada. Explorá la profundidad, la perspectiva
-      y la luz. También podés activar una capa cyberpunk de código en movimiento.
+      {tr("Una escena que responde a tu mirada. Explorá la profundidad, la perspectiva","A scene that responds to your point of view. Explore depth, perspective")}
+      {tr("y la luz. También podés activar una capa cyberpunk de código en movimiento.","and light. You can also enable a cyberpunk layer of moving code.")}
     </p>
   </div>
   <div class="spatial-frame" data-spatial="photo">
@@ -27,13 +30,13 @@ import "../styles/spatial.css";
       height="1024"
       loading="lazy"
       decoding="async"
-      alt="Observatorio futurista entre estructuras oscuras, anillos de cristal y una esfera luminosa sobre montañas lejanas."
+      alt={tr("Observatorio futurista entre estructuras oscuras, anillos de cristal y una esfera luminosa sobre montañas lejanas.", "Futuristic observatory with dark structures, glass rings and a glowing sphere over distant mountains.")}
     />
     <canvas aria-hidden="true" data-running="false"></canvas>
     <div class="matrix-rain" aria-hidden="true"></div>
     <div class="spatial-image-caption">
       <span class="mono">SKULL / OBSERVATORIO</span>
-      <span>Perspectiva · Luz · Profundidad</span>
+      <span>{tr("Perspectiva · Luz · {tr("Profundidad","Depth")}","Perspective · Light · Depth")}</span>
     </div>
     <div class="spatial-reticle" aria-hidden="true"></div>
   </div>
@@ -42,13 +45,13 @@ import "../styles/spatial.css";
       Profundidad <output id="spatial-depth-value">50</output>
     </label>
     <input id="spatial-depth" type="range" min="0" max="100" value="50" />
-    <span>Mové el cursor. En tu teléfono, desplazate.</span>
+    <span>{tr("Mové el cursor. En tu teléfono, desplazate.","Move your cursor. On a phone, scroll.")}</span>
   </div>
   <div class="spatial-art-actions">
-    <p class="mono">EXPERIENCIA INTERACTIVA / CONTROLADA POR VOS</p>
+    <p class="mono">{tr("EXPERIENCIA INTERACTIVA / CONTROLADA POR VOS","INTERACTIVE EXPERIENCE / YOU'RE IN CONTROL")}</p>
     <button type="button" id="matrix-toggle" aria-pressed="false" hidden>
       <span class="matrix-toggle-icon" aria-hidden="true">⌘</span>
-      <span class="matrix-toggle-label">Activar lluvia Matrix</span>
+      <span class="matrix-toggle-label">{tr("Activar lluvia Matrix","Enable Matrix rain")}</span>
     </button>
     <span id="matrix-status" class="mono" role="status" aria-live="polite"></span>
   </div>
@@ -66,34 +69,34 @@ import "../styles/spatial.css";
     <div class="journey-header shell">
       <span class="mono">SKULL / UMBRAL</span>
       <a href="#laboratorio">
-        Ir al laboratorio <span aria-hidden="true">↘</span>
+        {tr("Ir al laboratorio","Go to the lab")} <span aria-hidden="true">↘</span>
       </a>
     </div>
     <div class="journey-copy shell">
-      <p class="eyebrow">Un recorrido, tu ritmo</p>
+      <p class="eyebrow">{tr("Un recorrido, tu ritmo","A journey at your pace")}</p>
       <h2 id="journey-title">
-        No mires
+        {tr("No mires","Don't just look")}
         <br />
-        desde afuera.
+        {tr("desde afuera.","from the outside.")}
       </h2>
       <p class="journey-intro">
-        El scroll es la cámara.
+        {tr("El scroll es la cámara.","Scrolling becomes the camera.")}
         <br />
-        Seguí bajando para entrar.
+        {tr("Seguí bajando para entrar.","Scroll down to enter.")}
       </p>
     </div>
     <div class="journey-chapter shell" aria-hidden="true">
       <span class="mono" data-journey-label>
-        01 / ENTRAR
+        {tr("01 / ENTRAR","01 / ENTER")}
       </span>
-      <p data-journey-line>Todo empieza con un gesto.</p>
+      <p data-journey-line>{tr("Todo empieza con un gesto.","Everything begins with a gesture.")}</p>
     </div>
     <div class="journey-track shell" aria-hidden="true">
       <span></span>
     </div>
     <p class="journey-accessible">
-      Recorré un túnel de portales geométricos: las formas se abren, la cámara
-      avanza y el color acompaña el recorrido. Una escena 3D creada con código.
+      {tr("Recorré un túnel de portales geométricos: las formas se abren, la cámara","Explore a tunnel of geometric portals: shapes open and the camera")}
+      {tr("avanza y el color acompaña el recorrido. Una escena 3D creada con código.","moves forward as color guides the journey. A 3D scene built with code.")}
     </p>
   </div>
 </section>
