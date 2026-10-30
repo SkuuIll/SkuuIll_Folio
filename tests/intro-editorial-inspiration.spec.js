@@ -70,3 +70,14 @@ test("intro and illustrated modes do not overflow a small phone",async({page})=>
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2)).toBe(true);
  }
 });
+
+test("a visitor can replay the intro explicitly with ?intro=1",async({page})=>{
+ await page.emulateMedia({reducedMotion:"no-preference"});
+ await page.goto("./");
+ await page.locator("[data-sk-intro] [data-intro-skip]").click();
+ await expect(page.locator("[data-sk-intro]")).toBeHidden();
+ await page.goto("?intro=1");
+ await expect(page.locator("[data-sk-intro]")).toBeVisible();
+ await page.keyboard.press("Escape");
+ await expect(page.locator("[data-sk-intro]")).toBeHidden();
+});
