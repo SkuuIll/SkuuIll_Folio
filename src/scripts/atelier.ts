@@ -1,3 +1,5 @@
+const english = document.documentElement.lang.startsWith("en");
+const t = (es: string, en: string) => english ? en : es;
 const shots = [
   ...document.querySelectorAll<HTMLButtonElement>("[data-atelier-shot]"),
 ];
@@ -40,8 +42,8 @@ document
       if (loading) return;
       loading = true;
       button.disabled = true;
-      button.textContent = "Cargando prenda…";
-      status.textContent = "Preparando la muestra 3D.";
+      button.textContent = t("Cargando prenda…","Loading garment…");
+      status.textContent = t("Preparando la muestra 3D.","Preparing the 3D preview.");
       try {
         const { mountModel } = await import("./model-viewer");
         stage.hidden = false;
@@ -49,17 +51,17 @@ document
         start.hidden = true;
         controls.hidden = false;
         status.textContent =
-          "Muestra 3D lista. Arrastrá horizontalmente para girar; también podés usar los botones o las flechas del teclado. El scroll vertical sigue disponible.";
+          t("Muestra 3D lista. Arrastrá horizontalmente para girar; también podés usar los botones o las flechas del teclado. El scroll vertical sigue disponible.","3D preview ready. Drag horizontally to rotate, or use the controls or arrow keys. Vertical scrolling remains available.");
         stage.querySelector("canvas")?.focus();
       } catch {
         stage.hidden = true;
         stage.replaceChildren();
         status.textContent =
-          "La vista 3D no está disponible en este dispositivo. Podés explorar las capturas del Atelier.";
+          t("La vista 3D no está disponible en este dispositivo. Podés explorar las capturas del Atelier.","3D preview is not available on this device. You can browse the Atelier screenshots instead.");
       } finally {
         loading = false;
         button.disabled = false;
-        button.textContent = "Activar muestra 3D";
+        button.textContent = t("Activar muestra 3D","Activate 3D preview");
       }
     });
     shell.querySelector("[data-close-model]")?.addEventListener("click", () => {
@@ -69,7 +71,7 @@ document
       controls.hidden = true;
       start.hidden = false;
       status.textContent =
-        "Muestra 3D cerrada. Se liberaron sus recursos gráficos.";
+        t("Muestra 3D cerrada. Se liberaron sus recursos gráficos.","3D preview closed. Graphics resources released.");
       button.focus();
     });
     window.addEventListener("pagehide", () => dispose?.(), { once: true });
