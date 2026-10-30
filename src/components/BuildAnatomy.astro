@@ -1,0 +1,71 @@
+---
+import "../styles/anatomy.css";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const t = (es: string, english: string) => lang === "en" ? english : es;
+---
+<section class="anatomy-section shell" id="anatomia" aria-labelledby="anatomy-title">
+  <div class="anatomy-heading">
+    <div><p class="eyebrow">{t("04 / ANATOMÍA DEL SOFTWARE", "04 / SOFTWARE ANATOMY")}</p>
+    <h2 id="anatomy-title">{t("El sistema", "Inside the")}<br /><span>{t("por dentro.", "system.")}</span></h2></div>
+    <p>{t("Un instrumento ilustrado en SVG: un banco de pruebas donde tres módulos representan interfaz, lógica y entrega. La forma explica el proceso.", "An illustrated SVG instrument: a test bench whose three modules represent interface, logic, and delivery. Its parts explain the process.")}</p>
+  </div>
+  <div class="anatomy-workbench">
+    <div class="anatomy-drawing">
+      <svg viewBox="0 0 900 480" role="img" aria-labelledby="anatomy-figure-title anatomy-figure-desc">
+        <title id="anatomy-figure-title">{t("Banco de pruebas isométrico", "Isometric engineering test bench")}</title>
+        <desc id="anatomy-figure-desc">{t("Base mecanizada con tres módulos, un dial, rieles, escalas, rejillas y tornillos de montaje.", "Machined base with three modules, a dial, rails, rulers, vents, and mounting screws.")}</desc>
+        <defs><linearGradient id="workbench-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#345866"/><stop offset="1" stop-color="#10212d"/></linearGradient></defs>
+        <ellipse cx="450" cy="405" rx="355" ry="38" fill="#000" opacity=".22" />
+        <path d="M95 280 625 125 813 240 281 395Z" fill="url(#workbench-metal)" stroke="#7da9b8" stroke-width="2"/>
+        <path d="M281 395 813 240 813 280 281 435Z" fill="#132f3b" stroke="#7394a0"/>
+        <path d="M95 280 281 395 281 435 95 320Z" fill="#071b26" stroke="#517886"/>
+        <path d="M124 284 626 143 782 238 281 379Z" fill="#19333e" stroke="#6b8b96"/>
+        <path d="M154 292 648 155M256 359 750 222" stroke="#78f2ce" stroke-opacity=".3" stroke-width="3"/>
+        {Array.from({length:36}, (_,i) => <path d={"M"+(154+i*13)+" "+(292-i*3.75)+"l3 9"} stroke="#c0d8d7" stroke-opacity={i%5===0?".85":".28"} />)}
+        {Array.from({length:18}, (_,i) => <circle cx={116+i*28} cy={285-i*7.8} r="2.8" stroke="#8bb1bd" fill="#071820" />)}
+        {Array.from({length:3}, (_,i) => (
+          <g transform={"translate("+(i*163)+" "+(-i*45)+")"}>
+            <path d="M184 281 310 244 382 282 254 320Z" fill="#091d27" stroke="#7caab5" stroke-width="2"/>
+            <path d="M254 320 382 282 382 309 254 348Z" fill="#214150" stroke="#7299a5"/>
+            <path d="M184 281 254 320 254 348 184 308Z" fill="#10303d" stroke="#527f8d"/>
+            <path d="M205 280 310 251 362 281 256 311Z" fill="#214a50" stroke="#78d5bb" stroke-opacity=".7"/>
+            {Array.from({length:9}, (_,n) => <path d={"M"+(217+n*11)+" "+(287-n*3)+"l12 6"} stroke="#c1dfde" stroke-opacity=".4"/>)}
+            {Array.from({length:4}, (_,n) => <circle cx={268+n*30} cy={327-n*8.5} r="3" stroke="#9ebfca" fill="#081822"/>)}
+            <ellipse cx="292" cy="281" rx="17" ry="9" fill="#071820" stroke="#b1d4dc" />
+            <ellipse cx="292" cy="277" rx="12" ry="7" stroke="#a9f4d7" stroke-width="2" fill="#347775" />
+            <circle cx="292" cy="277" r="3" fill="#d5fff5"/>
+            <circle cx="359" cy="291" r="4" fill={["#8affd9","#96bbff","#f2d58e"][i]}/>
+            <text x="207" y="314" fill="#d1e6ea" font-size="11" font-family="monospace">0{i+1}</text>
+          </g>
+        ))}
+        <path d="M298 394 778 257" stroke="#81b9c5" stroke-width="3"/>
+        {Array.from({length:12}, (_,i) => <path d={"M"+(308+i*37)+" "+(390-i*10.5)+"v-7"} stroke="#c8e4e6"/>)}
+        <g class="anatomy-needle">
+          <path d="M325 383 342 378 350 388 333 393Z" fill="#a1fbe5" stroke="#e1fff5"/>
+          <path d="M333 393 350 388 350 405 333 410Z" fill="#236e76" stroke="#d1fff4"/>
+          <path d="M325 383 333 393 333 410 325 400Z" fill="#19454c"/>
+          <path d="M339 381v-31" stroke="#ddfff8" stroke-width="3"/>
+          <path d="M332 354 347 349 339 342Z" fill="#d9fff4"/>
+        </g>
+        <text x="326" y="449" fill="#a7cbd3" font-size="10" font-family="monospace" letter-spacing="3">SKULL / ENGINEERING WORKBENCH / REV. 01</text>
+      </svg>
+      <p class="mono">{t("Ilustración conceptual: no representa sistemas en ejecución.", "Conceptual drawing; not a live system monitor.")}</p>
+    </div>
+    <div class="anatomy-panel">
+      <span class="eyebrow">{t("ESTACIÓN DE CONTROL", "CONTROL STATION")}</span>
+      <p class="mono" data-anatomy-count>01 / 03</p>
+      <h3 data-anatomy-name>{t("Interfaz", "Interface")}</h3>
+      <p data-anatomy-details>{t("Diseño de componentes, estados y accesibilidad.", "Components, interface states, and accessibility.")}</p>
+      <div class="anatomy-steps" role="group" aria-label={t("Capas del sistema", "System layers")}>
+        <button type="button" data-anatomy-step="0" aria-pressed="true">{t("01 Interfaz","01 Interface")}</button>
+        <button type="button" data-anatomy-step="1" aria-pressed="false">{t("02 Lógica","02 Logic")}</button>
+        <button type="button" data-anatomy-step="2" aria-pressed="false">{t("03 Entrega","03 Delivery")}</button>
+      </div>
+      <p class="mono">{t("Elegí un módulo para explorar qué se valida.", "Choose a module to explore what gets checked.")}</p>
+    </div>
+  </div>
+</section>
+<script>
+  import "../scripts/anatomy";
+</script>
