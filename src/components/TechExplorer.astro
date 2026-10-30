@@ -1,0 +1,16 @@
+---
+import { projects, projectUrl } from "../data/projects";
+import { projectsForLocale } from "../data/projects-en";
+interface Props {lang?:"es"|"en"}
+const lang=Astro.props.lang??"es";const en=lang==="en";
+const translated=projectsForLocale(lang);
+const technologies=[...new Set(projects.flatMap(p=>p.stack))].map(name=>({name,projects:projects.filter(p=>p.stack.includes(name)).map(p=>({title:translated.find(t=>t.id===p.id)?.title??p.title,href:projectUrl(p.id,lang),id:p.id}))})).sort((a,b)=>b.projects.length-a.projects.length||a.name.localeCompare(b.name)).slice(0,32);
+---
+<section class="tech-explorer shell" id="tecnologias" aria-labelledby="tech-explorer-heading" data-tech-explorer data-tech={JSON.stringify(technologies)}>
+  <div class="tech-explorer-head"><div><p class="eyebrow">{en?"07 / TECH STACK":"07 / TECNOLOGÍAS"}</p><h2 id="tech-explorer-heading">{en?"Technology in context.":"Tecnología en contexto."}</h2></div><p>{en?"Select a technology to see the real projects where it appears. Connections are based on the documented project stack.":"Elegí una tecnología para descubrir en qué proyectos reales se utiliza. Las conexiones salen del stack documentado de cada proyecto."}</p></div>
+  <div class="tech-explorer-layout"><div class="tech-cloud" role="group" aria-label={en?"Filter by technology":"Filtrar por tecnología"}>{technologies.map((item,i)=><button type="button" data-tech-pick={i} aria-pressed={i===0?"true":"false"}>{item.name}<span>{item.projects.length}</span></button>)}</div>
+  <div class="tech-projects" aria-live="polite"><span class="mono">{en?"CONNECTED PROJECTS":"PROYECTOS CONECTADOS"}</span><h3 data-tech-title>{technologies[0]?.name}</h3><p data-tech-count></p><div data-tech-results>{technologies[0]?.projects.map(p=><a href={p.href}>{p.title}<span aria-hidden="true">↗</span></a>)}</div></div></div>
+</section>
+<script>
+ import "../scripts/tech-explorer.ts";
+</script>
