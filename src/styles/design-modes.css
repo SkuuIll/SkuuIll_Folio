@@ -1,0 +1,178 @@
+
+/* Skull / Seven Directions — each style changes composition, typography, surfaces and visual emphasis.
+   Applied after shared CSS. All themes share the same semantic content, links and static SEO. */
+.design-ribbon {
+  --ribbon-border: color-mix(in srgb,var(--accent) 36%,var(--line));
+  position:relative; z-index:9; display:grid; grid-template-columns:minmax(0,1fr) auto;
+  align-items:center; gap:12px 24px; margin-top:12px; margin-bottom:0;
+  padding:14px 20px; border:1px solid var(--ribbon-border); border-radius:14px;
+  background:color-mix(in srgb,var(--surface) 90%,transparent);
+  box-shadow:0 12px 40px #00000013;
+}
+.design-ribbon-main {display:flex;align-items:center;gap:16px;min-width:0;}
+.design-ribbon-figure {width:40px;height:40px;flex:none;position:relative;border:1px solid var(--ribbon-border);border-radius:10px;display:grid;place-items:center;background:var(--paper);overflow:hidden}
+.design-ribbon-figure::before{content:"";width:19px;height:19px;transform:rotate(45deg);border:3px solid var(--accent);box-shadow:7px -7px 0 -3px var(--signal-blue)}
+.design-ribbon-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;line-height:1.28}
+.design-ribbon-title strong{font:700 13px var(--sans);letter-spacing:-.015em}
+.design-ribbon-title span{font:11px var(--mono);color:var(--muted)}
+.design-ribbon-note{margin-top:5px;font-size:12px;line-height:1.55;color:var(--muted);max-width:68ch}
+.design-ribbon-controls{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.design-ribbon-controls button{border:1px solid var(--ribbon-border);min-width:44px;min-height:44px;border-radius:10px;background:transparent;color:var(--ink);padding:8px 12px;font:12px var(--mono);transition:border-color .2s,background-color .2s}
+.design-ribbon-controls button:hover{background:var(--soft);border-color:var(--accent)}
+.design-ribbon-controls .design-next{background:var(--accent);color:var(--paper);border-color:var(--accent);font-weight:700;min-width:126px}
+.design-ribbon-controls .design-next:hover{filter:brightness(1.14)}
+.design-ribbon-controls .design-index{font:11px var(--mono);white-space:nowrap;min-width:52px;text-align:center}
+.design-ribbon-caption{font:10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.design-ribbon [data-design-index]{font-variant-numeric:tabular-nums}
+.design-ribbon button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+:root[data-design] .site-header {transition:background-color .22s,border-color .22s}
+:root[data-design] .portfolio-work-card,:root[data-design] .portfolio-capability,:root[data-design] .anatomy-workbench {transition:background-color .22s,border-color .22s}
+:root[data-design] .sp-hero h1,:root[data-design] .portfolio-work-heading h2 {text-wrap:balance}
+:root[data-design] .sp-hero-copy{position:relative;z-index:1}
+:root[data-design] .signal-fallback{color:var(--accent)}
+:root[data-design] .portfolio-work-card,:root[data-design] .portfolio-capability{border-color:var(--line)}
+:root[data-design] .sp-actions>a{border-radius:var(--mode-radius,12px)}
+:root[data-design] .sp-primary{color:var(--paper)}
+:root[data-design] .hero-signature{opacity:var(--signature-opacity,1)}
+:root[data-design] .sp-hero-copy{max-width:var(--copy-width,740px)}
+:root[data-design] .sp-hero{min-height:var(--hero-height,calc(100svh - 82px))}
+:root[data-design] .portfolio-work-card{border-radius:var(--mode-card-radius,24px)}
+:root[data-design] .portfolio-capability{border-radius:var(--mode-card-radius,20px)}
+:root[data-design] .anatomy-workbench{border-radius:var(--mode-card-radius,26px)}
+:root[data-design] .design-ribbon{border-radius:var(--mode-card-radius,14px)}
+:root[data-design] .design-ribbon-figure{border-radius:var(--mode-radius,10px)}
+
+/* 01 — EDITORIAL / large restrained typography, architectural spacing, ruled cards. */
+:root[data-theme="dark"][data-design="editorial"]{--paper:#101417;--surface:#1a2125;--ink:#f6f5ef;--muted:#bcc3bc;--line:#3e494b;--accent:#c7f16c;--signal-blue:#b5bbb2;--soft:#27322a}
+:root[data-theme="light"][data-design="editorial"]{--paper:#f5f3eb;--surface:#e9e8e0;--ink:#1d2623;--muted:#54605b;--line:#b5bcb2;--accent:#3d6317;--signal-blue:#596d72;--soft:#dce6cf}
+:root[data-design="editorial"]{--mode-radius:2px;--mode-card-radius:3px;--copy-width:1000px;--signature-opacity:.55}
+:root[data-design="editorial"] .sp-hero h1{font-size:clamp(57px,8.2vw,143px);letter-spacing:-.095em;line-height:.96;font-weight:750}
+:root[data-design="editorial"] .sp-hero-copy{padding-top:clamp(45px,9vw,135px)}
+:root[data-design="editorial"] .signal-stage{width:52%;margin-left:48%;opacity:.55}
+:root[data-design="editorial"] .sp-hero .eyebrow,:root[data-design="editorial"] .portfolio-work-heading .eyebrow{border-left:3px solid var(--accent);padding-left:12px}
+:root[data-design="editorial"] .portfolio-work-grid{gap:0;border-top:1px solid var(--line)}
+:root[data-design="editorial"] .portfolio-work-card{background:transparent;border-width:0 0 1px 0}
+:root[data-design="editorial"] .portfolio-work-media{aspect-ratio:2.05}
+:root[data-design="editorial"] .design-ribbon-figure::before{border-radius:0;transform:none;box-shadow:8px 8px 0 -4px var(--signal-blue)}
+:root[data-design="editorial"] .portfolio-capabilities-grid{gap:0}
+:root[data-design="editorial"] .portfolio-capability{background:transparent;border-width:1px 0 1px 1px}
+
+/* 02 — CASEBOOK / photographic magazine, warm matte paper, cinematic wide case studies. */
+:root[data-theme="dark"][data-design="casebook"]{--paper:#191612;--surface:#2b251e;--ink:#f7e9d6;--muted:#c4b8a6;--line:#55473a;--accent:#ffc17b;--signal-blue:#dda68f;--soft:#403127}
+:root[data-theme="light"][data-design="casebook"]{--paper:#f8efe2;--surface:#efe2d0;--ink:#2d2119;--muted:#665547;--line:#d3bfa8;--accent:#94501a;--signal-blue:#805449;--soft:#ead2b9}
+:root[data-design="casebook"]{--mode-radius:30px;--mode-card-radius:8px;--copy-width:690px;--hero-height:88svh}
+:root[data-design="casebook"] .sp-hero h1{font-family:Georgia,serif;letter-spacing:-.06em;font-weight:500;font-size:clamp(53px,6.5vw,110px);font-style:normal}
+:root[data-design="casebook"] .sp-hero h1 em{font-style:italic}
+:root[data-design="casebook"] .signal-backdrop{filter:sepia(.32) saturate(.9)}
+:root[data-design="casebook"] .signal-stage{width:57%;margin-left:43%}
+:root[data-design="casebook"] .portfolio-work-grid{grid-template-columns:1fr;gap:28px}
+:root[data-design="casebook"] .portfolio-work-card{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(270px,.82fr);background:var(--surface);overflow:hidden}
+:root[data-design="casebook"] .portfolio-work-link{display:contents}
+:root[data-design="casebook"] .portfolio-work-card .portfolio-work-media{aspect-ratio:1.7;min-height:275px}
+:root[data-design="casebook"] .portfolio-work-heading h2{font-family:Georgia,serif;font-weight:400}
+:root[data-design="casebook"] .design-ribbon-figure::before{border-radius:50%;transform:none;box-shadow:9px 0 0 -3px var(--signal-blue)}
+:root[data-design="casebook"] .portfolio-work-card--feature{grid-column:1/-1}
+
+/* 03 — SYSTEMS / data-grid, monospace typography and circuitry. */
+:root[data-theme="dark"][data-design="systems"]{--paper:#061014;--surface:#0c2028;--ink:#e0fbfa;--muted:#8ec3c9;--line:#255462;--accent:#69fff0;--signal-blue:#56aeff;--soft:#123b46}
+:root[data-theme="light"][data-design="systems"]{--paper:#e7f5f4;--surface:#d3e9e9;--ink:#10313a;--muted:#356570;--line:#83adb5;--accent:#065a63;--signal-blue:#14528c;--soft:#bddcdb}
+:root[data-design="systems"]{--mode-radius:0px;--mode-card-radius:2px;--copy-width:720px}
+:root[data-design="systems"] body{background-image:linear-gradient(color-mix(in srgb,var(--accent) 7%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--accent) 7%,transparent) 1px,transparent 1px);background-size:36px 36px}
+:root[data-design="systems"] .sp-hero h1{font-family:var(--mono);font-weight:550;letter-spacing:-.07em;font-size:clamp(46px,5.7vw,91px)}
+:root[data-design="systems"] .sp-hero h1 em{text-shadow:0 0 18px color-mix(in srgb,var(--accent) 30%,transparent)}
+:root[data-design="systems"] .sp-hero-copy{border-left:1px solid var(--accent);padding-left:clamp(15px,3vw,46px)}
+:root[data-design="systems"] .sp-lead{font-family:var(--mono);font-size:13px}
+:root[data-design="systems"] .portfolio-work-card{background:color-mix(in srgb,var(--surface) 85%,transparent);box-shadow:inset 4px 0 0 var(--accent)}
+:root[data-design="systems"] .anatomy-workbench{border:2px solid var(--accent);box-shadow:0 0 45px color-mix(in srgb,var(--accent) 8%,transparent)}
+:root[data-design="systems"] .design-ribbon-figure::before{border-radius:0;box-shadow:inset 0 0 0 3px var(--paper);transform:rotate(0deg)}
+:root[data-design="systems"] .portfolio-capability{background:var(--surface)}
+
+/* 04 — ATELIER / personal narrative, quiet plum & lilac, serif contrast. */
+:root[data-theme="dark"][data-design="atelier"]{--paper:#161321;--surface:#252036;--ink:#f4ecfa;--muted:#c8b9d9;--line:#514365;--accent:#f1b9ff;--signal-blue:#9cbef4;--soft:#382844}
+:root[data-theme="light"][data-design="atelier"]{--paper:#faf5ff;--surface:#f0e8f8;--ink:#292036;--muted:#645774;--line:#c6b6d5;--accent:#7b358f;--signal-blue:#47639a;--soft:#e4d5f0}
+:root[data-design="atelier"]{--mode-radius:26px;--mode-card-radius:26px;--copy-width:800px;--signature-opacity:.8}
+:root[data-design="atelier"] .sp-hero h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-.065em;font-size:clamp(52px,7.1vw,122px)}
+:root[data-design="atelier"] .sp-hero h1 em{font-style:italic}
+:root[data-design="atelier"] .sp-hero-copy{margin-inline:auto;text-align:center}
+:root[data-design="atelier"] .sp-actions{justify-content:center}
+:root[data-design="atelier"] .signal-stage{width:100%;margin-left:0;opacity:.28}
+:root[data-design="atelier"] .hero-topline{letter-spacing:.2em}
+:root[data-design="atelier"] .portfolio-work-grid{gap:30px}
+:root[data-design="atelier"] .portfolio-work-card{background:var(--surface);box-shadow:0 18px 55px #00000018}
+:root[data-design="atelier"] .sp-sequence h2,:root[data-design="atelier"] .portfolio-work-heading h2{font-family:Georgia,serif;font-weight:400}
+:root[data-design="atelier"] .design-ribbon-figure::before{border-radius:50% 50% 0 50%;transform:rotate(-45deg)}
+
+/* 05 — CHROMATIC / high-energy color, rounded modular canvases. */
+:root[data-theme="dark"][data-design="chromatic"]{--paper:#1c1030;--surface:#301c49;--ink:#fff6fb;--muted:#d1bde6;--line:#6a4c88;--accent:#ffca62;--signal-blue:#ff80d7;--soft:#4c285e}
+:root[data-theme="light"][data-design="chromatic"]{--paper:#fff0f5;--surface:#fbe0f4;--ink:#321c4c;--muted:#6b4a7b;--line:#cda9d3;--accent:#a12b6a;--signal-blue:#7734aa;--soft:#f7cae0}
+:root[data-design="chromatic"]{--mode-radius:100px;--mode-card-radius:38px;--copy-width:740px}
+:root[data-design="chromatic"] body{background-image:radial-gradient(ellipse at 15% 7%,color-mix(in srgb,var(--signal-blue) 27%,transparent),transparent 36%),radial-gradient(ellipse at 83% 34%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 38%),linear-gradient(135deg,var(--paper),var(--surface))}
+:root[data-design="chromatic"] .sp-hero h1{font-size:clamp(58px,7.2vw,120px);letter-spacing:-.09em;font-weight:800;transform:rotate(-1.5deg)}
+:root[data-design="chromatic"] .sp-hero h1 em{color:var(--accent)}
+:root[data-design="chromatic"] .signal-stage{width:70%;margin-left:30%;filter:hue-rotate(45deg) saturate(1.5)}
+:root[data-design="chromatic"] .portfolio-work-grid{gap:26px}
+:root[data-design="chromatic"] .portfolio-work-card:nth-child(3n+1){transform:rotate(-1deg)}
+:root[data-design="chromatic"] .portfolio-work-card:nth-child(3n+2){transform:rotate(1deg)}
+:root[data-design="chromatic"] .portfolio-capability{box-shadow:inset 0 0 0 4px color-mix(in srgb,var(--accent) 12%,transparent)}
+:root[data-design="chromatic"] .design-ribbon-figure::before{border-radius:50%;box-shadow:10px 0 0 -3px var(--signal-blue),-9px 8px 0 -3px var(--accent)}
+
+/* 06 — POCKET / content-first, austere, efficient mobile-centered layout. */
+:root[data-theme="dark"][data-design="pocket"]{--paper:#101715;--surface:#18211e;--ink:#eff4ef;--muted:#bcc9c1;--line:#394740;--accent:#b6eec6;--signal-blue:#94bdad;--soft:#27352d}
+:root[data-theme="light"][data-design="pocket"]{--paper:#ffffff;--surface:#f4f6f3;--ink:#14201b;--muted:#4d6558;--line:#c2d1c6;--accent:#246b45;--signal-blue:#47695d;--soft:#e3efe7}
+:root[data-design="pocket"]{--mode-radius:8px;--mode-card-radius:10px;--copy-width:740px;--hero-height:min(85svh,820px);--signature-opacity:.25}
+:root[data-design="pocket"] .signal-backdrop{opacity:.16}
+:root[data-design="pocket"] .signal-stage{width:42%;margin-left:58%;opacity:.4}
+:root[data-design="pocket"] .sp-hero h1{font-size:clamp(46px,6vw,92px);font-weight:700;letter-spacing:-.075em}
+:root[data-design="pocket"] .sp-hero-copy{padding-top:45px}
+:root[data-design="pocket"] .portfolio-work-grid{gap:14px}
+:root[data-design="pocket"] .portfolio-work-card{background:var(--surface)}
+:root[data-design="pocket"] .portfolio-work-media{aspect-ratio:2.1}
+:root[data-design="pocket"] .design-ribbon{box-shadow:none}
+:root[data-design="pocket"] .design-ribbon-figure::before{border-radius:4px;transform:none;box-shadow:none}
+
+/* 07 — STUDIO / agency presentation, elegant charcoal and gold services. */
+:root[data-theme="dark"][data-design="studio"]{--paper:#0a1821;--surface:#152936;--ink:#f4f2e7;--muted:#c0c9c9;--line:#39515a;--accent:#f6d28b;--signal-blue:#88c7d8;--soft:#2f3c3d}
+:root[data-theme="light"][data-design="studio"]{--paper:#f3f2ea;--surface:#e8ede9;--ink:#18313d;--muted:#52656d;--line:#b2c7c4;--accent:#8c601d;--signal-blue:#19687c;--soft:#e1e7d5}
+:root[data-design="studio"]{--mode-radius:8px;--mode-card-radius:14px;--copy-width:820px}
+:root[data-design="studio"] .sp-hero h1{font-size:clamp(53px,6.9vw,116px);font-weight:680;letter-spacing:-.075em}
+:root[data-design="studio"] .sp-hero-copy{border-top:2px solid var(--accent);margin-top:48px}
+:root[data-design="studio"] .signal-stage{width:58%;margin-left:42%;opacity:.67}
+:root[data-design="studio"] .sp-primary{box-shadow:0 12px 40px color-mix(in srgb,var(--accent) 20%,transparent)}
+:root[data-design="studio"] .portfolio-capabilities-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+:root[data-design="studio"] .portfolio-capability{min-height:230px;background:var(--surface);border-top:3px solid var(--accent)}
+:root[data-design="studio"] .portfolio-work-card{background:var(--surface)}
+:root[data-design="studio"] .contact-section{border-top:2px solid var(--accent);padding-top:50px}
+:root[data-design="studio"] .design-ribbon-figure::before{transform:rotate(45deg);border-radius:4px;box-shadow:10px 10px 0 -4px var(--signal-blue)}
+:root[data-design="studio"] .portfolio-capabilities-heading h2{letter-spacing:-.08em}
+
+/* Responsive overrides for new layouts; never turn editorial modes into horizontal scroll. */
+@media(max-width:900px){
+ :root[data-design="casebook"] .portfolio-work-card{grid-template-columns:1fr}
+ :root[data-design="atelier"] .sp-hero-copy{margin-inline:0;text-align:left}
+ :root[data-design="atelier"] .sp-actions{justify-content:flex-start}
+ :root[data-design="studio"] .portfolio-capabilities-grid{grid-template-columns:1fr}
+ .design-ribbon{grid-template-columns:1fr}
+ .design-ribbon-controls{justify-content:flex-start}
+}
+@media(max-width:767px){
+ .design-ribbon{padding:12px;gap:12px;margin-top:10px}
+ .design-ribbon-main{gap:10px}
+ .design-ribbon-note{font-size:11px}
+ .design-ribbon-figure{width:34px;height:34px}
+ .design-ribbon-controls .design-index{min-width:48px}
+ .design-ribbon-controls .design-next{min-width:115px}
+ :root[data-design] .sp-hero{min-height:auto}
+ :root[data-design] .sp-hero-copy{padding-block:38px 30px}
+ :root[data-design] .sp-hero h1{font-size:clamp(42px,10vw,74px);letter-spacing:-.07em}
+ :root[data-design="editorial"] .sp-hero h1{font-size:clamp(44px,10.8vw,78px)}
+ :root[data-design="systems"] .sp-hero h1{font-size:clamp(37px,9vw,62px)}
+ :root[data-design="chromatic"] .sp-hero h1{transform:none}
+ :root[data-design="chromatic"] .portfolio-work-card:nth-child(n){transform:none}
+ :root[data-design="casebook"] .portfolio-work-card{display:block}
+ :root[data-design="editorial"] .portfolio-capability{border-width:1px}
+ :root[data-design] .portfolio-work-grid{grid-template-columns:1fr}
+ :root[data-design="casebook"] .portfolio-work-media{min-height:0}
+}
+@media(max-width:380px){ .design-ribbon-title strong{font-size:12px}.design-ribbon-note{max-width:36ch}.design-ribbon-controls{gap:4px} }
+@media(prefers-reduced-motion:reduce){ :root[data-design] .portfolio-work-card,:root[data-design] .sp-hero h1,:root[data-design] .design-ribbon-controls button{transition:none!important;transform:none!important} }
+:root[data-performance="lite"] .design-ribbon-figure{box-shadow:none}

@@ -9,6 +9,7 @@ import "../styles/experience.css";
 import "../styles/shell.css";
 import "../styles/landing.css";
 import "../styles/showcase.css";
+import "../styles/design-modes.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
 interface Props {
@@ -107,6 +108,16 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         if (["light", "dark"].includes(savedTheme)) theme = savedTheme;
       } catch {}
       document.documentElement.dataset.theme = theme;
+      // Cycle through seven art directions on every full page load.
+      // A shared key works across Spanish, English and project pages.
+      const designs = ["editorial", "casebook", "systems", "atelier", "chromatic", "pocket", "studio"];
+      let priorDesign;
+      try { priorDesign = sessionStorage.getItem("skull-design-last") || localStorage.getItem("skull-design-last"); } catch {}
+      const previousIndex = designs.indexOf(priorDesign);
+      const design = designs[(previousIndex + 1) % designs.length];
+      document.documentElement.dataset.design = design;
+      try { sessionStorage.setItem("skull-design-last", design); } catch {}
+      try { localStorage.setItem("skull-design-last", design); } catch {}
       try {
         const material = localStorage.getItem("skull-material");
         document.documentElement.dataset.material = [
@@ -146,7 +157,8 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         const choices = values.filter((value) => value !== last);
         return choices[Math.floor(Math.random() * choices.length)];
       };
-      const palette = choose(palettes, lastPalette);
+      const designPalettes = { editorial: "matrix", casebook: "copper", systems: "ice", atelier: "violet", chromatic: "neon", pocket: "forest", studio: "amber" };
+      const palette = designPalettes[design] || choose(palettes, lastPalette);
       const scene = choose(scenes, lastScene);
       const seed = Math.floor(Math.random() * 1000000);
       document.documentElement.dataset.palette = palette;
@@ -293,6 +305,29 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         </div>
       </dialog>
     </header>
+    <aside class="design-ribbon shell" data-design-ribbon aria-label={tr("Dirección de diseño actual", "Current design direction")}>
+      <div class="design-ribbon-main">
+        <span class="design-ribbon-figure" aria-hidden="true"></span>
+        <div>
+          <div class="design-ribbon-title">
+            <span class="design-ribbon-caption">{tr("EDICIÓN VISUAL", "VISUAL EDITION")}</span>
+            <strong data-design-name>Editorial / {tr("Identidad", "Identity")}</strong>
+          </div>
+          <p class="design-ribbon-note" data-design-note role="status" aria-live="polite">
+            {tr("Tipografía protagonista y composición editorial.", "Expressive type and editorial composition.")}
+          </p>
+        </div>
+      </div>
+      <div class="design-ribbon-controls">
+        <button type="button" data-design-prev aria-label={tr("Diseño anterior", "Previous design")} title={tr("Diseño anterior", "Previous design")}>
+          <span aria-hidden="true">←</span>
+        </button>
+        <span data-design-index class="design-index" aria-label={tr("Diseño de siete", "Design of seven")}>01 / 07</span>
+        <button type="button" data-design-next class="design-next">
+          {tr("Otro diseño", "Next design")} <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </aside>
     <main id="contenido">
       <slot />
     </main>
@@ -313,6 +348,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
     </footer>
     <script>
       import "../scripts/site";
+      import "../scripts/design-modes";
     </script>
   </body>
 </html>
