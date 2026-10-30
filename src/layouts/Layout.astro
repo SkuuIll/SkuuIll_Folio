@@ -125,9 +125,12 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         localStorage.removeItem("spulp-motion-mode");
       } catch {}
       const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const connection = navigator.connection;
+      const limited = Boolean(connection?.saveData || (navigator.deviceMemory !== undefined && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 2 && matchMedia("(pointer: coarse)").matches));
+      document.documentElement.dataset.performance = limited ? "lite" : matchMedia("(pointer: coarse)").matches ? "balanced" : "full";
       document.documentElement.dataset.motionMode = reducedMotion ? "reduced" : "full";
-      document.documentElement.dataset.effects = reducedMotion ? "off" : "full";
-      document.documentElement.dataset.motion = reducedMotion ? "paused" : "active";
+      document.documentElement.dataset.effects = reducedMotion || limited ? "off" : "full";
+      document.documentElement.dataset.motion = reducedMotion || limited ? "paused" : "active";
       const palettes = ["forest", "blue", "clay", "violet", "amber", "ice", "matrix", "neon", "sunset", "cobalt", "rose", "copper"];
       const scenes = ["orb", "ribbon", "helix", "torus", "lattice"];
       let lastPalette, lastScene;
