@@ -66,8 +66,8 @@
 :root[data-design="casebook"] .signal-backdrop{filter:sepia(.32) saturate(.9)}
 :root[data-design="casebook"] .signal-stage{width:57%;margin-left:43%}
 :root[data-design="casebook"] .portfolio-work-grid{grid-template-columns:1fr;gap:28px}
-:root[data-design="casebook"] .portfolio-work-card{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(270px,.82fr);background:var(--surface);overflow:hidden}
-:root[data-design="casebook"] .portfolio-work-link{display:contents}
+:root[data-design="casebook"] .portfolio-work-card{display:block;background:var(--surface);overflow:hidden}
+:root[data-design="casebook"] .portfolio-work-link{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(270px,.82fr);height:100%}
 :root[data-design="casebook"] .portfolio-work-card .portfolio-work-media{aspect-ratio:1.7;min-height:275px}
 :root[data-design="casebook"] .portfolio-work-heading h2{font-family:Georgia,serif;font-weight:400}
 :root[data-design="casebook"] .design-ribbon-figure::before{border-radius:50%;transform:none;box-shadow:9px 0 0 -3px var(--signal-blue)}
@@ -147,7 +147,7 @@
 
 /* Responsive overrides for new layouts; never turn editorial modes into horizontal scroll. */
 @media(max-width:900px){
- :root[data-design="casebook"] .portfolio-work-card{grid-template-columns:1fr}
+ :root[data-design="casebook"] .portfolio-work-link{grid-template-columns:1fr}
  :root[data-design="atelier"] .sp-hero-copy{margin-inline:0;text-align:left}
  :root[data-design="atelier"] .sp-actions{justify-content:flex-start}
  :root[data-design="studio"] .portfolio-capabilities-grid{grid-template-columns:1fr}
@@ -176,3 +176,35 @@
 @media(max-width:380px){ .design-ribbon-title strong{font-size:12px}.design-ribbon-note{max-width:36ch}.design-ribbon-controls{gap:4px} }
 @media(prefers-reduced-motion:reduce){ :root[data-design] .portfolio-work-card,:root[data-design] .sp-hero h1,:root[data-design] .design-ribbon-controls button{transition:none!important;transform:none!important} }
 :root[data-performance="lite"] .design-ribbon-figure{box-shadow:none}
+
+/* The fourth direction emphasizes a factual developer profile, but the section is
+   available to everyone in every direction. No resume or biography claims are invented. */
+.design-about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);align-items:center;gap:clamp(28px,5vw,92px);padding-block:clamp(80px,10vw,145px)}
+.design-about-heading .eyebrow{color:var(--accent);margin-bottom:22px}
+.design-about-heading h2{font-size:clamp(40px,4.9vw,78px);letter-spacing:-.075em;line-height:1.04}
+.design-about-heading h2 span{color:var(--muted)}
+.design-about-heading>p{max-width:51ch;color:var(--muted);margin-top:22px;line-height:1.8}
+.design-about-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.design-about-actions a{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;padding:12px 20px;min-height:48px;border:1px solid var(--line);border-radius:var(--mode-radius,10px);font-size:13px}
+.design-about-actions a.sp-primary{border-color:var(--accent);background:var(--accent);color:var(--paper)}
+.design-about-actions a.sp-secondary{color:var(--ink);background:transparent}
+.design-about-sheet{padding:clamp(23px,3.2vw,45px);border:1px solid var(--line);border-radius:var(--mode-card-radius,23px);background:var(--surface);position:relative;overflow:hidden}
+.design-about-stamp{display:flex;align-items:end;gap:17px;line-height:1;margin-bottom:35px}
+.design-about-stamp>span:first-child{font-size:clamp(70px,10vw,145px);font-weight:850;letter-spacing:-.12em;color:var(--accent)}
+.design-about-stamp>span:last-child{font:11px/1.7 var(--mono);letter-spacing:.09em;color:var(--muted);padding-bottom:12px}
+.design-about-sheet>.mono{color:var(--accent);font-size:11px}
+.design-about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 22px;margin:20px 0 28px}
+.design-about-grid article{border-top:1px solid var(--line);padding-top:13px;min-width:0}
+.design-about-grid article>.mono{color:var(--muted);font-size:10px}
+.design-about-grid h3{font-size:clamp(18px,1.6vw,25px);margin:12px 0}
+.design-about-grid p{font-size:12px;line-height:1.7;color:var(--muted)}
+.design-about-foot{border-top:1px solid var(--line);padding-top:18px;color:var(--muted)!important}
+:root[data-design="atelier"] .design-about{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,7vw,115px)}
+:root[data-design="atelier"] .design-about-heading h2{font-family:Georgia,serif;font-size:clamp(53px,6.4vw,100px);font-weight:400}
+:root[data-design="atelier"] .design-about-sheet{box-shadow:0 26px 85px #00000025;border-radius:35px}
+:root[data-design="systems"] .design-about-sheet{border-left:4px solid var(--accent)}
+:root[data-design="studio"] .design-about-sheet{border-top:4px solid var(--accent)}
+:root[data-design="chromatic"] .design-about-sheet{background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--signal-blue) 16%,var(--surface)))}
+:root[data-design="pocket"] .design-about-sheet{box-shadow:none}
+@media(max-width:900px){.design-about{grid-template-columns:1fr}:root[data-design="atelier"] .design-about{grid-template-columns:1fr}}
+@media(max-width:520px){.design-about-grid{gap:18px 12px}.design-about-sheet{padding:22px}.design-about-stamp>span:first-child{font-size:75px}}

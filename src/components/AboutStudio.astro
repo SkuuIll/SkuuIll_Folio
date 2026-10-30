@@ -1,0 +1,40 @@
+---
+import { profile } from "../data/profile";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const en = lang === "en";
+const tr = (es: string, english: string) => en ? english : es;
+const skills = [
+  { code:"01", title:tr("Interfaces", "Interfaces"), detail:tr("React, Next.js, TypeScript y diseño de experiencias web.", "React, Next.js, TypeScript and web experience design.") },
+  { code:"02", title:tr("Aplicaciones", "Applications"), detail:tr("Android, escritorio y soluciones multiplataforma.", "Android, desktop and cross-platform solutions.") },
+  { code:"03", title:tr("Arquitectura", "Architecture"), detail:tr("APIs, datos, backend y sistemas conectados.", "APIs, data, backend services and connected systems.") },
+  { code:"04", title:tr("Operación", "Operations"), detail:tr("Linux, automatización y despliegues reproducibles.", "Linux, automation and reproducible deployments.") }
+];
+---
+<section id="perfil" class="design-about shell" aria-labelledby="design-about-heading">
+  <div class="design-about-heading">
+    <p class="eyebrow">{tr("SOBRE MÍ / CONSTRUIR CON INTENCIÓN", "ABOUT / BUILD WITH PURPOSE")}</p>
+    <h2 id="design-about-heading">{tr("El código importa.", "Code matters.")}<br/><span>{tr("Las personas también.", "So do people.")}</span></h2>
+    <p>{tr("Soy Skull, desarrollador independiente en Chaco, Argentina. Conecto diseño, aplicaciones, datos y sistemas para resolver necesidades concretas.", "I'm Skull, an independent developer based in Chaco, Argentina. I connect design, applications, data and systems to solve practical problems.")}</p>
+    <div class="design-about-actions">
+      <a class="sp-primary" href={profile.github} target="_blank" rel="noopener noreferrer">{tr("Ver mi GitHub", "Explore my GitHub")} <span aria-hidden="true">↗</span></a>
+      <a class="sp-secondary" href={"mailto:" + profile.email}>{tr("Conversemos", "Get in touch")} <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <div class="design-about-sheet">
+    <div class="design-about-stamp" aria-hidden="true">
+      <span>SK</span><span>DEVELOPER<br/>/ ARGENTINA</span>
+    </div>
+    <p class="mono">{tr("MAPA DE CAPACIDADES", "CAPABILITY MAP")}</p>
+    <div class="design-about-grid">
+      {skills.map(skill => (
+        <article>
+          <span class="mono">{skill.code} / SKULL</span>
+          <h3>{skill.title}</h3>
+          <p>{skill.detail}</p>
+        </article>
+      ))}
+    </div>
+    <p class="design-about-foot mono">{tr("PROYECTOS REALES · ALCANCE DOCUMENTADO", "REAL PROJECTS · DOCUMENTED SCOPE")}</p>
+  </div>
+</section>
