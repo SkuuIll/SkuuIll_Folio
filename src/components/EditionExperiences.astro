@@ -109,7 +109,22 @@ const story = [
       <div class="canvas-viewport" data-canvas-viewport tabindex="0" aria-label={t("Mapa de proyectos. Usá flechas para moverte y más o menos para zoom.","Project map. Use arrow keys to pan and plus or minus to zoom.")}>
         <div class="canvas-space" data-canvas-space>
           <svg viewBox="0 0 900 600" aria-hidden="true"><path d="M170 160 530 110 720 340 380 470 170 160M530 110 380 470"/></svg>
-          {projects.map((p,i)=><a class:list={["canvas-node","canvas-node-"+i]} href={projectLink(p.id)}><span class="mono">0{i+1} / {p.label}</span><strong>{p.title}</strong><span>{t("Abrir proyecto","Open project")} ↗</span></a>)}
+          {projects.map((p,i)=><article class:list={["canvas-node","canvas-node-"+i]} data-canvas-card={p.id}>
+            <div class="canvas-card-front" data-canvas-front>
+              {portrait(p.id)
+                ? <img src={portrait(p.id)} alt="" loading="lazy" decoding="async" width="360" height="220" />
+                : <div class="canvas-card-placeholder" aria-hidden="true"><span>SK / DEV</span></div>}
+              <div class="canvas-card-caption"><span class="mono">0{i+1} / {p.label}</span><strong>{p.title}</strong></div>
+              <button type="button" data-canvas-flip class="canvas-card-flip" aria-label={t("Ver detalles de ","Show details for ")+p.title}>↻ <span>{t("GIRAR","FLIP")}</span></button>
+            </div>
+            <div class="canvas-card-back" data-canvas-back hidden>
+              <span class="mono">SKULL / WORK 0{i+1}</span><h3>{p.title}</h3><p>{p.summary}</p>
+              <div class="canvas-card-actions">
+                <button type="button" data-canvas-flip aria-label={t("Volver a la portada de ","Show cover of ")+p.title}>↶</button>
+                <a href={projectLink(p.id)}>{t("Ver proyecto","View project")} ↗</a>
+              </div>
+            </div>
+          </article>)}
         </div>
         <div class="canvas-zoom mono" aria-live="polite" data-canvas-zoom>100%</div>
       </div>
@@ -130,11 +145,18 @@ const story = [
   </section>
   <section class="edition-scene edition-story shell" data-edition-scene="story" aria-labelledby="story-heading">
     <div class="edition-overline">14 / STORY MODE · {t("RECORRIDO NARRATIVO","NARRATIVE JOURNEY")}</div>
-    <div class="story-shell" data-story>
+    <div class="story-shell" data-story tabindex="0" aria-label={t("Recorrido por cuatro capítulos. Podés usar las flechas del teclado.","Four-chapter journey. You can use the keyboard arrow keys.")}>
       <div class="story-sidebar"><span class="mono">SKULL / CHAPTERS</span><h2 data-primary-heading id="story-heading">{t("Del concepto","From concept")}<br/>{t("a la pantalla.","to screen.")}</h2><p>{t("Cuatro capítulos sobre el proceso de construir software.","Four chapters on the process of building software.")}</p>
         <ol class="story-chapters">{story.map((step,i)=><li><button type="button" data-story-pick={i} aria-current={i===0?"step":undefined}><span>{step.number}</span>{step.title}</button></li>)}</ol>
       </div>
-      <div class="story-content"><div class="story-topline"><span class="mono">CHAPTER <span data-story-index>01</span> / 04</span><span class="mono">SKULL / METHOD</span></div><div class="story-illustration" aria-hidden="true"><span class="story-orbit"></span><span class="story-square"></span><span class="story-center">SK</span></div><h3 data-story-title>{story[0].title}</h3><p data-story-description>{story[0].body}</p><div class="story-bottom"><span class="mono">{t("SIN SCROLL OBLIGATORIO","NO FORCED SCROLL")}</span><button data-story-next type="button">{t("Siguiente capítulo","Next chapter")} ↗</button></div></div>
+      <div class="story-content"><div class="story-topline"><span class="mono">CHAPTER <span data-story-index>01</span> / 04</span><span class="mono">SKULL / METHOD</span></div><div class="story-illustration" aria-hidden="true">
+          <div class="story-art-board">
+            <span class="story-photo-label mono">SKULL / DOCUMENTED WORK</span>
+            <img src={portrait("vigia")} data-story-photo alt="" width="900" height="550" loading="lazy" decoding="async" />
+            <span class="story-art-stamp"><span>SK</span><strong data-story-seal-number>01</strong><small>PROCESS</small></span>
+          </div>
+        </div>
+        <div class="story-route" aria-hidden="true"><span class="story-route-track"><span data-story-route-fill></span></span><span class="mono">01 — 02 — 03 — 04</span></div><h3 data-story-title>{story[0].title}</h3><p data-story-description>{story[0].body}</p><div class="story-bottom"><span class="mono">{t("SIN SCROLL OBLIGATORIO","NO FORCED SCROLL")}</span><button data-story-next type="button">{t("Siguiente capítulo","Next chapter")} ↗</button></div></div>
     </div>
   </section>
 </div>
