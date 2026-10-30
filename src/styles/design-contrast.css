@@ -82,7 +82,12 @@
 :root[data-design="studio"] .sp-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr);align-items:center;min-height:83svh;border-bottom:5px solid var(--accent);background:linear-gradient(108deg,var(--paper) 55%,var(--surface) 55%)}
 :root[data-design="studio"] .sp-hero-copy{max-width:100%;padding:80px 0 80px clamp(20px,3vw,55px);grid-column:1;position:relative;z-index:1}
 :root[data-design="studio"] .sp-hero h1{font-size:clamp(56px,6.8vw,110px)}
-:root[data-design="studio"] .signal-backdrop{grid-column:2;position:relative!important;inset:auto;min-width:0;min-height:490px}
+:root[data-design="studio"] .sp-hero::before{content:"";grid-column:2;grid-row:2/span 3;display:block;min-height:480px;align-self:stretch;background:linear-gradient(145deg,#11283566,#020a11a3),url("/media/vigia-modules.webp") center / cover;border:1px solid var(--line);border-radius:12px;box-shadow:0 25px 70px #0004}
+:root[data-design="studio"] .hero-topline{grid-column:1/-1;grid-row:1}
+:root[data-design="studio"] .sp-hero-copy{grid-column:1;grid-row:2}
+:root[data-design="studio"] .hero-signature{grid-column:1;grid-row:3}
+:root[data-design="studio"] .sp-scroll{grid-column:1;grid-row:4}
+:root[data-design="studio"] .signal-backdrop{opacity:.12}
 :root[data-design="studio"] .signal-stage{width:100%;margin-left:0;right:auto}
 :root[data-design="studio"] .portfolio-work-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px}
 :root[data-design="studio"] .portfolio-work-card{grid-column:auto!important}
@@ -93,7 +98,9 @@
  :root[data-design="systems"] .portfolio-work-grid,:root[data-design="atelier"] .portfolio-work-grid,:root[data-design="chromatic"] .portfolio-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  :root[data-design="studio"] .sp-hero{grid-template-columns:1fr}
  :root[data-design="studio"] .sp-hero-copy{grid-column:1}
- :root[data-design="studio"] .signal-backdrop{grid-column:1;min-height:0;position:absolute!important;inset:0;opacity:.18}
+ :root[data-design="studio"] .signal-backdrop{opacity:.12}
+ :root[data-design="studio"] .sp-hero::before{grid-column:1;grid-row:2;min-height:240px;opacity:.65}
+ :root[data-design="studio"] .sp-hero-copy{grid-column:1;grid-row:3}
 }
 @media(max-width:767px){
  :root[data-design="editorial"] .sp-hero h1{font-size:clamp(49px,10vw,76px)}
