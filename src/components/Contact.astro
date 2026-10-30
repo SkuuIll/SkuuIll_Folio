@@ -1,5 +1,8 @@
 ---
 import { profile } from "../data/profile";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const tr = (es: string, english: string) => lang === "en" ? english : es;
 ---
 
 <section
@@ -8,27 +11,27 @@ import { profile } from "../data/profile";
   aria-labelledby="contact-title"
 >
   <p class="eyebrow" data-reveal>
-    04 / SIGUIENTE SEÑAL
+    {tr("04 / SIGUIENTE SEÑAL","06 / GET IN TOUCH")}
   </p>
   <div class="contact-heading">
     <h2 id="contact-title" data-reveal>
-      ¿Qué tenés
+      {tr("¿Qué tenés","What's on")}
       <br />
-      <span class="muted">en mente?</span>
+      <span class="muted">{tr("en mente?","your mind?")}</span>
     </h2>
     <a
       class="contact-arrow"
       href={`mailto:${profile.email}`}
-      aria-label={`Escribime a ${profile.email}`}
+      aria-label={`${lang === "en" ? "Email me at" : "Escribime a"} ${profile.email}`}
     >
       ↗
     </a>
   </div>
   <div class="contact-bottom">
     <p>
-      Una aplicación, una integración o una herramienta
+      {tr("Una aplicación, una integración o una herramienta","An app, an integration or a tool")}
       <br />
-      que simplifique el trabajo. Contame la idea.
+      {tr("que simplifique el trabajo. Contame la idea.","that makes work easier. Tell me about your idea.")}
     </p>
     <a class="email-link" href={`mailto:${profile.email}`}>
       {profile.email} <span aria-hidden="true">↗</span>
@@ -36,16 +39,16 @@ import { profile } from "../data/profile";
   </div>
   <details class="inquiry-details" hidden>
     <summary>
-      Prefiero preparar una consulta <span aria-hidden="true">+</span>
+      {tr("Prefiero preparar una consulta","I prefer to prepare an inquiry")} <span aria-hidden="true">+</span>
     </summary>
     <form id="inquiry-form" novalidate>
       <div class="form-grid">
         <label>
-          Tu nombre
+          {tr("Tu nombre","Your name")}
           <input name="name" autocomplete="name" required maxlength="100" />
         </label>
         <label>
-          Tu email
+          {tr("Tu email","Your email")}
           <input
             name="email"
             type="email"
@@ -55,26 +58,26 @@ import { profile } from "../data/profile";
           />
         </label>
         <label>
-          <span id="inquiry-service-label">¿Qué necesitás?</span>
+          <span id="inquiry-service-label">{tr("¿Qué necesitás?","What do you need?")}</span>
           <select
             name="service"
             required
             aria-labelledby="inquiry-service-label"
           >
-            <option value="">Elegí una opción</option>
-            <option>Aplicación web</option>
-            <option>Android o escritorio</option>
-            <option>Diseño e interacción</option>
-            <option>Linux y automatización</option>
-            <option>Otro proyecto</option>
+            <option value="">{tr("Elegí una opción","Choose an option")}</option>
+            <option>{tr("Aplicación web","Web application")}</option>
+            <option>{tr("Android o escritorio","Android or desktop")}</option>
+            <option>{tr("Diseño e interacción","Design and interaction")}</option>
+            <option>{tr("Linux y automatización","Linux and automation")}</option>
+            <option>{tr("Otro proyecto","Other project")}</option>
           </select>
         </label>
         <label>
-          Proyecto de referencia
+          {tr("Proyecto de referencia","Reference project")}
           <input name="reference" maxlength="120" />
         </label>
         <label class="full-field">
-          Contame tu idea
+          {tr("Contame tu idea","Tell me about your idea")}
           <textarea
             name="idea"
             rows="4"
@@ -86,25 +89,25 @@ import { profile } from "../data/profile";
       </div>
       <p id="form-error" role="alert" hidden></p>
       <button class="solid-button" type="submit">
-        Preparar consulta <span aria-hidden="true">↗</span>
+        {tr("Preparar consulta","Prepare inquiry")} <span aria-hidden="true">↗</span>
       </button>
       <p class="form-note">
-        Vas a poder revisar el mensaje y abrirlo en tu correo para enviarlo.
+        {tr("Vas a poder revisar el mensaje y abrirlo en tu correo para enviarlo.","Review the message and open it in your email app before sending it.")}
       </p>
       <div id="inquiry-result" hidden>
         <label>
-          Mensaje preparado
+          {tr("Mensaje preparado","Prepared message")}
           <textarea id="inquiry-message" rows="8" readonly></textarea>
         </label>
         <div class="form-actions">
           <a id="email-draft" class="solid-button">
-            Abrir en mi correo ↗
+            {tr("Abrir en mi correo","Open in email")} ↗
           </a>
           <button id="copy-inquiry" class="outline-button" type="button">
-            Copiar mensaje
+            {tr("Copiar mensaje","Copy message")}
           </button>
           <button id="download-inquiry" class="outline-button" type="button">
-            Descargar texto
+            {tr("Descargar texto","Download text")}
           </button>
         </div>
         <p id="copy-status" role="status"></p>
