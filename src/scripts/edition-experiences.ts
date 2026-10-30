@@ -59,6 +59,20 @@ if(shell){
   buttons.forEach(button=>button.addEventListener("click",()=>{
    windowPanel.hidden=false;open(button.dataset.osOpen||"vigia");
   }));
+  // Desktop keyboard affordances: app shortcuts, Escape and focus restoration.
+  os.addEventListener("keydown",event=>{
+   if(event.key==="Escape"&&!windowPanel.hidden){
+    windowPanel.hidden=true;
+    buttons.forEach(button=>button.setAttribute("aria-pressed","false"));
+    buttons[0]?.focus();
+   }
+   const active=document.activeElement as HTMLElement;
+   if(buttons.includes(active as HTMLButtonElement)&&["ArrowRight","ArrowDown","ArrowLeft","ArrowUp"].includes(event.key)){
+    event.preventDefault();
+    const index=buttons.indexOf(active as HTMLButtonElement);
+    buttons[(index+(event.key==="ArrowRight"||event.key==="ArrowDown"?1:buttons.length-1))%buttons.length]?.focus();
+   }
+  });
   open("vigia");
  }
  // X-ray: interactive isometric separation, no WebGL context.
