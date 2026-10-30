@@ -1,0 +1,112 @@
+/* Inspired by editorial space, personal zines and mountain-trail chapters.
+   Original SKULL project artwork and content; no borrowed website assets. */
+
+/* 12 / ZINE — cover art on a navigable project map, each card flips for its story. */
+:root[data-design="canvas"] .canvas-shell{
+ border-radius:4px;border-color:var(--line);background:var(--paper);
+}
+:root[data-design="canvas"] .canvas-heading{
+ background:var(--paper);padding-block:clamp(22px,3.8vw,52px);
+}
+:root[data-design="canvas"] .canvas-heading h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-.085em}
+:root[data-design="canvas"] .canvas-viewport{
+ background-color:var(--paper);
+ background-image:radial-gradient(color-mix(in srgb,var(--accent) 24%,transparent) 1px,transparent 1px);
+ background-size:27px 27px;
+}
+:root[data-design="canvas"] .canvas-space{transform-style:preserve-3d}
+:root[data-design="canvas"] .canvas-space svg{opacity:.19;stroke-dasharray:3 9}
+:root[data-design="canvas"] .canvas-node{
+ padding:0!important;width:230px;height:238px;min-height:0;
+ display:block;overflow:hidden;background:var(--surface);
+ border:1px solid var(--line);border-radius:6px;
+ box-shadow:8px 10px 0 color-mix(in srgb,var(--accent) 12%,var(--surface)),0 24px 40px #0003;
+ transform:rotate(var(--art-rotation,0deg));
+ transition:box-shadow .2s ease,transform .2s ease;
+}
+:root[data-design="canvas"] .canvas-node-0{left:72px;top:42px;--art-rotation:-5deg}
+:root[data-design="canvas"] .canvas-node-1{left:515px;top:22px;--art-rotation:4deg}
+:root[data-design="canvas"] .canvas-node-2{left:616px;top:340px;--art-rotation:-3deg}
+:root[data-design="canvas"] .canvas-node-3{left:261px;top:360px;--art-rotation:5deg}
+:root[data-design="canvas"] .canvas-node:hover,
+:root[data-design="canvas"] .canvas-node:focus-within{
+ box-shadow:4px 7px 0 color-mix(in srgb,var(--accent) 28%,var(--surface)),0 25px 45px #0003;
+ transform:rotate(0deg) translateY(-4px);z-index:4;
+}
+.canvas-card-front,.canvas-card-back{width:100%;height:100%;min-height:0}
+.canvas-card-front{position:relative;display:flex;flex-direction:column}
+.canvas-card-front[hidden],.canvas-card-back[hidden]{display:none!important}
+.canvas-card-front img,.canvas-card-placeholder{width:100%;height:60%;min-height:0;object-fit:cover;object-position:top;display:block}
+.canvas-card-placeholder{background:linear-gradient(135deg,#183d4d,#142434 65%,#3a324a);color:#c5f9ee;display:grid;place-items:center;font:700 21px var(--mono)}
+.canvas-card-caption{display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:0;flex:1;padding:11px 12px 28px}
+.canvas-card-caption .mono{display:block;font-size:8px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--accent)}
+.canvas-card-caption strong{font-size:18px;letter-spacing:-.045em;line-height:1.1;display:block;color:var(--ink)}
+.canvas-card-flip{position:absolute;bottom:7px;right:8px;min-width:75px;min-height:28px;display:flex;align-items:center;justify-content:center;gap:6px;padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font:10px var(--mono);color:var(--ink)}
+.canvas-card-flip:hover{border-color:var(--accent)}
+.canvas-card-back{display:flex;flex-direction:column;gap:9px;padding:17px 15px;background:var(--soft);animation:sk-card-flip .26s ease both}
+.canvas-card-back>.mono{color:var(--accent);font-size:10px}
+.canvas-card-back h3{font:700 21px/1.1 var(--sans);margin:3px 0 0;color:var(--ink)}
+.canvas-card-back p{color:var(--muted);font-size:11px;line-height:1.45;margin:0;overflow:auto;flex:1}
+.canvas-card-actions{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.canvas-card-actions button{width:36px;height:34px;min-height:34px;border:1px solid var(--line);border-radius:5px;background:var(--surface);color:var(--ink);font-size:18px}
+.canvas-card-actions a{font-size:11px;font-weight:750;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.canvas-card-front:focus-within .canvas-card-flip,.canvas-card-back:focus-within .canvas-card-actions button{outline-offset:2px}
+@keyframes sk-card-flip{from{opacity:.5;transform:rotateY(-14deg)}to{opacity:1;transform:rotateY(0)}}
+
+/* 14 / JOURNEY — actual project imagery + progress stamps, not a generic SK illustration. */
+:root[data-design="story"] .story-shell{border-radius:6px;border-color:var(--line)}
+:root[data-design="story"] .story-content{background:var(--surface)}
+.story-illustration{
+ height:clamp(220px,28vw,385px);
+ display:block;perspective:none;overflow:visible;
+}
+.story-art-board{
+ position:relative;width:100%;height:100%;border:1px solid var(--line);
+ overflow:hidden;background:var(--paper);
+ box-shadow:11px 12px 0 color-mix(in srgb,var(--accent) 11%,var(--surface));
+}
+.story-art-board::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#02060870,transparent 50%,#03080a88)}
+.story-art-board img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.story-photo-label{position:absolute;top:14px;left:17px;z-index:1;color:#f2fff9;font-size:10px;letter-spacing:.1em;text-shadow:0 2px 8px #0009}
+.story-art-stamp{
+ position:absolute;z-index:2;right:clamp(13px,3vw,32px);bottom:clamp(13px,3vw,32px);
+ display:flex;align-items:center;flex-direction:column;justify-content:center;gap:0;
+ width:clamp(95px,12vw,170px);aspect-ratio:1;border:3px solid #f8e0ab;border-radius:50%;
+ color:#f9e8c6;background:#11181eaa;
+ transform:rotate(-13deg);box-shadow:0 0 0 7px #11212a60,0 0 0 11px #f8e0ab44;
+ text-shadow:0 2px 7px #000;
+}
+.story-art-stamp span{font:800 13px var(--mono);letter-spacing:.15em}
+.story-art-stamp strong{font:900 clamp(42px,6vw,76px)/.9 var(--mono)}
+.story-art-stamp small{font:700 9px var(--mono);letter-spacing:.12em}
+.story-route{display:flex;align-items:center;gap:15px;min-width:0}
+.story-route-track{flex:1;height:3px;display:block;background:var(--line);border-radius:5px;overflow:hidden}
+.story-route-track>span{--chapter-progress:.25;display:block;background:var(--accent);height:100%;width:100%;transform:scaleX(var(--chapter-progress));transform-origin:left;transition:transform .35s ease}
+.story-route>.mono{color:var(--muted);font-size:10px;letter-spacing:.06em}
+:root[data-design="story"] .story-content>p{min-height:0;margin-bottom:8px}
+:root[data-design="story"] .story-content h3{margin-top:5px}
+
+/* 11 / TERMINAL — console is the dominant architecture, no fake code execution. */
+:root[data-design="terminal"] .terminal-shell{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 25%,var(--line)),0 45px 95px #0005}
+:root[data-design="terminal"] .terminal-toolbar{border-bottom:1px solid var(--line);letter-spacing:.05em}
+:root[data-design="terminal"] .terminal-history{border-left:3px solid var(--accent);max-width:95ch}
+:root[data-design="terminal"] .terminal-form{max-width:95ch}
+
+/* Always prefer readable still art to animated surfaces on restricted devices. */
+:root[data-performance="lite"] .canvas-node{transition:none!important}
+@media(max-width:767px){
+ :root[data-design="canvas"] .canvas-node{width:206px;height:214px}
+ :root[data-design="canvas"] .canvas-node-0{left:102px;top:60px}
+ :root[data-design="canvas"] .canvas-node-1{left:510px;top:50px}
+ :root[data-design="canvas"] .canvas-node-2{left:620px;top:355px}
+ :root[data-design="canvas"] .canvas-node-3{left:300px;top:340px}
+ .canvas-card-caption strong{font-size:16px}
+ .story-art-stamp{width:92px}
+ .story-illustration{height:240px}
+ :root[data-design="story"] .story-content{gap:13px}
+}
+@media(prefers-reduced-motion:reduce){
+ .canvas-card-back{animation:none!important}
+ .story-route-track>span{transition:none!important}
+ :root[data-design="canvas"] .canvas-node{transition:none!important}
+}
