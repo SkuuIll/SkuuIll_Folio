@@ -1,0 +1,24 @@
+
+.anatomy-section{padding-block:clamp(72px,9vw,136px)}
+.anatomy-heading{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:30px 65px;margin-bottom:38px}
+.anatomy-heading .eyebrow{color:var(--accent);margin-bottom:22px}
+.anatomy-heading h2{font-size:clamp(44px,6vw,92px);line-height:1.04;letter-spacing:-.06em}
+.anatomy-heading h2 span{color:var(--muted)}
+.anatomy-heading>p{color:var(--muted);line-height:1.75;max-width:49ch;justify-self:end}
+.anatomy-workbench{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.8fr);border:1px solid var(--line);border-radius:26px;background:var(--surface);overflow:hidden}
+.anatomy-drawing{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:clamp(16px,3vw,40px);background:radial-gradient(ellipse at 50% 50%,#163440,#081720 74%);min-width:0}
+.anatomy-drawing svg{width:100%;height:auto;max-height:520px}
+.anatomy-drawing p{color:#afcbd5;font-size:10px;max-width:58ch}
+.anatomy-panel{display:flex;flex-direction:column;gap:18px;padding:clamp(25px,3vw,45px);border-left:1px solid var(--line)}
+.anatomy-panel>.eyebrow{color:var(--accent)}
+.anatomy-panel h3{font-size:clamp(34px,3vw,50px);letter-spacing:-.04em}
+.anatomy-panel>[data-anatomy-details]{color:var(--muted);line-height:1.7;min-height:80px}
+.anatomy-panel>.mono{color:var(--muted)}
+.anatomy-steps{display:grid;gap:9px}
+.anatomy-steps button{border:1px solid var(--line);color:var(--ink);background:transparent;border-radius:10px;text-align:left;padding:13px 18px;min-height:44px;font:12px var(--mono)}
+.anatomy-steps button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--paper);font-weight:700}
+.anatomy-steps button:hover:not([aria-pressed="true"]){border-color:var(--accent)}
+.anatomy-needle{transition:transform .4s cubic-bezier(.18,.8,.25,1)}
+@media(max-width:850px){.anatomy-heading,.anatomy-workbench{grid-template-columns:1fr}.anatomy-heading>p{justify-self:start}.anatomy-panel{border-left:0;border-top:1px solid var(--line)}.anatomy-panel>[data-anatomy-details]{min-height:0}.anatomy-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:540px){.anatomy-drawing{padding:10px}.anatomy-workbench{border-radius:16px}.anatomy-steps{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.anatomy-needle{transition:none}}
