@@ -54,7 +54,10 @@ GitHub Pages es una alternativa secundaria y actualmente requiere que Pages se h
 
 1. Abrí [Settings → Pages](https://github.com/SkuuIll/SkuuIll_Folio/settings/pages).
 2. En **Build and deployment**, elegí **GitHub Actions** como origen.
-3. En la pestaña **Actions**, abrí **Publish Skull Folio** y ejecutá **Run workflow** si el despliegue anterior falló por tener Pages desactivado.
+3. En **Settings → Secrets and variables → Actions → Variables**, creá `ENABLE_GITHUB_PAGES` con valor `true` (de lo contrario, la publicación secundaria se omite deliberadamente).
+4. En **Actions**, ejecutá **Publish Skull Folio** si querés publicar manualmente la alternativa.
+
+El flujo deja activo el control de compilación incluso cuando la publicación en GitHub Pages está desactivada, evitando errores repetidos por un servicio no habilitado.
 
 El workflow [deploy.yml](.github/workflows/deploy.yml) verifica el proyecto, construye `dist/` y publica el artefacto. El workflow [qa.yml](.github/workflows/qa.yml) comprueba la experiencia en navegadores y tamaños de pantalla diferentes.
 
