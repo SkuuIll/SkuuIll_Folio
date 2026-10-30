@@ -1,0 +1,139 @@
+/* SKULL / 2.0: a deliberately new editorial-industrial visual language.
+   Keeps all fourteen art directions functional, but gives the default
+   presentation a more decisive silhouette and accessible mobile rhythm. */
+:root[data-design="editorial"]{
+ --sk2-glow:color-mix(in srgb,var(--accent) 28%,transparent);
+}
+:root[data-design="editorial"] .site-header{
+ min-height:82px;
+ border-bottom:1px solid var(--ink);
+}
+:root[data-design="editorial"] .brand{font-weight:900;letter-spacing:-.09em}
+:root[data-design="editorial"] .sp-hero{
+ min-height:min(880px,calc(100svh - 82px));
+ padding-top:32px;
+ border-bottom:2px solid var(--ink);
+}
+:root[data-design="editorial"] .sp-hero-copy{
+ max-width:1040px;
+ padding:clamp(42px,8vw,112px) 0 32px;
+ position:relative;
+ z-index:1;
+}
+:root[data-design="editorial"] .sp-hero h1{
+ font-size:clamp(58px,9.5vw,154px);
+ line-height:.88;
+ letter-spacing:-.095em;
+ font-weight:900;
+ text-wrap:balance;
+ max-width:12ch;
+}
+:root[data-design="editorial"] .sp-hero .eyebrow{
+ display:inline-flex;
+ align-items:center;
+ gap:12px;
+ border:1px solid var(--line);
+ border-radius:100px;
+ padding:10px 16px;
+ background:var(--paper);
+}
+:root[data-design="editorial"] .sp-lead{
+ font-size:clamp(17px,1.8vw,23px);
+ max-width:48ch;
+ line-height:1.55;
+ color:var(--ink);
+}
+:root[data-design="editorial"] .sp-primary,
+:root[data-design="editorial"] .sp-secondary{
+ border-radius:4px;
+ min-height:58px;
+ font-weight:750;
+}
+:root[data-design="editorial"] .hero-signature>span:first-child{
+ font-size:clamp(90px,20vw,320px);
+ font-weight:950;
+ letter-spacing:-.12em;
+ line-height:.75;
+}
+:root[data-design="editorial"] .signal-stage{
+ width:70%;
+ margin-left:30%;
+ opacity:.5;
+}
+:root[data-design="editorial"] .portfolio-work{
+ border-top:0;
+ padding-top:clamp(64px,9vw,140px);
+}
+:root[data-design="editorial"] .portfolio-work-heading h2{
+ font-size:clamp(58px,9vw,142px);
+ line-height:.88;
+ letter-spacing:-.09em;
+ font-weight:900;
+}
+:root[data-design="editorial"] .portfolio-work-card{
+ border-bottom:1px solid var(--ink);
+}
+:root[data-design="editorial"] .portfolio-work-card .portfolio-work-media{
+ aspect-ratio:1.55;
+}
+:root[data-design="editorial"] .portfolio-work-card .portfolio-work-body h3{
+ font-size:clamp(42px,6vw,94px);
+ line-height:.96;
+ font-weight:850;
+ letter-spacing:-.075em;
+}
+:root[data-design="editorial"] .portfolio-work-card .portfolio-work-arrow{
+ width:60px;height:60px;
+ border-radius:4px;
+}
+:root[data-design="editorial"] .portfolio-work-card .portfolio-work-link:hover .portfolio-work-arrow{
+ transform:rotate(45deg);
+}
+:root[data-design="editorial"] .tech-explorer{
+ border-top:2px solid var(--ink);
+}
+:root[data-design="editorial"] .tech-cloud,
+:root[data-design="editorial"] .tech-projects{
+ border-radius:0;
+ border-color:var(--ink);
+}
+:root[data-design="editorial"] .tech-cloud button{
+ border-radius:3px;
+}
+:root[data-design="editorial"] .command-trigger{
+ border-radius:3px;
+}
+:root[data-design="editorial"] .case-architecture{
+ border-radius:0;
+ border-color:var(--ink);
+}
+@media(max-width:900px){
+ :root[data-design="editorial"] .sp-hero h1{font-size:clamp(52px,10vw,94px)}
+ :root[data-design="editorial"] .signal-stage{width:100%;margin:0;opacity:.24}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-link{grid-template-columns:1fr;gap:0}
+ :root[data-design="editorial"] .portfolio-work-card:nth-child(even) .portfolio-work-media{order:0}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-body{padding:26px 0 36px}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-media{max-height:none}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-body h3{font-size:clamp(38px,8vw,72px)}
+}
+@media(max-width:600px){
+ :root[data-design="editorial"] .sp-hero{min-height:calc(100svh - 70px);padding-block:18px 24px}
+ :root[data-design="editorial"] .sp-hero-copy{padding:48px 0 28px}
+ :root[data-design="editorial"] .sp-hero h1{font-size:clamp(47px,13vw,72px);letter-spacing:-.085em;overflow-wrap:anywhere}
+ :root[data-design="editorial"] .sp-lead{font-size:16px}
+ :root[data-design="editorial"] .hero-topline{font-size:9px;flex-wrap:wrap;gap:8px}
+ :root[data-design="editorial"] .hero-signature>span:first-child{font-size:clamp(76px,23vw,140px)}
+ :root[data-design="editorial"] .hero-signature{gap:12px}
+ :root[data-design="editorial"] .portfolio-work-heading h2{font-size:clamp(48px,12vw,72px)}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-media{aspect-ratio:1.35}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-body h3{font-size:clamp(38px,11vw,58px)}
+ :root[data-design="editorial"] .portfolio-work-card .portfolio-work-arrow{width:46px;height:46px}
+ .tech-cloud button{min-height:44px}
+ .tech-explorer-head h2{overflow-wrap:anywhere}
+ .command-trigger{font-size:11px}
+ .command-trigger>span:nth-child(2){display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ :root[data-design="editorial"] .portfolio-work-card,
+ :root[data-design="editorial"] .portfolio-work-card img{transition:none}
+}
