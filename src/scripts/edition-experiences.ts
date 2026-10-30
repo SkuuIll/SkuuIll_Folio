@@ -158,7 +158,7 @@ if(shell){
     const front=card?.querySelector<HTMLElement>("[data-canvas-front]");
     const back=card?.querySelector<HTMLElement>("[data-canvas-back]");
     if(!card||!front||!back)return;
-    const showBack=back.hidden;
+    const showBack=Boolean(back.hidden);
     back.hidden=!showBack;front.hidden=showBack;
     card.classList.toggle("is-flipped",showBack);
     const next=card.querySelector<HTMLButtonElement>(showBack?".canvas-card-back [data-canvas-flip]":".canvas-card-front [data-canvas-flip]");
