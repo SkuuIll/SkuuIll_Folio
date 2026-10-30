@@ -1,3 +1,4 @@
+export {};
 // Load the 3D engine only as a scene approaches the viewport. The initial hero
 // keeps its small Canvas renderer; the cinematic scenes are independent.
 const root = document.documentElement;

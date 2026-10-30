@@ -1,3 +1,4 @@
+export {};
 // Keep GSAP out of the initial bundle on restricted devices.
 const root = document.documentElement;
 const world = document.querySelector<HTMLElement>(".signal-world");
@@ -6,7 +7,7 @@ const stage = canvas?.parentElement;
 const ctx = canvas?.getContext("2d", { alpha: true });
 const full = () =>
   root.dataset.effects === "full" && root.dataset.motion !== "paused";
-let scrollContext: import("gsap").Context | undefined;
+let scrollContext: { revert(): void } | undefined;
 let scrollRevision = 0;
 async function setupScroll() {
   const revision = ++scrollRevision;
