@@ -88,6 +88,6 @@ export const selectedProjects = [
   "repo-setup",
   "fluxnet",
 ].map((id) => projects.find((project) => project.id === id)!);
-export const projectUrl = (id: string) =>
-  `${import.meta.env.BASE_URL}proyectos/${id}/`;
+export const projectUrl = (id: string, lang: "es" | "en" = "es") =>
+  `${import.meta.env.BASE_URL}${lang === "en" ? "en/projects/" : "proyectos/"}${id}/`;
 export const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
