@@ -4,8 +4,8 @@ import ProjectVisual from "../../../components/ProjectVisual.astro";
 import AtelierFeature from "../../../components/AtelierFeature.astro";
 import { projectUrl, asset } from "../../../data/projects";
 import { projectsForLocale } from "../../../data/projects-en";
-const projects = projectsForLocale("en");
 export function getStaticPaths() {
+  const projects = projectsForLocale("en");
   return projects.map((project, index) => ({
     params: { slug: project.id },
     props: { project, next: projects[(index + 1) % projects.length] },
