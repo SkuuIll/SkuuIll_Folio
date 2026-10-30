@@ -81,7 +81,7 @@
 :root[data-design="museum"] .museum-frame{transform:rotate(-.7deg);box-shadow:0 35px 65px #0005}
 :root[data-design="terminal"] .edition-terminal.shell{width:min(1350px,calc(100% - 70px))}
 :root[data-design="terminal"] .terminal-shell{min-height:min(81svh,820px);border-radius:6px;border-width:2px}
-:root[data-design="terminal"] .terminal-inner h2{letter-spacing:-.085em}
+:root[data-design="terminal"] .terminal-inner h1{letter-spacing:-.085em}
 :root[data-design="canvas"] .edition-canvas.shell{width:min(1590px,calc(100% - 36px))}
 :root[data-design="canvas"] .canvas-shell{border-radius:10px}
 :root[data-design="canvas"] .canvas-viewport{height:clamp(490px,58svh,800px)}
@@ -126,3 +126,16 @@
 @media(prefers-reduced-motion:reduce){
  :root[data-design="skull-os"] .os-icons button:hover{transform:none}
 }
+
+/* Window controls complete the desktop metaphor; never block project navigation. */
+.os-window{--os-x:0px;--os-y:0px;translate:var(--os-x) var(--os-y);position:relative;z-index:1;min-width:0}
+.os-window-bar{cursor:grab;user-select:none;touch-action:pan-y}
+.os-window-bar:active{cursor:grabbing}
+.os-window-actions{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+.os-window-actions button{min-width:31px;min-height:31px;display:grid;place-items:center;border-radius:7px;border:1px solid #bccbdc;background:#f8fbff;color:#254362;font:700 18px var(--mono);cursor:pointer}
+.os-window-actions button:hover{background:#c9d9ea}
+.os-window-actions [data-os-close]:hover{background:#d76a61;color:#fff;border-color:#d76a61}
+.os-window.is-maximized{grid-column:1/-1;--os-x:0px;--os-y:0px;z-index:4;align-self:stretch}
+.os-window[hidden]{display:none!important}
+@media(max-width:767px){.os-window{translate:none!important}.os-window-bar{cursor:default}.os-window-actions button{min-height:36px;min-width:36px}.os-window.is-maximized{grid-column:1}}
+@media(prefers-reduced-motion:reduce){.os-window{transition:none!important}}

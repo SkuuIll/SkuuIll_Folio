@@ -34,7 +34,7 @@
 
 /* Prevent visual bleed caused by large experimental typography and transforms. */
 .edition-experiences,.edition-scene{min-width:0;max-width:100%}
-.edition-scene :is(h2,h3,strong,p){overflow-wrap:anywhere}
+.edition-scene :is(h1,h2,h3,strong,p){overflow-wrap:anywhere}
 .os-surface,.os-window-content,.museum-gallery,.xray-shell,.story-shell,.canvas-shell,.brutal-panel{min-width:0;max-width:100%}
 .edition-scene :is(.os-window,.os-window-content>div,.museum-placard,.xray-heading,.xray-controls,.story-sidebar,.story-content){min-width:0}
 .edition-scene img{max-width:100%}

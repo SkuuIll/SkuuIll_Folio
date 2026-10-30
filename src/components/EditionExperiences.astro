@@ -24,7 +24,7 @@ const story = [
       <div class="os-surface">
         <div class="os-intro">
           <p class="mono">/home/skull/portfolio</p>
-          <h2 id="os-heading">{t("Mi trabajo,","My work,")}<br/><span>{t("tu escritorio.","your desktop.")}</span></h2>
+          <h1 id="os-heading">{t("Mi trabajo,","My work,")}<br/><span>{t("tu escritorio.","your desktop.")}</span></h1>
           <p>{t("Abrí los proyectos como aplicaciones y explorá su ficha sin salir del escritorio.","Open projects as apps and explore their case studies without leaving the desktop.")}</p>
         </div>
         <div class="os-icons" role="group" aria-label={t("Aplicaciones del escritorio","Desktop applications")}>
@@ -34,7 +34,14 @@ const story = [
           </button>)}
         </div>
         <div class="os-window" data-os-window>
-          <div class="os-window-bar"><div class="os-dots" aria-hidden="true"><span></span><span></span><span></span></div><span data-os-window-title>{projects[0]?.title}</span><span class="mono">SKULL.APP</span></div>
+          <div class="os-window-bar" data-os-drag-handle>
+            <div class="os-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span data-os-window-title>{projects[0]?.title}</span>
+            <div class="os-window-actions">
+              <button type="button" data-os-max aria-label={t("Maximizar o restaurar ventana","Maximize or restore window")} title={t("Maximizar / Restaurar","Maximize / Restore")}>□</button>
+              <button type="button" data-os-close aria-label={t("Cerrar ventana","Close window")} title={t("Cerrar","Close")}>×</button>
+            </div>
+          </div>
           <div class="os-window-content">
             <img data-os-image src={portrait("vigia")} width="900" height="550" loading="lazy" alt={t("Captura del proyecto seleccionado","Screenshot of the selected project")} /><div class="os-image-placeholder" data-os-placeholder hidden aria-hidden="true">REPO / SETUP KIT</div>
             <div><span class="mono" data-os-type>{projects[0]?.label}</span><h3 data-os-name>{projects[0]?.title}</h3><p data-os-summary>{projects[0]?.summary}</p>
@@ -49,7 +56,7 @@ const story = [
   <section class="edition-scene edition-xray shell" data-edition-scene="xray" aria-labelledby="xray-heading">
     <div class="edition-overline">09 / X-RAY 3D · {t("ARQUITECTURA EN CAPAS","LAYERED ARCHITECTURE")}</div>
     <div class="xray-shell" data-xray>
-      <div class="xray-heading"><span class="mono">SKULL / SYSTEM.EXPLODED</span><h2 id="xray-heading">{t("Desarmá el sistema.","Dissect the system.")}</h2><p>{t("Seleccioná una capa para ver cómo las piezas de software trabajan juntas. Modelo conceptual, no datos en vivo.","Select a layer to see how software components work together. Conceptual model, not live production data.")}</p></div>
+      <div class="xray-heading"><span class="mono">SKULL / SYSTEM.EXPLODED</span><h1 id="xray-heading">{t("Desarmá el sistema.","Dissect the system.")}</h1><p>{t("Seleccioná una capa para ver cómo las piezas de software trabajan juntas. Modelo conceptual, no datos en vivo.","Select a layer to see how software components work together. Conceptual model, not live production data.")}</p></div>
       <div class="xray-model" aria-hidden="true">
         <div class="xray-plate xray-plate-1"><span>UI / 01</span><div class="xray-glyph">▦ ▤ ▣</div></div>
         <div class="xray-plate xray-plate-2"><span>API / 02</span><div class="xray-glyph">{"{ }"}</div></div>
@@ -72,7 +79,7 @@ const story = [
   <section class="edition-scene edition-museum shell" data-edition-scene="museum" aria-labelledby="museum-heading">
     <div class="edition-overline">10 / DIGITAL MUSEUM · {t("EXPOSICIÓN DE SOFTWARE","SOFTWARE EXHIBITION")}</div>
     <div class="museum-hall" data-museum>
-      <div class="museum-masthead"><span class="mono">SKULL / COLLECTION 2026</span><h2 id="museum-heading">{t("Galería de sistemas.","Gallery of systems.")}</h2><p>{t("Los proyectos son piezas para explorar. Cambiá la obra en exposición.","Projects become exhibits. Change the work on display.")}</p></div>
+      <div class="museum-masthead"><span class="mono">SKULL / COLLECTION 2026</span><h1 id="museum-heading">{t("Galería de sistemas.","Gallery of systems.")}</h1><p>{t("Los proyectos son piezas para explorar. Cambiá la obra en exposición.","Projects become exhibits. Change the work on display.")}</p></div>
       <div class="museum-gallery">
         <div class="museum-frame"><img data-museum-image src={portrait("vigia")} loading="lazy" decoding="async" alt={t("Captura de Vigía en exposición","Vigía screenshot on display")} width="900" height="550" /><div class="museum-placeholder" data-museum-placeholder hidden aria-hidden="true">REPO / SETUP KIT</div><span class="museum-frame-corner">SK / 01</span></div>
         <div class="museum-placard"><span class="mono" data-museum-index>01 / 04</span><h3 data-museum-title>{projects[0]?.title}</h3><p data-museum-desc>{projects[0]?.summary}</p><a data-museum-link href={projectLink("vigia")}>{t("Estudiar la obra","Study the project")} ↗</a>
@@ -85,7 +92,7 @@ const story = [
     <div class="edition-overline">11 / TERMINAL HACKER PRO · {t("COMANDOS INTERACTIVOS","INTERACTIVE COMMANDS")}</div>
     <div class="terminal-shell" data-terminal>
       <div class="terminal-toolbar"><span aria-hidden="true">● ● ●</span><span>skull@portfolio:~</span><span>UTF-8 / {lang.toUpperCase()}</span></div>
-      <div class="terminal-inner"><h2 id="terminal-heading">~/skull<span class="terminal-cursor">_</span></h2><p>{t("Explorá el portafolio escribiendo comandos reales. No ejecuta código del sistema.","Explore the portfolio using real commands. It does not execute operating-system code.")}</p>
+      <div class="terminal-inner"><h1 id="terminal-heading">~/skull<span class="terminal-cursor">_</span></h1><p>{t("Explorá el portafolio escribiendo comandos reales. No ejecuta código del sistema.","Explore the portfolio using real commands. It does not execute operating-system code.")}</p>
         <div class="terminal-history" data-terminal-history role="log" aria-live="polite" aria-relevant="additions text">
           <p><span class="terminal-prompt">skull@portfolio $</span> help</p>
           <p>{t("Comandos: help · projects · skills · contact · about · clear","Commands: help · projects · skills · contact · about · clear")}</p>
@@ -98,7 +105,7 @@ const story = [
   <section class="edition-scene edition-canvas shell" data-edition-scene="canvas" aria-labelledby="canvas-heading">
     <div class="edition-overline">12 / INFINITE CANVAS · {t("MAPA DE PROYECTOS","PROJECT MAP")}</div>
     <div class="canvas-shell" data-canvas>
-      <div class="canvas-heading"><div><span class="mono">SKULL / SPACE.MAP</span><h2 id="canvas-heading">{t("Mapa abierto.","Open canvas.")}</h2></div><p>{t("Desplazá el mapa, acercate y elegí un proyecto. Los controles también funcionan sin gestos táctiles complejos.","Pan, zoom and select projects. The controls also work without complex touch gestures.")}</p></div>
+      <div class="canvas-heading"><div><span class="mono">SKULL / SPACE.MAP</span><h1 id="canvas-heading">{t("Mapa abierto.","Open canvas.")}</h1></div><p>{t("Desplazá el mapa, acercate y elegí un proyecto. Los controles también funcionan sin gestos táctiles complejos.","Pan, zoom and select projects. The controls also work without complex touch gestures.")}</p></div>
       <div class="canvas-viewport" data-canvas-viewport tabindex="0" aria-label={t("Mapa de proyectos. Usá flechas para moverte y más o menos para zoom.","Project map. Use arrow keys to pan and plus or minus to zoom.")}>
         <div class="canvas-space" data-canvas-space>
           <svg viewBox="0 0 900 600" aria-hidden="true"><path d="M170 160 530 110 720 340 380 470 170 160M530 110 380 470"/></svg>
@@ -113,7 +120,7 @@ const story = [
     <div class="edition-overline">13 / NEO-BRUTALIST LAB · {t("SIN ORNAMENTOS","WITHOUT PRETENSE")}</div>
     <div class="brutal-panel" data-brutal>
       <div class="brutal-head"><span>SKULL / LAB №13</span><span>BUILT DIFFERENT ↗</span></div>
-      <h2 id="brutal-heading">{t("IDEAS.","IDEAS.")}<span>{t("CÓDIGO.","CODE.")}</span><em>{t("RESULTADOS.","RESULTS.")}</em></h2>
+      <h1 id="brutal-heading">{t("IDEAS.","IDEAS.")}<span>{t("CÓDIGO.","CODE.")}</span><em>{t("RESULTADOS.","RESULTS.")}</em></h1>
       <p>{t("Un diseño directo, con bloques, contrastes y una demostración de cómo trabajo.","An unapologetically direct layout, bold blocks, and an interactive look at my process.")}</p>
       <div class="brutal-steps" role="group" aria-label={t("Etapas de trabajo","Work phases")}>
         {story.map((step,i)=><button type="button" data-brutal-pick={i} aria-pressed={i===0?"true":"false"}><span>{step.number}</span><strong>{step.title}</strong><span aria-hidden="true">↗</span></button>)}
@@ -124,7 +131,7 @@ const story = [
   <section class="edition-scene edition-story shell" data-edition-scene="story" aria-labelledby="story-heading">
     <div class="edition-overline">14 / STORY MODE · {t("RECORRIDO NARRATIVO","NARRATIVE JOURNEY")}</div>
     <div class="story-shell" data-story>
-      <div class="story-sidebar"><span class="mono">SKULL / CHAPTERS</span><h2 id="story-heading">{t("Del concepto","From concept")}<br/>{t("a la pantalla.","to screen.")}</h2><p>{t("Cuatro capítulos sobre el proceso de construir software.","Four chapters on the process of building software.")}</p>
+      <div class="story-sidebar"><span class="mono">SKULL / CHAPTERS</span><h1 id="story-heading">{t("Del concepto","From concept")}<br/>{t("a la pantalla.","to screen.")}</h1><p>{t("Cuatro capítulos sobre el proceso de construir software.","Four chapters on the process of building software.")}</p>
         <ol class="story-chapters">{story.map((step,i)=><li><button type="button" data-story-pick={i} aria-current={i===0?"step":undefined}><span>{step.number}</span>{step.title}</button></li>)}</ol>
       </div>
       <div class="story-content"><div class="story-topline"><span class="mono">CHAPTER <span data-story-index>01</span> / 04</span><span class="mono">SKULL / METHOD</span></div><div class="story-illustration" aria-hidden="true"><span class="story-orbit"></span><span class="story-square"></span><span class="story-center">SK</span></div><h3 data-story-title>{story[0].title}</h3><p data-story-description>{story[0].body}</p><div class="story-bottom"><span class="mono">{t("SIN SCROLL OBLIGATORIO","NO FORCED SCROLL")}</span><button data-story-next type="button">{t("Siguiente capítulo","Next chapter")} ↗</button></div></div>

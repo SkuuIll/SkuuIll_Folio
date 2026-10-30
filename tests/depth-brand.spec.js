@@ -42,6 +42,7 @@ test("English project depth is localized and all modes keep their own compositio
  await expect(page.locator(".brand svg")).toHaveAttribute("viewBox","0 0 64 64");
  await expect(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute("href",/favicon\.svg$/);
  const styles=[];
+ await page.locator("[data-design-select]").selectOption("editorial");
  for(let i=0;i<7;i++){
   const mode=await page.locator("html").getAttribute("data-design");
   const visual=await page.locator(".sp-hero").evaluate(el=>{

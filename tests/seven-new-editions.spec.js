@@ -7,7 +7,7 @@ test("all seven new editions are navigable from the selector and keep bilingual 
   await expect(page.locator("[data-design-select] option")).toHaveCount(14);
   for(const key of editions){
    await select(page,key);
-   expect(await page.locator('[data-edition-scene="'+key+'"] h2').count()).toBe(1);
+   expect(await page.locator('[data-edition-scene="'+key+'"] h1').count()).toBe(1);
   }
  }
 });
@@ -80,4 +80,29 @@ test("new editions remain responsive and switch light/dark on low-memory phones"
   await page.locator("#theme-toggle").click();
   expect(await page.locator("html").getAttribute("data-theme")).not.toBe(before);
  }
+});
+
+test("new directions replace the generic hero rather than stacking it below",async({page})=>{
+ await page.goto("./");
+ for(const key of editions){
+  await select(page,key);
+  await expect(page.locator(".sp-hero")).toBeHidden();
+  await expect(page.locator('.edition-scene[data-edition-scene="'+key+'"] h1')).toBeVisible();
+  await expect(page.locator(".signal-backdrop")).toBeHidden();
+ }
+ await select(page,"editorial");
+ await expect(page.locator(".sp-hero")).toBeVisible();
+ await expect(page.locator(".edition-experiences")).toBeHidden();
+});
+test("SKULL OS window supports close, reopen and maximize",async({page})=>{
+ await page.goto("./");await select(page,"skull-os");
+ const panel=page.locator("[data-os-window]");
+ await page.locator("[data-os-close]").click();
+ await expect(panel).toBeHidden();
+ await page.locator('[data-os-open="vigia"]').click();
+ await expect(panel).toBeVisible();
+ await page.locator("[data-os-max]").click();
+ await expect(panel).toHaveClass(/is-maximized/);
+ await page.locator("[data-os-max]").click();
+ await expect(panel).not.toHaveClass(/is-maximized/);
 });

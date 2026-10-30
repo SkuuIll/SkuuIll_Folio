@@ -24,7 +24,41 @@ if(shell){
    if(img){img.hidden=!p.image;if(p.image){img.src=p.image;img.alt=tr("Captura de ","Screenshot of ")+p.title}}
    if(placeholder)placeholder.hidden=Boolean(p.image);
   }
-  buttons.forEach(button=>button.addEventListener("click",()=>open(button.dataset.osOpen||"vigia")));
+  // A real window: reopen via its app icon, maximize/restores, and drag using
+  // the titlebar on fine-pointer desktops. Drag distance is bounded.
+  const windowPanel=os.querySelector<HTMLElement>("[data-os-window]")!;
+  const bar=os.querySelector<HTMLElement>("[data-os-drag-handle]");
+  os.querySelector("[data-os-close]")?.addEventListener("click",()=>{
+   windowPanel.hidden=true;
+   buttons.forEach(button=>button.setAttribute("aria-pressed","false"));
+  });
+  os.querySelector("[data-os-max]")?.addEventListener("click",()=>{
+   windowPanel.classList.toggle("is-maximized");
+   windowPanel.style.setProperty("--os-x","0px");
+   windowPanel.style.setProperty("--os-y","0px");
+  });
+  let grabbing=false,originX=0,originY=0,offX=0,offY=0;
+  bar?.addEventListener("pointerdown",event=>{
+   if(event.pointerType!=="mouse"||event.button!==0||
+    (event.target as Element).closest("button")||
+    window.matchMedia("(max-width:767px)").matches||
+    windowPanel.classList.contains("is-maximized"))return;
+   grabbing=true;originX=event.clientX-offX;originY=event.clientY-offY;
+   bar.setPointerCapture(event.pointerId);
+  });
+  bar?.addEventListener("pointermove",event=>{
+   if(!grabbing)return;
+   offX=Math.max(-125,Math.min(125,event.clientX-originX));
+   offY=Math.max(-85,Math.min(85,event.clientY-originY));
+   windowPanel.style.setProperty("--os-x",offX+"px");
+   windowPanel.style.setProperty("--os-y",offY+"px");
+  });
+  const finish=()=>{grabbing=false};
+  bar?.addEventListener("pointerup",finish);
+  bar?.addEventListener("pointercancel",finish);
+  buttons.forEach(button=>button.addEventListener("click",()=>{
+   windowPanel.hidden=false;open(button.dataset.osOpen||"vigia");
+  }));
   open("vigia");
  }
  // X-ray: interactive isometric separation, no WebGL context.
