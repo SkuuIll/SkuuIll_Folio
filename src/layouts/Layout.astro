@@ -283,8 +283,10 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       </div>
       <div class="footer-links">
         <a href={profile.github}>GitHub ↗</a>
+        <button type="button" class="footer-share" id="share-portfolio" hidden>Compartir ↗</button>
         <a href={`mailto:${profile.email}`}>Email ↗</a>
       </div>
+      <p id="share-status" class="share-status mono" role="status" aria-live="polite"></p>
       <div class="preferences" hidden>
         <label class="material-control">
           Acabado

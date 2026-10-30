@@ -319,3 +319,25 @@ if (oldCase && document.querySelector(".sp-hero")) {
   else if (/^[a-z0-9-]+$/.test(oldCase))
     location.replace(`${base}proyectos/#${encodeURIComponent(oldCase)}`);
 }
+
+// Native share on mobile; clipboard or visible URL elsewhere. No third-party scripts.
+const shareButton = document.querySelector<HTMLButtonElement>("#share-portfolio");
+const shareStatus = document.querySelector<HTMLElement>("#share-status");
+if (shareButton) {
+  shareButton.hidden = false;
+  shareButton.addEventListener("click", async () => {
+    const url = location.href;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: document.title, text: "Portafolio de Skull — desarrollo de software", url });
+        if (shareStatus) shareStatus.textContent = "Enlace listo para compartir.";
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        if (shareStatus) shareStatus.textContent = "Enlace copiado al portapapeles.";
+      } else if (shareStatus) shareStatus.textContent = "Copiá este enlace: " + url;
+    } catch (error) {
+      if ((error as Error)?.name !== "AbortError" && shareStatus)
+        shareStatus.textContent = "Copiá este enlace: " + url;
+    }
+  });
+}

@@ -502,3 +502,20 @@ body {
   .sp-primary { transition: transform 180ms ease, box-shadow 220ms ease, background 220ms ease; }
   .sp-primary:hover { box-shadow: 0 10px 32px color-mix(in srgb, var(--accent) 28%, transparent); }
 }
+
+.footer-share {
+  background: none;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 3px 0;
+  font: inherit;
+  min-height: 44px;
+  text-align: left;
+}
+.footer-share:hover { color: var(--accent); }
+.share-status {
+  max-width: 30ch;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}

@@ -8,7 +8,7 @@ import { projects, asset } from "../../data/projects";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <link rel="canonical" href="https://skuuill.github.io/SkuuIll_Folio/" />
+    <link rel="canonical" href={new URL(import.meta.env.BASE_URL, Astro.site ?? "https://skuull.pages.dev").href} />
     <title>Skull — Portafolio</title>
   </head>
   <body>

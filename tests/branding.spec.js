@@ -6,6 +6,7 @@ test('identity, sharing, SEO and sitemap follow production configuration', async
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /social-cover\.png$/);
   await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content', '1200');
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+  await expect(page.locator('#share-portfolio')).toBeVisible();
   const ld = await page.locator('script[type="application/ld+json"]').textContent();
   const graph = JSON.parse(ld)['@graph'];
   expect(graph.some((item) => item['@type'] === 'Person' && item.name === 'Skull')).toBe(true);
