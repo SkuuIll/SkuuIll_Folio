@@ -24,13 +24,13 @@ function populate() {
 function active() { return frame?.dataset.matrix === 'on'; }
 function sync() {
   if (!frame || !toggle || !label) return;
-  const reduced = motion.matches;
+  const reduced = motion.matches || document.documentElement.dataset.performance === "lite";
   if (reduced && active()) frame.dataset.matrix = 'off';
   toggle.disabled = reduced;
   frame.dataset.matrixVisible = String(visible && !document.hidden && !reduced && active());
   toggle.setAttribute('aria-pressed', String(active()));
-  label.textContent = active() ? 'Desactivar lluvia Matrix' : 'Activar lluvia Matrix';
-  if (status) status.textContent = reduced ? 'Efecto opcional desactivado por tu preferencia de movimiento reducido.' : '';
+  label.textContent = active() ? (document.documentElement.lang.startsWith('en') ? 'Disable Matrix rain' : 'Desactivar lluvia Matrix') : (document.documentElement.lang.startsWith('en') ? 'Enable Matrix rain' : 'Activar lluvia Matrix');
+  if (status) status.textContent = reduced ? (document.documentElement.lang.startsWith('en') ? 'Optional effect disabled to reduce resource usage or motion.' : 'Efecto opcional desactivado para reducir movimiento o consumo de recursos.') : '';
 }
 if (frame && toggle && layer) {
   toggle.hidden = false;
