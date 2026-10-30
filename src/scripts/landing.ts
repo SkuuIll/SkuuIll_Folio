@@ -1,6 +1,4 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+// Keep GSAP out of the initial bundle on restricted devices.
 const root = document.documentElement;
 const world = document.querySelector<HTMLElement>(".signal-world");
 const canvas = document.querySelector<HTMLCanvasElement>("#signal-canvas");
@@ -8,10 +6,16 @@ const stage = canvas?.parentElement;
 const ctx = canvas?.getContext("2d", { alpha: true });
 const full = () =>
   root.dataset.effects === "full" && root.dataset.motion !== "paused";
-let scrollContext: gsap.Context | undefined;
-function setupScroll() {
+let scrollContext: import("gsap").Context | undefined;
+let scrollRevision = 0;
+async function setupScroll() {
+  const revision = ++scrollRevision;
   scrollContext?.revert();
   if (!full()) return;
+  const [gsapModule, triggerModule] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
+  if (!full() || revision !== scrollRevision) return;
+  const gsap = gsapModule.gsap;
+  gsap.registerPlugin(triggerModule.ScrollTrigger);
   scrollContext = gsap.context(() => {
     gsap.from(".sp-hero-copy > *", {
       y: 24,
@@ -59,8 +63,8 @@ function setupScroll() {
     });
   });
 }
-setupScroll();
-document.addEventListener("skull:motion", setupScroll);
+void setupScroll();
+document.addEventListener("skull:motion", () => { void setupScroll(); });
 
 // A single bounded Canvas 2D loop projects a three-dimensional field. No video,
 // texture downloads or continuously running WebGL context are needed.
@@ -87,7 +91,7 @@ if (canvas && ctx && stage && world) {
   const connection = (
     navigator as Navigator & { connection?: { saveData?: boolean } }
   ).connection;
-  const points = coarse.matches || connection?.saveData ? 216 : 440;
+  const points = coarse.matches || connection?.saveData ? 168 : 440;
   const columns = coarse.matches || connection?.saveData ? 18 : 22;
   const rows = points / columns;
   const refreshColors = () => {
@@ -98,7 +102,7 @@ if (canvas && ctx && stage && world) {
   const resize = () => {
     width = stage.clientWidth;
     height = stage.clientHeight;
-    const dpr = Math.min(devicePixelRatio || 1, coarse.matches ? 1.25 : 1.5);
+    const dpr = Math.min(devicePixelRatio || 1, coarse.matches ? 1 : 1.5);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -222,6 +226,7 @@ if (canvas && ctx && stage && world) {
   }
   const allowed = () =>
     full() &&
+    root.dataset.performance !== "lite" &&
     visible &&
     !document.hidden &&
     !document.querySelector("dialog[open]") &&
