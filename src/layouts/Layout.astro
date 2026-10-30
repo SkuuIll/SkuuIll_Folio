@@ -14,6 +14,7 @@ import "../styles/design-contrast.css";
 import "../styles/theme-corrections.css";
 import "../styles/editions-two.css";
 import "../styles/visual-polish.css";
+import "../styles/edition-refinement.css";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
 import { legalNav } from "../data/legal";
@@ -302,24 +303,17 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         </div>
       </dialog>
     </header>
-    <aside class="design-ribbon shell" data-design-ribbon aria-label={tr("Dirección de diseño actual", "Current design direction")}>
-      <div class="design-ribbon-main">
-        <span class="design-ribbon-figure" aria-hidden="true"></span>
-        <div>
-          <div class="design-ribbon-title">
-            <span class="design-ribbon-caption">{tr("EDICIÓN VISUAL", "VISUAL EDITION")}</span>
-            <strong data-design-name>Editorial / {tr("Identidad", "Identity")}</strong>
-          </div>
-          <p class="design-ribbon-note" data-design-note role="status" aria-live="polite">
-            {tr("Tipografía protagonista y composición editorial.", "Expressive type and editorial composition.")}
-          </p>
-        </div>
+    <nav class="design-ribbon shell" data-design-ribbon aria-label={tr("Selector de las 14 ediciones de SKULL", "SKULL's 14-edition selector")}>
+      <strong class="picker-brand mono" aria-hidden="true">SKULL <span>✦</span></strong>
+      <div class="design-ribbon-main visually-hidden" aria-live="polite">
+        <strong data-design-name>Editorial / {tr("Identidad", "Identity")}</strong>
+        <span data-design-note>{tr("Tipografía protagonista y composición editorial.", "Expressive editorial composition.")}</span>
       </div>
       <div class="design-ribbon-controls">
         <button type="button" data-design-prev aria-label={tr("Diseño anterior", "Previous design")} title={tr("Diseño anterior", "Previous design")}>
           <span aria-hidden="true">←</span>
         </button>
-        <span data-design-index class="design-index" aria-label={tr("Diseño de catorce", "Design of fourteen")}>01 / 14</span>
+        <span data-design-index class="design-index" aria-label={tr("Edición actual de 14", "Current edition out of 14")}>01 / 14</span>
         <label class="design-select-label">
           <span class="visually-hidden">{tr("Elegir diseño", "Choose design")}</span>
           <select data-design-select aria-label={tr("Elegir entre 14 diseños", "Choose from 14 designs")}>
@@ -332,10 +326,10 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
           </select>
         </label>
         <button type="button" data-design-next class="design-next" aria-label={tr("Siguiente diseño", "Next design")} title={tr("Siguiente diseño", "Next design")}>
-          <span class="design-next-text">{tr("Otro diseño", "Next design")}</span> <span aria-hidden="true">→</span>
+          <span aria-hidden="true">→</span>
         </button>
       </div>
-    </aside>
+    </nav>
     <main id="contenido">
       <slot />
     </main>

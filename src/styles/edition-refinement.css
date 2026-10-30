@@ -1,0 +1,128 @@
+/* SKULL / Actual edition layouts — not theme skins over a duplicate landing page.
+   Loaded last; this also replaces the overgrown legacy ribbon styling. */
+
+/* A compact, centered navigator rather than an announcement banner. */
+.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;clip-path:inset(50%)!important}
+:root[data-design] .design-ribbon{
+  width:min(465px,calc(100% - 28px))!important;
+  max-width:465px!important;
+  height:50px!important;min-height:50px!important;max-height:50px!important;
+  padding:4px 6px 4px 12px!important;margin:7px auto 9px!important;
+  display:flex!important;grid-template-columns:none!important;align-items:center!important;
+  justify-content:space-between!important;flex-wrap:nowrap!important;
+  gap:9px!important;border-radius:14px!important;
+  background:var(--surface)!important;border:1px solid var(--line)!important;
+  box-shadow:0 3px 12px #00000012!important;isolation:isolate;
+}
+.design-ribbon .picker-brand{display:flex;gap:5px;align-items:center;white-space:nowrap;flex:0 0 auto;font:700 10px var(--mono);letter-spacing:.05em;color:var(--ink)}
+.design-ribbon .picker-brand span{color:var(--accent);font-size:13px}
+:root[data-design] .design-ribbon .design-ribbon-main{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important}
+:root[data-design] .design-ribbon .design-ribbon-controls{
+  display:flex!important;flex:1 1 auto!important;width:auto!important;
+  min-width:0!important;max-width:none!important;flex-wrap:nowrap!important;
+  height:42px!important;gap:5px!important;justify-content:flex-end!important;
+  align-items:center!important;
+}
+:root[data-design] .design-ribbon .design-ribbon-controls button{
+  flex:0 0 40px!important;min-width:40px!important;max-width:40px!important;width:40px!important;
+  height:40px!important;min-height:40px!important;max-height:40px!important;
+  padding:0!important;display:inline-grid!important;place-items:center!important;
+  border-radius:9px!important;background:var(--paper)!important;color:var(--ink)!important;
+  border:1px solid var(--line)!important;font-size:17px!important;
+  box-shadow:none!important;transform:none!important;
+}
+:root[data-design] .design-ribbon .design-ribbon-controls button:hover{background:var(--soft)!important;border-color:var(--accent)!important}
+:root[data-design] .design-ribbon .design-index{
+  flex:0 0 45px!important;min-width:45px!important;max-width:45px!important;
+  font:10px var(--mono)!important;white-space:nowrap;text-align:center;color:var(--muted)!important;
+}
+:root[data-design] .design-ribbon .design-select-label{
+  display:block!important;position:relative;flex:1 1 170px!important;
+  min-width:0!important;max-width:195px!important;width:auto!important;
+  height:40px!important;margin:0!important;
+}
+:root[data-design] .design-ribbon .design-select-label select{
+  appearance:auto!important;display:block!important;
+  box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:100%!important;
+  height:40px!important;min-height:40px!important;max-height:40px!important;
+  padding:0 7px!important;margin:0!important;
+  background:var(--paper)!important;color:var(--ink)!important;
+  font:11px var(--mono)!important;border:1px solid var(--line)!important;border-radius:9px!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+}
+:root[data-design] .design-ribbon :is(button,select):focus-visible{outline:2px solid var(--accent)!important;outline-offset:2px!important}
+.home-start-anchor{height:0;scroll-margin-top:95px}
+
+/* The seven NEW directions are full art-directed landing experiences, not
+   an experiment followed by the same generic hero and rotating background. */
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .signal-world>.sp-hero,
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .signal-world>.signal-backdrop{
+ display:none!important;
+}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .signal-world{background:var(--paper)!important}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .edition-experiences{
+ display:block!important;min-width:0;overflow:clip;
+}
+:root:is([data-design="skull-os"],[data-design="xray"],[data-design="museum"],[data-design="terminal"],[data-design="canvas"],[data-design="brutalist"],[data-design="story"]) .edition-scene{padding-top:13px;padding-bottom:clamp(40px,5vw,70px)}
+.edition-overline{font-size:10px;letter-spacing:.13em;margin-bottom:13px}
+
+/* Individual stage identities: independent proportions, framing and hierarchy. */
+:root[data-design="skull-os"] .edition-os.shell{width:min(1600px,calc(100% - 42px))}
+:root[data-design="skull-os"] .os-desktop{min-height:min(85svh,850px);background:radial-gradient(circle at 70% 32%,#3c648e88,transparent 44%),linear-gradient(130deg,#08192b,#10263b 55%,#12374b)}
+:root[data-design="skull-os"] .os-surface{min-height:clamp(545px,66svh,780px)}
+:root[data-design="skull-os"] .os-window{outline:1px solid #ffffff25;box-shadow:0 30px 80px #000a}
+:root[data-design="skull-os"] .os-icons button:hover{transform:translateY(-3px);background:#32547bcc}
+:root[data-design="xray"] .edition-xray.shell{width:min(1350px,calc(100% - 70px))}
+:root[data-design="xray"] .xray-shell{min-height:min(83svh,840px);background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 42%),linear-gradient(135deg,var(--surface),var(--paper))}
+:root[data-design="xray"] .xray-model{min-height:480px}
+:root[data-design="museum"] .edition-museum.shell{width:min(1560px,calc(100% - 48px))}
+:root[data-design="museum"] .museum-hall{min-height:min(82svh,820px);background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--surface) 90%,var(--paper)) 0 130px,var(--paper) 130px 132px);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+:root[data-design="museum"] .museum-gallery{min-height:390px}
+:root[data-design="museum"] .museum-frame{transform:rotate(-.7deg);box-shadow:0 35px 65px #0005}
+:root[data-design="terminal"] .edition-terminal.shell{width:min(1350px,calc(100% - 70px))}
+:root[data-design="terminal"] .terminal-shell{min-height:min(81svh,820px);border-radius:6px;border-width:2px}
+:root[data-design="terminal"] .terminal-inner h2{letter-spacing:-.085em}
+:root[data-design="canvas"] .edition-canvas.shell{width:min(1590px,calc(100% - 36px))}
+:root[data-design="canvas"] .canvas-shell{border-radius:10px}
+:root[data-design="canvas"] .canvas-viewport{height:clamp(490px,58svh,800px)}
+:root[data-design="brutalist"] .edition-brutal.shell{width:min(1480px,calc(100% - 52px))}
+:root[data-design="brutalist"] .brutal-panel{min-height:min(80svh,820px)}
+:root[data-design="story"] .edition-story.shell{width:min(1420px,calc(100% - 68px))}
+:root[data-design="story"] .story-shell{min-height:min(82svh,880px);border-radius:26px}
+
+/* Smaller devices keep the identity of each experience; never inherit desktop min-heights. */
+@media(max-width:767px){
+ :root[data-design] .design-ribbon{width:min(420px,calc(100% - 22px))!important;height:48px!important;min-height:48px!important;max-height:48px!important;padding:3px 5px 3px 8px!important;gap:4px!important}
+ .design-ribbon .picker-brand{font-size:9px}
+ :root[data-design] .design-ribbon .design-ribbon-controls{height:40px!important;gap:3px!important}
+ :root[data-design] .design-ribbon .design-ribbon-controls button{flex-basis:38px!important;min-width:38px!important;max-width:38px!important;width:38px!important;height:38px!important;min-height:38px!important;max-height:38px!important}
+ :root[data-design] .design-ribbon .design-index{flex-basis:39px!important;min-width:39px!important;max-width:39px!important;font-size:9px!important}
+ :root[data-design] .design-ribbon .design-select-label{flex:1 1 0!important;min-width:0!important;max-width:none!important;height:38px!important}
+ :root[data-design] .design-ribbon .design-select-label select{height:38px!important;min-height:38px!important;max-height:38px!important;font-size:10px!important;padding-inline:4px!important}
+ :root[data-design="skull-os"] .edition-os.shell,
+ :root[data-design="xray"] .edition-xray.shell,
+ :root[data-design="museum"] .edition-museum.shell,
+ :root[data-design="terminal"] .edition-terminal.shell,
+ :root[data-design="canvas"] .edition-canvas.shell,
+ :root[data-design="brutalist"] .edition-brutal.shell,
+ :root[data-design="story"] .edition-story.shell{width:calc(100% - 30px)}
+ :root[data-design="skull-os"] .os-desktop,
+ :root[data-design="skull-os"] .os-surface,
+ :root[data-design="xray"] .xray-shell,
+ :root[data-design="xray"] .xray-model,
+ :root[data-design="museum"] .museum-hall,
+ :root[data-design="museum"] .museum-gallery,
+ :root[data-design="terminal"] .terminal-shell,
+ :root[data-design="brutalist"] .brutal-panel,
+ :root[data-design="story"] .story-shell{min-height:0}
+ :root[data-design="canvas"] .canvas-viewport{height:450px}
+ :root[data-design="museum"] .museum-frame{transform:none}
+}
+@media(max-width:380px){
+ :root[data-design] .design-ribbon{padding-inline:4px!important}
+ .design-ribbon .picker-brand{display:none}
+ :root[data-design] .design-ribbon .design-select-label select{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ :root[data-design="skull-os"] .os-icons button:hover{transform:none}
+}
