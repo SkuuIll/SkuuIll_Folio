@@ -1,0 +1,122 @@
+
+/* Seven truly distinct compositions. Overrides layer on top of base design-modes.css. */
+/* 01 EDITORIAL — paper, oversized masthead, ruled editorial spreads. */
+:root[data-theme="dark"][data-design="editorial"]{--paper:#f6f4eb;--surface:#ecece3;--ink:#17241f;--muted:#55645b;--line:#a8b5ab;--soft:#dbe7db;--accent:#236443;--signal-blue:#285f6a}
+:root[data-design="editorial"] .signal-world{background:var(--paper);border-top:5px solid var(--ink)}
+:root[data-design="editorial"] .sp-hero{border-bottom:2px solid var(--ink);min-height:88svh}
+:root[data-design="editorial"] .sp-hero-copy{border-left:0;padding-left:0;max-width:96%}
+:root[data-design="editorial"] .sp-hero h1{font-size:clamp(70px,10.2vw,170px);line-height:.88;letter-spacing:-.1em;text-transform:uppercase}
+:root[data-design="editorial"] .sp-hero .eyebrow{font-size:12px;letter-spacing:.19em}
+:root[data-design="editorial"] .signal-stage{opacity:.15;right:-5%;width:50%}
+:root[data-design="editorial"] .portfolio-work-heading{border-top:2px solid var(--ink);padding-top:24px}
+:root[data-design="editorial"] .portfolio-work-heading h2{font-size:clamp(45px,5.7vw,85px)}
+:root[data-design="editorial"] .portfolio-work-link{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:28px}
+:root[data-design="editorial"] .portfolio-work-card{border-bottom:2px solid var(--ink);padding-block:20px}
+:root[data-design="editorial"] .portfolio-work-card:nth-child(even) .portfolio-work-media{order:2}
+:root[data-design="editorial"] .portfolio-work-media{aspect-ratio:1.65;max-height:400px}
+:root[data-design="editorial"] .design-about-sheet{border-radius:0;background:transparent}
+/* 02 CASEBOOK — cinematic case-study magazine with full-bleed background image. */
+:root[data-design="casebook"] .sp-hero{isolation:isolate;position:relative;background:#121921;min-height:min(90svh,920px)}
+:root[data-design="casebook"] .sp-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#080f1ae8 5%,#080f1aac 49%,#080f1a45),url("/media/atelier-colors.webp") center / cover;filter:saturate(.75)}
+:root[data-design="casebook"] .sp-hero h1{color:#f5f0e9;text-shadow:0 5px 30px #0008;font-family:Georgia,serif}
+:root[data-design="casebook"] .sp-hero-copy{max-width:800px;border-left:4px solid #f7bd7a;padding-left:28px}
+:root[data-design="casebook"] .sp-hero .eyebrow,:root[data-design="casebook"] .sp-lead{color:#eadac8}
+:root[data-design="casebook"] .signal-backdrop{opacity:.08}
+:root[data-design="casebook"] .portfolio-work-card{border:0}
+:root[data-design="casebook"] .portfolio-work-card:nth-child(even) .portfolio-work-link{grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr)}
+:root[data-design="casebook"] .portfolio-work-card:nth-child(even) .portfolio-work-body{order:-1}
+:root[data-design="casebook"] .portfolio-work-card .portfolio-work-media{height:100%;min-height:370px}
+:root[data-design="casebook"] .portfolio-work-card .portfolio-work-media img{height:100%;object-fit:cover}
+:root[data-design="casebook"] .portfolio-work-body{align-self:center;padding:clamp(22px,3vw,50px)}
+:root[data-design="casebook"] .portfolio-work-body h3{font-family:Georgia,serif;font-size:clamp(29px,3.8vw,56px)}
+/* 03 SYSTEMS — schematic console with technical panels. */
+:root[data-design="systems"] .sp-hero{border:1px solid var(--line);margin:25px auto;width:min(100% - 48px,1550px);min-height:75svh;background:linear-gradient(110deg,#06131ddd,transparent),repeating-linear-gradient(90deg,#3c9fa416 0 1px,transparent 1px 62px)}
+:root[data-design="systems"] .sp-hero::before{content:"[ SKULL / BUILD 07 ]";position:absolute;z-index:1;top:25px;right:25px;color:var(--accent);font:13px var(--mono)}
+:root[data-design="systems"] .sp-hero-copy{max-width:61%;padding:50px 0 45px 30px;border-left:4px solid var(--accent)}
+:root[data-design="systems"] .sp-hero h1{font-size:clamp(48px,5.6vw,98px);line-height:1.07}
+:root[data-design="systems"] .signal-stage{width:43%;right:2%;margin-left:auto;opacity:.84}
+:root[data-design="systems"] .portfolio-work-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+:root[data-design="systems"] .portfolio-work-card{grid-column:auto!important}
+:root[data-design="systems"] .portfolio-work-body h3{font-family:var(--mono);font-size:clamp(20px,1.8vw,26px)}
+:root[data-design="systems"] .architecture-console{border:2px solid var(--accent);box-shadow:0 0 40px color-mix(in srgb,var(--accent) 13%,transparent)}
+/* 04 ATELIER — centered narrative and big typography, personal studio. */
+:root[data-design="atelier"] .signal-world{background:radial-gradient(ellipse at top,#7a4b8455,transparent 64%),var(--paper)}
+:root[data-design="atelier"] .sp-hero{min-height:94svh;display:grid;place-items:center}
+:root[data-design="atelier"] .sp-hero-copy{text-align:center;margin-inline:auto;max-width:1050px;padding-block:90px}
+:root[data-design="atelier"] .sp-hero h1{font-size:clamp(60px,8vw,140px);font-weight:400}
+:root[data-design="atelier"] .sp-lead{margin-inline:auto}
+:root[data-design="atelier"] .sp-actions{justify-content:center}
+:root[data-design="atelier"] .signal-stage{opacity:.16}
+:root[data-design="atelier"] .portfolio-work-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+:root[data-design="atelier"] .portfolio-work-card{grid-column:auto!important}
+:root[data-design="atelier"] .portfolio-work-card:nth-child(2n){margin-top:70px}
+:root[data-design="atelier"] .portfolio-work-body h3{font-family:Georgia,serif;font-size:clamp(25px,2.8vw,39px)}
+:root[data-design="atelier"] .design-about{padding-block:140px}
+/* 05 CHROMATIC — bold modular poster, exuberant card rhythm. */
+:root[data-design="chromatic"] .sp-hero{border-radius:45px;margin:28px auto;max-width:calc(100% - 56px);background:linear-gradient(125deg,#ad2e79,#5337b9 48%,#161939);min-height:85svh;overflow:hidden}
+:root[data-design="chromatic"] .sp-hero h1{color:#fff;max-width:900px;text-shadow:4px 6px 0 #0c1247}
+:root[data-design="chromatic"] .sp-hero h1 em{color:#ffdf6e}
+:root[data-design="chromatic"] .sp-hero .eyebrow,:root[data-design="chromatic"] .sp-lead{color:#fff2fa}
+:root[data-design="chromatic"] .signal-stage{filter:hue-rotate(130deg) saturate(1.7);opacity:.65}
+:root[data-design="chromatic"] .portfolio-work-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+:root[data-design="chromatic"] .portfolio-work-card{grid-column:auto!important;transform:rotate(0)!important}
+:root[data-design="chromatic"] .portfolio-work-card:nth-child(3n+1){background:#472076;border-radius:50px 8px 50px 8px}
+:root[data-design="chromatic"] .portfolio-work-card:nth-child(3n+2){background:#652762;border-radius:8px 50px 8px 50px}
+:root[data-design="chromatic"] .portfolio-work-card:nth-child(3n){background:#2b3867;border-radius:35px}
+:root[data-design="chromatic"] .portfolio-work-body h3{font-weight:850;font-size:clamp(24px,2.4vw,36px)}
+/* 06 POCKET — intentionally light, readable, no visual noise. */
+:root[data-theme="dark"][data-design="pocket"]{--paper:#f9faf8;--surface:#f0f3ef;--ink:#101d18;--muted:#466353;--line:#b8cbbb;--accent:#216b44;--signal-blue:#377e5f;--soft:#dfece1}
+:root[data-design="pocket"] .sp-hero{min-height:65svh;background:var(--paper)}
+:root[data-design="pocket"] .sp-hero-copy{padding-block:55px}
+:root[data-design="pocket"] .sp-hero h1{font-size:clamp(46px,5.9vw,94px);line-height:1.08}
+:root[data-design="pocket"] .signal-backdrop,.signal-stage{ }
+:root[data-design="pocket"] .signal-backdrop{display:none}
+:root[data-design="pocket"] .portfolio-work-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+:root[data-design="pocket"] .portfolio-work-card{grid-column:auto!important;border:1px solid var(--line);box-shadow:none}
+:root[data-design="pocket"] .portfolio-work-media{aspect-ratio:2.1}
+:root[data-design="pocket"] .portfolio-work-body{padding:18px}
+:root[data-design="pocket"] .design-ribbon{background:var(--paper);box-shadow:none}
+:root[data-design="pocket"] .depth-stage{min-height:470px}
+:root[data-design="pocket"] .architecture-stage{background:var(--paper)}
+/* 07 STUDIO — commercial split header, services-first grid. */
+:root[data-design="studio"] .sp-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr);align-items:center;min-height:83svh;border-bottom:5px solid var(--accent);background:linear-gradient(108deg,var(--paper) 55%,var(--surface) 55%)}
+:root[data-design="studio"] .sp-hero-copy{max-width:100%;padding:80px 0 80px clamp(20px,3vw,55px);grid-column:1;position:relative;z-index:1}
+:root[data-design="studio"] .sp-hero h1{font-size:clamp(56px,6.8vw,110px)}
+:root[data-design="studio"] .signal-backdrop{grid-column:2;position:relative!important;inset:auto;min-width:0;min-height:490px}
+:root[data-design="studio"] .signal-stage{width:100%;margin-left:0;right:auto}
+:root[data-design="studio"] .portfolio-work-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px}
+:root[data-design="studio"] .portfolio-work-card{grid-column:auto!important}
+:root[data-design="studio"] .portfolio-capabilities{border-top:4px solid var(--accent);border-bottom:4px solid var(--accent)}
+:root[data-design="studio"] .portfolio-capability{min-height:270px}
+/* Consistent responsive fallbacks: no sideways overflow. */
+@media(max-width:1100px){
+ :root[data-design="systems"] .portfolio-work-grid,:root[data-design="atelier"] .portfolio-work-grid,:root[data-design="chromatic"] .portfolio-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ :root[data-design="studio"] .sp-hero{grid-template-columns:1fr}
+ :root[data-design="studio"] .sp-hero-copy{grid-column:1}
+ :root[data-design="studio"] .signal-backdrop{grid-column:1;min-height:0;position:absolute!important;inset:0;opacity:.18}
+}
+@media(max-width:767px){
+ :root[data-design="editorial"] .sp-hero h1{font-size:clamp(49px,10vw,76px)}
+ :root[data-design="editorial"] .portfolio-work-link{grid-template-columns:1fr}
+ :root[data-design="editorial"] .portfolio-work-card:nth-child(even) .portfolio-work-media{order:0}
+ :root[data-design="casebook"] .sp-hero{min-height:76svh}
+ :root[data-design="casebook"] .sp-hero-copy{max-width:100%;padding:45px 20px}
+ :root[data-design="casebook"] .portfolio-work-card .portfolio-work-media{min-height:0}
+ :root[data-design="systems"] .sp-hero{width:calc(100% - 18px);min-height:0;margin:12px auto}
+ :root[data-design="systems"] .sp-hero-copy{max-width:100%;padding:45px 18px}
+ :root[data-design="systems"] .signal-stage{opacity:.13}
+ :root[data-design="atelier"] .sp-hero-copy{text-align:left;padding:55px 12px}
+ :root[data-design="atelier"] .portfolio-work-card:nth-child(2n){margin-top:0}
+ :root[data-design="chromatic"] .sp-hero{border-radius:20px;margin:9px auto;max-width:calc(100% - 18px)}
+ :root[data-design="chromatic"] .sp-hero h1{font-size:clamp(44px,10vw,75px);text-shadow:none}
+ :root[data-design="studio"] .sp-hero{min-height:0}
+ :root[data-design="studio"] .sp-hero-copy{padding:40px 12px}
+ :root[data-design="pocket"] .sp-hero{min-height:0}
+ :root[data-design="pocket"] .portfolio-work-grid,
+ :root[data-design="systems"] .portfolio-work-grid,
+ :root[data-design="atelier"] .portfolio-work-grid,
+ :root[data-design="chromatic"] .portfolio-work-grid,
+ :root[data-design="studio"] .portfolio-work-grid{grid-template-columns:1fr}
+ :root[data-design] .portfolio-work-card{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){:root[data-design="studio"] .signal-backdrop{animation:none}}
