@@ -189,7 +189,8 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         try {
           const root = document.documentElement;
           const alreadySeen = sessionStorage.getItem("skull-intro-seen");
-          if (!alreadySeen && root.dataset.effects !== "off" &&
+          const previewRequested = new URLSearchParams(location.search).get("intro") === "1";
+          if ((!alreadySeen || previewRequested) && root.dataset.effects !== "off" &&
             root.dataset.performance !== "lite" &&
             !matchMedia("(prefers-reduced-motion: reduce)").matches) {
             root.dataset.intro = "pending";
