@@ -1,3 +1,5 @@
+const english = document.documentElement.lang.startsWith("en");
+const tr = (es: string, englishText: string) => english ? englishText : es;
 const root = document.documentElement;
 const base = import.meta.env.BASE_URL;
 const themeButton = document.querySelector<HTMLButtonElement>("#theme-toggle");
@@ -7,10 +9,10 @@ function applyTheme(theme: string) {
   themeButton?.setAttribute("aria-pressed", String(theme === "dark"));
   themeButton?.setAttribute(
     "aria-label",
-    theme === "dark" ? "Activar modo claro" : "Activar modo oscuro",
+    theme === "dark" ? tr("Activar modo claro", "Switch to light mode") : tr("Activar modo oscuro", "Switch to dark mode"),
   );
   const label = themeButton?.querySelector("span");
-  if (label) label.textContent = theme === "dark" ? "Claro" : "Oscuro";
+  if (label) label.textContent = theme === "dark" ? tr("Claro", "Light") : tr("Oscuro", "Dark");
   document
     .querySelector('meta[name="theme-color"]')
     ?.setAttribute(
@@ -71,7 +73,7 @@ if (menu && mobileNav) {
     mobileNav.getAnimations().forEach((animation) => animation.cancel());
     mobileNav.close();
     menu.setAttribute("aria-expanded", "false");
-    menu.setAttribute("aria-label", "Abrir menú");
+    menu.setAttribute("aria-label", tr("Abrir menú", "Open menu"));
     mobileNav.hidden = true;
     chapterToggle?.setAttribute("aria-expanded", "false");
     opener.focus({ preventScroll: true });
@@ -85,7 +87,7 @@ if (menu && mobileNav) {
     mobileNav.hidden = false;
     mobileNav.showModal();
     menu.setAttribute("aria-expanded", "true");
-    menu.setAttribute("aria-label", "Cerrar menú");
+    menu.setAttribute("aria-label", tr("Cerrar menú", "Close menu"));
     chapterToggle?.setAttribute("aria-expanded", "true");
     if (
       animate &&
@@ -178,9 +180,10 @@ showPalette();
 const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
 function applyMotionPreference() {
   const reduced = motionPreference.matches;
+  const lite = root.dataset.performance === "lite";
   root.dataset.motionMode = reduced ? "reduced" : "full";
-  root.dataset.motion = reduced ? "paused" : "active";
-  root.dataset.effects = reduced ? "off" : "full";
+  root.dataset.motion = reduced || lite ? "paused" : "active";
+  root.dataset.effects = reduced || lite ? "off" : "full";
   document.dispatchEvent(new CustomEvent("skull:motion"));
 }
 motionPreference.addEventListener("change", applyMotionPreference);
@@ -213,15 +216,15 @@ if (inquiry) {
       element.value = element.value.trim();
     if (!inquiry.checkValidity()) {
       error.textContent =
-        "Completá nombre, un email válido, el tipo de proyecto y una descripción de al menos 15 caracteres.";
+        tr("Completá nombre, un email válido, el tipo de proyecto y una descripción de al menos 15 caracteres.","Complete your name, a valid email, a project type, and at least 15 characters of description.");
       error.hidden = false;
       inquiry.reportValidity();
       return;
     }
     const data = new FormData(inquiry);
     const text = `Hola, Skull.\n\nSoy ${data.get("name")} (${data.get("email")}).\nMe interesa: ${data.get("service")}.\n${data.get("reference") ? `Proyecto de referencia: ${data.get("reference")}\n` : ""}\n${data.get("idea")}\n\nEnviado desde el portafolio de Skull.`;
-    message.value = text;
-    draft.href = `mailto:moreappmix@gmail.com?subject=${encodeURIComponent(`Consulta: ${data.get("service")}`)}&body=${encodeURIComponent(text)}`;
+    message.value = english ? text.replace("Hola, Skull.", "Hello, Skull.").replace("Soy ", "I am ").replace("Me interesa:", "I am interested in:").replace("Proyecto de referencia:", "Reference:").replace("Enviado desde el portafolio de Skull.", "Sent from Skull portfolio.") : text;
+    draft.href = `mailto:moreappmix@gmail.com?subject=${encodeURIComponent(`Consulta: ${data.get("service")}`)}&body=${encodeURIComponent(message.value)}`;
     error.hidden = true;
     result.hidden = false;
     message.focus();
@@ -231,12 +234,12 @@ if (inquiry) {
     ?.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(message.value);
-        status.textContent = "Mensaje copiado.";
+        status.textContent = tr("Mensaje copiado.","Message copied.");
       } catch {
         message.focus();
         message.select();
         status.textContent =
-          "Seleccioné el mensaje. Podés copiarlo con el menú del navegador o con Ctrl+C.";
+          tr("Seleccioné el mensaje. Podés copiarlo con el menú del navegador o con Ctrl+C.","Message selected. You can copy it with your browser menu or Ctrl+C.");
       }
     });
   document.querySelector("#download-inquiry")?.addEventListener("click", () => {
@@ -281,7 +284,7 @@ if (search) {
       ),
     );
     document.querySelector("#project-count")!.textContent =
-      `${count} de ${rows.length} proyectos`;
+      english ? `${count} of ${rows.length} projects` : `${count} de ${rows.length} proyectos`;
     (document.querySelector("#empty-projects") as HTMLElement).hidden =
       count !== 0;
   };
