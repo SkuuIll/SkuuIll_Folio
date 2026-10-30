@@ -1,0 +1,105 @@
+/* Theme corrections / 2026-10-30
+   Every visual edition has *two* contrasting palettes. Overrides are intentionally
+   last in the cascade so theme switching cannot be blocked by art-direction CSS. */
+
+/* 01: Editorial is light by default only when the visitor chooses light. */
+:root[data-theme="dark"][data-design="editorial"]{
+ --paper:#101a18;--surface:#1b2924;--ink:#f1f6ed;--muted:#bed0c3;
+ --line:#3a5348;--soft:#283f32;--accent:#baf27c;--signal-blue:#9adccf;
+}
+:root[data-theme="light"][data-design="editorial"]{
+ --paper:#f6f4eb;--surface:#ecece3;--ink:#17241f;--muted:#55645b;
+ --line:#a8b5ab;--soft:#dbe7db;--accent:#236443;--signal-blue:#285f6a;
+}
+:root[data-theme="dark"][data-design="editorial"] .signal-world{background:var(--paper)}
+:root[data-theme="light"][data-design="editorial"] .signal-world{background:var(--paper)}
+
+/* 03: Systems uses the selected ink on the schematic; no always-black hero. */
+:root[data-design="systems"] .sp-hero{
+ background:
+ linear-gradient(110deg,color-mix(in srgb,var(--paper) 90%,transparent),color-mix(in srgb,var(--paper) 54%,transparent)),
+ repeating-linear-gradient(90deg,color-mix(in srgb,var(--accent) 16%,transparent) 0 1px,transparent 1px 62px),
+ var(--surface);
+}
+:root[data-theme="light"][data-design="systems"] .sp-hero{color:var(--ink)}
+:root[data-theme="light"][data-design="systems"] .signal-stage{opacity:.34}
+:root[data-theme="dark"][data-design="systems"] .signal-stage{opacity:.72}
+
+/* 05: Fix halo/doubled letters caused by rotated, heavily shadowed type. */
+:root[data-design="chromatic"] .sp-hero h1,
+:root[data-design="chromatic"] .sp-hero h1 em{
+ transform:none!important;
+ text-shadow:none!important;
+ filter:none!important;
+ letter-spacing:-.055em;
+ -webkit-text-stroke:0 transparent;
+ text-rendering:optimizeLegibility;
+ transition:none!important;
+}
+:root[data-design="chromatic"] .sp-hero h1{font-weight:750;line-height:1.08}
+:root[data-theme="dark"][data-design="chromatic"] .sp-hero{
+ background:linear-gradient(122deg,#842a70 0%,#48308d 51%,#161e3e 100%);
+}
+:root[data-theme="light"][data-design="chromatic"] .sp-hero{
+ background:linear-gradient(122deg,#ffe4f0 0%,#e6defd 51%,#dcebf5 100%);
+}
+:root[data-theme="light"][data-design="chromatic"] .sp-hero h1,
+:root[data-theme="light"][data-design="chromatic"] .sp-hero .eyebrow,
+:root[data-theme="light"][data-design="chromatic"] .sp-lead{color:#342346}
+:root[data-theme="light"][data-design="chromatic"] .sp-hero h1 em{color:#97316e}
+:root[data-theme="dark"][data-design="chromatic"] .sp-hero h1{color:#fff6ff}
+:root[data-theme="dark"][data-design="chromatic"] .sp-hero h1 em{color:#ffe29a}
+:root[data-theme="light"][data-design="chromatic"] .portfolio-work-card:nth-child(3n+1){background:#f6dce9}
+:root[data-theme="light"][data-design="chromatic"] .portfolio-work-card:nth-child(3n+2){background:#e7dbfb}
+:root[data-theme="light"][data-design="chromatic"] .portfolio-work-card:nth-child(3n){background:#dceaf6}
+:root[data-theme="dark"][data-design="chromatic"] .portfolio-work-card:nth-child(3n+1){background:#472076}
+:root[data-theme="dark"][data-design="chromatic"] .portfolio-work-card:nth-child(3n+2){background:#652762}
+:root[data-theme="dark"][data-design="chromatic"] .portfolio-work-card:nth-child(3n){background:#2b3867}
+
+/* 06: Pocket had also been hard-coded light despite dark selection. */
+:root[data-theme="dark"][data-design="pocket"]{
+ --paper:#111c17;--surface:#1b2b22;--ink:#f1f6ed;--muted:#b8cebf;
+ --line:#3a5545;--accent:#a1ecc0;--signal-blue:#9ccfb6;--soft:#264133;
+}
+:root[data-theme="light"][data-design="pocket"]{
+ --paper:#f9faf8;--surface:#f0f3ef;--ink:#101d18;--muted:#466353;
+ --line:#b8cbbb;--accent:#216b44;--signal-blue:#377e5f;--soft:#dfece1;
+}
+:root[data-design="pocket"] .sp-hero{background:var(--paper)}
+
+/* 07: Studio's graphic stays a deliberately dark inset but the page,
+   copy panel, borders, and base hero all follow dark/light tokens. */
+:root[data-theme="dark"][data-design="studio"]{
+ --paper:#0a1821;--surface:#172c38;--ink:#f4f6ef;--muted:#bfced1;
+ --line:#44616a;--accent:#f6d28b;--signal-blue:#88c7d8;--soft:#31454b;
+}
+:root[data-theme="light"][data-design="studio"]{
+ --paper:#f7f5ed;--surface:#e9f0ef;--ink:#16313c;--muted:#50626b;
+ --line:#a7bfc0;--accent:#8c601d;--signal-blue:#19687c;--soft:#dce9e2;
+}
+:root[data-design="studio"] .sp-hero{
+ background:linear-gradient(108deg,var(--paper) 55%,var(--surface) 55%);
+ color:var(--ink);
+}
+:root[data-theme="light"][data-design="studio"] .sp-hero::before{
+ background:linear-gradient(145deg,#e2eff155,#111c2b55),url("/media/vigia-modules.webp") center / cover;
+ border-color:var(--line);
+}
+:root[data-theme="dark"][data-design="studio"] .sp-hero::before{
+ background:linear-gradient(145deg,#11283566,#020a11a3),url("/media/vigia-modules.webp") center / cover;
+ border-color:var(--line);
+}
+
+/* Illustration sections have an intentionally dark viewing surface, while
+   surrounding copy and controls track the page theme. */
+:root[data-theme="light"] .depth-console,
+:root[data-theme="light"] .architecture-console,
+:root[data-theme="light"] .design-about-sheet{color:var(--ink)}
+:root[data-theme="light"] .design-ribbon{background:var(--surface)}
+
+/* Focus and user motion preferences never depend on a visual edition. */
+:root[data-design] .theme-toggle:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+ :root[data-design="chromatic"] .sp-hero h1,
+ :root[data-design="chromatic"] .sp-hero h1 em{transform:none!important}
+}
