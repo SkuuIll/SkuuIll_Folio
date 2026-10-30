@@ -1,0 +1,2 @@
+const {test,expect}=require("@playwright/test");
+for(const lang of ["","en/"]){test("technology explorer connects documented projects "+(lang||"es"),async({page})=>{await page.goto(lang+"?design=editorial");const explorer=page.locator("[data-tech-explorer]");await expect(explorer).toHaveCount(1);const react=explorer.locator("[data-tech-pick]",{hasText:"React"}).first();await react.click();await expect(react).toHaveAttribute("aria-pressed","true");await expect(explorer.locator("[data-tech-results] a").first()).toHaveAttribute("href",/projects|proyectos/);});}
