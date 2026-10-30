@@ -2,7 +2,7 @@
 
 Portafolio web independiente de **Skull (SkuuIll)**, desarrollador freelance de software en Charata, Chaco, Argentina.
 
-**Sitio principal:** https://skuuill.pages.dev/ (Cloudflare Pages, despliegue automático desde `main`).
+**Sitio principal:** https://skuull.pages.dev/ (Cloudflare Pages, despliegue automático desde `main`).
 
 **Repositorio:** https://github.com/SkuuIll/SkuuIll_Folio
 

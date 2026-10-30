@@ -96,7 +96,7 @@ test("all project cases exist with visible content and correct canonical URLs", 
       "href",
       new URL(
         `${(process.env.PORTFOLIO_BASE || "/SkuuIll_Folio").replace(/\/$/, "")}/proyectos/${project.id}/`,
-        process.env.PORTFOLIO_SITE || "https://skuuill.pages.dev",
+        process.env.PORTFOLIO_SITE || "https://skuull.pages.dev",
       ).href,
     );
     expect(

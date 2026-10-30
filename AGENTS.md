@@ -1,6 +1,6 @@
 # SkuuIll / Skull — project guidance for coding agents
 
-This is the public **Skull** portfolio (Astro 7, TypeScript, static output). The canonical production URL is https://skuuill.pages.dev/. Cloudflare Pages builds `main` with `PORTFOLIO_BASE=/` and Node 24. The separate GitHub profile is `SkuuIll/SkuuIll`.
+This is the public **Skull** portfolio (Astro 7, TypeScript, static output). The canonical production URL is https://skuull.pages.dev/. Cloudflare Pages builds `main` with `PORTFOLIO_BASE=/` and Node 24. The separate GitHub profile is `SkuuIll/SkuuIll`.
 
 ## Priorities
 

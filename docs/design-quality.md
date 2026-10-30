@@ -1,7 +1,7 @@
 # Criterios de diseño y calidad — Skull
 
 ## Identidad
-- **Marca:** Skull (usuario técnico SkuuIll). URL principal: https://skuuill.pages.dev/.
+- **Marca:** Skull (usuario técnico SkuuIll). URL principal: https://skuull.pages.dev/.
 - **Carácter:** estudio independiente de desarrollo, interfaces, sistemas y experiencias digitales. Editorial, técnico, preciso; evitar efectos sin función.
 - **Jerarquía:** una idea principal por sección; textos descriptivos verificables; proyectos visibles antes de elementos ornamentales.
 - **Casos privados:** indicar claramente que son privados y diferenciar prototipos, demostraciones y producto real.

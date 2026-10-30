@@ -1,3 +1,4 @@
+export {};
 // Opt-in Matrix rain. CSS animations pause outside the observatory and for reduced motion.
 const frame = document.querySelector<HTMLElement>('.spatial-frame');
 const toggle = document.querySelector<HTMLButtonElement>('#matrix-toggle');

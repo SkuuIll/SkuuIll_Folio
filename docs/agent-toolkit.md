@@ -41,6 +41,6 @@ En un agente compatible, iniciar el contexto de producto con `/impeccable init` 
 3. **Implementar en cambios pequeños**: aplicar el enfoque de Superpowers (especificación, plan y pruebas), sin sobreingeniería.
 4. **Auditar**: aplicar la crítica de Impeccable si está instalado y revisar manualmente accesibilidad, responsive, movimiento y rendimiento.
 5. **Verificar**: ejecutar `npm run check`, `npm run check:privacy`, `npm run build` y Playwright cuando estén disponibles; registrar límites de cualquier prueba no ejecutada.
-6. **Publicar**: verificar el sitio real en https://skuuill.pages.dev/ y revisar `canonical`, Open Graph y enlaces de contacto.
+6. **Publicar**: verificar el sitio real en https://skuull.pages.dev/ y revisar `canonical`, Open Graph y enlaces de contacto.
 
 Las tres herramientas son proyectos de terceros. Las referencias no certifican que estén instaladas ni constituyen una afirmación de autoría.

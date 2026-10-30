@@ -22,9 +22,7 @@ test('opt-in Matrix overlay and expanded color palette remain controllable', asy
   await expect(toggle).toHaveAttribute('aria-pressed', 'false');
   await toggle.click();
   await expect(frame).toHaveAttribute('data-matrix', 'on');
-  await expect(frame.locator('.matrix-column')).toHaveCount(28, { timeout: 5000 }).catch(async () => {
-    expect(await frame.locator('.matrix-column').count()).toBeGreaterThanOrEqual(12);
-  });
+  expect(await frame.locator(".matrix-column").count()).toBeGreaterThanOrEqual(12);
   await toggle.click();
   await expect(frame).toHaveAttribute('data-matrix', 'off');
   const button = page.locator('#palette-toggle');
