@@ -1,0 +1,52 @@
+---
+import { asset } from "../data/projects";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const en = lang === "en";
+const tr = (es: string, english: string) => en ? english : es;
+const cases = [
+ {id:"vigia",name:"Vigía",type:tr("OPERACIONES CONECTADAS","CONNECTED OPERATIONS"),image:"vigia-modules.webp",alt:tr("Captura real del selector de módulos de Vigía","Real screenshot of Vigía's modules"),code:"REACT / ANDROID"},
+ {id:"cpaul",name:"CPAUL Atelier",type:tr("PERSONALIZACIÓN 3D","3D CUSTOMIZATION"),image:"atelier-colors.webp",alt:tr("Captura real del editor 3D de CPAUL","Real screenshot of CPAUL's 3D editor"),code:"COMMERCE / 3D"},
+ {id:"pubg-map",name:"Tactical Map",type:tr("CARTOGRAFÍA INTERACTIVA","INTERACTIVE CARTOGRAPHY"),image:"tactical-map.webp",alt:tr("Captura de la aplicación de cartografía Tactical Map","Screenshot of the Tactical Map application"),code:"WEB / PWA"}
+];
+---
+<section class="depth-showcase shell" id="profundidad-3d" aria-labelledby="depth-title" data-depth-shell>
+ <header class="depth-heading">
+  <div>
+   <p class="eyebrow">{tr("04 / EXPERIENCIAS POR CAPAS","04 / LAYERED EXPERIENCES")}</p>
+   <h2 id="depth-title">{tr("La profundidad", "Depth with")}<br/><span>{tr("tiene propósito.", "a purpose.")}</span></h2>
+  </div>
+  <p>{tr("Tres proyectos reales, tres capturas superpuestas. Mové el cursor para explorar la profundidad y elegí qué trabajo querés poner en primer plano.", "Three real projects, three overlapping screenshots. Move your pointer to explore depth, and choose the project in the foreground.")}</p>
+ </header>
+ <div class="depth-layout">
+  <div class="depth-stage" data-depth-stage data-active="vigia" role="group" aria-label={tr("Vista de proyectos superpuestos con efecto de profundidad","Layered project screenshots with depth effect")}>
+   <div class="depth-grid" aria-hidden="true"></div>
+   <div class="depth-universe">
+    {cases.map((item,i)=>(
+      <figure class:list={["depth-layer",`depth-layer--${i+1}`]} data-depth-layer={item.id}>
+        <div class="depth-window-bar"><span aria-hidden="true">● ● ●</span><span>{item.code}</span></div>
+        <img src={asset(`media/${item.image}`)} alt={item.alt} loading="lazy" decoding="async" width="900" height="550" />
+        <figcaption><strong>{item.name}</strong><small>{item.type}</small></figcaption>
+      </figure>
+    ))}
+   </div>
+   <div class="depth-crosshair" aria-hidden="true">+</div>
+   <span class="depth-coordinates mono" aria-hidden="true">X: 00.0 / Y: 00.0 / Z: +03</span>
+   <div class="depth-stage-caption mono">{tr("CAPTURAS DE PROYECTOS / PERSPECTIVA SIMULADA","PROJECT SCREENSHOTS / SIMULATED PERSPECTIVE")}</div>
+  </div>
+  <aside class="depth-console">
+   <span class="mono depth-kicker">SKULL / PROJECT.DEPTH</span>
+   <h3>{tr("Una interfaz.", "One interface.")}<br/>{tr("Varias capas.", "Many layers.")}</h3>
+   <p>{tr("No es una escena genérica: son interfaces de trabajos documentados, con movimiento por profundidad sin usar otro motor WebGL.", "Not a generic sci-fi scene: these are documented project interfaces, layered without adding another WebGL engine.")}</p>
+   <div class="depth-selector" role="group" aria-label={tr("Proyecto en primer plano","Foreground project")}>
+     {cases.map((item,i)=>(<button type="button" data-depth-pick={item.id} aria-pressed={i===0?"true":"false"}>
+      <span class="mono">0{i+1}</span><strong>{item.name}</strong><span aria-hidden="true">↗</span>
+     </button>))}
+   </div>
+   <div class="depth-readout" aria-live="polite" role="status"><span class="mono">{tr("EN PRIMER PLANO","IN FOCUS")}</span><strong data-depth-name>Vigía</strong><p data-depth-description>{tr("Gestión hotelera y operaciones conectadas.","Hotel management and connected operations.")}</p></div>
+   <a class="depth-link" data-depth-link href={asset(en?"en/projects/vigia/":"proyectos/vigia/")}>{tr("Ver el caso real","View case study")} <span aria-hidden="true">↗</span></a>
+   <small>{tr("En móviles, tocá un proyecto para cambiar de capa. Se respeta el movimiento reducido.","On mobile, tap a project to change layers. Reduced-motion preferences are respected.")}</small>
+  </aside>
+ </div>
+</section>
+<script>import "../scripts/depth-showcase";</script>
