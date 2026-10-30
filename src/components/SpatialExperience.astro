@@ -9,15 +9,15 @@ import "../styles/spatial.css";
   aria-labelledby="spatial-title"
 >
   <div class="spatial-heading">
-    <p class="eyebrow">Una ventana a otro lugar</p>
+    <p class="eyebrow">03 / OBSERVATORIO DIGITAL</p>
     <h2 id="spatial-title">
-      La pantalla
+      Más allá
       <br />
-      se queda corta.
+      de la pantalla.
     </h2>
     <p>
-      Una imagen que se abre cuando te movés. Acercate, cambiá el punto de vista
-      y mirá de nuevo.
+      Una escena que responde a tu mirada. Explorá la profundidad, la perspectiva
+      y la luz. También podés activar una capa cyberpunk de código en movimiento.
     </p>
   </div>
   <div class="spatial-frame" data-spatial="photo">
@@ -30,9 +30,10 @@ import "../styles/spatial.css";
       alt="Observatorio futurista entre estructuras oscuras, anillos de cristal y una esfera luminosa sobre montañas lejanas."
     />
     <canvas aria-hidden="true" data-running="false"></canvas>
+    <div class="matrix-rain" aria-hidden="true"></div>
     <div class="spatial-image-caption">
       <span class="mono">SKULL / OBSERVATORIO</span>
-      <span>Arte digital con profundidad</span>
+      <span>Perspectiva · Luz · Profundidad</span>
     </div>
     <div class="spatial-reticle" aria-hidden="true"></div>
   </div>
@@ -42,6 +43,14 @@ import "../styles/spatial.css";
     </label>
     <input id="spatial-depth" type="range" min="0" max="100" value="50" />
     <span>Mové el cursor. En tu teléfono, desplazate.</span>
+  </div>
+  <div class="spatial-art-actions">
+    <p class="mono">EXPERIENCIA INTERACTIVA / CONTROLADA POR VOS</p>
+    <button type="button" id="matrix-toggle" aria-pressed="false" hidden>
+      <span class="matrix-toggle-icon" aria-hidden="true">⌘</span>
+      <span class="matrix-toggle-label">Activar lluvia Matrix</span>
+    </button>
+    <span id="matrix-status" class="mono" role="status" aria-live="polite"></span>
   </div>
 </section>
 
@@ -90,4 +99,5 @@ import "../styles/spatial.css";
 </section>
 <script>
   import "../scripts/spatial";
+  import "../scripts/matrix";
 </script>

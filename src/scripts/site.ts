@@ -145,8 +145,8 @@ materialSelect?.addEventListener("change", () => {
   } catch {}
 });
 
-const palettes = ["forest", "blue", "clay", "violet", "amber", "ice"];
-const paletteNames = ["Menta", "Azul", "Coral", "Violeta", "Ámbar", "Hielo"];
+const palettes = ["forest", "blue", "clay", "violet", "amber", "ice", "matrix", "neon", "sunset", "cobalt", "rose", "copper"];
+const paletteNames = ["Menta", "Azul", "Coral", "Violeta", "Ámbar", "Hielo", "Matrix", "Neón", "Atardecer", "Cobalto", "Rosa", "Cobre"];
 const paletteButton =
   document.querySelector<HTMLButtonElement>("#palette-toggle");
 

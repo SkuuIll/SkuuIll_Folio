@@ -481,3 +481,24 @@ body {
     backdrop-filter: none;
   }
 }
+
+/* Expanded, intentional color system. Each palette has high-contrast dark and light variants. */
+:root[data-theme="dark"][data-palette="matrix"] { --paper: #050f0d; --surface: #10241b; --soft: #0b3024; --accent: #62fa93; --signal-blue: #6ad2b9; }
+:root[data-theme="dark"][data-palette="neon"] { --paper: #180b1c; --surface: #2b1431; --soft: #431e4a; --accent: #ff91eb; --signal-blue: #7bd8ff; }
+:root[data-theme="dark"][data-palette="sunset"] { --paper: #20110c; --surface: #332016; --soft: #503020; --accent: #ffc18c; --signal-blue: #ffa69e; }
+:root[data-theme="dark"][data-palette="cobalt"] { --paper: #0b142a; --surface: #182748; --soft: #223e64; --accent: #a7cbff; --signal-blue: #87f4e8; }
+:root[data-theme="dark"][data-palette="rose"] { --paper: #1c1019; --surface: #30202d; --soft: #472b41; --accent: #ffc1d4; --signal-blue: #e1b4ff; }
+:root[data-theme="dark"][data-palette="copper"] { --paper: #19120f; --surface: #32221c; --soft: #483026; --accent: #f2bc95; --signal-blue: #a8d7cf; }
+:root[data-theme="light"][data-palette="matrix"] { --paper: #f0fff4; --surface: #e3f4e8; --soft: #d6f1dd; --accent: #146137; --signal-blue: #005d56; }
+:root[data-theme="light"][data-palette="neon"] { --paper: #fff2fb; --surface: #fae1f4; --soft: #f5d5f2; --accent: #982368; --signal-blue: #005d84; }
+:root[data-theme="light"][data-palette="sunset"] { --paper: #fff6ed; --surface: #f8e6d6; --soft: #f6dfcf; --accent: #934719; --signal-blue: #974f47; }
+:root[data-theme="light"][data-palette="cobalt"] { --paper: #f1f5ff; --surface: #e0eafd; --soft: #dae7fb; --accent: #235492; --signal-blue: #00645a; }
+:root[data-theme="light"][data-palette="rose"] { --paper: #fff5f8; --surface: #fae5ec; --soft: #f6dce7; --accent: #8f3253; --signal-blue: #63438e; }
+:root[data-theme="light"][data-palette="copper"] { --paper: #fff6f0; --surface: #f4e6dc; --soft: #f1dfd3; --accent: #824929; --signal-blue: #2d6559; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand svg { transition: filter 0.4s ease, transform 0.4s ease; }
+  .brand:hover svg { filter: drop-shadow(0 0 10px var(--accent)); transform: rotate(-6deg) scale(1.04); }
+  .sp-primary { transition: transform 180ms ease, box-shadow 220ms ease, background 220ms ease; }
+  .sp-primary:hover { box-shadow: 0 10px 32px color-mix(in srgb, var(--accent) 28%, transparent); }
+}
