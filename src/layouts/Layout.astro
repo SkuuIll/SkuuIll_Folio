@@ -125,9 +125,13 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
     <script is:inline>
       // Resolve the preferred theme before the first paint to avoid color flashes.
       let theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      let explicitTheme = false;
       try {
         const savedTheme = localStorage.getItem("skull-theme");
-        if (["light", "dark"].includes(savedTheme)) theme = savedTheme;
+        if (["light", "dark"].includes(savedTheme)) {
+          theme = savedTheme;
+          explicitTheme = true;
+        }
       } catch {}
       document.documentElement.dataset.theme = theme;
       // First visit: editorial. An explicitly selected edition follows the visitor
@@ -141,6 +145,19 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       const design = requestedDesign && designs.includes(requestedDesign)
         ? requestedDesign
         : priorDesign && designs.includes(priorDesign) ? priorDesign : "editorial";
+      // Each exhibition has a deliberate first-visit mood. Matrix/Terminal
+      // opens as black + phosphor green, Museum as warm paper. Once someone
+      // chooses Light/Dark manually, that explicit preference always wins.
+      if (!explicitTheme) {
+        const editionThemes = {
+          "casebook": "dark", "systems": "dark", "chromatic": "dark",
+          "skull-os": "dark", "xray": "dark", "terminal": "dark",
+          "canvas": "dark", "story": "dark",
+          "atelier": "light", "pocket": "light", "studio": "light",
+          "museum": "light", "brutalist": "light"
+        };
+        document.documentElement.dataset.theme = editionThemes[design] || theme;
+      }
       document.documentElement.dataset.design = design;
       try { sessionStorage.setItem("skull-design-last", design); } catch {}
       try { localStorage.setItem("skull-design-last", design); } catch {}
