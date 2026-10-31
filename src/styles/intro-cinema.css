@@ -1,0 +1,11 @@
+/* SKULL cinematic opening — purely decorative, no additional blocking time. */
+.sk-intro-core{position:relative;isolation:isolate}
+.sk-intro-orbit{position:absolute;inset:50% auto auto 50%;width:min(68vw,600px);aspect-ratio:1;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;opacity:.4}
+.sk-intro-orbit span{position:absolute;inset:8%;border:1px solid currentColor;border-radius:50%;opacity:.38;animation:sk-orbit 11s linear infinite}
+.sk-intro-orbit span:nth-child(1){transform:rotate(32deg) scaleX(.52)}
+.sk-intro-orbit span:nth-child(2){transform:rotate(94deg) scaleX(.42);animation-duration:15s;animation-direction:reverse}
+.sk-intro-orbit span:nth-child(3){transform:rotate(-25deg) scaleX(.7);animation-duration:18s}
+.sk-intro-percent{font-size:clamp(10px,1.2vw,15px);letter-spacing:.18em}
+@keyframes sk-orbit{to{rotate:360deg}}
+@media(max-width:767px){.sk-intro-orbit{width:90vw;opacity:.24}.sk-intro-percent{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.sk-intro-orbit span{animation:none}}
