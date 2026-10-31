@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 const editions=["skull-os","xray","museum","terminal","canvas","brutalist","story"];
-async function select(page,key){const en=new URL(page.url()).pathname.replace(/\\/$/,"").endsWith("/en");await page.goto((en?"en/":"./")+"?design="+key);await expect(page.locator("html")).toHaveAttribute("data-design",key);await expect(page.locator('[data-edition-scene="'+key+'"]')).toBeVisible();}
+async function select(page,key){const en=new URL(page.url()).pathname.endsWith("/en/");await page.goto((en?"en/":"./")+"?design="+key);await expect(page.locator("html")).toHaveAttribute("data-design",key);await expect(page.locator('[data-edition-scene="'+key+'"]')).toBeVisible();}
 test("all seven new editions are navigable from the selector and keep bilingual content",async({page})=>{
  for(const language of ["./","en/"]){
   await page.goto(language);
