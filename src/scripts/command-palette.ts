@@ -5,6 +5,7 @@ const input=dialog?.querySelector<HTMLInputElement>("[data-command-input]");
 const results=dialog?.querySelector<HTMLElement>("[data-command-results]");
 const count=dialog?.querySelector<HTMLElement>("[data-command-count]");
 const close=dialog?.querySelector<HTMLButtonElement>("[data-command-close]");
+const editionShortcut=dialog?.querySelector<HTMLButtonElement>("[data-command-editions]");
 const en=document.documentElement.lang.startsWith("en");
 const entries:Entry[]=dialog?JSON.parse(dialog.dataset.commandItems||"[]"):[];
 const normalize=(s:string)=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
@@ -21,7 +22,7 @@ function activate(index:number){
 function render(){
  if(!input||!results)return;
  const query=normalize(input.value.trim());
- visible=entries.map((item,i)=>({item,i,score:query?normalize(item.title).startsWith(query)?0:normalize(item.title).includes(query)?1:normalize(item.subtitle+" "+(item.keywords||"")).includes(query)?2:100: i})).filter(x=>x.score<100).sort((a,b)=>a.score-b.score||a.i-b.i).slice(0,12).map(x=>x.item);
+ visible=entries.map((item,i)=>({item,i,score:query?normalize(item.title).startsWith(query)?0:normalize(item.title).includes(query)?1:normalize(item.subtitle+" "+(item.keywords||"")).includes(query)?2:normalize(item.group).includes(query)?3:100: i})).filter(x=>x.score<100).sort((a,b)=>a.score-b.score||a.i-b.i).slice(0,query==="ediciones"||query==="editions"?20:12).map(x=>x.item);
  results.replaceChildren();
  visible.forEach((entry,i)=>{
   const button=document.createElement("button");button.type="button";button.id="command-result-"+i;button.dataset.commandResult="";button.setAttribute("role","option");
@@ -38,6 +39,7 @@ function open(){if(!dialog||dialog.open)return;dialog.showModal();if(input){inpu
 function dismiss(){dialog?.close();trigger?.focus({preventScroll:true})}
 trigger?.addEventListener("click",open);
 close?.addEventListener("click",dismiss);
+editionShortcut?.addEventListener("click",()=>{if(!input)return;input.value=en?"editions":"ediciones";render();input.focus();});
 dialog?.addEventListener("click",event=>{if(event.target===dialog)dismiss()});
 dialog?.addEventListener("close",()=>trigger?.focus({preventScroll:true}));
 document.addEventListener("keydown",event=>{
