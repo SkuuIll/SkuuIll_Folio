@@ -18,8 +18,9 @@ const colorState=page=>page.evaluate(()=>{
 test("all fourteen editions resolve their own color system in light and dark",async({page})=>{
  for(const [design,palette] of editions){
   for(const theme of ["dark","light"]){
-   await page.addInitScript((t)=>localStorage.setItem("skull-theme",t),theme);
    await page.goto("./?design="+design);
+   await page.evaluate(t=>localStorage.setItem("skull-theme",t),theme);
+   await page.reload();
    const colors=await colorState(page);
    expect(colors.design).toBe(design);
    expect(colors.palette).toBe(palette);
