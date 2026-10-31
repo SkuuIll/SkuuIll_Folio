@@ -122,24 +122,24 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
-      let theme = "dark";
+      // Resolve the preferred theme before the first paint to avoid color flashes.
+      let theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       try {
         const savedTheme = localStorage.getItem("skull-theme");
         if (["light", "dark"].includes(savedTheme)) theme = savedTheme;
       } catch {}
       document.documentElement.dataset.theme = theme;
-      // A stable editorial homepage by default; fourteen art directions remain available by explicit URL.
-      // A shared key works across Spanish, English and project pages.
+      // First visit: editorial. An explicitly selected edition follows the visitor
+      // across Spanish/English navigation and all case-study pages.
       const designs = ["editorial", "casebook", "systems", "atelier", "chromatic", "pocket", "studio", "skull-os", "xray", "museum", "terminal", "canvas", "brutalist", "story"];
       let priorDesign;
       try { priorDesign = sessionStorage.getItem("skull-design-last") || localStorage.getItem("skull-design-last"); } catch {}
-      const previousIndex = designs.indexOf(priorDesign);
-      // An explicit design link is shareable and predictable. Ordinary visits
-      // still rotate through all fourteen editions.
+      // Query parameter takes precedence, then the edition selected in this
+      // browser; never silently revert to Editorial while browsing a case.
       const requestedDesign = new URLSearchParams(location.search).get("design");
       const design = requestedDesign && designs.includes(requestedDesign)
         ? requestedDesign
-        : "editorial";
+        : priorDesign && designs.includes(priorDesign) ? priorDesign : "editorial";
       document.documentElement.dataset.design = design;
       try { sessionStorage.setItem("skull-design-last", design); } catch {}
       try { localStorage.setItem("skull-design-last", design); } catch {}
