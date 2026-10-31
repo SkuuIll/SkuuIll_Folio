@@ -16,7 +16,7 @@ test("one Search opens all fourteen editions without a second toolbar",async({pa
  await page.locator("[data-command-editions]").click();
  await expect(page.locator("[data-command-result]")).toHaveCount(14);
  for(const mode of modes)await expect(page.locator("[data-command-results]")).toContainText(mode.toUpperCase());
- await page.locator("[data-command-results]").getByRole("button",{name:/XRAY/i}).click();
+ await page.locator("[data-command-results]").getByRole("option",{name:/XRAY/i}).click();
  await expect(page.locator("html")).toHaveAttribute("data-design","xray");
 });
 test("English search retains editions on a constrained mobile viewport",async({page})=>{
