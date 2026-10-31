@@ -17,6 +17,7 @@ test("each of fourteen visual editions has distinct light and dark palettes",asy
  await expect(button).toBeVisible();
  const observations=[];
  for(let i=0;i<14;i++){
+  await page.goto("./?design="+editions[i]);
   const current=await page.locator("html").getAttribute("data-design");
   expect(editions).toContain(current);
   if((await page.locator("html").getAttribute("data-theme"))!=="dark")await button.click();
@@ -42,7 +43,6 @@ test("each of fourteen visual editions has distinct light and dark palettes",asy
   expect(ratio(d0,darkInk)).toBeGreaterThan(4.4);
   expect(ratio(d1,lightInk)).toBeGreaterThan(4.4);
   observations.push(current);
-  await page.locator("[data-design-next]").click();
  }
  expect(new Set(observations).size).toBe(14);
 });
@@ -50,8 +50,7 @@ test("editorial and studio do not lock to one theme; systems changes backgrounds
  await page.goto("./");
  const button=page.locator("#theme-toggle");
  for(const target of ["editorial","systems","studio"]){
-  for(let i=0;i<14&&(await page.locator("html").getAttribute("data-design"))!==target;i++)
-   await page.locator("[data-design-next]").click();
+  await page.goto("./?design="+target);
   await expect(page.locator("html")).toHaveAttribute("data-design",target);
   if((await page.locator("html").getAttribute("data-theme"))!=="dark")await button.click();
   const dark=await cssState(page);await button.click();const light=await cssState(page);
@@ -61,8 +60,7 @@ test("editorial and studio do not lock to one theme; systems changes backgrounds
 });
 test("chromatic text is no longer rotated, shadowed or visually doubled",async({page})=>{
  await page.goto("./");
- for(let i=0;i<14&&(await page.locator("html").getAttribute("data-design"))!=="chromatic";i++)
-  await page.locator("[data-design-next]").click();
+ await page.goto("./?design=chromatic");
  await expect(page.locator("html")).toHaveAttribute("data-design","chromatic");
  for(let mode=0;mode<2;mode++){
   const h=await cssState(page);
