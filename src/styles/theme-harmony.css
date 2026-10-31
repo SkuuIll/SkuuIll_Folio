@@ -1,0 +1,96 @@
+/* SKULL palette harmony: the selected art direction owns every shared surface.
+   Keep each edition's intentional illustration colors, but remove accidental
+   cyan/blue defaults from common UI and first-load brand treatments. */
+
+/* The opening ident is always dark for cinematic contrast. Its signal,
+   however, belongs to the active edition instead of always being teal. */
+:root{--intro-glow:#baf27c}
+:root[data-design="editorial"]{--intro-glow:#baf27c}
+:root[data-design="casebook"]{--intro-glow:#ffc17b}
+:root[data-design="systems"]{--intro-glow:#69fff0}
+:root[data-design="atelier"]{--intro-glow:#f1b9ff}
+:root[data-design="chromatic"]{--intro-glow:#ff91eb}
+:root[data-design="pocket"]{--intro-glow:#a1ecc0}
+:root[data-design="studio"]{--intro-glow:#f6d28b}
+:root[data-design="skull-os"]{--intro-glow:#9ebdff}
+:root[data-design="xray"]{--intro-glow:#72efd2}
+:root[data-design="museum"]{--intro-glow:#f3c98d}
+:root[data-design="terminal"]{--intro-glow:#80ffac}
+:root[data-design="canvas"]{--intro-glow:#8bd7ff}
+:root[data-design="brutalist"]{--intro-glow:#ffe56b}
+:root[data-design="story"]{--intro-glow:#d7baff}
+
+.sk-intro{
+ color:#f5f7f3;
+ background:radial-gradient(ellipse at 50% 43%,
+  color-mix(in srgb,var(--intro-glow) 22%,#081017) 0%,
+  color-mix(in srgb,var(--intro-glow) 5%,#081017) 58%,#050a0e 100%);
+}
+.sk-intro-grid{
+ background:
+  repeating-linear-gradient(0deg,transparent 0 70px,color-mix(in srgb,var(--intro-glow) 17%,transparent) 71px 72px),
+  repeating-linear-gradient(90deg,transparent 0 70px,color-mix(in srgb,var(--intro-glow) 17%,transparent) 71px 72px);
+}
+.sk-intro-mark{color:var(--intro-glow);filter:drop-shadow(0 5px 18px color-mix(in srgb,var(--intro-glow) 30%,transparent))}
+.sk-intro-name .sk-intro-dot,
+.sk-intro-sequence span[data-active="true"]{color:var(--intro-glow)}
+.sk-intro-sub,.sk-intro-top,.sk-intro-status,.sk-intro-sequence{
+ color:color-mix(in srgb,var(--intro-glow) 26%,#f2f4f0);
+}
+.sk-intro-meter{background:color-mix(in srgb,var(--intro-glow) 20%,#18242a)}
+.sk-intro-meter span{background:linear-gradient(90deg,var(--intro-glow),color-mix(in srgb,var(--intro-glow) 45%,#e9eeff))}
+.sk-intro-rule{background:color-mix(in srgb,var(--intro-glow) 65%,transparent)}
+.sk-intro::before{border-color:color-mix(in srgb,var(--intro-glow) 28%,transparent)}
+.sk-intro::after{background:linear-gradient(transparent,color-mix(in srgb,var(--intro-glow) 54%,transparent),transparent)}
+.sk-intro-orbit{color:var(--intro-glow)}
+.sk-intro-skip{background:color-mix(in srgb,var(--intro-glow) 9%,#09141b);color:#f5f7f3;
+ border-color:color-mix(in srgb,var(--intro-glow) 49%,#223137)}
+.sk-intro-skip:hover,.sk-intro-skip:focus-visible{border-color:var(--intro-glow)}
+
+/* Common project chrome inherits the edition, including warm Casebook,
+   fluorescent Terminal/Matrix, cool X-Ray, violet Story and bright Canvas. */
+.portfolio-work{--portfolio-border:color-mix(in srgb,var(--line) 75%,transparent)}
+.portfolio-capability{
+ border-color:color-mix(in srgb,var(--line) 75%,transparent);
+ background:color-mix(in srgb,var(--surface) 32%,transparent);
+}
+.portfolio-work-card:hover,.portfolio-capability:hover{
+ border-color:color-mix(in srgb,var(--accent) 62%,var(--line));
+ background:color-mix(in srgb,var(--accent) 6%,var(--surface));
+}
+.portfolio-archive-link:hover{
+ border-color:var(--accent);
+ background:color-mix(in srgb,var(--accent) 7%,var(--surface));
+}
+
+/* Placeholder art has a coherent tint, but preserves the individual
+   project's own tone. Genuine screenshots retain their actual colors. */
+.portfolio-work-media:has(.portfolio-work-art){
+ --case-tone:#334657;
+ background:radial-gradient(ellipse at 38% 22%,
+  color-mix(in srgb,var(--accent) 43%,var(--case-tone)) 0%,
+  color-mix(in srgb,var(--case-tone) 24%,#09121b) 78%);
+}
+.portfolio-work-media--sage:has(.portfolio-work-art){--case-tone:#45705b}
+.portfolio-work-media--sand:has(.portfolio-work-art){--case-tone:#856e59}
+.portfolio-work-media--blue:has(.portfolio-work-art){--case-tone:#416b94}
+.portfolio-work-media--olive:has(.portfolio-work-art){--case-tone:#68764d}
+.portfolio-work-media--ink:has(.portfolio-work-art){--case-tone:#47516c}
+.portfolio-work-art{
+ background-image:
+ linear-gradient(90deg,color-mix(in srgb,var(--intro-glow) 13%,transparent) 1px,transparent 1px),
+ linear-gradient(color-mix(in srgb,var(--intro-glow) 13%,transparent) 1px,transparent 1px);
+}
+
+/* Always use the brand hue for a shared control's focus treatment, not
+   the legacy default aqua hue. Keep scene-specific custom art untouched. */
+.command-dialog button:focus-visible,.command-trigger:focus-visible,
+.portfolio-work-link:focus-visible{outline-color:var(--accent)}
+:root[data-theme="light"] .sk-intro{color:#f5f7f3}
+
+/* Native form controls/scrollbars should match the chosen theme too. */
+:root[data-theme="dark"]{color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
+@media(prefers-reduced-motion:reduce){
+ .sk-intro-mark{filter:none}
+}
