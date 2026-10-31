@@ -19,6 +19,14 @@ const items = [...navigation,...entries];
 <dialog class="command-dialog" id="skull-command" aria-label={en?"Search projects, navigation and editions":"Buscar proyectos, navegación y ediciones"} data-command-dialog data-command-items={JSON.stringify(items)}>
   <div class="command-shell">
     <div class="command-searchbar"><span aria-hidden="true">⌕</span><label class="sr-only" for="command-query">{en?"Search":"Buscar"}</label><input id="command-query" data-command-input type="search" autocomplete="off" spellcheck="false" placeholder={en?"Search projects, technologies, editions…":"Buscar proyectos, tecnologías, ediciones…"} /><button type="button" data-command-close aria-label={en?"Close search":"Cerrar búsqueda"}>ESC</button></div>
+    <div class="command-shortcuts">
+      <button type="button" data-command-editions aria-label={en?"Browse the 14 visual editions":"Explorar las 14 ediciones visuales"}>
+        <span aria-hidden="true">✦</span>
+        {en?"14 visual editions":"14 estilos visuales"}
+        <span aria-hidden="true">↗</span>
+      </button>
+      <span>{en?"Projects, technologies and design styles in one place.":"Proyectos, tecnologías y estilos en un solo lugar."}</span>
+    </div>
     <p class="command-count mono" data-command-count aria-live="polite"></p>
     <div class="command-results" data-command-results role="listbox" aria-label={en?"Search results":"Resultados de búsqueda"}></div>
     <div class="command-footer mono"><span>↑ ↓ {en?"Navigate":"Navegar"}</span><span>↵ {en?"Open":"Abrir"}</span><span>ESC {en?"Close":"Cerrar"}</span></div>
