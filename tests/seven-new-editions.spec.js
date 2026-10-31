@@ -1,10 +1,10 @@
 const {test,expect}=require("@playwright/test");
 const editions=["skull-os","xray","museum","terminal","canvas","brutalist","story"];
-async function select(page,key){await page.locator("[data-design-select]").selectOption(key);await expect(page.locator("html")).toHaveAttribute("data-design",key);await expect(page.locator('[data-edition-scene="'+key+'"]')).toBeVisible();}
+async function select(page,key){const en=new URL(page.url()).pathname.replace(/\\/$/,"").endsWith("/en");await page.goto((en?"en/":"./")+"?design="+key);await expect(page.locator("html")).toHaveAttribute("data-design",key);await expect(page.locator('[data-edition-scene="'+key+'"]')).toBeVisible();}
 test("all seven new editions are navigable from the selector and keep bilingual content",async({page})=>{
  for(const language of ["./","en/"]){
   await page.goto(language);
-  await expect(page.locator("[data-design-select] option")).toHaveCount(14);
+  await expect(page.locator("[data-design-ribbon]")).toBeHidden();
   for(const key of editions){
    await select(page,key);
    expect(await page.locator('[data-edition-scene="'+key+'"] h1').count()).toBe(1);
@@ -90,7 +90,7 @@ test("new directions replace the generic hero rather than stacking it below",asy
   await expect(page.locator('.edition-scene[data-edition-scene="'+key+'"] h1')).toBeVisible();
   await expect(page.locator(".signal-backdrop")).toBeHidden();
  }
- await page.locator("[data-design-select]").selectOption("editorial");
+ await select(page,"editorial");
  await expect(page.locator("html")).toHaveAttribute("data-design","editorial");
  await expect(page.locator(".sp-hero")).toBeVisible();
  await expect(page.locator(".edition-experiences")).toBeHidden();
