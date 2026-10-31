@@ -94,3 +94,20 @@
 @media(prefers-reduced-motion:reduce){
  .sk-intro-mark{filter:none}
 }
+
+/* Casebook is an amber photographic exhibition, not a blue dashboard.
+   Retint the photo overlay and printed figure badge without recoloring
+   the real screenshot itself. */
+:root[data-design="casebook"] .sp-hero::before{
+ background:
+  linear-gradient(180deg,
+   color-mix(in srgb,var(--accent) 12%,#160e0b) 0%,
+   transparent 44%,
+   color-mix(in srgb,var(--accent) 11%,#25180f) 100%),
+  url("/media/atelier-colors.webp") center / cover !important;
+}
+:root[data-design="casebook"] .sp-hero::after{
+ color:#fff6e8;
+ background:color-mix(in srgb,var(--accent) 9%,#23180e);
+ border-color:color-mix(in srgb,var(--accent) 45%,#4e3828);
+}
