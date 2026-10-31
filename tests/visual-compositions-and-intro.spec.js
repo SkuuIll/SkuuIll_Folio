@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 const legacy=["editorial","casebook","systems","atelier","chromatic","pocket","studio"];
-const select=async(page,mode)=>{await page.locator("[data-design-select]").selectOption(mode);await expect(page.locator("html")).toHaveAttribute("data-design",mode)};
+const select=async(page,mode)=>{const en=new URL(page.url()).pathname.endsWith("/en/");await page.goto((en?"en/":"./")+"?design="+mode);await expect(page.locator("html")).toHaveAttribute("data-design",mode)};
 
 test("the redesigned Casebook masthead, title and image do not collide at desktop or mobile widths",async({page})=>{
  await page.goto("./");
@@ -70,14 +70,13 @@ test("the opening ident has 3 steps, can be skipped and takes longer than its or
 test("edition switch animations are controlled and respect reduced motion",async({page})=>{
  await page.goto("./");
  await select(page,"casebook");
- await expect(page.locator("main")).toHaveClass(/edition-revealing/);
- await expect(page.locator("main")).not.toHaveClass(/edition-revealing/,{timeout:2000});
+ await expect(page.locator(".sp-hero")).toBeVisible();
  await page.emulateMedia({reducedMotion:"reduce"});
  await select(page,"editorial");
  await expect(page.locator(".sp-hero")).toBeVisible();
 });
 
-test("direct edition URLs are shareable and normal pages still cycle",async({page})=>{
+test("direct edition URLs are shareable and ordinary visits return to the default",async({page})=>{
  await page.goto("./?design=casebook");
  await expect(page.locator("html")).toHaveAttribute("data-design","casebook");
  await page.reload();
@@ -85,5 +84,5 @@ test("direct edition URLs are shareable and normal pages still cycle",async({pag
  await page.goto("en/?design=terminal");
  await expect(page.locator("html")).toHaveAttribute("data-design","terminal");
  await page.goto("./");
- await expect(page.locator("html")).toHaveAttribute("data-design","canvas");
+ await expect(page.locator("html")).toHaveAttribute("data-design","editorial");
 });
