@@ -19,6 +19,6 @@ test("all editions can be found in the single search dialog",async({page})=>{
  await page.locator("[data-command-trigger]").click();
  await page.locator("[data-command-editions]").click();
  await expect(page.locator("[data-command-result]")).toHaveCount(14);
- await page.locator("[data-command-results]").getByRole("button",{name:/TERMINAL/i}).click();
+ await page.locator("[data-command-results]").getByRole("option",{name:/TERMINAL/i}).click();
  await expect(page.locator("html")).toHaveAttribute("data-design","terminal");
 });
