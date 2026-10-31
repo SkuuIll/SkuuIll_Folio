@@ -5,7 +5,8 @@ async function gotoClean(page,path="./"){
  await page.goto(path);
 }
 async function select(page,mode){
- await page.locator("[data-design-select]").selectOption(mode);
+ const en=new URL(page.url()).pathname.endsWith("/en/");
+ await page.goto((en?"en/":"./")+"?design="+mode);
  await expect(page.locator("html")).toHaveAttribute("data-design",mode);
 }
 test("all 14 editions now change the actual project/capability/about compositions",async({page})=>{
@@ -36,7 +37,7 @@ test("all 14 editions now change the actual project/capability/about composition
  }
  expect(new Set(signatures.map(x=>x.signature)).size).toBe(14);
 });
-test("project edition label follows the selector in both languages",async({page})=>{
+test("project edition label follows the active edition in both languages",async({page})=>{
  for(const path of ["./","en/"]){
   await gotoClean(page,path);
   await select(page,"museum");
@@ -62,13 +63,13 @@ test("14 different project layouts remain inside the viewport on small phones",a
       gridWidth:Math.round(grid.getBoundingClientRect().width),
       cardWidths:visibleCards.map(el=>Math.round(el.getBoundingClientRect().width)),
       mainWidth:Math.round(main.width),
-      selectorWidth:Math.round(document.querySelector("[data-design-ribbon]").getBoundingClientRect().width)
+      searchVisible:!!document.querySelector("[data-command-trigger]")
     };
   });
   expect(result.overflow,JSON.stringify({mode,result})).toBeLessThanOrEqual(2);
   expect(result.cardWidths.length).toBe(6);
   expect(Math.max(...result.cardWidths),JSON.stringify({mode,result})).toBeLessThanOrEqual(result.gridWidth+2);
-  expect(result.selectorWidth).toBeLessThanOrEqual(465);
+  expect(result.searchVisible).toBe(true);
  }
 });
 test("all editions preserve project links and accessible focus targets",async({page})=>{
