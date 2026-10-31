@@ -340,33 +340,8 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
         </div>
       </dialog>
     </header>
-    <nav class="design-ribbon shell" data-design-ribbon aria-label={tr("Selector de las 14 ediciones de SKULL", "SKULL's 14-edition selector")}>
-      <strong class="picker-brand mono" aria-hidden="true">SKULL <span>✦</span></strong>
-      <div class="design-ribbon-main visually-hidden" aria-live="polite">
-        <strong data-design-name>Editorial / {tr("Identidad", "Identity")}</strong>
-        <span data-design-note>{tr("Tipografía protagonista y composición editorial.", "Expressive editorial composition.")}</span>
-      </div>
-      <div class="design-ribbon-controls">
-        <button type="button" data-design-prev aria-label={tr("Diseño anterior", "Previous design")} title={tr("Diseño anterior", "Previous design")}>
-          <span aria-hidden="true">←</span>
-        </button>
-        <span data-design-index class="design-index" aria-label={tr("Edición actual de 14", "Current edition out of 14")}>01 / 14</span>
-        <label class="design-select-label">
-          <span class="visually-hidden">{tr("Elegir diseño", "Choose design")}</span>
-          <select data-design-select aria-label={tr("Elegir entre 14 diseños", "Choose from 14 designs")}>
-            {[
-              ["editorial","01 · Editorial"],["casebook","02 · Casebook"],["systems","03 · Systems"],["atelier","04 · Atelier"],
-              ["chromatic","05 · Chromatic"],["pocket","06 · Pocket"],["studio","07 · Studio"],["skull-os","08 · SKULL OS"],
-              ["xray","09 · X-Ray 3D"],["museum","10 · Digital Museum"],["terminal","11 · Terminal Pro"],
-              ["canvas","12 · Infinite Canvas"],["brutalist","13 · Neo-Brutalist"],["story","14 · Story Mode"]
-            ].map(([value,label]) => <option value={value}>{label}</option>)}
-          </select>
-        </label>
-        <button type="button" data-design-next class="design-next" aria-label={tr("Siguiente diseño", "Next design")} title={tr("Siguiente diseño", "Next design")}>
-          <span aria-hidden="true">→</span>
-        </button>
-      </div>
-    </nav>
+    {/* The visual edition chooser lives inside Search; keep this hidden hook for design state and heading synchronization. */}
+    <div data-design-ribbon hidden aria-hidden="true"></div>
     <main id="contenido">
       <slot />
     </main>
