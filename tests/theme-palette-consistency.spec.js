@@ -74,3 +74,23 @@ test("initial theme follows system preference and saved override before first pa
  await page.reload();
  await expect(page.locator("html")).toHaveAttribute("data-theme","dark");
 });
+
+test("Matrix loads phosphor green on black by default, but an explicit light preference wins",async({page})=>{
+ await page.emulateMedia({colorScheme:"light"});
+ await page.goto("./?design=terminal");
+ let state=await colorState(page);
+ expect(state.theme).toBe("dark");
+ expect(state.palette).toBe("matrix");
+ expect(state.paper).toBe("#030d0a");
+ expect(state.accent).toBe("#80ffac");
+ await page.locator("#theme-toggle").click();
+ state=await colorState(page);
+ expect(state.theme).toBe("light");
+ await page.goto("en/projects/vigia/");
+ state=await colorState(page);
+ expect(state.design).toBe("terminal");
+ expect(state.theme).toBe("light");
+ await page.goto("./?design=museum");
+ state=await colorState(page);
+ expect(state.theme).toBe("light");
+});
