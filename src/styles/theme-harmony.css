@@ -20,32 +20,32 @@
 :root[data-design="brutalist"]{--intro-glow:#ffe56b}
 :root[data-design="story"]{--intro-glow:#d7baff}
 
-.sk-intro{
+:root[data-design] .sk-intro{
  color:#f5f7f3;
  background:radial-gradient(ellipse at 50% 43%,
   color-mix(in srgb,var(--intro-glow) 22%,#081017) 0%,
   color-mix(in srgb,var(--intro-glow) 5%,#081017) 58%,#050a0e 100%);
 }
-.sk-intro-grid{
+:root[data-design] .sk-intro-grid{
  background:
   repeating-linear-gradient(0deg,transparent 0 70px,color-mix(in srgb,var(--intro-glow) 17%,transparent) 71px 72px),
   repeating-linear-gradient(90deg,transparent 0 70px,color-mix(in srgb,var(--intro-glow) 17%,transparent) 71px 72px);
 }
-.sk-intro-mark{color:var(--intro-glow);filter:drop-shadow(0 5px 18px color-mix(in srgb,var(--intro-glow) 30%,transparent))}
-.sk-intro-name .sk-intro-dot,
-.sk-intro-sequence span[data-active="true"]{color:var(--intro-glow)}
-.sk-intro-sub,.sk-intro-top,.sk-intro-status,.sk-intro-sequence{
+:root[data-design] .sk-intro-mark{color:var(--intro-glow);filter:drop-shadow(0 5px 18px color-mix(in srgb,var(--intro-glow) 30%,transparent))}
+:root[data-design] .sk-intro-name .sk-intro-dot,
+:root[data-design] .sk-intro-sequence span[data-active="true"]{color:var(--intro-glow)}
+:root[data-design] .sk-intro-sub,.sk-intro-top,.sk-intro-status,.sk-intro-sequence{
  color:color-mix(in srgb,var(--intro-glow) 26%,#f2f4f0);
 }
-.sk-intro-meter{background:color-mix(in srgb,var(--intro-glow) 20%,#18242a)}
-.sk-intro-meter span{background:linear-gradient(90deg,var(--intro-glow),color-mix(in srgb,var(--intro-glow) 45%,#e9eeff))}
-.sk-intro-rule{background:color-mix(in srgb,var(--intro-glow) 65%,transparent)}
-.sk-intro::before{border-color:color-mix(in srgb,var(--intro-glow) 28%,transparent)}
-.sk-intro::after{background:linear-gradient(transparent,color-mix(in srgb,var(--intro-glow) 54%,transparent),transparent)}
-.sk-intro-orbit{color:var(--intro-glow)}
-.sk-intro-skip{background:color-mix(in srgb,var(--intro-glow) 9%,#09141b);color:#f5f7f3;
+:root[data-design] .sk-intro-meter{background:color-mix(in srgb,var(--intro-glow) 20%,#18242a)}
+:root[data-design] .sk-intro-meter span{background:linear-gradient(90deg,var(--intro-glow),color-mix(in srgb,var(--intro-glow) 45%,#e9eeff))}
+:root[data-design] .sk-intro-rule{background:color-mix(in srgb,var(--intro-glow) 65%,transparent)}
+:root[data-design] .sk-intro::before{border-color:color-mix(in srgb,var(--intro-glow) 28%,transparent)}
+:root[data-design] .sk-intro::after{background:linear-gradient(transparent,color-mix(in srgb,var(--intro-glow) 54%,transparent),transparent)}
+:root[data-design] .sk-intro-orbit{color:var(--intro-glow)}
+:root[data-design] .sk-intro-skip{background:color-mix(in srgb,var(--intro-glow) 9%,#09141b);color:#f5f7f3;
  border-color:color-mix(in srgb,var(--intro-glow) 49%,#223137)}
-.sk-intro-skip:hover,.sk-intro-skip:focus-visible{border-color:var(--intro-glow)}
+:root[data-design] .sk-intro-skip:hover,.sk-intro-skip:focus-visible{border-color:var(--intro-glow)}
 
 /* Common project chrome inherits the edition, including warm Casebook,
    fluorescent Terminal/Matrix, cool X-Ray, violet Story and bright Canvas. */
@@ -92,7 +92,7 @@
 :root[data-theme="dark"]{color-scheme:dark}
 :root[data-theme="light"]{color-scheme:light}
 @media(prefers-reduced-motion:reduce){
- .sk-intro-mark{filter:none}
+ :root[data-design] .sk-intro-mark{filter:none}
 }
 
 /* Casebook is an amber photographic exhibition, not a blue dashboard.
