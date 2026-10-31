@@ -61,8 +61,8 @@ test("the opening cinematic branding carries the active palette instead of fixed
    return {glow,mark};
   });
   expect(value.glow).toMatch(/^#[a-f0-9]{6}$/i);
-  expect(value.mark).not.toBe("");
-  expect(value.mark).not.toBe("rgb(120, 245, 206)");
+  const rgb=[1,3,5].map(i=>parseInt(value.glow.slice(i,i+2),16));
+  expect(value.mark).toBe(`rgb(${rgb.join(", ")})`);
  }
 });
 test("initial theme follows system preference and saved override before first paint",async({page})=>{
