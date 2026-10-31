@@ -19,3 +19,12 @@
 .command-footer{display:flex;gap:18px;flex-wrap:wrap;padding:12px 18px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
 @media(max-width:767px){.command-trigger{min-height:42px;padding:8px}.command-trigger kbd{display:none}.command-dialog{max-height:86dvh}.command-shell{max-height:86dvh}}
 @media(prefers-reduced-motion:reduce){.command-trigger{transition:none}.command-dialog::backdrop{backdrop-filter:none}}
+
+/* One discoverable navigation surface: Search owns editions, not a separate ribbon. */
+.command-shortcuts{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line)}
+.command-shortcuts button{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:9px 13px;background:color-mix(in srgb,var(--accent) 8%,var(--surface));color:var(--ink);border:1px solid var(--line);border-radius:8px;font:600 12px var(--mono);transition:border-color .2s ease,background .2s ease}
+.command-shortcuts button:hover,.command-shortcuts button:focus-visible{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 15%,var(--surface))}
+.command-shortcuts button span:first-child{color:var(--accent)}
+.command-shortcuts>span{font-size:11px;line-height:1.4;color:var(--muted)}
+@media(max-width:767px){.command-shortcuts{padding:10px 12px}.command-shortcuts>span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.command-shortcuts button{transition:none}}
