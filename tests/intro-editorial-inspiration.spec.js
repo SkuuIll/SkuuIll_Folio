@@ -1,6 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const choose = async (page,mode) => {
- await page.locator("[data-design-select]").selectOption(mode);
+ const en=new URL(page.url()).pathname.endsWith("/en/");
+ await page.goto((en?"en/":"./")+"?design="+mode);
  await expect(page.locator("html")).toHaveAttribute("data-design",mode);
 };
 test("first visit shows SKULL ident, skip works, subsequent loads do not wait",async({page})=>{
@@ -20,7 +21,7 @@ test("intro dismisses automatically and never blocks navigation indefinitely",as
  await page.goto("./");
  await expect(page.locator("[data-sk-intro]")).toBeVisible();
  await expect(page.locator("[data-sk-intro]")).toBeHidden({timeout:4200});
- await expect(page.locator("[data-design-select]")).toBeVisible();
+ await expect(page.locator("[data-command-trigger]")).toBeVisible();
 });
 test("reduced motion skips the intro",async({page})=>{
  await page.emulateMedia({reducedMotion:"reduce"});
