@@ -191,7 +191,6 @@ applyMotionPreference();
 
 const inquiry = document.querySelector<HTMLFormElement>("#inquiry-form");
 if (inquiry) {
-  document.querySelector<HTMLElement>(".inquiry-details")!.hidden = false;
   const error = document.querySelector<HTMLElement>("#form-error")!;
   const result = document.querySelector<HTMLElement>("#inquiry-result")!;
   const message =
@@ -252,6 +251,7 @@ if (inquiry) {
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
+  document.querySelector<HTMLElement>(".inquiry-details")!.hidden = false;
 }
 
 const search = document.querySelector<HTMLInputElement>("#project-search");

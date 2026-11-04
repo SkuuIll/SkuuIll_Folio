@@ -4,7 +4,7 @@ const choose = async (page,mode) => {
  await page.goto((en?"en/":"./")+"?design="+mode);
  await expect(page.locator("html")).toHaveAttribute("data-design",mode);
 };
-test("first visit shows SKULL ident, skip works, subsequent loads do not wait",async({page})=>{
+test("first visit and reload show SKULL ident, and skip works",async({page})=>{
  await page.emulateMedia({reducedMotion:"no-preference"});
  await page.goto("./");
  const intro=page.locator("[data-sk-intro]");
@@ -12,7 +12,8 @@ test("first visit shows SKULL ident, skip works, subsequent loads do not wait",a
  await intro.getByRole("button",{name:"Omitir intro"}).click();
  await expect(intro).toBeHidden();
  await page.reload();
- await expect(page.locator("[data-sk-intro]")).toBeHidden();
+ await expect(page.locator("[data-sk-intro]")).toBeVisible();
+ await page.locator("[data-intro-skip]").click();
  await page.goto("en/");
  await expect(page.locator("[data-sk-intro]")).toBeHidden();
 });

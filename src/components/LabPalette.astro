@@ -1,0 +1,33 @@
+---
+import "../styles/lab-palette.css";
+interface Props { lang?: "es" | "en" }
+const en = Astro.props.lang === "en";
+const t = (es: string, english: string) => en ? english : es;
+---
+<div class="lab-panel lab-palette" role="tabpanel" id="panel-palette" aria-labelledby="tab-palette" tabindex="0">
+  <div class="experiment-copy">
+    <span class="mono">{t("EXPERIMENTO_04 / COLOR","EXPERIMENT_04 / COLOR")}</span>
+    <h3>{t("El color también", "Color shapes")}<br />{t("cuenta historias.", "the story.")}</h3>
+    <p>{t("Explorá tres paletas sobre una misma interfaz. La muestra cambia sin alterar la apariencia del sitio.", "Explore three palettes on the same interface. The preview changes without affecting the site's appearance.")}</p>
+    <div class="lab-controls palette-controls" hidden>
+      <span class="palette-label mono" id="palette-choice-label">{t("ELEGÍ UNA PALETA", "CHOOSE A PALETTE")}</span>
+      <div class="palette-options" role="group" aria-labelledby="palette-choice-label">
+        <button type="button" data-lab-color="forest" aria-pressed="true"><span aria-hidden="true"></span>{t("Bosque", "Forest")}</button>
+        <button type="button" data-lab-color="copper" aria-pressed="false"><span aria-hidden="true"></span>{t("Cobre", "Copper")}</button>
+        <button type="button" data-lab-color="ink" aria-pressed="false"><span aria-hidden="true"></span>{t("Índigo", "Indigo")}</button>
+      </div>
+      <button type="button" class="palette-reset" data-palette-reset>{t("Restablecer paleta", "Reset palette")} ↺</button>
+    </div>
+  </div>
+  <div class="palette-preview" data-palette-preview data-lab-palette="forest" aria-label={t("Vista previa de interfaz", "Interface preview")}>
+    <div class="palette-preview-top mono"><span>SK / COLOR LAB</span><span>04 — 04</span></div>
+    <div class="palette-preview-art" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
+    <div class="palette-preview-content">
+      <span class="palette-preview-label mono">{t("UNA IDEA, TRES PALETAS", "ONE IDEA, THREE PALETTES")}</span>
+      <strong>{t("Diseño que se siente.", "Design you can feel.")}</strong>
+      <p>{t("El mismo mensaje, una nueva perspectiva.", "The same message, a new perspective.")}</p>
+      <span class="palette-preview-action">{t("VISTA DE EJEMPLO", "SAMPLE PREVIEW")}</span>
+    </div>
+    <div class="palette-preview-swatches" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+</div>

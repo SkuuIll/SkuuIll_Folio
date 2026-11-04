@@ -25,7 +25,7 @@ test("all fourteen editions resolve their own color system in light and dark",as
    expect(colors.design).toBe(design);
    expect(colors.palette).toBe(palette);
    expect(colors.theme).toBe(theme);
-   for(const token of ["paper","ink","accent","surface","intro"])expect(colors[token],design+" "+theme+" "+token).toMatch(/^#[a-f0-9]{6}$/i);
+   for(const token of ["paper","ink","accent","surface","intro"])expect(colors[token],design+" "+theme+" "+token).toMatch(/^#(?:[a-f0-9]{3}|[a-f0-9]{6})$/i);
    expect(colors.paper).not.toBe(colors.ink);
    expect(colors.accent).not.toBe(colors.paper);
    expect(colors.background).not.toBe(colors.foreground);

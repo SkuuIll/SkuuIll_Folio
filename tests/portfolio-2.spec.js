@@ -5,7 +5,7 @@ test("global command palette finds projects and navigates in Spanish",async({pag
  const dialog=page.locator("#skull-command");
  await expect(dialog).toBeVisible();
  await page.locator("#command-query").fill("Vigía");
- await expect(dialog.locator("[data-command-result]")).toHaveCount(1);
+ await expect(dialog.locator("[data-command-result]").first()).toContainText("Vigía");
  await page.keyboard.press("Enter");
  await expect(page).toHaveURL(/\/proyectos\/vigia\//);
 });

@@ -55,13 +55,17 @@ const story = [
   </section>
   <section class="edition-scene edition-xray shell" data-edition-scene="xray" aria-labelledby="xray-heading">
     <div class="edition-overline">09 / X-RAY 3D · {t("ARQUITECTURA EN CAPAS","LAYERED ARCHITECTURE")}</div>
-    <div class="xray-shell" data-xray>
-      <div class="xray-heading"><span class="mono">SKULL / SYSTEM.EXPLODED</span><h2 data-primary-heading id="xray-heading">{t("Desarmá el sistema.","Dissect the system.")}</h2><p>{t("Seleccioná una capa para ver cómo las piezas de software trabajan juntas. Modelo conceptual, no datos en vivo.","Select a layer to see how software components work together. Conceptual model, not live production data.")}</p></div>
+    <div class="xray-shell" data-xray data-step="0" data-playing="false">
+      <div class="xray-heading"><span class="mono xray-kicker">SKULL / SYSTEM.EXPLODED</span><h2 data-primary-heading id="xray-heading">{t("Desarmá el sistema.","Dissect the system.")}</h2><p>{t("Seleccioná una capa y descubrí cómo las piezas de software trabajan juntas.","Select a layer and discover how the parts of a software system work together.")}</p><span class="xray-note mono">{t("MODELO CONCEPTUAL · NO CONECTADO EN VIVO","CONCEPTUAL MODEL · NOT CONNECTED LIVE")}</span><button type="button" class="xray-play" data-xray-play hidden><span aria-hidden="true">▶</span><span data-xray-play-label>{t("Reproducir recorrido","Play sequence")}</span></button></div>
       <div class="xray-model" aria-hidden="true">
-        <div class="xray-plate xray-plate-1"><span>UI / 01</span><div class="xray-glyph">▦ ▤ ▣</div></div>
-        <div class="xray-plate xray-plate-2"><span>API / 02</span><div class="xray-glyph">{"{ }"}</div></div>
-        <div class="xray-plate xray-plate-3"><span>DATA / 03</span><div class="xray-glyph">⛁</div></div>
-        <div class="xray-plate xray-plate-4"><span>OPS / 04</span><div class="xray-glyph">⌘</div></div>
+        <div class="xray-reticle"><span></span><span></span></div>
+        <div class="xray-object">
+          <div class="xray-plate xray-plate-1"><span>01 / INTERFACE</span><div class="xray-plate-design xray-design-ui"><i></i><i></i><i></i><i></i></div><b class="xray-plate-number">01</b></div>
+          <div class="xray-plate xray-plate-2"><span>02 / API</span><div class="xray-plate-design xray-design-api"><i></i><i></i><i></i></div><b class="xray-plate-number">02</b></div>
+          <div class="xray-plate xray-plate-3"><span>03 / DATA</span><div class="xray-plate-design xray-design-data"><i></i><i></i><i></i><i></i></div><b class="xray-plate-number">03</b></div>
+          <div class="xray-plate xray-plate-4"><span>04 / OPERATIONS</span><div class="xray-plate-design xray-design-ops"><i></i><i></i><i></i><i></i><i></i></div><b class="xray-plate-number">04</b></div>
+        </div>
+        <div class="xray-model-caption mono"><span>SK / 04</span><span>EXPLODED VIEW</span></div>
       </div>
       <div class="xray-controls">
         <div class="xray-layers" role="group" aria-label={t("Capas del sistema","System layers")}>
@@ -70,7 +74,7 @@ const story = [
             ["API",t("Lógica, permisos y contratos.","Business logic, permissions and contracts.")],
             [t("Datos","Data"),t("Persistencia, consultas y validación.","Persistence, queries and validation.")],
             [t("Operaciones","Operations"),t("Despliegue, pruebas y monitoreo.","Deployment, tests and monitoring.")],
-          ].map((item,i)=><button type="button" data-xray-pick={i} aria-pressed={i===0?"true":"false"}><span class="mono">0{i+1}</span><strong>{item[0]}</strong><span aria-hidden="true">↗</span></button>)}
+          ].map((item,i)=><button type="button" data-xray-pick={i} aria-pressed={i===0?"true":"false"}><span class="mono">0{i+1}</span><strong>{item[0]}</strong><span class="xray-control-arrow" aria-hidden="true">↗</span></button>)}
         </div>
         <div class="xray-readout" aria-live="polite"><span class="mono">LAYER / <span data-xray-count>01</span></span><h3 data-xray-title>{t("Interfaz","Interface")}</h3><p data-xray-description>{t("Pantallas, componentes y accesibilidad.","Screens, components and accessibility.")}</p></div>
       </div>

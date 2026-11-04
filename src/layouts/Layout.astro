@@ -27,6 +27,9 @@ import "../styles/portfolio-2-visual.css";
 import "../styles/cinema-2.css";
 import "../styles/intro-cinema.css";
 import "../styles/theme-harmony.css";
+import "../styles/library-motion.css";
+import "../styles/xray-motion.css";
+import "../styles/hero-identities.css";
 import CommandPalette from "../components/CommandPalette.astro";
 import { asset } from "../data/projects";
 import { profile } from "../data/profile";
@@ -72,7 +75,7 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
 ---
 
 <!doctype html>
-<html lang={en ? "en" : "es-AR"} data-material="glass">
+<html lang={en ? "en" : "es-AR"} data-material="glass" data-home={hasLandingIntro ? "true" : undefined} style={`--casebook-image:url("${asset("media/atelier-colors.webp")}");--studio-image:url("${asset("media/vigia-modules.webp")}")`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -142,9 +145,14 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
       // Query parameter takes precedence, then the edition selected in this
       // browser; never silently revert to Editorial while browsing a case.
       const requestedDesign = new URLSearchParams(location.search).get("design");
+      const isHomeReload = document.documentElement.dataset.home === "true" &&
+        performance.getEntriesByType("navigation")[0]?.type === "reload";
+      const alternativeDesigns = designs.filter((value) => value !== priorDesign);
       const design = requestedDesign && designs.includes(requestedDesign)
         ? requestedDesign
-        : priorDesign && designs.includes(priorDesign) ? priorDesign : "editorial";
+        : isHomeReload && priorDesign && designs.includes(priorDesign)
+          ? alternativeDesigns[Math.floor(Math.random() * alternativeDesigns.length)]
+          : priorDesign && designs.includes(priorDesign) ? priorDesign : "editorial";
       // Each exhibition has a deliberate first-visit mood. Matrix/Terminal
       // opens as black + phosphor green, Museum as warm paper. Once someone
       // chooses Light/Dark manually, that explicit preference always wins.
@@ -218,13 +226,13 @@ const structuredData = { "@context": "https://schema.org", "@graph": [
     </script>
     {hasLandingIntro && (
       <script is:inline>
-        // Only a tab's first home visit gets the intro. Never delay visitors
-        // with reduced motion, data saving or a constrained device.
+        // Show the intro on first visit and reload, without delaying constrained devices.
         try {
           const root = document.documentElement;
           const alreadySeen = sessionStorage.getItem("skull-intro-seen");
           const previewRequested = new URLSearchParams(location.search).get("intro") === "1";
-          if ((!alreadySeen || previewRequested) && root.dataset.effects !== "off" &&
+          const reloaded = performance.getEntriesByType("navigation")[0]?.type === "reload";
+          if ((!alreadySeen || previewRequested || reloaded) && root.dataset.effects !== "off" &&
             root.dataset.performance !== "lite" &&
             !matchMedia("(prefers-reduced-motion: reduce)").matches) {
             root.dataset.intro = "pending";

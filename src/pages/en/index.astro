@@ -6,6 +6,8 @@ import SelectedWork from "../../components/SelectedWork.astro";
 import ProductFrames from "../../components/ProductFrames.astro";
 import BuildAnatomy from "../../components/BuildAnatomy.astro";
 import AboutStudio from "../../components/AboutStudio.astro";
+import LabPalette from "../../components/LabPalette.astro";
+import HeroDetails from "../../components/HeroDetails.astro";
 import TechExplorer from "../../components/TechExplorer.astro";
 import EditionExperiences from "../../components/EditionExperiences.astro";
 import { asset, projects } from "../../data/projects";
@@ -104,7 +106,7 @@ import { asset, projects } from "../../data/projects";
         <h1 id="hero-title">
           I turn ideas
           <br />
-          en <em>real software.</em>
+          into <em>real software.</em>
         </h1>
         <p class="sp-lead">
           I design interfaces and develop applications, APIs, and systems.
@@ -120,6 +122,7 @@ import { asset, projects } from "../../data/projects";
           </a>
         </div>
       </div>
+      <HeroDetails lang="en" />
       <div class="hero-signature">
         <span>
           Skull<span class="signature-dot">.</span>
@@ -191,7 +194,7 @@ import { asset, projects } from "../../data/projects";
         </h2>
       </div>
       <p>
-        This is a small interactive laboratory. Three original experiments
+        This is a small interactive laboratory. Four original experiments
         to experience design in action.
       </p>
     </div>
@@ -224,6 +227,7 @@ import { asset, projects } from "../../data/projects";
         >
           03 Interfaces
         </button>
+        <button role="tab" id="tab-palette" aria-controls="panel-palette" aria-selected="false" tabindex="-1">04 Palettes</button>
       </div>
       <div
         class="lab-panel"
@@ -346,6 +350,7 @@ import { asset, projects } from "../../data/projects";
           </span>
         </div>
       </div>
+      <LabPalette lang="en" />
       <div class="lab-footer mono">
         <span>BUILT WITH CODE / REAL INTERACTION</span>
         <span>SKULL — LAB_2026</span>
@@ -353,7 +358,7 @@ import { asset, projects } from "../../data/projects";
     </div>
     <noscript>
       <p class="lab-note">
-        Browse all three compositions. Enable JavaScript to change
+        Browse all four compositions. Enable JavaScript to change
         their controls.
       </p>
     </noscript>

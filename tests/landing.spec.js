@@ -102,7 +102,7 @@ test("lab supports keyboard navigation, density, arrangement, amplitude and inte
   await page.locator("#amplitude").fill("90");
   await expect(page.locator("#amplitude-value")).toHaveText("90");
   await page.getByRole("tab", { name: /Movimiento/ }).focus();
-  await page.keyboard.press("End");
+  await page.keyboard.press("ArrowRight");
   await page.getByRole("button", { name: "Procesando", exact: true }).click();
   await expect(page.locator("#interface-status")).toContainText("Procesando");
   await page.getByRole("button", { name: "Completado", exact: true }).click();
@@ -258,7 +258,7 @@ test("Skull branding is consistent and navigation remains compact", async ({
   ).toBeVisible();
   await expect(page.locator(".hero-signature")).toContainText("Skull");
   expect(await page.locator("body").innerText()).not.toMatch(/Spulp/i);
-  await expect(page.locator(".site-header button:visible")).toHaveCount(2);
+  await expect(page.locator(".site-header button:visible")).toHaveCount(3);
   for (const route of ["proyectos/", "proyectos/cpaul/", "proyectos/vigia/"]) {
     await page.goto(route);
     await expect(page).toHaveTitle(/Skull/);
@@ -266,7 +266,7 @@ test("Skull branding is consistent and navigation remains compact", async ({
   }
 });
 
-test("every load has a fresh composition and palette but preserves the chosen theme", async ({
+test("reload changes the edition and scene while preserving the chosen theme", async ({
   page,
 }) => {
   await page.addInitScript(() => localStorage.setItem("skull-theme", "light"));
@@ -275,6 +275,7 @@ test("every load has a fresh composition and palette but preserves the chosen th
     palette: root.dataset.palette,
     scene: root.dataset.scene,
     seed: root.dataset.seed,
+    design: root.dataset.design,
   }));
   for (let i = 0; i < 4; i++) {
     await page.reload();
@@ -282,14 +283,15 @@ test("every load has a fresh composition and palette but preserves the chosen th
       palette: root.dataset.palette,
       scene: root.dataset.scene,
       seed: root.dataset.seed,
+      design: root.dataset.design,
     }));
-    expect(current.palette).not.toBe(last.palette);
+    expect(current.design).not.toBe(last.design);
     expect(current.scene).not.toBe(last.scene);
     await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
     last = current;
   }
   await page.goto("proyectos/");
-  expect(await page.locator("html").getAttribute("data-palette")).not.toBe(
+  expect(await page.locator("html").getAttribute("data-palette")).toBe(
     last.palette,
   );
   await page.goto("./");

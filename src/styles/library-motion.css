@@ -1,0 +1,37 @@
+/* Layered project previews inspired by Vengeance UI's Folder Preview.
+   The preview uses each project's existing image and remains a single link. */
+.catalog-row:is(:hover, :focus-visible) h2 {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: .16em;
+}
+.catalog-row .catalog-row-status { color: var(--muted); }
+@media (hover: hover) and (pointer: fine) {
+  .catalog-row .catalog-thumb {
+    overflow: visible;
+    position: relative;
+    isolation: isolate;
+    transition: transform 260ms cubic-bezier(.2,.7,.2,1);
+  }
+  .catalog-row .catalog-thumb::before,
+  .catalog-row .catalog-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: inherit;
+    z-index: -1;
+    transition: transform 260ms cubic-bezier(.2,.7,.2,1);
+  }
+  .catalog-row .catalog-thumb img { border-radius: inherit; }
+  .catalog-row:is(:hover, :focus-visible) .catalog-thumb { transform: translateY(-3px); }
+  .catalog-row:is(:hover, :focus-visible) .catalog-thumb::before { transform: rotate(-6deg) translate(-3px, -4px); }
+  .catalog-row:is(:hover, :focus-visible) .catalog-thumb::after { transform: rotate(5deg) translate(3px, -2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .catalog-row .catalog-thumb,
+  .catalog-row .catalog-thumb::before,
+  .catalog-row .catalog-thumb::after { transition: none; transform: none !important; }
+}

@@ -64,7 +64,7 @@ for (const width of [360, 390, 768, 1440, 1920]) {
     expect(missingTargets).toEqual([]);
     if(experimental) await expect(page.locator(".signal-stage")).toBeHidden();
     else await expect(page.locator(".signal-stage")).toBeVisible();
-    await expect(page.getByRole("tab")).toHaveCount(3);
+    await expect(page.getByRole("tab")).toHaveCount(4);
     expect(errors).toEqual([]);
   });
 }
@@ -259,13 +259,13 @@ test("content and email stay usable without JavaScript", async ({
   await context.close();
 });
 
-test("palette and scene change on reload while blocked storage remains usable", async ({
+test("edition changes on reload while blocked storage remains usable", async ({
   page,
 }) => {
   await page.goto("./");
-  const first = await page.locator("html").getAttribute("data-palette");
+  const first = await page.locator("html").getAttribute("data-design");
   await page.reload();
-  expect(await page.locator("html").getAttribute("data-palette")).not.toBe(
+  expect(await page.locator("html").getAttribute("data-design")).not.toBe(
     first,
   );
   await page.addInitScript(() => {

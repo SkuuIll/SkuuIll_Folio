@@ -1,10 +1,10 @@
 const { test, expect } = require("@playwright/test");
 const modes = ["editorial","casebook","systems","atelier","chromatic","pocket","studio","skull-os","xray","museum","terminal","canvas","brutalist","story"];
-test("default edition is stable and explicit links remain shareable",async({page})=>{
+test("home reload changes edition and explicit links remain shareable",async({page})=>{
  await page.goto("./");
  await expect(page.locator("html")).toHaveAttribute("data-design","editorial");
  await page.reload();
- await expect(page.locator("html")).toHaveAttribute("data-design","editorial");
+ await expect(page.locator("html")).not.toHaveAttribute("data-design","editorial");
  await page.goto("./?design=xray");
  await expect(page.locator("html")).toHaveAttribute("data-design","xray");
  await expect(page.locator('[data-edition-scene="xray"]')).toBeVisible();

@@ -32,6 +32,33 @@ const modes = [
   { key:"story", palette:"violet", es:"Story Mode / Capítulos", en:"Story Mode / Chapters",esNote:"El proceso de crear software contado en cuatro capítulos.",enNote:"The software process told through four chapters." },
 ] as const;
 const english = root.lang.startsWith("en");
+// The original seven editions share a semantic hero but tell different,
+// truthful stories about the same portfolio.
+const heroCopy: Record<string, { es: [string, string, string]; en: [string, string, string] }> = {
+  editorial: { es: ["Transformo ideas", "en software real.", "Diseño interfaces y desarrollo aplicaciones, APIs y sistemas. Del primer prototipo al despliegue."], en: ["I turn ideas", "into real software.", "I design interfaces and develop applications, APIs and systems. From first prototype to production."] },
+  casebook: { es: ["Los proyectos", "hablan por sí solos.", "Una selección de productos, herramientas y experiencias: cada caso cuenta cómo fue construido."], en: ["The work", "speaks for itself.", "A selection of products, tools and experiences: each case tells the story of how it was built."] },
+  systems: { es: ["Detrás de cada interfaz,", "un sistema.", "Diseño y conecto interfaces, APIs, datos e infraestructura para resolver problemas concretos."], en: ["Behind every interface,", "a system.", "I design and connect interfaces, APIs, data and infrastructure to solve real problems."] },
+  atelier: { es: ["Diseño con intención.", "Código con oficio.", "Combino sensibilidad visual y desarrollo para crear experiencias que se pueden usar."], en: ["Design with intention.", "Code with craft.", "I combine visual thinking and development to create experiences people can use."] },
+  chromatic: { es: ["Una idea.", "Muchas formas.", "Experimentos visuales, interfaces y software: una mirada a lo que pasa cuando el diseño se mueve."], en: ["One idea.", "Many forms.", "Visual experiments, interfaces and software: a look at what happens when design moves."] },
+  pocket: { es: ["Software útil.", "Sin vueltas.", "Aplicaciones, herramientas y sistemas que hacen más simple el trabajo cotidiano."], en: ["Useful software.", "No detours.", "Applications, tools and systems that make everyday work simpler."] },
+  studio: { es: ["Del problema", "al producto.", "Un estudio independiente para diseñar, construir y desplegar soluciones digitales."], en: ["From problem", "to product.", "An independent studio for designing, building and deploying digital solutions."] },
+};
+const workCopy: Record<string, { es: [string, string]; en: [string, string] }> = {
+  editorial: {es:["No es un concepto.","Es software."],en:["Not just a concept.","It's working software."]},
+  casebook: {es:["Cada proyecto", "tiene una historia."],en:["Every project", "has a story."]},
+  systems: {es:["Arquitecturas", "para problemas reales."],en:["Architecture", "for real problems."]},
+  atelier: {es:["Piezas hechas", "con intención."],en:["Work made", "with intention."]},
+  chromatic: {es:["Ideas en movimiento.", "Software en acción."],en:["Ideas in motion.", "Software in action."]},
+  pocket: {es:["Hecho para resolver.", "Menos ruido, más utilidad."],en:["Built to solve.", "Less noise, more purpose."]},
+  studio: {es:["Del desafío", "al resultado."],en:["From challenge", "to outcome."]},
+  "skull-os": {es:["Abrí un proyecto.", "Explorá el trabajo."],en:["Open a project.", "Explore the work."]},
+  xray: {es:["Sistemas en capas.", "Productos reales."],en:["Layered systems.", "Real products."]},
+  museum: {es:["Obras de código.", "Problemas reales."],en:["Works of code.", "Real problems."]},
+  terminal: {es:["Proyectos", "listos para explorar."],en:["Projects", "ready to explore."]},
+  canvas: {es:["Un mapa", "de lo que construyo."],en:["A map", "of what I build."]},
+  brutalist: {es:["Trabajo concreto.", "Sin vueltas."],en:["Concrete work.", "No detours."]},
+  story: {es:["Cada proyecto", "tiene un recorrido."],en:["Every project", "has a journey."]},
+};
 const selector = document.querySelector<HTMLElement>("[data-design-ribbon]");
 if (selector) {
   const title = selector.querySelector<HTMLElement>("[data-design-name]");
@@ -81,6 +108,22 @@ if (selector) {
     root.dataset.design = mode.key;
     syncHeadings(mode.key);
     root.dataset.palette = mode.palette;
+    const copy = heroCopy[mode.key];
+    const hero = document.getElementById("hero-title");
+    const lead = document.querySelector<HTMLElement>(".sp-hero .sp-lead");
+    if(copy && hero){
+      const [first, second, description] = english ? copy.en : copy.es;
+      const emphasis = document.createElement("em");emphasis.textContent=second;
+      hero.replaceChildren(document.createTextNode(first),document.createElement("br"),emphasis);
+      if(lead)lead.textContent=description;
+    }
+    const workHeading=document.getElementById("portfolio-work-title");
+    const work=workCopy[mode.key];
+    if(workHeading && work){
+      const [first, second] = english ? work.en : work.es;
+      const emphasis=document.createElement("span");emphasis.textContent=second;
+      workHeading.replaceChildren(document.createTextNode(first),document.createElement("br"),emphasis);
+    }
     if (direct) direct.value = mode.key;
     if (title) title.textContent = english ? mode.en : mode.es;
     if (note) note.textContent = english ? mode.enNote : mode.esNote;

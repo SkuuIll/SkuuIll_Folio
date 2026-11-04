@@ -373,6 +373,7 @@ function applyTab(index: number) {
 let tabRevision = 0;
 let tabTransition: { skipTransition(): void; ready: Promise<void> } | undefined;
 function activateTab(index: number, animate = false) {
+  animate = animate && !matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revision = ++tabRevision;
   tabTransition?.skipTransition();
   const console = document.querySelector<HTMLElement>(".lab-console") as
@@ -462,7 +463,11 @@ amplitude?.addEventListener("input", () => {
     ?.style.setProperty("--amp", String(Number(amplitude.value) / 50));
   document.querySelector("#amplitude-value")!.textContent = amplitude.value;
 });
-const states = {
+const states = root.lang.startsWith("en") ? {
+  ready: "Ready to begin.",
+  working: "Processing your idea…",
+  done: "Complete. Every detail in place.",
+} : {
   ready: "Todo listo para empezar.",
   working: "Procesando tu idea…",
   done: "Listo. Cada detalle en su lugar.",
@@ -482,6 +487,15 @@ document
         );
     }),
   );
+const palettePreview = document.querySelector<HTMLElement>("[data-palette-preview]");
+const paletteButtons = [...document.querySelectorAll<HTMLButtonElement>("[data-lab-color]")];
+function setLabPalette(palette: string) {
+  if (!palettePreview || !paletteButtons.some((button) => button.dataset.labColor === palette)) return;
+  palettePreview.dataset.labPalette = palette;
+  paletteButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.labColor === palette)));
+}
+paletteButtons.forEach((button) => button.addEventListener("click", () => setLabPalette(button.dataset.labColor || "forest")));
+document.querySelector<HTMLButtonElement>("[data-palette-reset]")?.addEventListener("click", () => setLabPalette("forest"));
 // Magnetic feedback remains small and never replaces the native pointer.
 document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((element) => {
   let pending = 0,

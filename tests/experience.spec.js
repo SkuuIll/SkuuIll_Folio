@@ -109,7 +109,7 @@ test("home demonstrates skills and keeps projects in the archive", async ({
   page,
 }) => {
   await page.goto("./");
-  await expect(page.locator(".lab-panel")).toHaveCount(3);
+  await expect(page.locator(".lab-panel")).toHaveCount(4);
   await expect(page.locator(".process-steps article")).toHaveCount(4);
   await expect(page.locator("#atelier-shot")).toHaveCount(0);
   await expect(

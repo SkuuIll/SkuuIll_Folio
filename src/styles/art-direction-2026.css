@@ -68,7 +68,7 @@
   z-index:1;width:100%;height:100%;min-height:440px;
   background:
     linear-gradient(180deg,#040a1080,transparent 38%,#08151b59),
-    url("/media/atelier-colors.webp") center / cover!important;
+    var(--casebook-image) center / cover!important;
   border:1px solid color-mix(in srgb,var(--line) 70%,transparent);
   border-radius:3px;filter:none!important;box-shadow:16px 16px 0 color-mix(in srgb,var(--accent) 13%,transparent);
 }
@@ -239,7 +239,7 @@
 }
 :root[data-design="studio"] .sp-hero::before{
   grid-column:2;grid-row:2/span 3;align-self:stretch;min-height:390px;
-  background:linear-gradient(145deg,#11283566,#020a11a3),url("/media/vigia-modules.webp") center / cover;
+  background:linear-gradient(145deg,#11283566,#020a11a3),var(--studio-image) center / cover;
 }
 :root[data-design="studio"] .sp-hero-copy{
   grid-column:1;grid-row:2;max-width:none!important;margin:0!important;

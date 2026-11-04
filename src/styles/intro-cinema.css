@@ -9,3 +9,10 @@
 @keyframes sk-orbit{to{rotate:360deg}}
 @media(max-width:767px){.sk-intro-orbit{width:90vw;opacity:.24}.sk-intro-percent{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.sk-intro-orbit span{animation:none}}
+
+/* A kinetic signal accompanies the ident without implying network progress. */
+.sk-intro-signal{position:absolute;left:50%;top:50%;width:min(82vw,790px);height:36%;transform:translate(-50%,-50%);display:flex;justify-content:space-between;align-items:center;z-index:-1;pointer-events:none;opacity:.32}
+.sk-intro-signal span{width:1px;height:35%;background:var(--intro-glow,currentColor);transform:scaleY(.15);animation:sk-signal 2.6s cubic-bezier(.22,.7,.2,1) both}
+.sk-intro-signal span:nth-child(3n){height:80%;animation-delay:.18s}.sk-intro-signal span:nth-child(3n + 1){height:55%;animation-delay:.35s}.sk-intro-signal span:nth-child(4n){height:100%;animation-delay:.5s}
+@keyframes sk-signal{0%{opacity:0;transform:scaleY(.1)}35%{opacity:.9;transform:scaleY(1)}100%{opacity:.25;transform:scaleY(.35)}}
+@media(prefers-reduced-motion:reduce){.sk-intro-signal span{animation:none}}

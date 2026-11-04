@@ -17,7 +17,7 @@
 :root[data-design="editorial"] .design-about-sheet{border-radius:0;background:transparent}
 /* 02 CASEBOOK — cinematic case-study magazine with full-bleed background image. */
 :root[data-design="casebook"] .sp-hero{isolation:isolate;position:relative;background:#121921;min-height:min(90svh,920px)}
-:root[data-design="casebook"] .sp-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#080f1ae8 5%,#080f1aac 49%,#080f1a45),url("/media/atelier-colors.webp") center / cover;filter:saturate(.75)}
+:root[data-design="casebook"] .sp-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#080f1ae8 5%,#080f1aac 49%,#080f1a45),var(--casebook-image) center / cover;filter:saturate(.75)}
 :root[data-design="casebook"] .sp-hero h1{color:#f5f0e9;text-shadow:0 5px 30px #0008;font-family:Georgia,serif}
 :root[data-design="casebook"] .sp-hero-copy{max-width:800px;border-left:4px solid #f7bd7a;padding-left:28px}
 :root[data-design="casebook"] .sp-hero .eyebrow,:root[data-design="casebook"] .sp-lead{color:#eadac8}
@@ -82,7 +82,7 @@
 :root[data-design="studio"] .sp-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr);align-items:center;min-height:83svh;border-bottom:5px solid var(--accent);background:linear-gradient(108deg,var(--paper) 55%,var(--surface) 55%)}
 :root[data-design="studio"] .sp-hero-copy{max-width:100%;padding:80px 0 80px clamp(20px,3vw,55px);grid-column:1;position:relative;z-index:1}
 :root[data-design="studio"] .sp-hero h1{font-size:clamp(56px,6.8vw,110px)}
-:root[data-design="studio"] .sp-hero::before{content:"";grid-column:2;grid-row:2/span 3;display:block;min-height:480px;align-self:stretch;background:linear-gradient(145deg,#11283566,#020a11a3),url("/media/vigia-modules.webp") center / cover;border:1px solid var(--line);border-radius:12px;box-shadow:0 25px 70px #0004}
+:root[data-design="studio"] .sp-hero::before{content:"";grid-column:2;grid-row:2/span 3;display:block;min-height:480px;align-self:stretch;background:linear-gradient(145deg,#11283566,#020a11a3),var(--studio-image) center / cover;border:1px solid var(--line);border-radius:12px;box-shadow:0 25px 70px #0004}
 :root[data-design="studio"] .hero-topline{grid-column:1/-1;grid-row:1}
 :root[data-design="studio"] .sp-hero-copy{grid-column:1;grid-row:2}
 :root[data-design="studio"] .hero-signature{grid-column:1;grid-row:3}

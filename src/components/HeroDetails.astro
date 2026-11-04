@@ -1,0 +1,29 @@
+---
+import { asset, projectUrl } from "../data/projects";
+interface Props { lang?: "es" | "en" }
+const lang = Astro.props.lang ?? "es";
+const en = lang === "en";
+const t = (es: string, english: string) => en ? english : es;
+---
+<aside class="hero-detail hero-detail--systems" aria-label={t("Capas conceptuales del sistema", "Conceptual system layers")}>
+  <div class="hero-detail-head mono"><span>SK / SYSTEM MAP</span><span>{t("MODELO CONCEPTUAL", "CONCEPTUAL MODEL")}</span></div>
+  <div class="hero-system-stack">
+    <div><span>01</span><strong>{t("Interfaz", "Interface")}</strong><small>WEB / MOBILE</small></div>
+    <div><span>02</span><strong>API</strong><small>{t("LÓGICA / ACCESO", "LOGIC / ACCESS")}</small></div>
+    <div><span>03</span><strong>{t("Datos", "Data")}</strong><small>{t("CONSULTA / ALMACENAMIENTO", "QUERY / STORAGE")}</small></div>
+  </div>
+  <span class="hero-detail-foot mono">{t("DISEÑO + DESARROLLO", "DESIGN + DEVELOPMENT")}</span>
+</aside>
+<div class="hero-detail hero-detail--atelier" aria-label={t("Una selección de proyectos", "A selection of projects")}>
+  <a href={projectUrl("cpaul",lang)}><img src={asset("media/atelier-colors.webp")} alt={t("Editor de indumentaria de CPAUL", "CPAUL clothing editor")} width="1600" height="900" loading="lazy" decoding="async"/><span><small>01 / ATELIER</small><strong>{t("Indumentaria en 3D", "3D clothing")}</strong></span></a>
+  <a href={projectUrl("vigia",lang)}><img src={asset("media/vigia-modules.webp")} alt={t("Selector de módulos de Vigía", "Vigía module selector")} width="1440" height="900" loading="lazy" decoding="async"/><span><small>02 / VIGÍA</small><strong>{t("Operaciones conectadas", "Connected operations")}</strong></span></a>
+</div>
+<div class="hero-detail hero-detail--chromatic" aria-label={t("Proyectos destacados", "Featured projects")}>
+  <a href={projectUrl("pubg-map",lang)}><img src={asset("media/tactical-map.webp")} alt={t("Mapa táctico interactivo", "Interactive tactical map")} width="1440" height="900" loading="lazy" decoding="async"/><span class="mono">03 / TACTICAL MAP ↗</span></a>
+</div>
+<nav class="hero-detail hero-detail--pocket" aria-label={t("Proyectos destacados", "Featured projects")}>
+  <span class="mono">{t("EXPLORÁ UN PROYECTO", "EXPLORE A PROJECT")}</span>
+  <a href={projectUrl("vigia",lang)}><span>01</span> Vigía <span aria-hidden="true">↗</span></a>
+  <a href={projectUrl("cpaul",lang)}><span>02</span> CPAUL <span aria-hidden="true">↗</span></a>
+  <a href={projectUrl("pubg-map",lang)}><span>03</span> Tactical Map <span aria-hidden="true">↗</span></a>
+</nav>

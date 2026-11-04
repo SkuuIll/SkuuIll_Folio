@@ -82,11 +82,11 @@
  color:var(--ink);
 }
 :root[data-theme="light"][data-design="studio"] .sp-hero::before{
- background:linear-gradient(145deg,#e2eff155,#111c2b55),url("/media/vigia-modules.webp") center / cover;
+ background:linear-gradient(145deg,#e2eff155,#111c2b55),var(--studio-image) center / cover;
  border-color:var(--line);
 }
 :root[data-theme="dark"][data-design="studio"] .sp-hero::before{
- background:linear-gradient(145deg,#11283566,#020a11a3),url("/media/vigia-modules.webp") center / cover;
+ background:linear-gradient(145deg,#11283566,#020a11a3),var(--studio-image) center / cover;
  border-color:var(--line);
 }
 

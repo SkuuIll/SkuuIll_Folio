@@ -81,13 +81,46 @@ if(shell){
   const buttons=[...xray.querySelectorAll<HTMLButtonElement>("[data-xray-pick]")];
   const labels=en?["Interface","API","Data","Operations"]:["Interfaz","API","Datos","Operaciones"];
   const descriptions=en?["Screens, components and accessibility.","Business logic, permissions and contracts.","Persistence, queries and validation.","Deployment, tests and monitoring."]:["Pantallas, componentes y accesibilidad.","Lógica, permisos y contratos.","Persistencia, consultas y validación.","Despliegue, pruebas y monitoreo."];
-  buttons.forEach((button,i)=>button.addEventListener("click",()=>{
+  const play=xray.querySelector<HTMLButtonElement>("[data-xray-play]");
+  const playLabel=xray.querySelector<HTMLElement>("[data-xray-play-label]");
+  const motion=matchMedia("(prefers-reduced-motion: reduce)");
+  let timer: ReturnType<typeof setTimeout>|undefined;
+  let playing=false;
+  let inView=false;
+  const stop=()=>{
+   if(timer!==undefined)clearTimeout(timer);
+   timer=undefined;playing=false;xray.dataset.playing="false";
+   if(playLabel)playLabel.textContent=tr("Reproducir recorrido","Play sequence");
+  };
+  const choose=(i:number)=>{
    xray.dataset.step=String(i);
    buttons.forEach((b,n)=>b.setAttribute("aria-pressed",String(i===n)));
    set(xray,"[data-xray-count]",String(i+1).padStart(2,"0"));
    set(xray,"[data-xray-title]",labels[i]);
    set(xray,"[data-xray-description]",descriptions[i]);
-  }));
+  };
+  buttons.forEach((button,i)=>button.addEventListener("click",()=>{stop();choose(i)}));
+  play?.addEventListener("click",()=>{
+   if(playing){stop();return}
+   if(motion.matches)return;
+   playing=true;xray.dataset.playing="true";choose(0);
+   if(playLabel)playLabel.textContent=tr("Detener recorrido","Stop sequence");
+   let i=0;
+   const next=()=>{if(!playing)return;i++;if(i>=buttons.length){stop();return}choose(i);timer=setTimeout(next,1100)};
+   timer=setTimeout(next,1100);
+  });
+  const syncMotion=()=>{if(play)play.hidden=motion.matches;if(motion.matches)stop()};
+  motion.addEventListener("change",syncMotion);syncMotion();
+  if("IntersectionObserver" in window){
+   const observer=new IntersectionObserver(([entry])=>{
+    inView=entry.isIntersecting;
+    xray.dataset.inView=String(inView&&!document.hidden);
+    if(!entry.isIntersecting)stop();
+   },{threshold:0.05});
+   observer.observe(xray);
+   window.addEventListener("pagehide",()=>{observer.disconnect();stop()},{once:true});
+  }
+  document.addEventListener("visibilitychange",()=>{xray.dataset.inView=String(inView&&!document.hidden);if(document.hidden)stop()});
   xray.dataset.step="0";
  }
  // Museum: curated exhibit, proper alt text and no fabricated mockups.

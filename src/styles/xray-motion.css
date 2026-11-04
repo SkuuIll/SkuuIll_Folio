@@ -1,0 +1,54 @@
+/* X-Ray is an illustrated conceptual system; no production data is implied. */
+:root[data-design="xray"] .xray-shell{position:relative;isolation:isolate;overflow:hidden;grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr) minmax(200px,.72fr);gap:clamp(22px,3vw,48px);min-height:clamp(600px,78svh,820px);padding:clamp(28px,4vw,65px);border-radius:3px;background:var(--paper)}
+.xray-shell::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent 49.9%,color-mix(in srgb,var(--line) 35%,transparent) 50%,transparent 50.1%),repeating-linear-gradient(0deg,transparent 0 69px,color-mix(in srgb,var(--line) 18%,transparent) 70px 71px);mask-image:linear-gradient(90deg,transparent 5%,#000 35%,#000 80%,transparent)}
+.xray-heading{position:relative;z-index:2;max-width:390px}
+.xray-heading .xray-kicker{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.12em}
+.xray-kicker::before{content:"";width:25px;height:2px;background:var(--accent)}
+.xray-heading h1,.xray-heading h2{font-size:clamp(45px,5.1vw,78px);line-height:.95;letter-spacing:-.075em;margin:25px 0 22px}
+.xray-heading p{max-width:32ch;font-size:clamp(13px,1vw,15px);line-height:1.7;color:var(--muted)}
+.xray-note{display:block;margin-top:26px;color:var(--muted);font-size:9px;line-height:1.6;letter-spacing:.09em}
+.xray-play{display:inline-flex;align-items:center;gap:11px;min-height:46px;margin-top:22px;padding:10px 15px;background:var(--accent);color:var(--paper);border:1px solid var(--accent);font:600 11px var(--mono);cursor:pointer;transition:transform .25s,background-color .25s}
+.xray-play[hidden]{display:none}
+.xray-play:hover{transform:translateY(-3px)}
+.xray-play:focus-visible,.xray-layers button:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+:root[data-design="xray"] .xray-model{position:relative;min-width:0;min-height:510px;perspective:1000px;overflow:clip}
+.xray-object{position:absolute;inset:0;scale:.8;transform-style:preserve-3d;animation:xray-float 7s ease-in-out infinite;animation-play-state:paused}
+.xray-shell[data-in-view="true"] .xray-object{animation-play-state:running}
+.xray-reticle{position:absolute;inset:12% 6%;border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);border-radius:50%;transform:rotate(-24deg);pointer-events:none}
+.xray-reticle::before,.xray-reticle::after{content:"";position:absolute;inset:12%;border:1px dashed color-mix(in srgb,var(--accent) 22%,transparent);border-radius:50%}
+.xray-reticle::after{inset:25%;border-style:solid}
+.xray-reticle::before{animation:xray-orbit 24s linear infinite;animation-play-state:paused}
+.xray-reticle span{position:absolute;left:50%;top:-4px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.xray-reticle span:nth-child(2){left:auto;right:9%;top:72%;width:4px;height:4px}
+.xray-plate{--depth:0px;top:50%;left:50%;width:min(70%,285px);height:150px;display:block;padding:15px;border:1px solid color-mix(in srgb,var(--accent) 55%,var(--line));border-radius:4px;background:color-mix(in srgb,var(--surface) 88%,var(--paper));box-shadow:0 14px 24px #0003;transform:translate(-50%,-50%) rotateX(57deg) rotateZ(-28deg) translateY(var(--lift)) translateZ(var(--depth));transition:transform .8s cubic-bezier(.2,.8,.2,1),background-color .6s,border-color .5s,box-shadow .6s}
+.xray-plate::after{content:"";position:absolute;inset:0;border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);transform:translateZ(-8px);pointer-events:none}
+.xray-plate>span{position:relative;z-index:1;font:9px var(--mono);letter-spacing:.12em;color:var(--accent)}
+.xray-plate-number{position:absolute;right:14px;top:10px;font:11px var(--mono);color:var(--accent);opacity:.75}
+.xray-plate-1{--lift:-165px}.xray-plate-2{--lift:-55px}.xray-plate-3{--lift:55px}.xray-plate-4{--lift:165px}
+.xray-shell[data-step="0"] .xray-plate-1,.xray-shell[data-step="1"] .xray-plate-2,.xray-shell[data-step="2"] .xray-plate-3,.xray-shell[data-step="3"] .xray-plate-4{--depth:55px;border:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 19%,var(--surface));box-shadow:0 18px 45px color-mix(in srgb,var(--accent) 25%,transparent)}
+.xray-plate-design{position:absolute;inset:34px 16px 13px;display:flex;gap:6px;align-items:stretch;opacity:.8}
+.xray-plate-design i{display:block;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.xray-plate-design i{animation:xray-signal 3.4s ease-in-out infinite;animation-play-state:paused}
+.xray-plate-design i:nth-child(2){animation-delay:.25s}.xray-plate-design i:nth-child(3){animation-delay:.5s}.xray-plate-design i:nth-child(4){animation-delay:.75s}.xray-plate-design i:nth-child(5){animation-delay:1s}
+.xray-shell[data-in-view="true"] .xray-reticle::before,.xray-shell[data-in-view="true"] .xray-plate-design i{animation-play-state:running}
+.xray-design-ui i:first-child{width:30%}.xray-design-ui i:nth-child(2){width:27%}.xray-design-ui i:nth-child(3){width:17%}.xray-design-ui i:nth-child(4){flex:1}
+.xray-design-api{align-items:center;justify-content:space-between}.xray-design-api::before{content:"";position:absolute;left:10%;right:10%;top:50%;border-top:1px dashed var(--accent)}.xray-design-api i{z-index:1;width:24%;height:56%;background:var(--surface)}
+.xray-design-data{flex-direction:column;gap:5px}.xray-design-data i{width:100%;flex:1;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 25%,transparent) 35%,transparent 35%)}
+.xray-design-ops{align-items:end;gap:8px}.xray-design-ops i{flex:1;height:35%}.xray-design-ops i:nth-child(2){height:70%}.xray-design-ops i:nth-child(3){height:48%}.xray-design-ops i:nth-child(4){height:85%}.xray-design-ops i:nth-child(5){height:58%}
+.xray-model-caption{position:absolute;inset:auto 2% 3%;display:flex;justify-content:space-between;font-size:9px;color:var(--muted);letter-spacing:.1em}
+.xray-controls{position:relative;z-index:2;min-width:0}
+.xray-layers{gap:0;border-top:1px solid var(--line)}
+.xray-layers button{position:relative;display:grid;grid-template-columns:25px 1fr 20px;min-height:57px;padding:12px 8px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;transition:background-color .3s,padding .3s}
+.xray-layers button strong{font-size:14px;font-weight:600}
+.xray-layers button[aria-pressed="true"]{padding-inline:15px;background:color-mix(in srgb,var(--accent) 13%,var(--surface));box-shadow:inset 3px 0 var(--accent)}
+.xray-control-arrow{transition:transform .3s;color:var(--accent)}
+.xray-layers button:is(:hover,[aria-pressed="true"]) .xray-control-arrow{transform:translate(3px,-3px)}
+.xray-readout{margin-top:23px;padding-top:20px}.xray-readout h3{font-size:clamp(23px,2.2vw,30px);letter-spacing:-.04em}
+@keyframes xray-float{0%,100%{transform:translateY(-7px)}50%{transform:translateY(9px)}}
+@keyframes xray-orbit{to{transform:rotate(360deg)}}
+@keyframes xray-signal{0%,100%{opacity:.45}50%{opacity:1}}
+@media(max-width:1100px){:root[data-design="xray"] .xray-shell{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.xray-controls{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:24px}.xray-readout{margin-top:0}}
+@media(max-width:767px){:root[data-design="xray"] .xray-shell{grid-template-columns:minmax(0,1fr);gap:18px;padding:26px 22px;min-height:0}.xray-heading h1,.xray-heading h2{font-size:clamp(42px,11vw,65px);max-width:10ch;margin:18px 0}.xray-note{margin-top:16px}:root[data-design="xray"] .xray-model{min-height:360px}.xray-object{scale:.72;translate:-8px 0}.xray-plate{width:min(76%,265px);height:125px}.xray-plate-1{--lift:-125px}.xray-plate-2{--lift:-42px}.xray-plate-3{--lift:42px}.xray-plate-4{--lift:125px}.xray-controls{grid-column:1;grid-template-columns:1fr;gap:10px}.xray-readout{min-height:100px}.xray-model-caption{bottom:0}}
+@media(prefers-reduced-motion:reduce){.xray-object,.xray-plate,.xray-play,.xray-control-arrow,.xray-layers button,.xray-reticle::before,.xray-plate-design i{animation:none!important;transition:none!important}.xray-play:hover{transform:none}}
+:root[data-performance="lite"] .xray-object,:root[data-performance="lite"] .xray-reticle::before,:root[data-performance="lite"] .xray-plate-design i,
+:root[data-effects="off"] .xray-object,:root[data-effects="off"] .xray-reticle::before,:root[data-effects="off"] .xray-plate-design i{animation:none}
